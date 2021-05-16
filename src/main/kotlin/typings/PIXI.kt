@@ -169,52 +169,33 @@ external interface IDestroyable {
 
 external interface IDestroyOptions {
 	val children: Boolean?
-		get() = definedExternally
 	val texture: Boolean?
-		get() = definedExternally
 	val baseTexture: Boolean?
-		get() = definedExternally
 }
 
 external interface IResizable {
 	var resizeTo: dynamic
-		get() = definedExternally
-		set(value) = definedExternally
 }
 
 
 external interface IApplicationOptions : IResizable {
 	val width: Float?
-		get() = definedExternally
 	val height: Float?
-		get() = definedExternally
 	val view: HTMLCanvasElement?
-		get() = definedExternally
 	val forceCanvas: Boolean?
-		get() = definedExternally
 	val useContextAlpha: Any?
-		get() = definedExternally
 	
 	/**
 	 * Use `backgroundAlpha` instead.
 	 * @deprecated
 	 */
 	val transparent: Boolean?
-		get() = definedExternally
 	val autoDensity: Boolean?
-		get() = definedExternally
 	val antialias: Boolean?
-		get() = definedExternally
 	val resolution: Float?
-		get() = definedExternally
 	val preserveDrawingBuffer: Boolean?
-		get() = definedExternally
 	val clearBeforeRender: Boolean?
-		get() = definedExternally
 	val backgroundColor: Float?
-		get() = definedExternally
 	val backgroundAlpha: Float?
-		get() = definedExternally
 	val powerPreference: String?
-		get() = definedExternally
 }
