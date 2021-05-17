@@ -1,4 +1,4 @@
-val seskarVersion = "0.0.9"
+val seskarVersion = "0.0.10"
 val kotlinxHtmlVersion = "0.7.2"
 
 plugins {
@@ -10,7 +10,6 @@ group = "fr.ayfri"
 version = "1.0-SNAPSHOT"
 
 repositories {
-    jcenter()
     mavenCentral()
     maven { url = uri("https://maven.pkg.jetbrains.space/public/p/kotlinx-html/maven") }
 }
