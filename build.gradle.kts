@@ -1,24 +1,25 @@
-val seskarVersion = "0.0.10"
-val kotlinxHtmlVersion = "0.7.3"
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-plugins {
-    kotlin("js") version "1.5.0"
-    id("com.github.turansky.seskar") version "0.0.9"
-}
-
-group = "fr.ayfri"
-version = "1.0-SNAPSHOT"
+group = Project.group
+version = Project.version
 
 repositories {
     mavenCentral()
 }
 
+plugins {
+    Dependencies.plugins.forEach { (n, v) -> id(n) version v }
+}
+
 dependencies {
-    testImplementation(kotlin("test-js"))
-    implementation("org.jetbrains.kotlinx:kotlinx-html:$kotlinxHtmlVersion")
-    // Generation of externals doesn't work with PIXI yet, so everything is write-handed
-    implementation(npm("pixi.js", "6.0.4", generateExternals = true))
-    implementation("com.github.turansky.seskar:seskar-core:$seskarVersion")
+    Dependencies.dependencies.forEach { (n, v) -> implementation(n, v) }
+    Dependencies.npmDependencies.forEach { (n, v) -> implementation(npm(n, v)) }
+}
+
+tasks {
+    withType<KotlinCompile> {
+        kotlinOptions.jvmTarget = Versions.java
+    }
 }
 
 kotlin {
