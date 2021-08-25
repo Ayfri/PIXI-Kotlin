@@ -1,0 +1,201 @@
+@file:JsModule("@pixi/interaction")
+
+package typings.interaction
+
+import org.w3c.dom.HTMLElement
+import org.w3c.dom.Touch
+import org.w3c.dom.TouchEvent
+import org.w3c.dom.events.MouseEvent
+import org.w3c.dom.pointerevents.PointerEvent
+import seskar.js.Case
+import seskar.js.JsUnion
+import typings.utils.Dict
+import typings.Indexed
+import typings.core.AbstractRenderer
+import typings.display.DisplayObject
+import typings.math.IPointData
+import typings.math.Point
+import typings.utils.EventEmitter
+
+@JsUnion(case = Case.SNAKE)
+external enum class Cursor {
+	AUTO,
+	DEFAULT,
+	NONE,
+	CONTEXT_MENU,
+	HELP,
+	POINTER,
+	PROGRESS,
+	WAIT,
+	CELL,
+	CROSSHAIR,
+	TEXT,
+	VERTICAL_TEXT,
+	ALIAS,
+	COPY,
+	MOVE,
+	NO_DROP,
+	NOT_ALLOWED,
+	E_RESIZE,
+	N_RESIZE,
+	NE_RESIZE,
+	NW_RESIZE,
+	S_RESIZE,
+	SE_RESIZE,
+	SW_RESIZE,
+	W_RESIZE,
+	NS_RESIZE,
+	EW_RESIZE,
+	NEWS_RESIZE,
+	COL_RESIZE,
+	NWSE_RESIZE,
+	ROW_RESIZE,
+	ALL_SCROLL,
+	ZOOM_IN,
+	ZOOM_OUT,
+	GRAB,
+	GRABBING
+}
+
+external interface DelayedEvent {
+	var displayObject: DisplayObject
+	var eventString: String
+	var eventData: InteractionEvent
+}
+
+external interface IHitArea {
+	fun contains(x: Number, y: Number): Boolean
+}
+
+open external class InteractionData {
+	open var global: Point
+	open var target: DisplayObject
+	open var originalEvent: InteractivePointerEvent
+	open var identifier: Number
+	open var isPrimary: Boolean
+	open var button: Number
+	open var buttons: Number
+	open var width: Number
+	open var height: Number
+	open var tiltX: Number
+	open var tiltY: Number
+	open var pointerType: String
+	open var pressure: Number
+	open var twist: Number
+	open var tangentialPressure: Number
+	open val pointerId: Number
+	open fun <P : IPointData /* = Point */> getLocalPosition(displayObject: DisplayObject, point: P, globalPos: IPointData): P
+	open fun <P : IPointData /* = Point */> getLocalPosition(displayObject: DisplayObject, point: P): P
+	open fun <P : IPointData /* = Point */> getLocalPosition(displayObject: DisplayObject): P
+	open fun getLocalPosition(displayObject: DisplayObject, point: Point, globalPos: IPointData): Point
+	open fun getLocalPosition(displayObject: DisplayObject, point: Point): Point
+	open fun getLocalPosition(displayObject: DisplayObject): Point
+	open fun copyEvent(event: Touch)
+	open fun copyEvent(event: PointerEvent)
+	open fun copyEvent(event: TouchEvent)
+	open fun copyEvent(event: MouseEvent)
+	open fun reset()
+}
+
+open external class InteractionEvent {
+	open var stopped: Boolean
+	open var stopsPropagatingAt: DisplayObject
+	open var stopPropagationHint: Boolean
+	open var target: DisplayObject
+	open var currentTarget: DisplayObject
+	open var type: String
+	open var data: InteractionData
+	open fun stopPropagation()
+	open fun reset()
+}
+
+open external class InteractionManager(renderer: AbstractRenderer, options: InteractionManagerOptions) : EventEmitter {
+	constructor(renderer: AbstractRenderer)
+
+	open val activeInteractionData: Indexed<Number, InteractionData>
+	open val supportsTouchEvents: Boolean
+	open val supportsPointerEvents: Boolean
+	open var interactionDataPool: Array<InteractionData>
+	open var cursor: String
+	open var delayedEvents: Array<DelayedEvent>
+	open var search: TreeSearch
+	open var renderer: AbstractRenderer
+	open var autoPreventDefault: Boolean
+	open var interactionFrequency: Number
+	open var mouse: InteractionData
+	open var eventData: InteractionEvent
+	open var moveWhenInside: Boolean
+	open var cursorStyle: Dict<dynamic /* string | (mode: String) -> Unit | CSSStyleDeclaration */>
+	open var currentCursorMode: String
+	open var resolution: Number
+	protected open var interactionDOMElement: HTMLElement
+	protected open var eventsAdded: Boolean
+	protected open var mouseOverRenderer: Boolean
+	open var useSystemTicker: Boolean
+	open val lastObjectRendered: DisplayObject
+
+	open fun hitTest(globalPoint: Point, root: DisplayObject): DisplayObject
+	open fun hitTest(globalPoint: Point): DisplayObject
+	open fun setTargetElement(element: HTMLElement, resolution: Number)
+	open fun setTargetElement(element: HTMLElement)
+	open fun tickerUpdate(deltaTime: Number)
+	open fun update()
+	open fun setCursorMode(mode: String)
+	open fun mapPositionToPoint(point: IPointData, x: Number, y: Number)
+	open fun processInteractive(interactionEvent: InteractionEvent, displayObject: DisplayObject, func: InteractionCallback, hitTest: Boolean)
+	open fun processInteractive(interactionEvent: InteractionEvent, displayObject: DisplayObject, func: InteractionCallback)
+	open fun processInteractive(interactionEvent: InteractionEvent, displayObject: DisplayObject)
+	open fun destroy()
+}
+
+external interface InteractionManagerOptions {
+	var autoPreventDefault: Boolean?
+	var interactionFrequency: Number?
+	var useSystemTicker: Boolean?
+}
+
+open external class InteractionTrackingData(pointerId: Number) {
+	open val pointerId: Number
+	open var flags: Number
+	open var over: Boolean
+	open var rightDown: Boolean
+	open var leftDown: Boolean
+
+	companion object {
+		val FLAGS: InteractionTrackingFlagsReadOnly
+	}
+}
+
+external interface InteractionTrackingFlags {
+	var OVER: Number
+	var LEFT_DOWN: Number
+	var RIGHT_DOWN: Number
+	var NONE: Number
+}
+
+external interface InteractionTrackingFlagsReadOnly {
+	val OVER: Number
+	val LEFT_DOWN: Number
+	val RIGHT_DOWN: Number
+	val NONE: Number
+}
+
+external object interactiveTarget {
+	var interactive: Boolean
+	var interactiveChildren: Boolean
+	var hitArea: IHitArea
+	var cursor: Cursor
+	var buttonMode: Boolean
+	var trackedPointers: Indexed<Number, InteractionTrackingData>
+	var _trackedPointers: Indexed<Number, InteractionTrackingData>
+}
+
+open external class TreeSearch {
+	open fun recursiveFindHit(interactionEvent: InteractionEvent, displayObject: DisplayObject, func: InteractionCallback, hitTest: Boolean, interactive: Boolean): Boolean
+	open fun recursiveFindHit(interactionEvent: InteractionEvent, displayObject: DisplayObject, func: InteractionCallback, hitTest: Boolean): Boolean
+	open fun recursiveFindHit(interactionEvent: InteractionEvent, displayObject: DisplayObject, func: InteractionCallback): Boolean
+	open fun recursiveFindHit(interactionEvent: InteractionEvent, displayObject: DisplayObject): Boolean
+	open fun findHit(interactionEvent: InteractionEvent, displayObject: DisplayObject, func: InteractionCallback, hitTest: Boolean)
+	open fun findHit(interactionEvent: InteractionEvent, displayObject: DisplayObject, func: InteractionCallback)
+	open fun findHit(interactionEvent: InteractionEvent, displayObject: DisplayObject)
+}
