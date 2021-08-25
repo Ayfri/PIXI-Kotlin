@@ -1,28 +1,35 @@
 object Project {
-    const val group = "fr.ayfri.pixi-kotlin"
-    const val version = "0.1.0"
+	const val group = "fr.ayfri.pixi-kotlin"
+	const val version = "0.1.0"
 }
 
 object Versions {
-    const val java = "16"
-    const val kotlin = "1.5.21"
-    const val seskar = "0.0.10"
-    const val kotlinHtml = "0.7.3"
-    const val pixi = "6.1.0"
+	const val java = "16"
+	const val kotlin = "1.5.30"
+	const val seskar = "0.0.13"
+	const val kotlinExtensions = "1.0.1-pre.236-kotlin-1.5.30"
+	const val kotlinHtml = "0.7.3"
+	const val pixi = "6.1.2"
 }
 
 object Dependencies {
-    val dependencies = mapOf(
-        "com.github.turansky.seskar:seskar-core" to Versions.seskar,
-        "org.jetbrains.kotlinx:kotlinx-html" to Versions.kotlinHtml
-    )
+	val mavenRepositories = listOf(
+		"https://maven.pkg.jetbrains.space/kotlin/p/kotlin/kotlin-js-wrappers"
+	)
 
-    val plugins = mapOf(
-        "org.jetbrains.kotlin.js" to Versions.kotlin,
-        "com.github.turansky.seskar" to Versions.seskar
-    )
+	val dependencies = mapOf(
+		"com.github.turansky.seskar:seskar-core" to Versions.seskar,
+		"org.jetbrains.kotlinx:kotlinx-html" to Versions.kotlinHtml,
+		"org.jetbrains.kotlin-wrappers:kotlin-extensions" to Versions.kotlinExtensions,
+		"org.jetbrains.kotlin:kotlin-stdlib-js" to Versions.kotlin
+	)
 
-    val npmDependencies = mapOf(
-        "pixi.js" to Versions.pixi
-    )
+	val plugins = mapOf(
+		"org.jetbrains.kotlin.js" to Versions.kotlin,
+		"com.github.turansky.seskar" to Versions.seskar
+	)
+
+	val npmDependencies = mapOf(
+		"pixi.js" to Versions.pixi
+	)
 }
