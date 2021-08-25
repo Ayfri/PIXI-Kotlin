@@ -5,6 +5,7 @@ version = Project.version
 
 repositories {
     mavenCentral()
+    Dependencies.mavenRepositories.forEach { r -> maven { url = uri(r) }}
 }
 
 plugins {
@@ -12,7 +13,7 @@ plugins {
 }
 
 dependencies {
-    Dependencies.dependencies.forEach { (n, v) -> implementation(n, v) }
+    Dependencies.dependencies.forEach { (n, v) -> implementation("$n:$v") }
     Dependencies.npmDependencies.forEach { (n, v) -> implementation(npm(n, v)) }
 }
 
@@ -24,6 +25,7 @@ tasks {
 
 kotlin {
     js(IR) {
+        useCommonJs()
         binaries.executable()
         browser {
             commonWebpackConfig {
