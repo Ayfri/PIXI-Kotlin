@@ -4,8 +4,6 @@ package typings.graphics
 
 import kotlinext.js.Record
 import org.khronos.webgl.Float32Array
-import seskar.js.Case
-import seskar.js.JsUnion
 import typings.constants.BLEND_MODES
 import typings.core.*
 import typings.display.Bounds
@@ -274,20 +272,6 @@ external interface ILineStyleOptions : IFillStyleOptions {
 external interface IShapeBuildCommand {
 	fun build(graphicsData: GraphicsData)
 	fun triangulate(graphicsData: GraphicsData, target: GraphicsGeometry)
-}
-
-@JsUnion(case = Case.KEBAB)
-external enum class LINE_CAP {
-	BUTT,
-	ROUND,
-	SQUARE
-}
-
-@JsUnion(case = Case.KEBAB)
-external enum class LINE_JOIN {
-	MITER,
-	BEVEL,
-	ROUND
 }
 
 open external class LineStyle : FillStyle {

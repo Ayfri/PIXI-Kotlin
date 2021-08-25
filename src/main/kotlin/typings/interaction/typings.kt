@@ -7,55 +7,13 @@ import org.w3c.dom.Touch
 import org.w3c.dom.TouchEvent
 import org.w3c.dom.events.MouseEvent
 import org.w3c.dom.pointerevents.PointerEvent
-import seskar.js.Case
-import seskar.js.JsUnion
-import typings.utils.Dict
 import typings.Indexed
 import typings.core.AbstractRenderer
 import typings.display.DisplayObject
 import typings.math.IPointData
 import typings.math.Point
+import typings.utils.Dict
 import typings.utils.EventEmitter
-
-@JsUnion(case = Case.SNAKE)
-external enum class Cursor {
-	AUTO,
-	DEFAULT,
-	NONE,
-	CONTEXT_MENU,
-	HELP,
-	POINTER,
-	PROGRESS,
-	WAIT,
-	CELL,
-	CROSSHAIR,
-	TEXT,
-	VERTICAL_TEXT,
-	ALIAS,
-	COPY,
-	MOVE,
-	NO_DROP,
-	NOT_ALLOWED,
-	E_RESIZE,
-	N_RESIZE,
-	NE_RESIZE,
-	NW_RESIZE,
-	S_RESIZE,
-	SE_RESIZE,
-	SW_RESIZE,
-	W_RESIZE,
-	NS_RESIZE,
-	EW_RESIZE,
-	NEWS_RESIZE,
-	COL_RESIZE,
-	NWSE_RESIZE,
-	ROW_RESIZE,
-	ALL_SCROLL,
-	ZOOM_IN,
-	ZOOM_OUT,
-	GRAB,
-	GRABBING
-}
 
 external interface DelayedEvent {
 	var displayObject: DisplayObject
@@ -84,7 +42,12 @@ open external class InteractionData {
 	open var twist: Number
 	open var tangentialPressure: Number
 	open val pointerId: Number
-	open fun <P : IPointData /* = Point */> getLocalPosition(displayObject: DisplayObject, point: P, globalPos: IPointData): P
+	open fun <P : IPointData /* = Point */> getLocalPosition(
+		displayObject: DisplayObject,
+		point: P,
+		globalPos: IPointData
+	): P
+
 	open fun <P : IPointData /* = Point */> getLocalPosition(displayObject: DisplayObject, point: P): P
 	open fun <P : IPointData /* = Point */> getLocalPosition(displayObject: DisplayObject): P
 	open fun getLocalPosition(displayObject: DisplayObject, point: Point, globalPos: IPointData): Point
@@ -142,8 +105,19 @@ open external class InteractionManager(renderer: AbstractRenderer, options: Inte
 	open fun update()
 	open fun setCursorMode(mode: String)
 	open fun mapPositionToPoint(point: IPointData, x: Number, y: Number)
-	open fun processInteractive(interactionEvent: InteractionEvent, displayObject: DisplayObject, func: InteractionCallback, hitTest: Boolean)
-	open fun processInteractive(interactionEvent: InteractionEvent, displayObject: DisplayObject, func: InteractionCallback)
+	open fun processInteractive(
+		interactionEvent: InteractionEvent,
+		displayObject: DisplayObject,
+		func: InteractionCallback,
+		hitTest: Boolean
+	)
+
+	open fun processInteractive(
+		interactionEvent: InteractionEvent,
+		displayObject: DisplayObject,
+		func: InteractionCallback
+	)
+
 	open fun processInteractive(interactionEvent: InteractionEvent, displayObject: DisplayObject)
 	open fun destroy()
 }
@@ -191,11 +165,35 @@ external object interactiveTarget {
 }
 
 open external class TreeSearch {
-	open fun recursiveFindHit(interactionEvent: InteractionEvent, displayObject: DisplayObject, func: InteractionCallback, hitTest: Boolean, interactive: Boolean): Boolean
-	open fun recursiveFindHit(interactionEvent: InteractionEvent, displayObject: DisplayObject, func: InteractionCallback, hitTest: Boolean): Boolean
-	open fun recursiveFindHit(interactionEvent: InteractionEvent, displayObject: DisplayObject, func: InteractionCallback): Boolean
+	open fun recursiveFindHit(
+		interactionEvent: InteractionEvent,
+		displayObject: DisplayObject,
+		func: InteractionCallback,
+		hitTest: Boolean,
+		interactive: Boolean
+	): Boolean
+
+	open fun recursiveFindHit(
+		interactionEvent: InteractionEvent,
+		displayObject: DisplayObject,
+		func: InteractionCallback,
+		hitTest: Boolean
+	): Boolean
+
+	open fun recursiveFindHit(
+		interactionEvent: InteractionEvent,
+		displayObject: DisplayObject,
+		func: InteractionCallback
+	): Boolean
+
 	open fun recursiveFindHit(interactionEvent: InteractionEvent, displayObject: DisplayObject): Boolean
-	open fun findHit(interactionEvent: InteractionEvent, displayObject: DisplayObject, func: InteractionCallback, hitTest: Boolean)
+	open fun findHit(
+		interactionEvent: InteractionEvent,
+		displayObject: DisplayObject,
+		func: InteractionCallback,
+		hitTest: Boolean
+	)
+
 	open fun findHit(interactionEvent: InteractionEvent, displayObject: DisplayObject, func: InteractionCallback)
 	open fun findHit(interactionEvent: InteractionEvent, displayObject: DisplayObject)
 }

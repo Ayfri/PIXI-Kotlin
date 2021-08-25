@@ -4,8 +4,6 @@ package typings.math
 
 import kotlinx.html.P
 import org.khronos.webgl.Float32Array
-import seskar.js.JsInt
-import seskar.js.JsUnion
 
 open external class Circle(x: Number, y: Number, radius: Number) {
 	constructor(x: Number, y: Number)
@@ -249,24 +247,6 @@ open external class RoundedRectangle(x: Number, y: Number, width: Number, height
 	open fun clone(): RoundedRectangle
 	open fun contains(x: Number, y: Number): Boolean
 	override fun toString(): String
-}
-
-@JsUnion
-external enum class SHAPES {
-	@JsInt(0)
-	POLY,
-
-	@JsInt(1)
-	RECT,
-
-	@JsInt(2)
-	CIRC,
-
-	@JsInt(3)
-	ELIP,
-
-	@JsInt(4)
-	RREC
 }
 
 open external class Transform {

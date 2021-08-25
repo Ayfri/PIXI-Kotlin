@@ -10,9 +10,6 @@ import org.w3c.dom.HTMLCanvasElement
 import org.w3c.dom.ImageData
 import org.w3c.dom.Location
 import org.w3c.dom.url.URL
-import seskar.js.JsInt
-import seskar.js.JsString
-import seskar.js.JsUnion
 import typings.IIndexed
 import typings.Indexed
 import typings.core.*
@@ -66,24 +63,6 @@ external interface FormatFunction {
 	operator fun invoke(urlObject: String): String
 }
 
-@JsUnion
-external enum class BufferType {
-	@JsString("Float32Array")
-	FLOAT32_ARRAY,
-
-	@JsString("Uint32Array")
-	UINT32_ARRAY,
-
-	@JsString("Int32Array")
-	INT32_ARRAY,
-
-	@JsString("Uint16Array")
-	UINT16_ARRAY,
-
-	@JsString("Uint8Array")
-	UINT8_ARRAY,
-}
-
 external fun getBufferType(array: ITypedArray): BufferType?
 external fun getResolutionOfUrl(url: String, default: Number = definedExternally): Number
 external fun hex2rgb(hex: Number, out: Array<Number> = definedExternally): dynamic /* Array<Number> | Float32Array */
@@ -123,16 +102,6 @@ external interface ResolveFunction {
 external fun rgb2hex(rgb: Array<Number>): Number
 external fun rgb2hex(rgb: Float32Array): Number
 external fun sayHello(type: String)
-
-@JsUnion
-external enum class Sign {
-	@JsInt(-1)
-	NEGATIVE,
-	@JsInt(0)
-	ZERO,
-	@JsInt(1)
-	POSITIVE,
-}
 
 external fun sign(n: Number): Sign
 external fun skipHello()

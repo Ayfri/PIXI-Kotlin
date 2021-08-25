@@ -1,6 +1,6 @@
-@file:JsModule("@pixi/sprite-tilling")
+@file:JsModule("@pixi/sprite-tiling")
 
-package typings.sprite_tilling
+package typings.sprite_tiling
 
 import typings.core.*
 import typings.display.IDestroyOptions
