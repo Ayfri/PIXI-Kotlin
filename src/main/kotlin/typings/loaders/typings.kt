@@ -2,6 +2,7 @@
 
 package typings.loaders
 
+import org.w3c.files.Blob
 import org.w3c.xhr.XMLHttpRequest
 import seskar.js.JsInt
 import seskar.js.JsString
@@ -115,9 +116,20 @@ external interface IAddOptions {
 }
 
 external interface ILoaderAdd {
-	operator fun invoke(name: String, url: String, options: IAddOptions = definedExternally, callback: OnCompleteSignal = definedExternally): Loader
+	operator fun invoke(
+		name: String,
+		url: String,
+		options: IAddOptions = definedExternally,
+		callback: OnCompleteSignal = definedExternally
+	): Loader
+
 	operator fun invoke(name: String, url: String, callback: OnCompleteSignal = definedExternally): Loader
-	operator fun invoke(name: String, options: IAddOptions = definedExternally, callback: OnCompleteSignal = definedExternally): Loader
+	operator fun invoke(
+		name: String,
+		options: IAddOptions = definedExternally,
+		callback: OnCompleteSignal = definedExternally
+	): Loader
+
 	operator fun invoke(name: String, callback: OnCompleteSignal = definedExternally): Loader
 	operator fun invoke(resources: Array<IAddOptions>, callback: OnCompleteSignal = definedExternally): Loader
 	operator fun invoke(resources: Array<String>, callback: OnCompleteSignal = definedExternally): Loader

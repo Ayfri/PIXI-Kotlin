@@ -5,7 +5,7 @@ import typings.app.IApplicationOptions
 import typings.core.Resource
 import typings.core.Texture
 
-inline var LoaderResource.texture: Texture<Resource>
+inline var ILoaderResource.texture: Texture<Resource>
 	get() = asDynamic().texture
 	set(value) {
 		asDynamic().texture = value
@@ -22,10 +22,3 @@ inline var IApplicationOptions.sharedLoader: Boolean?
 	set(value) {
 		asDynamic().sharedLoader = value
 	}
-
-operator fun ILoaderAdd.invoke(self: Loader, options: IAddOptions, callback: OnCompleteSignal) = asDynamic()(self, options, callback)
-operator fun ILoaderAdd.invoke(self: Loader, url: String, options: IAddOptions, callback: OnCompleteSignal) = asDynamic()(self, url, options, callback)
-operator fun ILoaderAdd.invoke(self: Loader, url: String, callback: OnCompleteSignal) = asDynamic()(self, url, callback)
-operator fun ILoaderAdd.invoke(self: Loader, name: String, url: String, options: IAddOptions, callback: OnCompleteSignal) = asDynamic()(self, name, url, options, callback)
-operator fun ILoaderAdd.invoke(self: Loader, name: String, url: String, callback: OnCompleteSignal) = asDynamic()(self, name, url, callback)
-operator fun ILoaderAdd.invoke(self: Loader, resources: Array<dynamic, /* IAddOptions | String */>, callback: OnCompleteSignal) = asDynamic()(self, resources, callback)
