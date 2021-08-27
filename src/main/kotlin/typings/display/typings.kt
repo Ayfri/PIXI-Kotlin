@@ -3,10 +3,10 @@
 package typings.display
 
 import org.khronos.webgl.Float32Array
-import typings.utils.Dict
 import typings.core.Filter
 import typings.core.Renderer
 import typings.math.*
+import typings.utils.Dict
 import typings.utils.EventEmitter
 
 open external class Bounds {
@@ -32,19 +32,10 @@ open external class Bounds {
 		vertices: Float32Array,
 		beginOffset: Number,
 		endOffset: Number,
-		padX: Number,
-		padY: Number
+		padX: Number = definedExternally,
+		padY: Number = definedExternally
 	)
 
-	open fun addVerticesMatrix(
-		matrix: Matrix,
-		vertices: Float32Array,
-		beginOffset: Number,
-		endOffset: Number,
-		padX: Number
-	)
-
-	open fun addVerticesMatrix(matrix: Matrix, vertices: Float32Array, beginOffset: Number, endOffset: Number)
 	open fun addBounds(bounds: Bounds)
 	open fun addBoundsMask(bounds: Bounds, mask: Bounds)
 	open fun addBoundsMatrix(bounds: Bounds, matrix: Matrix)
@@ -61,12 +52,11 @@ open external class Container : DisplayObject {
 	override var sortDirty: Boolean
 	override var parent: Container
 	open var containerUpdateTransform: () -> Unit
-	protected open fun onChildrenChange(_length: Number)
-	protected open fun onChildrenChange()
+	protected open fun onChildrenChange(_length: Number = definedExternally)
 	open var width: Number
 	open var height: Number
 
-	open fun <T : DisplayObject> addChild(vararg child: T): T /* Array[0] */
+	open fun <T : DisplayObject> addChild(vararg child: T): T /* T[0] */
 	open fun <T : DisplayObject> addChildAt(child: T, index: Number): T
 	open fun swapChildren(child: DisplayObject, child2: DisplayObject)
 	open fun getChildIndex(child: DisplayObject): Number
@@ -75,22 +65,15 @@ open external class Container : DisplayObject {
 	open fun <T : DisplayObject> removeChild(vararg child: T): T
 	override fun removeChild(child: DisplayObject): DisplayObject
 	open fun removeChildAt(index: Number): DisplayObject
-	open fun removeChildren(beginIndex: Number, endIndex: Number): Array<DisplayObject>
-	open fun removeChildren(beginIndex: Number): Array<DisplayObject>
-	open fun removeChildren(): Array<DisplayObject>
+	open fun removeChildren(beginIndex: Number = definedExternally, endIndex: Number = definedExternally): Array<DisplayObject>
 	open fun sortChildren()
 	override fun updateTransform()
 	override fun calculateBounds()
-	open fun getLocalBounds(rect: Rectangle, skipChildrenUpdate: Boolean): Rectangle
-	override fun getLocalBounds(rect: Rectangle): Rectangle
-	override fun getLocalBounds(): Rectangle
+	open fun getLocalBounds(rect: Rectangle = definedExternally, skipChildrenUpdate: Boolean = definedExternally): Rectangle
 	protected open fun renderAdvanced(renderer: Renderer)
 	protected open fun _render(_renderer: Renderer)
 	protected open fun _calculateBounds()
 	override fun render(renderer: Renderer)
-	override fun destroy(options: Boolean)
-	override fun destroy(options: IDestroyOptions)
-	open fun destroy()
 }
 
 
@@ -112,76 +95,32 @@ abstract external class DisplayObject : EventEmitter {
 	abstract fun removeChild(child: DisplayObject): DisplayObject
 	abstract fun render(renderer: Renderer)
 	open fun updateTransform()
-	open fun getBounds(skipUpdate: Boolean, rect: Rectangle): Rectangle
-	open fun getBounds(skipUpdate: Boolean): Rectangle
+	open fun getBounds(skipUpdate: Boolean, rect: Rectangle = definedExternally): Rectangle
 	open fun getBounds(): Rectangle
-	open fun getLocalBounds(rect: Rectangle): Rectangle
-	open fun getLocalBounds(): Rectangle
-	open fun <P : IPointData> toGlobal(position: IPointData, point: P, skipUpdate: Boolean): P
-	open fun <P : IPointData> toGlobal(position: IPointData, point: P): P
-	open fun <P : IPointData> toGlobal(position: IPointData): P
-	open fun <P : IPointData> toLocal(position: IPointData, from: DisplayObject, point: P, skipUpdate: Boolean): P
-	open fun <P : IPointData> toLocal(position: IPointData, from: DisplayObject, point: P): P
-	open fun <P : IPointData> toLocal(position: IPointData, from: DisplayObject): P
-	open fun <P : IPointData> toLocal(position: IPointData): P
+	open fun getLocalBounds(rect: Rectangle = definedExternally): Rectangle
+	open fun <P : IPointData> toGlobal(position: IPointData, point: P = definedExternally, skipUpdate: Boolean = definedExternally): P
+	open fun <P : IPointData> toLocal(
+		position: IPointData,
+		from: DisplayObject = definedExternally,
+		point: P = definedExternally,
+		skipUpdate: Boolean = definedExternally
+	): P
+
 	open fun setParent(container: Container): Container
 	open fun setTransform(
-		x: Number,
-		y: Number,
-		scaleX: Number,
-		scaleY: Number,
-		rotation: Number,
-		skewX: Number,
-		skewY: Number,
-		pivotX: Number,
-		pivotY: Number
+		x: Number = definedExternally,
+		y: Number = definedExternally,
+		scaleX: Number = definedExternally,
+		scaleY: Number = definedExternally,
+		rotation: Number = definedExternally,
+		skewX: Number = definedExternally,
+		skewY: Number = definedExternally,
+		pivotX: Number = definedExternally,
+		pivotY: Number = definedExternally
 	): DisplayObject /* this */
 
-	open fun setTransform(
-		x: Number,
-		y: Number,
-		scaleX: Number,
-		scaleY: Number,
-		rotation: Number,
-		skewX: Number,
-		skewY: Number,
-		pivotX: Number
-	): DisplayObject /* this */
-
-	open fun setTransform(
-		x: Number,
-		y: Number,
-		scaleX: Number,
-		scaleY: Number,
-		rotation: Number,
-		skewX: Number,
-		skewY: Number
-	): DisplayObject /* this */
-
-	open fun setTransform(
-		x: Number,
-		y: Number,
-		scaleX: Number,
-		scaleY: Number,
-		rotation: Number,
-		skewX: Number
-	): DisplayObject /* this */
-
-	open fun setTransform(
-		x: Number,
-		y: Number,
-		scaleX: Number,
-		scaleY: Number,
-		rotation: Number
-	): DisplayObject /* this */
-
-	open fun setTransform(x: Number, y: Number, scaleX: Number, scaleY: Number): DisplayObject /* this */
-	open fun setTransform(x: Number, y: Number, scaleX: Number): DisplayObject /* this */
-	open fun setTransform(x: Number, y: Number): DisplayObject /* this */
-	open fun setTransform(x: Number): DisplayObject /* this */
-	open fun setTransform(): DisplayObject /* this */
-	open fun destroy(_options: IDestroyOptions)
-	open fun destroy(_options: Boolean)
+	open fun destroy(_options: IDestroyOptions = definedExternally)
+	open fun destroy(_options: Boolean = definedExternally)
 	open val _tempDisplayObjectParent: TemporaryDisplayObject
 	open fun enableTempParent(): Container
 	open fun disableTempParent(cacheParent: Container)

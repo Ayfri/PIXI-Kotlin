@@ -10,7 +10,6 @@ import typings.constants.TYPES
 import typings.core.*
 import typings.display.Container
 import typings.display.DisplayObject
-import typings.display.IDestroyOptions
 import typings.math.Matrix
 
 external interface IParticleProperties {
@@ -47,10 +46,12 @@ open external class ParticleBuffer(properties: Array<IParticleRendererProperty>,
 	open fun destroy()
 }
 
-open external class ParticleContainer(maxSize: Number, properties: IParticleProperties, batchSize: Number, autoResize: Number) : Container {
-	constructor(maxSize: Number, properties: IParticleProperties, batchSize: Number)
-	constructor(maxSize: Number, properties: IParticleProperties)
-
+open external class ParticleContainer(
+	maxSize: Number,
+	properties: IParticleProperties = definedExternally,
+	batchSize: Number = definedExternally,
+	autoResize: Number = definedExternally
+) : Container {
 	open val blendMode: BLEND_MODES
 	open var autoResize: Boolean
 	open var roundPixelms: Boolean
@@ -69,9 +70,6 @@ open external class ParticleContainer(maxSize: Number, properties: IParticleProp
 	override fun render(renderer: Renderer)
 	override fun onChildrenChange(smallestChildIndex: Number)
 	open fun dispose()
-	override fun destroy(options: Boolean)
-	override fun destroy(options: IDestroyOptions)
-	override fun destroy()
 }
 
 open external class ParticleRenderer(renderer: Renderer) : ObjectRenderer {

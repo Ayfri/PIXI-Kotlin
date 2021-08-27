@@ -45,34 +45,25 @@ inline var DisplayObject._cacheData: CacheData
 		asDynamic()._cacheData = value
 	}
 
-@Suppress("NOTHING_TO_INLINE")
 inline fun DisplayObject._renderCached(renderer: Renderer): Unit = asDynamic()._renderCached(renderer) as Unit
 
-@Suppress("NOTHING_TO_INLINE")
 inline fun DisplayObject._initCachedDisplayObject(renderer: Renderer): Unit =
 	asDynamic()._initCachedDisplayObject(renderer) as Unit
 
-
 inline fun DisplayObject._calculateCachedBounds(): Unit = asDynamic()._calculateCachedBounds() as Unit
 
-
 inline fun DisplayObject._getCachedCanvas(): Rectangle = asDynamic()._getCachedCanvas() as Rectangle
-
 
 inline fun DisplayObject._renderCachedCanvas(renderer: AbstractRenderer): Unit =
 	asDynamic()._renderCachedCanvas(renderer) as Unit
 
-
-inline fun DisplayObject._initCAchedDisplayObjectCanvas(renderer: AbstractRenderer): Unit =
-	asDynamic()._initCAchedDisplayObjectCanvas(renderer) as Unit
-
+inline fun DisplayObject._initCachedDisplayObjectCanvas(renderer: AbstractRenderer): Unit =
+	asDynamic()._initCachedDisplayObjectCanvas(renderer) as Unit
 
 inline fun DisplayObject._destroyCachedDisplayObject(): Unit = asDynamic()._destroyCachedDisplayObject() as Unit
 
-
 inline fun DisplayObject._cacheAsBitmapDestroy(options: IDestroyOptions): Unit =
 	asDynamic()._cacheAsBitmapDestroy(options) as Unit
-
 
 inline fun DisplayObject._cacheAsBitmapDestroy(options: Boolean): Unit = asDynamic()._cacheAsBitmapDestroy(options) as Unit
 

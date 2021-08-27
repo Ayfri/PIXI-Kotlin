@@ -5,11 +5,7 @@ package typings.math
 import kotlinx.html.P
 import org.khronos.webgl.Float32Array
 
-open external class Circle(x: Number, y: Number, radius: Number) {
-	constructor(x: Number, y: Number)
-	constructor(x: Number)
-	constructor()
-
+open external class Circle(x: Number = definedExternally, y: Number = definedExternally, radius: Number = definedExternally) {
 	open var x: Number
 	open var y: Number
 	open var radius: Number
@@ -22,12 +18,7 @@ open external class Circle(x: Number, y: Number, radius: Number) {
 
 external val DEG_TO_RAD: Number
 
-open external class Ellipse(x: Number, y: Number, width: Number, height: Number) {
-	constructor(x: Number, y: Number, width: Number)
-	constructor(x: Number, y: Number)
-	constructor(x: Number)
-	constructor()
-
+open external class Ellipse(x: Number = definedExternally, y: Number = definedExternally, width: Number = definedExternally, height: Number = definedExternally) {
 	open var x: Number
 	open var y: Number
 	open var width: Number
@@ -69,9 +60,7 @@ external interface IPoint : IPointData {
 	fun copyFrom(p: IPointData): IPoint /* this */
 	fun <T : IPoint> copyTo(p: T): T
 	fun equals(p: IPointData): Boolean
-	fun set(x: Number, y: Number)
-	fun set(x: Number)
-	fun set()
+	fun set(x: Number = definedExternally, y: Number = definedExternally)
 }
 
 external interface IPointData {
@@ -84,14 +73,7 @@ external interface ISize {
 	var height: Number
 }
 
-open external class Matrix(a: Number, b: Number, c: Number, d: Number, tx: Number, ty: Number) {
-	constructor(a: Number, b: Number, c: Number, d: Number, tx: Number)
-	constructor(a: Number, b: Number, c: Number, d: Number)
-	constructor(a: Number, b: Number, c: Number)
-	constructor(a: Number, b: Number)
-	constructor(a: Number)
-	constructor()
-
+open external class Matrix(a: Number = definedExternally, b: Number = definedExternally, c: Number = definedExternally, d: Number = definedExternally, tx: Number = definedExternally, ty: Number = definedExternally) {
 	open var a: Number
 	open var b: Number
 	open var c: Number
@@ -102,12 +84,9 @@ open external class Matrix(a: Number, b: Number, c: Number, d: Number, tx: Numbe
 
 	open fun fromArray(array: Array<Number>)
 	open fun set(a: Number, b: Number, c: Number, d: Number, tx: Number): Matrix /* this */
-	open fun toArray(transpose: Boolean, out: Float32Array): Float32Array
-	open fun toArray(transpose: Boolean): Float32Array
-	open fun <P : IPointData /* = Point */> apply(pos: IPointData, newPos: P): P
-	open fun <P : IPointData /* = Point */> apply(pos: IPointData): P
-	open fun <P : IPointData /* = Point */> applyInverse(pose: IPointData, newPos: P): P
-	open fun <P : IPointData /* = Point */> applyInverse(pose: IPointData): P
+	open fun toArray(transpose: Boolean, out: Float32Array = definedExternally): Float32Array
+	open fun <P : IPointData /* = Point */> apply(pos: IPointData, newPos: P = definedExternally): P
+	open fun <P : IPointData /* = Point */> applyInverse(pose: IPointData, newPos: P = definedExternally): P
 	open fun translate(x: Number, y: Number): Matrix /* this */
 	open fun scale(x: Number, y: Number): Matrix /* this */
 	open fun rotate(angle: Number): Matrix /* this */
@@ -139,10 +118,7 @@ open external class Matrix(a: Number, b: Number, c: Number, d: Number, tx: Numbe
 }
 
 @Suppress("RETURN_TYPE_MISMATCH_ON_OVERRIDE")
-open external class ObservablePoint<T>(context: (self: T) -> Any, scope: T, x: Number, y: Number) : IPoint {
-	constructor(context: (self: T) -> Any, scope: T, x: Number)
-	constructor(context: (self: T) -> Any, scope: T)
-
+open external class ObservablePoint<T>(context: (self: T) -> Any, scope: T, x: Number = definedExternally, y: Number = definedExternally) : IPoint {
 	open var cb: (self: T) -> Any
 	open var scope: T
 	open var _x: Number
@@ -154,8 +130,6 @@ open external class ObservablePoint<T>(context: (self: T) -> Any, scope: T, x: N
 	open fun clone(cb: (`this`: T) -> Any): ObservablePoint<Any>
 	open fun clone(): ObservablePoint<Any>
 	override fun set(x: Number, y: Number): ObservablePoint<T> /* this */
-	override fun set(x: Number): ObservablePoint<T> /* this */
-	override fun set(): ObservablePoint<T> /* this */
 	override fun copyFrom(p: IPointData): ObservablePoint<T> /* this */
 	override fun <T : IPoint> copyTo(p: T): T
 	override fun equals(p: IPointData): Boolean
@@ -165,20 +139,15 @@ open external class ObservablePoint<T>(context: (self: T) -> Any, scope: T, x: N
 external val PI_2: Number
 
 @Suppress("RETURN_TYPE_MISMATCH_ON_OVERRIDE")
-open external class Point(x: Number, y: Number) : IPoint {
-	constructor(x: Number)
-	constructor()
-
+open external class Point(x: Number = definedExternally, y: Number = definedExternally) : IPoint {
 	override var x: Number
-
 	override var y: Number
+
 	open fun clone(): Point
 	override fun copyFrom(p: IPointData): Point
 	override fun <T : IPoint> copyTo(p: T): T
 	override fun equals(p: IPointData): Boolean
 	override fun set(x: Number, y: Number): Point
-	override fun set(x: Number): Point
-	override fun set(): Point
 	override fun toString(): String
 }
 
@@ -198,12 +167,7 @@ open external class Polygon(points: Array<IPointData>) {
 
 external val RAD_TO_DEG: Number
 
-open external class Rectangle(x: Number, y: Number, width: Number, height: Number) {
-	constructor(x: Number, y: Number, width: Number)
-	constructor(x: Number, y: Number)
-	constructor(x: Number)
-	constructor()
-
+open external class Rectangle(x: Number = definedExternally, y: Number = definedExternally, width: Number = definedExternally, height: Number = definedExternally) {
 	open var x: Number
 	open var y: Number
 	open var width: Number
@@ -219,8 +183,7 @@ open external class Rectangle(x: Number, y: Number, width: Number, height: Numbe
 	open fun contains(x: Number, y: Number): Boolean
 	open fun pad(paddingX: Number, paddingY: Number): Rectangle /* this */
 	open fun fit(rectangle: Rectangle): Rectangle /* this */
-	open fun ceil(resolution: Number, eps: Number): Rectangle /* this */
-	open fun ceil(resolution: Number): Rectangle /* this */
+	open fun ceil(resolution: Number, eps: Number = definedExternally): Rectangle /* this */
 	open fun ceil(): Rectangle /* this */
 	open fun enlarge(rectangle: Rectangle): Rectangle /* this */
 	override fun toString(): String
@@ -230,13 +193,7 @@ open external class Rectangle(x: Number, y: Number, width: Number, height: Numbe
 	}
 }
 
-open external class RoundedRectangle(x: Number, y: Number, width: Number, height: Number, radius: Number) {
-	constructor(x: Number, y: Number, width: Number, height: Number)
-	constructor(x: Number, y: Number, width: Number)
-	constructor(x: Number, y: Number)
-	constructor(x: Number)
-	constructor()
-
+open external class RoundedRectangle(x: Number = definedExternally, y: Number = definedExternally, width: Number = definedExternally, height: Number = definedExternally, radius: Number = definedExternally) {
 	open var x: Number
 	open var y: Number
 	open var width: Number

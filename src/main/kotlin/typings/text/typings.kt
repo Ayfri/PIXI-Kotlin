@@ -6,7 +6,6 @@ import org.w3c.dom.CanvasRenderingContext2D
 import org.w3c.dom.HTMLCanvasElement
 import typings.Indexed
 import typings.core.Renderer
-import typings.display.IDestroyOptions
 import typings.math.Rectangle
 import typings.sprite.Sprite
 
@@ -75,9 +74,6 @@ open external class Text(
 	override fun _render(renderer: Renderer)
 	override fun getLocalBounds(rect: Rectangle): Rectangle
 	override fun _calculateBounds()
-	override fun destroy(options: IDestroyOptions)
-	override fun destroy(options: Boolean)
-	override fun destroy()
 
 	companion object {
 		var nextLineHeightBehavior: Boolean

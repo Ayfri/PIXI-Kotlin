@@ -17,14 +17,10 @@ open external class BasePrepare(renderer: AbstractRenderer) {
 	open var compeltes: Array<Any>
 	open var ticking: Boolean
 
-	open fun upload(item: IDisplayObjectExtended, done: () -> Unit)
-	open fun upload(item: IUploadHook, done: () -> Unit)
-	open fun upload(item: IFindHook, done: () -> Unit)
-	open fun upload(item: () -> Unit, done: () -> Unit)
-	open fun upload(item: IDisplayObjectExtended)
-	open fun upload(item: IUploadHook)
-	open fun upload(item: IFindHook)
-	open fun upload(item: () -> Unit)
+	open fun upload(item: IDisplayObjectExtended, done: () -> Unit = definedExternally)
+	open fun upload(item: IUploadHook, done: () -> Unit = definedExternally)
+	open fun upload(item: IFindHook, done: () -> Unit = definedExternally)
+	open fun upload(item: () -> Unit, done: () -> Unit = definedExternally)
 	open fun tick()
 	open fun prepareItems()
 	open fun registerFindHook(addHook: IFindHook): BasePrepare /* this */

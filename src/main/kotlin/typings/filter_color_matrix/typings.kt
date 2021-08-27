@@ -10,15 +10,12 @@ open external class ColorMatrixFilter : Filter {
 	open var alpha: Number
 
 	open fun brightness(b: Number, multiply: Boolean)
-	open fun tint(color: Number, multiply: Boolean)
-	open fun tint(color: Number)
+	open fun tint(color: Number, multiply: Boolean = definedExternally)
 	open fun greyscale(scale: Number, multiply: Boolean)
 	open fun blackAndWhite(multiply: Boolean)
 	open fun hue(rotation: Number, multiply: Boolean)
 	open fun contrast(amount: Number, multiply: Boolean)
-	open fun saturate(amount: Number, multiply: Boolean)
-	open fun saturate(amount: Number)
-	open fun saturate()
+	open fun saturate(amount: Number = definedExternally, multiply: Boolean = definedExternally)
 	open fun desaturate()
 	open fun negative(multiply: Boolean)
 	open fun sepia(multiply: Boolean)

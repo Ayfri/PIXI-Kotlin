@@ -12,14 +12,10 @@ import typings.core.*
 import typings.loaders.LoaderResource
 import kotlin.js.Promise
 
-abstract external class BlobResource(source: String, options: IBlobOptions) : BufferResource {
-	constructor(source: Uint32Array, options: IBlobOptions)
-	constructor(source: Uint8Array, options: IBlobOptions)
-	constructor(source: Float32Array, options: IBlobOptions)
-	constructor(source: Uint32Array)
-	constructor(source: Uint8Array)
-	constructor(source: Float32Array)
-	constructor(source: String)
+abstract external class BlobResource(source: String, options: IBlobOptions = definedExternally) : BufferResource {
+	constructor(source: Uint32Array, options: IBlobOptions = definedExternally)
+	constructor(source: Uint8Array, options: IBlobOptions = definedExternally)
+	constructor(source: Float32Array, options: IBlobOptions = definedExternally)
 
 	protected var origin: String
 	protected var buffer: ViewableBuffer
@@ -76,29 +72,22 @@ external interface CompressedTextureManifest {
 	var cacheID: String
 }
 
-open external class CompressedTextureResource(source: String, options: ICompressedTextureResourceOptions) :
-	BlobResource {
+open external class CompressedTextureResource(source: String, options: ICompressedTextureResourceOptions) : BlobResource {
 	constructor(source: Uint8Array, options: ICompressedTextureResourceOptions)
 	constructor(source: Uint32Array, options: ICompressedTextureResourceOptions)
 
 	open var format: INTERNAL_FORMATS
 	open var levels: Number
-	override fun upload(
-		renderer: Renderer,
-		_texture: BaseTexture<Resource, IAutoDetectOptions>,
-		_glTexture: GLTexture
-	): Boolean
+	override fun upload(renderer: Renderer, _texture: BaseTexture<Resource, IAutoDetectOptions>, _glTexture: GLTexture): Boolean
 
 	protected fun onBlobLoaded()
 }
 
-open external class DDSLoader {
-	companion object {
-		fun use(resource: LoaderResource, next: VarArgFun<String, Unit>)
-	}
+external object DDSLoader {
+	fun use(resource: LoaderResource, next: VarArgFun<String, Unit>)
 }
 
-external val FORMATS_TO_COMPONENTS: Indexed<Number, Number>;
+external val FORMATS_TO_COMPONENTS: Indexed<Number, Number>
 
 external interface IBlobOptions {
 	var autoLoad: Boolean?
@@ -116,10 +105,8 @@ external interface ICompressedTextureResourceOptions {
 
 external val INTERNAL_FORMAT_TO_BYTES_PER_PIXEL: Indexed<Number, Number>
 
-open external class KTXLoader {
-	companion object {
-		fun use(resource: LoaderResource, next: VarArgFun<String, Unit>)
-	}
+external object KTXLoader {
+	fun use(resource: LoaderResource, next: VarArgFun<String, Unit>)
 }
 
 external val TYPES_TO_BYTES_PER_COMPONENT: Indexed<Number, Number>

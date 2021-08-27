@@ -44,15 +44,11 @@ open external class InteractionData {
 	open val pointerId: Number
 	open fun <P : IPointData /* = Point */> getLocalPosition(
 		displayObject: DisplayObject,
-		point: P,
-		globalPos: IPointData
+		point: P = definedExternally,
+		globalPos: IPointData = definedExternally
 	): P
 
-	open fun <P : IPointData /* = Point */> getLocalPosition(displayObject: DisplayObject, point: P): P
-	open fun <P : IPointData /* = Point */> getLocalPosition(displayObject: DisplayObject): P
-	open fun getLocalPosition(displayObject: DisplayObject, point: Point, globalPos: IPointData): Point
-	open fun getLocalPosition(displayObject: DisplayObject, point: Point): Point
-	open fun getLocalPosition(displayObject: DisplayObject): Point
+	open fun getLocalPosition(displayObject: DisplayObject, point: Point = definedExternally, globalPos: IPointData = definedExternally): Point
 	open fun copyEvent(event: Touch)
 	open fun copyEvent(event: PointerEvent)
 	open fun copyEvent(event: TouchEvent)
@@ -72,9 +68,7 @@ open external class InteractionEvent {
 	open fun reset()
 }
 
-open external class InteractionManager(renderer: AbstractRenderer, options: InteractionManagerOptions) : EventEmitter {
-	constructor(renderer: AbstractRenderer)
-
+open external class InteractionManager(renderer: AbstractRenderer, options: InteractionManagerOptions = definedExternally) : EventEmitter {
 	open val activeInteractionData: Indexed<Number, InteractionData>
 	open val supportsTouchEvents: Boolean
 	open val supportsPointerEvents: Boolean
@@ -97,10 +91,8 @@ open external class InteractionManager(renderer: AbstractRenderer, options: Inte
 	open var useSystemTicker: Boolean
 	open val lastObjectRendered: DisplayObject
 
-	open fun hitTest(globalPoint: Point, root: DisplayObject): DisplayObject
-	open fun hitTest(globalPoint: Point): DisplayObject
-	open fun setTargetElement(element: HTMLElement, resolution: Number)
-	open fun setTargetElement(element: HTMLElement)
+	open fun hitTest(globalPoint: Point, root: DisplayObject = definedExternally): DisplayObject
+	open fun setTargetElement(element: HTMLElement, resolution: Number = definedExternally)
 	open fun tickerUpdate(deltaTime: Number)
 	open fun update()
 	open fun setCursorMode(mode: String)
@@ -108,17 +100,10 @@ open external class InteractionManager(renderer: AbstractRenderer, options: Inte
 	open fun processInteractive(
 		interactionEvent: InteractionEvent,
 		displayObject: DisplayObject,
-		func: InteractionCallback,
-		hitTest: Boolean
+		func: InteractionCallback = definedExternally,
+		hitTest: Boolean = definedExternally
 	)
 
-	open fun processInteractive(
-		interactionEvent: InteractionEvent,
-		displayObject: DisplayObject,
-		func: InteractionCallback
-	)
-
-	open fun processInteractive(interactionEvent: InteractionEvent, displayObject: DisplayObject)
 	open fun destroy()
 }
 
@@ -168,32 +153,15 @@ open external class TreeSearch {
 	open fun recursiveFindHit(
 		interactionEvent: InteractionEvent,
 		displayObject: DisplayObject,
-		func: InteractionCallback,
-		hitTest: Boolean,
-		interactive: Boolean
+		func: InteractionCallback = definedExternally,
+		hitTest: Boolean = definedExternally,
+		interactive: Boolean = definedExternally
 	): Boolean
 
-	open fun recursiveFindHit(
-		interactionEvent: InteractionEvent,
-		displayObject: DisplayObject,
-		func: InteractionCallback,
-		hitTest: Boolean
-	): Boolean
-
-	open fun recursiveFindHit(
-		interactionEvent: InteractionEvent,
-		displayObject: DisplayObject,
-		func: InteractionCallback
-	): Boolean
-
-	open fun recursiveFindHit(interactionEvent: InteractionEvent, displayObject: DisplayObject): Boolean
 	open fun findHit(
 		interactionEvent: InteractionEvent,
 		displayObject: DisplayObject,
-		func: InteractionCallback,
-		hitTest: Boolean
+		func: InteractionCallback = definedExternally,
+		hitTest: Boolean = definedExternally
 	)
-
-	open fun findHit(interactionEvent: InteractionEvent, displayObject: DisplayObject, func: InteractionCallback)
-	open fun findHit(interactionEvent: InteractionEvent, displayObject: DisplayObject)
 }

@@ -8,7 +8,6 @@ import typings.constants.BLEND_MODES
 import typings.core.*
 import typings.display.Bounds
 import typings.display.Container
-import typings.display.IDestroyOptions
 import typings.math.*
 
 external object ArcUtils {
@@ -47,9 +46,7 @@ open external class FillStyle {
 	open fun destroy()
 }
 
-open external class Graphics(geometry: GraphicsGeometry) : Container {
-	constructor()
-
+open external class Graphics(geometry: GraphicsGeometry = definedExternally) : Container {
 	open var shader: Shader
 	open var currentPath: Polygon
 	protected open var batches: Array<IGraphicsBatchElement>
@@ -69,13 +66,8 @@ open external class Graphics(geometry: GraphicsGeometry) : Container {
 	open val line: LineStyle
 
 	open fun clone(): Graphics
-	open fun lineStyle(width: Number, color: Number, alpha: Number, alignment: Number, native: Number): Graphics /* this */
-	open fun lineStyle(width: Number, color: Number, alpha: Number, alignment: Number): Graphics /* this */
-	open fun lineStyle(width: Number, color: Number, alpha: Number): Graphics /* this */
-	open fun lineStyle(width: Number, color: Number): Graphics /* this */
-	open fun lineStyle(width: Number): Graphics /* this */
-	open fun lineStyle(options: ILineStyleOptions): Graphics /* this */
-	open fun lineStyle(): Graphics /* this */
+	open fun lineStyle(width: Number = definedExternally, color: Number = definedExternally, alpha: Number = definedExternally, alignment: Number = definedExternally, native: Number = definedExternally): Graphics /* this */
+	open fun lineStyle(options: ILineStyleOptions = definedExternally): Graphics /* this */
 	open fun lineTextureStyle(options: ILineStyleOptions): Graphics /* this */
 	protected open fun startPoly()
 	open fun finishPoly()
@@ -87,11 +79,8 @@ open external class Graphics(geometry: GraphicsGeometry) : Container {
 	open fun quadraticCurveTo(cpX: Number, cpY: Number, toX: Number, toY: Number): Graphics /* this */
 	open fun bezierCurveTo(cpX: Number, cpY: Number, cpX2: Number, cpY2: Number, toX: Number, toY: Number): Graphics /* this */
 	open fun arcTo(x1: Number, y1: Number, x2: Number, y2: Number, radius: Number)
-	open fun arc(cx: Number, cy: Number, radius: Number, startAngle: Number, endAngle: Number, anticlockwise: Boolean): Graphics /* this */
-	open fun arc(cx: Number, cy: Number, radius: Number, startAngle: Number, endAngle: Number): Graphics /* this */
-	open fun beginFill(color: Number, alpha: Number): Graphics /* this */
-	open fun beginFill(color: Number): Graphics /* this */
-	open fun beginFill(): Graphics /* this */
+	open fun arc(cx: Number, cy: Number, radius: Number, startAngle: Number, endAngle: Number, anticlockwise: Boolean = definedExternally): Graphics /* this */
+	open fun beginFill(color: Number = definedExternally, alpha: Number = definedExternally): Graphics /* this */
 	open fun beginTextureFill(options: IFillStyleOptions): Graphics /* this */
 	open fun endFill(): Graphics /* this */
 	open fun drawRect(x: Number, y: Number, width: Number, height: Number): Graphics /* this */
@@ -110,8 +99,7 @@ open external class Graphics(geometry: GraphicsGeometry) : Container {
 	protected open fun _populateBatches()
 	protected open fun _renderBatched(renderer: Renderer)
 	protected open fun _renderDirect(renderer: Renderer)
-	protected open fun _renderDrawCallDirect(renderer: Renderer, drawCall: BatchDrawCall)
-	protected open fun _resolveDirectShader(renderer: Renderer): Shader
+	protected open fun _renderDrawCallDirect(renderer: Renderer, drawCall: BatchDrawCall = definedExternally)
 	override fun _calculateBounds()
 	open fun containsPoint(point: IPointData): Boolean
 	protected open fun calculateTints()
@@ -120,9 +108,6 @@ open external class Graphics(geometry: GraphicsGeometry) : Container {
 	open fun setMatrix(matrix: Matrix): Graphics /* this */
 	open fun beginHole(): Graphics /* this */
 	open fun endHole(): Graphics /* this */
-	override fun destroy(options: IDestroyOptions)
-	override fun destroy(options: Boolean)
-	override fun destroy()
 
 	companion object {
 		var _TEMP_POINT: Point
@@ -131,11 +116,7 @@ open external class Graphics(geometry: GraphicsGeometry) : Container {
 
 external val GRAPHICS_CURVES: IGraphicsCurvesSettings
 
-open external class GraphicsData(shape: IShape, fillStyle: FillStyle, lineStyle: LineStyle, matrix: Matrix) {
-	constructor(shape: IShape, fillStyle: FillStyle, lineStyle: LineStyle)
-	constructor(shape: IShape, fillStyle: FillStyle)
-	constructor(shape: IShape)
-
+open external class GraphicsData(shape: IShape, fillStyle: FillStyle = definedExternally, lineStyle: LineStyle = definedExternally, matrix: Matrix = definedExternally) {
 	open var shape: IShape
 	open var lineStyle: LineStyle
 	open var fillStyle: FillStyle
@@ -165,7 +146,7 @@ open external class GraphicsGeometry : BatchGeometry {
 	open var batches: Array<BatchPart>
 	protected open var dirty: Number
 	protected open var cacheDirty: Number
-	protected open var clearDiry: Number
+	protected open var clearDirty: Number
 	protected open var shapeIndex: Number
 	protected open var _bounds: Bounds
 	protected open var boundsDirty: Number
@@ -173,12 +154,8 @@ open external class GraphicsGeometry : BatchGeometry {
 
 	protected fun invalidate()
 	protected fun clear(): GraphicsGeometry
-	protected fun drawShape(shape: IShape_2, fillStyle: FillStyle, lineStyle: LineStyle, matrix: Matrix): GraphicsGeometry
-	protected fun drawShape(shape: IShape_2, fillStyle: FillStyle, lineStyle: LineStyle): GraphicsGeometry
-	protected fun drawShape(shape: IShape_2, fillStyle: FillStyle): GraphicsGeometry
-	protected fun drawShape(shape: IShape_2): GraphicsGeometry
-	open fun drawHole(shape: IShape_2, matrix: Matrix): GraphicsGeometry
-	open fun drawHole(shape: IShape_2): GraphicsGeometry
+	protected fun drawShape(shape: IShape_2, fillStyle: FillStyle = definedExternally, lineStyle: LineStyle = definedExternally, matrix: Matrix = definedExternally): GraphicsGeometry
+	open fun drawHole(shape: IShape_2, matrix: Matrix = definedExternally): GraphicsGeometry
 	override fun destroy()
 	open fun containsPoint(point: IPointData): Boolean
 	open fun updateBatches(allow32Indices: Boolean)
@@ -196,10 +173,8 @@ open external class GraphicsGeometry : BatchGeometry {
 	protected open fun processHoles(data: Array<GraphicsData>)
 	protected open fun calculateBounds()
 	protected open fun transformPoints(points: Array<Number>, matrix: Matrix)
-	protected open fun addColors(colors: Array<Number>, color: Number, alpha: Number, size: Number, offset: Number)
-	protected open fun addColors(colors: Array<Number>, color: Number, alpha: Number, size: Number)
-	protected open fun addUvs(vers: Array<Number>, uvs: Array<Number>, texture: Texture<Resource>, start: Number, size: Number, matrix: Matrix)
-	protected open fun addUvs(vers: Array<Number>, uvs: Array<Number>, texture: Texture<Resource>, start: Number, size: Number)
+	protected open fun addColors(colors: Array<Number>, color: Number, alpha: Number, size: Number, offset: Number = definedExternally)
+	protected open fun addUvs(vers: Array<Number>, uvs: Array<Number>, texture: Texture<Resource>, start: Number, size: Number, matrix: Matrix = definedExternally)
 	protected open fun adjustUvs(uvs: Array<Number>, texture: Texture<Resource>, start: Number, size: Number)
 
 	companion object {
@@ -256,8 +231,7 @@ external interface IGraphicsCurvesSettings {
 	var minSegments: Number
 	var maxSegments: Number
 	var epsilon: Number
-	fun _segmentsCount(length: Number, defaultSegments: Number): Number
-	fun _segmentsCount(length: Number): Number
+	fun _segmentsCount(length: Number, defaultSegments: Number = definedExternally): Number
 }
 
 external interface ILineStyleOptions : IFillStyleOptions {

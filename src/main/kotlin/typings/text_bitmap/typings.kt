@@ -5,21 +5,19 @@ package typings.text_bitmap
 import org.khronos.webgl.Float32Array
 import org.khronos.webgl.Uint16Array
 import org.w3c.dom.XMLDocument
-import typings.utils.Dict
 import typings.VarArgFun
 import typings.core.Resource
 import typings.core.Texture
 import typings.display.Container
-import typings.display.IDestroyOptions
 import typings.loaders.Loader
 import typings.loaders.LoaderResource
 import typings.math.ObservablePoint
-import typings.math.Rectangle
 import typings.mesh.Mesh
 import typings.mesh.MeshMaterial
 import typings.text.PartialTextStyle
 import typings.text.TextStyle
 import typings.text.TextStyleAlign
+import typings.utils.Dict
 
 open external class BitMapFont(data: BitMapFontData, textures: Array<Texture<Resource>>, ownsTextures: Boolean = definedExternally) {
 	constructor(data: BitMapFontData, textures: Dict<Texture<Resource>>)
@@ -98,11 +96,7 @@ open external class BitmapText(text: String, style: IBitmapTextStylePartial = de
 
 	open fun updateText()
 	override fun updateTransform()
-	override fun getLocalBounds(): Rectangle
 	protected open fun validate()
-	override fun destroy(options: IDestroyOptions)
-	override fun destroy(options: Boolean)
-	override fun destroy()
 
 	companion object {
 		var styleDefaults: IBitmapTextStylePartial

@@ -4,13 +4,10 @@ package typings.sprite_animated
 
 import typings.core.Resource
 import typings.core.Texture
-import typings.display.IDestroyOptions
 import typings.sprite.Sprite
 
-open external class AnimatedSprite(textures: Array<Texture<Resource>>, autoUpdate: Boolean) : Sprite {
-	constructor(textures: Array<Texture<Resource>>)
-	constructor(textures: Array<FrameObject>, autoUpdate: Boolean)
-	constructor(textures: Array<FrameObject>)
+open external class AnimatedSprite(textures: Array<Texture<Resource>>, autoUpdate: Boolean = definedExternally) : Sprite {
+	constructor(textures: Array<FrameObject>, autoUpdate: Boolean = definedExternally)
 
 	open var animationSpeed: Number
 	open var loop: Boolean
@@ -29,9 +26,6 @@ open external class AnimatedSprite(textures: Array<Texture<Resource>>, autoUpdat
 	open fun gotoAndStop(frameNumber: Number)
 	open fun gotoAndPlay(frameNumber: Number)
 	open fun update(deltaTime: Number)
-	override fun destroy(options: IDestroyOptions)
-	override fun destroy(options: Boolean)
-	override fun destroy()
 
 	companion object {
 		fun frameFrames(frames: Array<String>): AnimatedSprite

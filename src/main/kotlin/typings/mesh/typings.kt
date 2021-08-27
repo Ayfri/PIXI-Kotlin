@@ -8,7 +8,6 @@ import typings.constants.BLEND_MODES
 import typings.constants.DRAW_MODES
 import typings.core.*
 import typings.display.Container
-import typings.display.IDestroyOptions
 import typings.math.IPointData
 import typings.math.Matrix
 import typings.utils.Dict
@@ -21,10 +20,12 @@ external interface IMeshMaterialOptions {
 	var uniforms: Dict<Any>?
 }
 
-open external class Mesh<T : Shader /* = MeshMaterial */>(geometry: Geometry, shader: T, state: State, drawMode: DRAW_MODES) : Container {
-	constructor(geometry: Geometry, shader: T, state: State)
-	constructor(geometry: Geometry, shader: T)
-
+open external class Mesh<T : Shader /* = MeshMaterial */>(
+	geometry: Geometry,
+	shader: T,
+	state: State = definedExternally,
+	drawMode: DRAW_MODES = definedExternally
+) : Container {
 	open val geometry: Geometry
 	open var shader: T
 	open var state: State
@@ -49,9 +50,6 @@ open external class Mesh<T : Shader /* = MeshMaterial */>(geometry: Geometry, sh
 	open fun calculateUvs()
 	override fun _calculateBounds()
 	open fun containsPoint(point: IPointData): Boolean
-	override fun destroy(options: IDestroyOptions)
-	override fun destroy(options: Boolean)
-	override fun destroy()
 
 	companion object {
 		var BATCHABLE_SIZE: Number
@@ -64,22 +62,16 @@ open external class MeshBatchUvs(uvBuffer: Buffer, uvMatrix: Matrix) {
 	open var uvMatrix: TextureMatrix
 	open var _updateID: Number
 
-	open fun update(forceUpdate: Boolean)
-	open fun update()
+	open fun update(forceUpdate: Boolean = definedExternally)
 }
 
-open external class MeshGeometry(vertices: IArrayBuffer, uvs: IArrayBuffer, index: IArrayBuffer) : Geometry {
-	constructor(vertices: IArrayBuffer, uvs: IArrayBuffer)
-	constructor(vertices: IArrayBuffer)
-	constructor()
-
+open external class MeshGeometry(vertices: IArrayBuffer = definedExternally, uvs: IArrayBuffer = definedExternally, index: IArrayBuffer = definedExternally) :
+	Geometry {
 	open var _updateID: Number
 	open val vertexDirtyId: Number
 }
 
-open external class MeshMaterial(uSampler: Texture<Resource>, options: IMeshMaterialOptions) : Shader {
-	constructor(uSampler: Texture<Resource>)
-
+open external class MeshMaterial(uSampler: Texture<Resource>, options: IMeshMaterialOptions = definedExternally) : Shader {
 	open val uvMatrix: TextureMatrix
 	open var batchable: Boolean
 	open var pluginNAme: String

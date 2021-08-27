@@ -2,7 +2,6 @@
 
 package typings.spritesheet
 
-import typings.utils.Dict
 import typings.VarArgFun
 import typings.core.BaseTexture
 import typings.core.IAutoDetectOptions
@@ -10,6 +9,7 @@ import typings.core.Resource
 import typings.core.Texture
 import typings.loaders.LoaderResource
 import typings.math.IPointData
+import typings.utils.Dict
 
 external interface ISpritesheetDataMeta {
 	var scale: String
@@ -44,10 +44,8 @@ external interface ISpritesheetFrameData {
 	var anchor: IPointData?
 }
 
-open external class Spritesheet(texture: Texture<Resource>, data: ISpritesheetData, resolutionFilename: String) {
-	constructor(texture: Texture<Resource>, data: ISpritesheetData)
-	constructor(texture: BaseTexture<Resource, IAutoDetectOptions>, data: ISpritesheetData, resolutionFilename: String)
-	constructor(texture: BaseTexture<Resource, IAutoDetectOptions>, data: ISpritesheetData)
+open external class Spritesheet(texture: Texture<Resource>, data: ISpritesheetData, resolutionFilename: String = definedExternally) {
+	constructor(texture: BaseTexture<Resource, IAutoDetectOptions>, data: ISpritesheetData, resolutionFilename: String = definedExternally)
 
 	open var baseTexture: BaseTexture<Resource, IAutoDetectOptions>
 	open var textures: Dict<Texture<Resource>>
@@ -55,8 +53,7 @@ open external class Spritesheet(texture: Texture<Resource>, data: ISpritesheetDa
 	open var data: ISpritesheetData
 	open var renderer: Number
 
-	open fun destroy(destroyBase: Boolean)
-	open fun destroy()
+	open fun destroy(destroyBase: Boolean = definedExternally)
 
 	companion object {
 		val BATCH_SIZE: Number /* = 1000 */

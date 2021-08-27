@@ -12,19 +12,11 @@ import typings.core.Renderer
 import typings.display.DisplayObject
 
 open external class Extract(renderer: Renderer) : IRendererPlugin {
-	open fun image(target: DisplayObject, format: String, quality: Number): HTMLImageElement
-	open fun image(target: DisplayObject, format: String): HTMLImageElement
-	open fun image(target: DisplayObject): HTMLImageElement
-	open fun image(target: RenderTexture, format: String, quality: Number): HTMLImageElement
-	open fun image(target: RenderTexture, format: String): HTMLImageElement
-	open fun image(target: RenderTexture): HTMLImageElement
+	open fun image(target: DisplayObject, format: String = definedExternally, quality: Number = definedExternally): HTMLImageElement
+	open fun image(target: RenderTexture, format: String = definedExternally, quality: Number = definedExternally): HTMLImageElement
 
-	open fun base64(target: DisplayObject, format: String, quality: Number): String
-	open fun base64(target: DisplayObject, format: String): String
-	open fun base64(target: DisplayObject): String
-	open fun base64(target: RenderTexture, format: String, quality: Number): String
-	open fun base64(target: RenderTexture, format: String): String
-	open fun base64(target: RenderTexture): String
+	open fun base64(target: DisplayObject, format: String = definedExternally, quality: Number = definedExternally): String
+	open fun base64(target: RenderTexture, format: String = definedExternally, quality: Number = definedExternally): String
 
 	open fun canvas(target: DisplayObject): HTMLCanvasElement
 	open fun canvas(target: RenderTexture): HTMLCanvasElement

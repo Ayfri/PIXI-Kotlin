@@ -7,7 +7,7 @@ import org.w3c.xhr.XMLHttpRequest
 import seskar.js.JsInt
 import seskar.js.JsString
 import seskar.js.JsUnion
-import typings.*
+import typings.VarArgFun
 import typings.app.IApplicationOptions
 import typings.core.IBaseTextureOptions
 import typings.core.Resource
@@ -56,43 +56,31 @@ open external class AsyncQueue<TaskData> internal constructor(
 			array: Array<Any>,
 			iterator: (x: Any, next: (err: Any) -> Unit) -> Unit,
 			callback: (err: Any) -> Unit,
-			deferNext: Boolean
+			deferNext: Boolean = definedExternally
 		)
 
 		fun eachSeries(
 			array: Array<Any>,
 			iterator: (x: Any, next: (err: Any) -> Unit) -> Unit,
-			callback: (err: Any) -> Unit
+			callback: () -> Unit = definedExternally,
+			deferNext: Boolean = definedExternally
 		)
 
-		fun eachSeries(
-			array: Array<Any>,
-			iterator: (x: Any, next: (err: Any) -> Unit) -> Unit,
-			callback: () -> Unit,
-			deferNext: Boolean
-		)
-
-		fun eachSeries(array: Array<Any>, iterator: (x: Any, next: (err: Any) -> Unit) -> Unit, callback: () -> Unit)
-		fun eachSeries(array: Array<Any>, iterator: (x: Any, next: (err: Any) -> Unit) -> Unit)
 		fun eachSeries(
 			array: Array<Any>,
 			iterator: (x: Any, next: () -> Unit) -> Unit,
 			callback: (err: Any) -> Unit,
-			deferNext: Boolean
+			deferNext: Boolean = definedExternally
 		)
 
-		fun eachSeries(array: Array<Any>, iterator: (x: Any, next: () -> Unit) -> Unit, callback: (err: Any) -> Unit)
 		fun eachSeries(
 			array: Array<Any>,
 			iterator: (x: Any, next: () -> Unit) -> Unit,
-			callback: () -> Unit,
-			deferNext: Boolean
+			callback: () -> Unit = definedExternally,
+			deferNext: Boolean = definedExternally
 		)
 
-		fun eachSeries(array: Array<Any>, iterator: (x: Any, next: () -> Unit) -> Unit, callback: () -> Unit)
-		fun eachSeries(array: Array<Any>, iterator: (x: Any, next: () -> Unit) -> Unit)
-		fun queue(worker: (x: Any, next: VarArgFun<Any, Unit>) -> Unit, concurrency: Number): AsyncQueue<Any>
-		fun queue(worker: (x: Any, next: VarArgFun<Any, Unit>) -> Unit): AsyncQueue<Any>
+		fun queue(worker: (x: Any, next: VarArgFun<Any, Unit>) -> Unit, concurrency: Number = definedExternally): AsyncQueue<Any>
 	}
 }
 
@@ -115,27 +103,6 @@ external interface IAddOptions {
 	var metadata: IResourceMetadata?
 }
 
-external interface ILoaderAdd {
-	operator fun invoke(
-		name: String,
-		url: String,
-		options: IAddOptions = definedExternally,
-		callback: OnCompleteSignal = definedExternally
-	): Loader
-
-	operator fun invoke(name: String, url: String, callback: OnCompleteSignal = definedExternally): Loader
-	operator fun invoke(
-		name: String,
-		options: IAddOptions = definedExternally,
-		callback: OnCompleteSignal = definedExternally
-	): Loader
-
-	operator fun invoke(name: String, callback: OnCompleteSignal = definedExternally): Loader
-	operator fun invoke(resources: Array<IAddOptions>, callback: OnCompleteSignal = definedExternally): Loader
-	operator fun invoke(resources: Array<String>, callback: OnCompleteSignal = definedExternally): Loader
-	operator fun invoke(options: IAddOptions, callback: OnCompleteSignal = definedExternally): Loader
-}
-
 external interface ILoaderPlugin {
 	val add: (() -> Unit)?
 	val pre: ((resource: LoaderResource, next: VarArgFun<Any, Unit>) -> Unit)?
@@ -149,10 +116,7 @@ external interface IResourceMetadata : IBaseTextureOptions<Any> {
 	var imageMetadata: IResourceMetadata?
 }
 
-open external class Loader(baseUrl: String, concurrency: Number) {
-	constructor(baseUrl: String)
-	constructor()
-
+open external class Loader(baseUrl: String = definedExternally, concurrency: Number = definedExternally) {
 	open var baseUrl: String
 	open var progress: Number
 	open var loading: Boolean
@@ -165,22 +129,38 @@ open external class Loader(baseUrl: String, concurrency: Number) {
 	open val onLoad: Signal<OnLoadSignal>
 	open val onStart: Signal<OnStartSignal>
 	open val onComplete: Signal<OnCompleteSignal>
-	open val add: ILoaderAdd
+
+	//	open val add: ILoaderAdd
+	open fun add(name: String, url: String, callback: OnCompleteSignal = definedExternally): Loader
+	open fun add(
+		name: String,
+		url: String,
+		options: IAddOptions = definedExternally,
+		callback: OnCompleteSignal = definedExternally
+	): Loader
+
+	open fun add(
+		url: String,
+		options: IAddOptions = definedExternally,
+		callback: OnCompleteSignal = definedExternally
+	): Loader
+
+	open fun add(options: IAddOptions, callback: OnCompleteSignal = definedExternally): Loader
+	open fun add(resources: Array<String>, callback: OnCompleteSignal = definedExternally): Loader
+	open fun add(resources: Array<IAddOptions>, callback: OnCompleteSignal = definedExternally): Loader
 	open var currency: Number
 
 	protected open fun _add(
 		name: String,
 		url: String,
 		options: IAddOptions,
-		callback: OnCompleteSignalResource
+		callback: OnCompleteSignalResource = definedExternally
 	): Loader /* this */
 
-	protected open fun _add(name: String, url: String, options: IAddOptions): Loader /* this */
 	open fun pre(fn: ILoaderMiddleware)
 	open fun use(fn: ILoaderMiddleware)
 	open fun reset(): Loader /* this */
-	open fun load(cb: OnCompleteSignal): Loader /* this */
-	open fun load(): Loader /* this */
+	open fun load(cb: OnCompleteSignal = definedExternally): Loader /* this */
 	open fun _loadResouce(resource: LoaderResource, dequeue: () -> Unit)
 	open fun destroy()
 
@@ -321,7 +301,6 @@ open external class LoaderResource(name: String, url: Array<String>, options: Lo
 	val _xhrTypeMap: Dict<XHR_RESPONSE_TYPE>
 	val EMPTY_GIF: String
 }
-
 
 open external class Signal<CbType /* = VarArgFun<Any, Unit> */> {
 	open var _head: SignalBending<CbType>

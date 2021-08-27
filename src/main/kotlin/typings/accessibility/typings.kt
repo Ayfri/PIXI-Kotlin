@@ -3,8 +3,6 @@
 package typings.accessibility
 
 import org.w3c.dom.HTMLElement
-import seskar.js.JsString
-import seskar.js.JsUnion
 import typings.core.AbstractRenderer
 import typings.core.Renderer
 import typings.display.DisplayObject

@@ -1,7 +1,7 @@
 package typings.loaders
 
-import typings.utils.Dict
 import typings.VarArgFun
+import typings.utils.Dict
 
 typealias ILoaderMiddleware = (resource: LoaderResource, next: VarArgFun<Any, Unit>) -> Unit
 typealias ILoaderResource = LoaderResource

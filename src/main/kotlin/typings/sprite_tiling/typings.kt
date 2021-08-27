@@ -3,7 +3,6 @@
 package typings.sprite_tiling
 
 import typings.core.*
-import typings.display.IDestroyOptions
 import typings.math.IPointData
 import typings.math.ObservablePoint
 import typings.math.Rectangle
@@ -16,10 +15,7 @@ external interface TilingSpriteFromOptions : IBaseTextureOptions<Any> {
 	override var height: Number
 }
 
-open external class TilingSprite(texture: Texture<Resource>, width: Number, height: Number) : Sprite {
-	constructor(texture: Texture<Resource>, width: Number)
-	constructor(texture: Texture<Resource>)
-
+open external class TilingSprite(texture: Texture<Resource>, width: Number = definedExternally, height: Number = definedExternally) : Sprite {
 	open var tileTransform: Transform
 	open var uvMatrix: TextureMatrix
 	open var uvRespectAnchor: Boolean
@@ -33,11 +29,7 @@ open external class TilingSprite(texture: Texture<Resource>, width: Number, heig
 	override fun _render(renderer: Renderer)
 	override fun _calculateBounds()
 	override fun getLocalBounds(rect: Rectangle): Rectangle
-	override fun getLocalBounds(): Rectangle
 	override fun containsPoint(point: IPointData): Boolean
-	override fun destroy(options: IDestroyOptions)
-	override fun destroy(options: Boolean)
-	override fun destroy()
 
 	companion object {
 		fun from(source: String, options: TilingSpriteFromOptions): TilingSprite
