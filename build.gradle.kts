@@ -24,11 +24,14 @@ tasks {
 }
 
 kotlin {
+    kotlinDaemonJvmArgs = listOf("-Xopt-in=kotlin.RequiresOptIn")
+
     js(IR) {
         useCommonJs()
         binaries.executable()
         browser {
             commonWebpackConfig {
+                outputFileName = "dist.js"
                 cssSupport.enabled = true
             }
         }
