@@ -5,9 +5,9 @@ object Project {
 
 object Versions {
 	const val java = "16"
-	const val kotlin = "1.5.30"
-	const val seskar = "0.0.13"
-	const val kotlinExtensions = "1.0.1-pre.236-kotlin-1.5.30"
+	const val kotlin = "1.5.31"
+	const val seskar = "0.1.0"
+	const val kotlinExtensions = "1.0.1-pre.263-kotlin-1.5.31"
 	const val kotlinHtml = "0.7.3"
 	const val pixi = "6.1.2"
 }
