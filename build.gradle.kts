@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin
+import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 group = Project.group
@@ -23,17 +25,23 @@ tasks {
     }
 }
 
+rootProject.plugins.withType<YarnPlugin> {
+    rootProject.the<YarnRootExtension>().apply {
+        resolution("@webpack-cli/serve", "1.5.2")
+    }
+}
+
 kotlin {
     kotlinDaemonJvmArgs = listOf("-Xopt-in=kotlin.RequiresOptIn")
 
     js(IR) {
         useCommonJs()
-        binaries.executable()
         browser {
             commonWebpackConfig {
-                outputFileName = "dist.js"
                 cssSupport.enabled = true
+                outputFileName = "dist.js"
             }
         }
+        binaries.executable()
     }
 }
