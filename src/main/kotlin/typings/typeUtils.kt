@@ -1,5 +1,7 @@
 package typings
 
+external fun require(module: dynamic): dynamic
+
 typealias VarArgFun<E, R> = (items: Array<out E>) -> R
 
 operator fun <E, R> VarArgFun<E, R>.invoke(vararg items: E): R = this(items)
