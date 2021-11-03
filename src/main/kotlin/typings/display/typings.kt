@@ -5,7 +5,11 @@ package typings.display
 import org.khronos.webgl.Float32Array
 import typings.core.Filter
 import typings.core.Renderer
-import typings.math.*
+import typings.math.IPointData
+import typings.math.Matrix
+import typings.math.ObservablePoint
+import typings.math.Rectangle
+import typings.math.Transform
 import typings.utils.Dict
 import typings.utils.EventEmitter
 
@@ -35,7 +39,7 @@ open external class Bounds {
 		padX: Number = definedExternally,
 		padY: Number = definedExternally
 	)
-
+	
 	open fun addBounds(bounds: Bounds)
 	open fun addBoundsMask(bounds: Bounds, mask: Bounds)
 	open fun addBoundsMatrix(bounds: Bounds, matrix: Matrix)
@@ -55,7 +59,7 @@ open external class Container : DisplayObject {
 	protected open fun onChildrenChange(_length: Number = definedExternally)
 	open var width: Number
 	open var height: Number
-
+	
 	open fun <T : DisplayObject> addChild(vararg child: T): T /* T[0] */
 	open fun <T : DisplayObject> addChildAt(child: T, index: Number): T
 	open fun swapChildren(child: DisplayObject, child2: DisplayObject)
@@ -105,7 +109,7 @@ abstract external class DisplayObject : EventEmitter {
 		point: P = definedExternally,
 		skipUpdate: Boolean = definedExternally
 	): P
-
+	
 	open fun setParent(container: Container): Container
 	open fun setTransform(
 		x: Number = definedExternally,
@@ -118,7 +122,7 @@ abstract external class DisplayObject : EventEmitter {
 		pivotX: Number = definedExternally,
 		pivotY: Number = definedExternally
 	): DisplayObject /* this */
-
+	
 	open fun destroy(_options: IDestroyOptions = definedExternally)
 	open fun destroy(_options: Boolean = definedExternally)
 	open val _tempDisplayObjectParent: TemporaryDisplayObject
@@ -137,8 +141,8 @@ abstract external class DisplayObject : EventEmitter {
 	open var zIndex: Number
 	open val worldVisible: Boolean
 	open var mask: dynamic? /* Container | MaskData | null */
-
-
+	
+	
 	companion object {
 		fun mixin(source: Dict<Any>)
 	}

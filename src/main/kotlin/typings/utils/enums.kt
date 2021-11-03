@@ -8,16 +8,16 @@ import seskar.js.JsUnion
 external enum class BufferType {
 	@JsString("Float32Array")
 	FLOAT32_ARRAY,
-
+	
 	@JsString("Uint32Array")
 	UINT32_ARRAY,
-
+	
 	@JsString("Int32Array")
 	INT32_ARRAY,
-
+	
 	@JsString("Uint16Array")
 	UINT16_ARRAY,
-
+	
 	@JsString("Uint8Array")
 	UINT8_ARRAY,
 }
@@ -26,8 +26,10 @@ external enum class BufferType {
 external enum class Sign {
 	@JsInt(-1)
 	NEGATIVE,
+	
 	@JsInt(0)
 	ZERO,
+	
 	@JsInt(1)
 	POSITIVE,
 }

@@ -9,16 +9,17 @@ import seskar.js.JsString
 import seskar.js.JsUnion
 import typings.VarArgFun
 import typings.app.IApplicationOptions
+import typings.app.IApplicationPlugin
 import typings.core.IBaseTextureOptions
 import typings.core.Resource
 import typings.core.Texture
 import typings.utils.Dict
 
-external object AppLoaderPlugin {
+external object AppLoaderPlugin : IApplicationPlugin {
 	var loader: Loader
-	fun init(options: IApplicationOptions)
+	override fun init(options: IApplicationOptions)
 	fun init()
-	fun destroy()
+	override fun destroy()
 }
 
 open external class AsyncQueue<TaskData> internal constructor(
@@ -26,7 +27,7 @@ open external class AsyncQueue<TaskData> internal constructor(
 	concurrency: Number
 ) {
 	internal constructor(worker: (x: TaskData, next: () -> Unit) -> Unit)
-
+	
 	open var workers: Number
 	open var concurrency: Number
 	open var buffer: Number
@@ -50,7 +51,7 @@ open external class AsyncQueue<TaskData> internal constructor(
 	open fun idle(): Boolean
 	open fun pause()
 	open fun resume()
-
+	
 	companion object {
 		fun eachSeries(
 			array: Array<Any>,
@@ -58,28 +59,28 @@ open external class AsyncQueue<TaskData> internal constructor(
 			callback: (err: Any) -> Unit,
 			deferNext: Boolean = definedExternally
 		)
-
+		
 		fun eachSeries(
 			array: Array<Any>,
 			iterator: (x: Any, next: (err: Any) -> Unit) -> Unit,
 			callback: () -> Unit = definedExternally,
 			deferNext: Boolean = definedExternally
 		)
-
+		
 		fun eachSeries(
 			array: Array<Any>,
 			iterator: (x: Any, next: () -> Unit) -> Unit,
 			callback: (err: Any) -> Unit,
 			deferNext: Boolean = definedExternally
 		)
-
+		
 		fun eachSeries(
 			array: Array<Any>,
 			iterator: (x: Any, next: () -> Unit) -> Unit,
 			callback: () -> Unit = definedExternally,
 			deferNext: Boolean = definedExternally
 		)
-
+		
 		fun queue(worker: (x: Any, next: VarArgFun<Any, Unit>) -> Unit, concurrency: Number = definedExternally): AsyncQueue<Any>
 	}
 }
@@ -129,7 +130,7 @@ open external class Loader(baseUrl: String = definedExternally, concurrency: Num
 	open val onLoad: Signal<OnLoadSignal>
 	open val onStart: Signal<OnStartSignal>
 	open val onComplete: Signal<OnCompleteSignal>
-
+	
 	//	open val add: ILoaderAdd
 	open fun add(name: String, url: String, callback: OnCompleteSignal = definedExternally): Loader
 	open fun add(
@@ -138,32 +139,33 @@ open external class Loader(baseUrl: String = definedExternally, concurrency: Num
 		options: IAddOptions = definedExternally,
 		callback: OnCompleteSignal = definedExternally
 	): Loader
-
+	
 	open fun add(
 		url: String,
 		options: IAddOptions = definedExternally,
 		callback: OnCompleteSignal = definedExternally
 	): Loader
-
+	
 	open fun add(options: IAddOptions, callback: OnCompleteSignal = definedExternally): Loader
 	open fun add(resources: Array<String>, callback: OnCompleteSignal = definedExternally): Loader
 	open fun add(resources: Array<IAddOptions>, callback: OnCompleteSignal = definedExternally): Loader
 	open var currency: Number
-
+	
 	protected open fun _add(
 		name: String,
 		url: String,
 		options: IAddOptions,
 		callback: OnCompleteSignalResource = definedExternally
 	): Loader /* this */
-
+	
 	open fun pre(fn: ILoaderMiddleware)
 	open fun use(fn: ILoaderMiddleware)
 	open fun reset(): Loader /* this */
 	open fun load(cb: OnCompleteSignal = definedExternally): Loader /* this */
+	open fun load(cb: () -> Unit = definedExternally): Loader /* this */
 	open fun _loadResouce(resource: LoaderResource, dequeue: () -> Unit)
 	open fun destroy()
-
+	
 	companion object {
 		val shared: Loader
 		fun registerPlugin(plugin: ILoaderPlugin): Loader
@@ -174,7 +176,7 @@ open external class LoaderResource(name: String, url: Array<String>, options: Lo
 	constructor(name: String, url: String, options: LoaderOptions)
 	constructor(name: String, url: Array<String>)
 	constructor(name: String, url: String)
-
+	
 	open var texture: Texture<Resource>?
 	open var blob: Blob?
 	open val name: String
@@ -208,12 +210,12 @@ open external class LoaderResource(name: String, url: Array<String>, options: Lo
 	open fun _determineCrossOrigin(url: String, loc: Any): String
 	open fun _determineCrossOrigin(url: String): String
 	open fun _getMimeFromXhrType(type: XHR_RESPONSE_TYPE)
-
+	
 	companion object {
 		fun setExtensionLoadType(extname: String, loadType: LOAD_TYPE)
 		fun setExtensionXhrType(extname: String, xhrType: XHR_RESPONSE_TYPE)
 	}
-
+	
 	interface LoaderOptions {
 		var crossOrigin: dynamic? /* string | boolean */
 		var timeout: Number?
@@ -221,82 +223,82 @@ open external class LoaderResource(name: String, url: Array<String>, options: Lo
 		var xhrType: XHR_RESPONSE_TYPE?
 		var metadata: IResourceMetadata?
 	}
-
+	
 	@JsUnion
 	enum class STATUS_FLAGS {
 		@JsInt(0)
 		NONE,
-
+		
 		@JsInt(1)
 		DATA_URL,
-
+		
 		@JsInt(2)
 		COMPLETE,
-
+		
 		@JsInt(4)
 		LOADING
 	}
-
+	
 	@JsUnion
 	enum class TYPE {
 		@JsInt(0)
 		UNKNOWN,
-
+		
 		@JsInt(1)
 		JSON,
-
+		
 		@JsInt(2)
 		XML,
-
+		
 		@JsInt(3)
 		IMAGE,
-
+		
 		@JsInt(4)
 		AUDIO,
-
+		
 		@JsInt(5)
 		VIDEO,
-
+		
 		@JsInt(6)
 		TEXT
 	}
-
+	
 	@JsUnion
 	enum class LOAD_TYPE {
 		@JsInt(1)
 		XHR,
-
+		
 		@JsInt(2)
 		IMAGE,
-
+		
 		@JsInt(3)
 		AUDIO,
-
+		
 		@JsInt(4)
 		VIDEO
 	}
-
+	
 	@JsUnion
 	enum class XHR_RESPONSE_TYPE {
 		@JsString("text")
 		DEFAULT,
-
+		
 		@JsString("arraybuffer")
 		BUFFER,
-
+		
 		@JsString("blob")
 		BLOB,
-
+		
 		@JsString("document")
 		DOCUMENT,
-
+		
 		@JsString("json")
 		JSON,
-
+		
 		@JsString("text")
 		TEXT
 	}
-
+	
 	val _loadTypeMap: Dict<Number>
 	val _xhrTypeMap: Dict<XHR_RESPONSE_TYPE>
 	val EMPTY_GIF: String
@@ -319,14 +321,14 @@ open external class Signal<CbType /* = VarArgFun<Any, Unit> */> {
 
 open external class SignalBending<CbType>(fn: CbType, once: Boolean, thisArg: Any?) {
 	constructor(fn: CbType, once: Boolean)
-
+	
 	open var _fn: Any
 	open var _once: Boolean
 	open var _next: SignalBending<CbType>
 	open var _prev: SignalBending<CbType>
 	open var _owner: Signal<CbType>
 	open var _thisArg: Any
-
+	
 	open fun detach(): Boolean
 }
 

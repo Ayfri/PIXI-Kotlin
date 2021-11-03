@@ -22,7 +22,7 @@ open external class BlurFilter(
 	open var blurY: Number
 	override var blendMode: BLEND_MODES
 	open var repeatEdgePixels: Boolean
-
+	
 	open fun apply(filterManager: FilterSystem, input: RenderTexture, output: RenderTexture, clearMode: CLEAR_MODES)
 	protected fun updatePadding()
 }
@@ -39,6 +39,6 @@ open external class BlurFilterPass(
 	open var passes: Number
 	open var blur: Number
 	open var quality: Number
-
+	
 	open fun apply(filterManager: FilterSystem, input: RenderTexture, output: RenderTexture, clearMode: CLEAR_MODES)
 }

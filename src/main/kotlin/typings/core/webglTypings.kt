@@ -9,10 +9,10 @@ import typings.compressed_textures.GLenum
 external enum class WebGLPowerPreference {
 	@JsString("default")
 	DEFAULT,
-
+	
 	@JsString("high-performance")
 	HIGH_PERFORMANCE,
-
+	
 	@JsString("low-performance")
 	LOW_PERFORMANCE
 }

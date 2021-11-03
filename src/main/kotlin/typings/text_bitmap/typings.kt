@@ -21,15 +21,15 @@ import typings.utils.Dict
 
 open external class BitMapFont(data: BitMapFontData, textures: Array<Texture<Resource>>, ownsTextures: Boolean = definedExternally) {
 	constructor(data: BitMapFontData, textures: Dict<Texture<Resource>>)
-
+	
 	open val font: String
 	open val size: Number
 	open val lineHeight: Number
 	open val chars: Dict<IBitmapFontCharacter>
 	open val pageTextures: Dict<Texture<Resource>>
-
+	
 	open fun destroy()
-
+	
 	companion object {
 		val ALPHA: dynamic /* Array<String> | Array<Array<String>> */
 		val NUMERIC: Array<Array<String>>
@@ -37,7 +37,7 @@ open external class BitMapFont(data: BitMapFontData, textures: Array<Texture<Res
 		val ASCII: Array<Array<String>>
 		val defaultOptions: IBitmapFontOptions
 		val available: Dict<BitMapFont>
-
+		
 		fun install(data: String, texture: Texture<Resource>, ownsTextures: Boolean = definedExternally): BitMapFont
 		fun install(data: XMLDocument, texture: Texture<Resource>, ownsTextures: Boolean = definedExternally): BitMapFont
 		fun install(data: BitMapFontData, texture: Texture<Resource>, ownsTextures: Boolean = definedExternally): BitMapFont
@@ -47,7 +47,7 @@ open external class BitMapFont(data: BitMapFontData, textures: Array<Texture<Res
 		fun install(data: String, texture: Dict<Texture<Resource>>, ownsTextures: Boolean = definedExternally): BitMapFont
 		fun install(data: XMLDocument, texture: Dict<Texture<Resource>>, ownsTextures: Boolean = definedExternally): BitMapFont
 		fun install(data: BitMapFontData, texture: Dict<Texture<Resource>>, ownsTextures: Boolean = definedExternally): BitMapFont
-
+		
 		fun from(name: String, textStyle: TextStyle = definedExternally, options: IBitmapFontOptions = definedExternally): BitMapFont
 		fun from(name: String, textStyle: PartialTextStyle = definedExternally, options: IBitmapFontOptions = definedExternally): BitMapFont
 	}
@@ -93,11 +93,11 @@ open external class BitmapText(text: String, style: IBitmapTextStylePartial = de
 	open var letterSpacing: Number
 	open var roundPixels: Boolean
 	open val textHeight: Number
-
+	
 	open fun updateText()
 	override fun updateTransform()
 	protected open fun validate()
-
+	
 	companion object {
 		var styleDefaults: IBitmapTextStylePartial
 	}

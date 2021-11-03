@@ -8,16 +8,16 @@ import seskar.js.JsUnion
 external enum class SHAPES {
 	@JsInt(0)
 	POLY,
-
+	
 	@JsInt(1)
 	RECT,
-
+	
 	@JsInt(2)
 	CIRC,
-
+	
 	@JsInt(3)
 	ELIP,
-
+	
 	@JsInt(4)
 	RREC
 }

@@ -14,15 +14,15 @@ import typings.display.DisplayObject
 open external class Extract(renderer: Renderer) : IRendererPlugin {
 	open fun image(target: DisplayObject, format: String = definedExternally, quality: Number = definedExternally): HTMLImageElement
 	open fun image(target: RenderTexture, format: String = definedExternally, quality: Number = definedExternally): HTMLImageElement
-
+	
 	open fun base64(target: DisplayObject, format: String = definedExternally, quality: Number = definedExternally): String
 	open fun base64(target: RenderTexture, format: String = definedExternally, quality: Number = definedExternally): String
-
+	
 	open fun canvas(target: DisplayObject): HTMLCanvasElement
 	open fun canvas(target: RenderTexture): HTMLCanvasElement
-
+	
 	override fun destroy()
-
+	
 	companion object {
 		fun arrayPostDivide(pixels: Array<Number>, out: Array<Number>)
 		fun arrayPostDivide(pixels: Array<Number>, out: Uint8Array)

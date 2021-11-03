@@ -16,7 +16,7 @@ open external class BasePrepare(renderer: AbstractRenderer) {
 	open var uploadHooks: Array<Any>
 	open var compeltes: Array<Any>
 	open var ticking: Boolean
-
+	
 	open fun upload(item: IDisplayObjectExtended, done: () -> Unit = definedExternally)
 	open fun upload(item: IUploadHook, done: () -> Unit = definedExternally)
 	open fun upload(item: IFindHook, done: () -> Unit = definedExternally)
@@ -34,7 +34,7 @@ open external class BasePrepare(renderer: AbstractRenderer) {
 open external class CountLimiter(maxItemsPerFrame: Number) {
 	open var maxItemsPerFrame: Number
 	open var itemsLeft: Number
-
+	
 	open fun beginFrame()
 	open fun allowedToUpload()
 }
@@ -60,7 +60,7 @@ open external class Prepare(renderer: Renderer) : BasePrepare
 open external class TimeLimiter(maxMilliseconds: Number) {
 	open var maxMilliseconds: Number
 	open var frameStart: Number
-
+	
 	open fun beginFrame()
 	open fun allowedToUpload()
 }

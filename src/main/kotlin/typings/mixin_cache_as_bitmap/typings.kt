@@ -15,7 +15,7 @@ open external class CacheData {
 	open var originalCalculateBounds: () -> Unit
 	open var originalGetLocalBounds: (rect: Rectangle?) -> Rectangle
 	open var originalUpdateTransform: () -> Unit
-	open var originalDestroy: (options: dynamic /* undefined | IDestroyOptions | boolean */ ) -> Unit
+	open var originalDestroy: (options: dynamic /* undefined | IDestroyOptions | boolean */) -> Unit
 	open var originalMask: dynamic /* Container | MaskData */
 	open var originalContainsPoint: (point: IPointData) -> Boolean
 	open var sprite: Sprite

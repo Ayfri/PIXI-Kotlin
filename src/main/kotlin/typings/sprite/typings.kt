@@ -9,7 +9,11 @@ import org.w3c.dom.HTMLImageElement
 import org.w3c.dom.HTMLVideoElement
 import org.w3c.dom.ImageBitmap
 import typings.constants.BLEND_MODES
-import typings.core.*
+import typings.core.BaseTexture
+import typings.core.IAutoDetectOptions
+import typings.core.Renderer
+import typings.core.Resource
+import typings.core.Texture
 import typings.display.Container
 import typings.math.IPointData
 import typings.math.ObservablePoint
@@ -35,7 +39,7 @@ open external class Sprite(texture: Texture<Resource> = definedExternally) : Con
 	open val anchor: ObservablePoint<Any>
 	open var tint: Number
 	open var texture: Texture<Resource>
-
+	
 	protected open fun _onTextureUpdate()
 	open fun calculateVertices()
 	open fun calculateTrimmedVertices()
@@ -43,7 +47,7 @@ open external class Sprite(texture: Texture<Resource> = definedExternally) : Con
 	override fun _calculateBounds()
 	override fun getLocalBounds(rect: Rectangle): Rectangle
 	open fun containsPoint(point: IPointData): Boolean
-
+	
 	companion object {
 		fun from(source: Texture<out Resource>): Sprite
 		fun from(source: String): Sprite

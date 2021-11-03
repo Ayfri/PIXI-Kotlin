@@ -2,6 +2,7 @@
 import kotlinx.browser.document
 import kotlinx.browser.window
 import typings.app.Application
+import typings.app.resizeTo
 import typings.loaders.Loader
 import typings.sprite.Sprite
 import typings.ticker.Ticker
@@ -12,7 +13,7 @@ lateinit var app: Application
 
 fun main() {
 	app = Application.create { backgroundColor = 08080808f }
-	app.asDynamic().resizeTo = window
+	app.resizeTo = window
 	
 	Loader.shared.add("test", "test.png").load(::start)
 	document.getElementById("root")!!.appendChild(app.view)

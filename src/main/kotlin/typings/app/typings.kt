@@ -13,14 +13,11 @@ open external class Application(options: IApplicationOptions = definedExternally
 	open var renderer: dynamic /* AbstractRenderer | Renderer */
 	open val view: HTMLCanvasElement
 	open val screen: Rectangle
-
+	
 	open fun render()
 	open fun destroy(removeView: Boolean = definedExternally, stageOptions: IDestroyOptions = definedExternally)
 	open fun destroy(removeView: Boolean = definedExternally, stageOptions: Boolean = definedExternally)
-
-	open fun resize()
-	open var resizeTo: dynamic /* Window | HTMLElement */
-
+	
 	companion object {
 		fun registerPlugin(plugin: IApplicationPlugin)
 	}

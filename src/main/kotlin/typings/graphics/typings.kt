@@ -5,14 +5,34 @@ package typings.graphics
 import kotlinext.js.Record
 import org.khronos.webgl.Float32Array
 import typings.constants.BLEND_MODES
-import typings.core.*
+import typings.core.BatchDrawCall
+import typings.core.BatchGeometry
+import typings.core.Renderer
+import typings.core.Resource
+import typings.core.Shader
+import typings.core.Texture
 import typings.display.Bounds
 import typings.display.Container
-import typings.math.*
+import typings.math.IPointData
+import typings.math.IShape
+import typings.math.Matrix
+import typings.math.Point
+import typings.math.Polygon
+import typings.math.SHAPES
 
 external object ArcUtils {
 	fun curveTo(x1: Number, y1: Number, x2: Number, y2: Number, radius: Number, points: Array<Number>): IArcLikeShape
-	fun arc(_startX: Number, _startY: Number, cx: Number, cy: Number, radius: Number, startAngle: Number, endAngle: Number, _anticlockwise: Boolean, points: Array<Number>)
+	fun arc(
+		_startX: Number,
+		_startY: Number,
+		cx: Number,
+		cy: Number,
+		radius: Number,
+		startAngle: Number,
+		endAngle: Number,
+		_anticlockwise: Boolean,
+		points: Array<Number>
+	)
 }
 
 open external class BatchPart {
@@ -21,7 +41,7 @@ open external class BatchPart {
 	open var size: Number
 	open var attribStart: Number
 	open var attribSize: Number
-
+	
 	open fun begin(style: LineStyle, startIndex: Number, attribStart: Number)
 	open fun begin(style: FillStyle, startIndex: Number, attribStart: Number)
 	open fun end(endIndex: Number, endAttrib: Number)
@@ -64,9 +84,16 @@ open external class Graphics(geometry: GraphicsGeometry = definedExternally) : C
 	open var tint: Number
 	open val fill: FillStyle
 	open val line: LineStyle
-
+	
 	open fun clone(): Graphics
-	open fun lineStyle(width: Number = definedExternally, color: Number = definedExternally, alpha: Number = definedExternally, alignment: Number = definedExternally, native: Number = definedExternally): Graphics /* this */
+	open fun lineStyle(
+		width: Number = definedExternally,
+		color: Number = definedExternally,
+		alpha: Number = definedExternally,
+		alignment: Number = definedExternally,
+		native: Number = definedExternally
+	): Graphics /* this */
+	
 	open fun lineStyle(options: ILineStyleOptions = definedExternally): Graphics /* this */
 	open fun lineTextureStyle(options: ILineStyleOptions): Graphics /* this */
 	protected open fun startPoly()
@@ -108,7 +135,7 @@ open external class Graphics(geometry: GraphicsGeometry = definedExternally) : C
 	open fun setMatrix(matrix: Matrix): Graphics /* this */
 	open fun beginHole(): Graphics /* this */
 	open fun endHole(): Graphics /* this */
-
+	
 	companion object {
 		var _TEMP_POINT: Point
 	}
@@ -124,7 +151,7 @@ open external class GraphicsData(shape: IShape, fillStyle: FillStyle = definedEx
 	open var type: SHAPES
 	open var points: Array<Number>
 	open var holes: Array<GraphicsData>
-
+	
 	open fun clone(): GraphicsData
 	open fun destroy()
 }
@@ -151,10 +178,16 @@ open external class GraphicsGeometry : BatchGeometry {
 	protected open var _bounds: Bounds
 	protected open var boundsDirty: Number
 	open var bounds: Bounds
-
+	
 	protected fun invalidate()
 	protected fun clear(): GraphicsGeometry
-	protected fun drawShape(shape: IShape_2, fillStyle: FillStyle = definedExternally, lineStyle: LineStyle = definedExternally, matrix: Matrix = definedExternally): GraphicsGeometry
+	protected fun drawShape(
+		shape: IShape_2,
+		fillStyle: FillStyle = definedExternally,
+		lineStyle: LineStyle = definedExternally,
+		matrix: Matrix = definedExternally
+	): GraphicsGeometry
+	
 	open fun drawHole(shape: IShape_2, matrix: Matrix = definedExternally): GraphicsGeometry
 	override fun destroy()
 	open fun containsPoint(point: IPointData): Boolean
@@ -176,7 +209,7 @@ open external class GraphicsGeometry : BatchGeometry {
 	protected open fun addColors(colors: Array<Number>, color: Number, alpha: Number, size: Number, offset: Number = definedExternally)
 	protected open fun addUvs(vers: Array<Number>, uvs: Array<Number>, texture: Texture<Resource>, start: Number, size: Number, matrix: Matrix = definedExternally)
 	protected open fun adjustUvs(uvs: Array<Number>, texture: Texture<Resource>, start: Number, size: Number)
-
+	
 	companion object {
 		var BATCHABLE_SIZE: Number
 	}
@@ -255,7 +288,7 @@ open external class LineStyle : FillStyle {
 	open var cap: LINE_CAP
 	open var join: LINE_JOIN
 	open var miterLimit: Number
-
+	
 	override fun clone(): LineStyle
 	override fun reset()
 }

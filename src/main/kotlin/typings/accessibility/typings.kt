@@ -10,7 +10,7 @@ import typings.math.Rectangle
 
 open external class AccessibilityManager(renderer: Renderer) {
 	constructor(renderer: AbstractRenderer)
-
+	
 	var debug: Boolean
 	var renderer: dynamic /* AbstractRenderer | Renderer */
 	val isActive: Boolean

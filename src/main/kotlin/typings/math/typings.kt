@@ -73,7 +73,14 @@ external interface ISize {
 	var height: Number
 }
 
-open external class Matrix(a: Number = definedExternally, b: Number = definedExternally, c: Number = definedExternally, d: Number = definedExternally, tx: Number = definedExternally, ty: Number = definedExternally) {
+open external class Matrix(
+	a: Number = definedExternally,
+	b: Number = definedExternally,
+	c: Number = definedExternally,
+	d: Number = definedExternally,
+	tx: Number = definedExternally,
+	ty: Number = definedExternally
+) {
 	open var a: Number
 	open var b: Number
 	open var c: Number
@@ -81,7 +88,7 @@ open external class Matrix(a: Number = definedExternally, b: Number = definedExt
 	open var tx: Number
 	open var ty: Number
 	open var array: Float32Array?
-
+	
 	open fun fromArray(array: Array<Number>)
 	open fun set(a: Number, b: Number, c: Number, d: Number, tx: Number): Matrix /* this */
 	open fun toArray(transpose: Boolean, out: Float32Array = definedExternally): Float32Array
@@ -102,7 +109,7 @@ open external class Matrix(a: Number = definedExternally, b: Number = definedExt
 		skewX: Number,
 		skewY: Number
 	): Matrix /* this */
-
+	
 	open fun prepend(matrix: Matrix): Matrix /* this */
 	open fun decompose(transform: Transform): Transform
 	open fun invert(): Matrix /* this */
@@ -110,7 +117,7 @@ open external class Matrix(a: Number = definedExternally, b: Number = definedExt
 	open fun clone(): Matrix
 	open fun copyTo(matrix: Matrix): Matrix
 	open fun copyFrom(matrix: Matrix): Matrix /* this */
-
+	
 	companion object {
 		val IDENTITY: Matrix
 		val TEMP_MATRIX: Matrix
@@ -126,7 +133,7 @@ open external class ObservablePoint<T>(context: (self: T) -> Any, scope: T, x: N
 	override var x: Number
 	override var y: Number
 	open fun clone(cb: (`this`: T) -> Any, scope: Any): ObservablePoint<Any>
-
+	
 	open fun clone(cb: (`this`: T) -> Any): ObservablePoint<Any>
 	open fun clone(): ObservablePoint<Any>
 	override fun set(x: Number, y: Number): ObservablePoint<T> /* this */
@@ -142,7 +149,7 @@ external val PI_2: Number
 open external class Point(x: Number = definedExternally, y: Number = definedExternally) : IPoint {
 	override var x: Number
 	override var y: Number
-
+	
 	open fun clone(): Point
 	override fun copyFrom(p: IPointData): Point
 	override fun <T : IPoint> copyTo(p: T): T
@@ -155,11 +162,11 @@ open external class Polygon(points: Array<IPointData>) {
 	constructor(points: Array<Number>)
 	constructor(vararg points: Array<IPointData>)
 	constructor(vararg points: Array<Number>)
-
+	
 	open var points: Array<Number>
 	open var closeStroke: Boolean
 	open val type: SHAPES
-
+	
 	open fun clone(): Polygon
 	open fun contains(x: Number, y: Number): Boolean
 	override fun toString(): String
@@ -177,7 +184,7 @@ open external class Rectangle(x: Number = definedExternally, y: Number = defined
 	open val right: Number
 	open val top: Number
 	open val bottom: Number
-
+	
 	open fun clone(): Rectangle
 	open fun copyFrom(rectangle: Rectangle): Rectangle
 	open fun contains(x: Number, y: Number): Boolean
@@ -187,20 +194,26 @@ open external class Rectangle(x: Number = definedExternally, y: Number = defined
 	open fun ceil(): Rectangle /* this */
 	open fun enlarge(rectangle: Rectangle): Rectangle /* this */
 	override fun toString(): String
-
+	
 	companion object {
 		val EMPTY: Rectangle
 	}
 }
 
-open external class RoundedRectangle(x: Number = definedExternally, y: Number = definedExternally, width: Number = definedExternally, height: Number = definedExternally, radius: Number = definedExternally) {
+open external class RoundedRectangle(
+	x: Number = definedExternally,
+	y: Number = definedExternally,
+	width: Number = definedExternally,
+	height: Number = definedExternally,
+	radius: Number = definedExternally
+) {
 	open var x: Number
 	open var y: Number
 	open var width: Number
 	open var height: Number
 	open var radius: Number
 	open val type: SHAPES
-
+	
 	open fun clone(): RoundedRectangle
 	open fun contains(x: Number, y: Number): Boolean
 	override fun toString(): String
@@ -221,15 +234,15 @@ open external class Transform {
 	protected open var _localID: Number
 	protected open var _currentLocalID: Number
 	open var rotation: Number
-
+	
 	protected open fun onChange()
 	protected open fun updateSkew()
 	override fun toString(): String
 	open fun updateLocalTransform()
 	open fun updateTransform(parentTransform: Transform)
 	open fun setFromMatrix(matrix: Matrix)
-
-
+	
+	
 	companion object {
 		val IDENTITY: Transform
 	}

@@ -3,7 +3,11 @@
 package typings.mesh_extras
 
 import typings.constants.DRAW_MODES
-import typings.core.*
+import typings.core.IArrayBuffer
+import typings.core.ITypedArray
+import typings.core.Renderer
+import typings.core.Resource
+import typings.core.Texture
 import typings.math.IPoint
 import typings.mesh.Mesh
 import typings.mesh.MeshGeometry
@@ -27,7 +31,7 @@ open external class NineSlicePlane(
 	open var rightWidth: Number
 	open var topHeight: Number
 	open var bottomHeight: Number
-
+	
 	override fun textureUpdated()
 	open fun updateHorizontalVertices()
 	open fun updateVerticalVertices()
@@ -43,7 +47,7 @@ open external class PlaneGeometry(
 	open var segHeight: Number
 	open var width: Number
 	open var height: Number
-
+	
 	open fun build()
 }
 
@@ -52,7 +56,7 @@ open external class RopeGeometry(width: Number, points: Array<IPoint>, textureSc
 	open val textureScale: Number
 	open var _wdith: Number
 	open val width: Number
-
+	
 	open fun updateVertices()
 	open fun update()
 }
@@ -73,13 +77,13 @@ open external class SimplePlane(texture: Texture<Resource>, verticesX: Number, v
 	open var autoUpdate: Boolean
 	protected open var _textureID: Number
 	override var texture: Texture<Resource>
-
+	
 	open fun textureUpdated()
 	override fun _render(renderer: Renderer)
 }
 
 open external class SimpleRope(texture: Texture<Resource>, points: Array<IPoint>, textureScale: Number = definedExternally) : Mesh<MeshMaterial> {
 	open var autoUpdate: Boolean
-
+	
 	override fun _render(renderer: Renderer)
 }

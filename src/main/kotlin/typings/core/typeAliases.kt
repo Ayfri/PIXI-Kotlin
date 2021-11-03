@@ -7,7 +7,7 @@ import typings.VarArgFun
 
 typealias ImageSource = Any
 typealias IArrayBuffer = ArrayBuffer
-typealias IRenderingContext =  WebGL2RenderingContext
+typealias IRenderingContext = WebGL2RenderingContext
 typealias IRendererPlugins = Indexed<String, Any>
 typealias IResourcePluginOptions = Indexed<String, Any>
 

@@ -3,7 +3,13 @@
 package typings.settings
 
 import org.w3c.dom.HTMLCanvasElement
-import typings.constants.*
+import typings.constants.ENV
+import typings.constants.GC_MODES
+import typings.constants.MIPMAP_MODES
+import typings.constants.MSAA_QUALITY
+import typings.constants.PRECISION
+import typings.constants.SCALE_MODES
+import typings.constants.WRAP_MODES
 import typings.isMobileResult
 import kotlin.js.RegExp
 

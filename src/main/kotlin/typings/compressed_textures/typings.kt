@@ -8,7 +8,13 @@ import org.khronos.webgl.Uint32Array
 import org.khronos.webgl.Uint8Array
 import typings.Indexed
 import typings.VarArgFun
-import typings.core.*
+import typings.core.BaseTexture
+import typings.core.BufferResource
+import typings.core.GLTexture
+import typings.core.IAutoDetectOptions
+import typings.core.Renderer
+import typings.core.Resource
+import typings.core.ViewableBuffer
 import typings.loaders.LoaderResource
 import kotlin.js.Promise
 
@@ -16,13 +22,13 @@ abstract external class BlobResource(source: String, options: IBlobOptions = def
 	constructor(source: Uint32Array, options: IBlobOptions = definedExternally)
 	constructor(source: Uint8Array, options: IBlobOptions = definedExternally)
 	constructor(source: Float32Array, options: IBlobOptions = definedExternally)
-
+	
 	protected var origin: String
 	protected var buffer: ViewableBuffer
 	protected var loaded: Boolean
-
+	
 	protected fun onBlobLoaded(_data: ArrayBuffer)
-
+	
 	override fun load(): Promise<Resource>
 }
 
@@ -75,11 +81,11 @@ external interface CompressedTextureManifest {
 open external class CompressedTextureResource(source: String, options: ICompressedTextureResourceOptions) : BlobResource {
 	constructor(source: Uint8Array, options: ICompressedTextureResourceOptions)
 	constructor(source: Uint32Array, options: ICompressedTextureResourceOptions)
-
+	
 	open var format: INTERNAL_FORMATS
 	open var levels: Number
 	override fun upload(renderer: Renderer, _texture: BaseTexture<Resource, IAutoDetectOptions>, _glTexture: GLTexture): Boolean
-
+	
 	protected fun onBlobLoaded()
 }
 

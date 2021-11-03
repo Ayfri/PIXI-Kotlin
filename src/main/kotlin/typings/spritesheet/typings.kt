@@ -46,15 +46,15 @@ external interface ISpritesheetFrameData {
 
 open external class Spritesheet(texture: Texture<Resource>, data: ISpritesheetData, resolutionFilename: String = definedExternally) {
 	constructor(texture: BaseTexture<Resource, IAutoDetectOptions>, data: ISpritesheetData, resolutionFilename: String = definedExternally)
-
+	
 	open var baseTexture: BaseTexture<Resource, IAutoDetectOptions>
 	open var textures: Dict<Texture<Resource>>
 	open var animations: Dict<Array<Texture<Resource>>>
 	open var data: ISpritesheetData
 	open var renderer: Number
-
+	
 	open fun destroy(destroyBase: Boolean = definedExternally)
-
+	
 	companion object {
 		val BATCH_SIZE: Number /* = 1000 */
 	}

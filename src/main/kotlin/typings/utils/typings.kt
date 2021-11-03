@@ -12,7 +12,11 @@ import org.w3c.dom.Location
 import org.w3c.dom.url.URL
 import typings.IIndexed
 import typings.Indexed
-import typings.core.*
+import typings.core.BaseTexture
+import typings.core.IAutoDetectOptions
+import typings.core.ITypedArray
+import typings.core.Program
+import typings.core.Resource
 import kotlin.js.RegExp
 
 external val BaseTextureCache: Indexed<String, BaseTexture<Resource, IAutoDetectOptions>>
@@ -23,7 +27,7 @@ open external class CanvasRenderTarget(width: Number, height: Number, resolution
 	open var resolution: Number
 	open var width: Number
 	open var height: Number
-
+	
 	open fun clear()
 	open fun resize(desiredWidth: Number, desiredHeight: Number)
 	open fun destroy()
@@ -72,7 +76,7 @@ external fun interleaveTypedArrays(arrays: Array<PackedArray>, sizes: Array<Numb
 external fun isPow2(v: Number): Boolean
 external fun isWebGLSupported(): Boolean
 external fun log2(v: Number): Number
-external  fun nextPow2(v: Number): Number
+external fun nextPow2(v: Number): Number
 
 external interface ParsedUrlQuery : IIndexed<String, dynamic /* String | Array<String> */>
 
@@ -156,6 +160,7 @@ external interface UrlObjectCommon {
 external interface UrlWithParsedQuery : Url {
 	override var query: ParsedUrlQuery
 }
+
 external interface UrlWithStringQuery : Url {
 	override var query: String?
 }

@@ -6,7 +6,7 @@ open external class Runner(name: String) {
 	open var items: Array<Any>
 	open val empty: Boolean
 	open val name: String
-
+	
 	open fun emit(
 		a0: Any? /* unknown */,
 		a1: Any? /* unknown */,
@@ -17,7 +17,7 @@ open external class Runner(name: String) {
 		a6: Any? /* unknown */,
 		a7: Any? /* unknown */
 	): Runner /* this */
-
+	
 	open fun add(item: Any? /* unknown */): Runner /* this */
 	open fun remove(item: Any? /* unknown */): Runner /* this */
 	open fun contains(item: Any?): Boolean

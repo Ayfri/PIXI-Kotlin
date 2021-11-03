@@ -8,7 +8,7 @@ open external class ColorMatrixFilter : Filter {
 	open var grayscale: (scale: Number, multiply: Boolean) -> Unit
 	open var matrix: ColorMatrix
 	open var alpha: Number
-
+	
 	open fun brightness(b: Number, multiply: Boolean)
 	open fun tint(color: Number, multiply: Boolean = definedExternally)
 	open fun greyscale(scale: Number, multiply: Boolean)

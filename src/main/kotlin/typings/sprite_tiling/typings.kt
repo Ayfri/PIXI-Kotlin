@@ -2,7 +2,15 @@
 
 package typings.sprite_tiling
 
-import typings.core.*
+import typings.core.IBaseTextureOptions
+import typings.core.ObjectRenderer
+import typings.core.QuadUv
+import typings.core.Renderer
+import typings.core.Resource
+import typings.core.Shader
+import typings.core.State
+import typings.core.Texture
+import typings.core.TextureMatrix
 import typings.math.IPointData
 import typings.math.ObservablePoint
 import typings.math.Rectangle
@@ -24,13 +32,13 @@ open external class TilingSprite(texture: Texture<Resource>, width: Number = def
 	open var tilePosition: ObservablePoint<Any>
 	override var width: Number
 	override var height: Number
-
+	
 	override fun _onTextureUpdate()
 	override fun _render(renderer: Renderer)
 	override fun _calculateBounds()
 	override fun getLocalBounds(rect: Rectangle): Rectangle
 	override fun containsPoint(point: IPointData): Boolean
-
+	
 	companion object {
 		fun from(source: String, options: TilingSpriteFromOptions): TilingSprite
 	}
@@ -41,6 +49,6 @@ open external class TilingSpriteRenderer(renderer: Renderer) : ObjectRenderer {
 	open var simpleShader: Shader
 	open var quad: QuadUv
 	open val state: State
-
+	
 	open fun render(ts: TilingSprite)
 }

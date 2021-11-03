@@ -42,7 +42,7 @@ open external class Mesh<T : Shader /* = MeshMaterial */>(
 	open var blendMode: BLEND_MODES
 	open var roundPixels: Boolean
 	open var texture: Texture<Resource>
-
+	
 	override fun _render(renderer: Renderer)
 	protected open fun _renderDefault(renderer: Renderer)
 	protected open fun _renderToBatch(renderer: Renderer)
@@ -50,7 +50,7 @@ open external class Mesh<T : Shader /* = MeshMaterial */>(
 	open fun calculateUvs()
 	override fun _calculateBounds()
 	open fun containsPoint(point: IPointData): Boolean
-
+	
 	companion object {
 		var BATCHABLE_SIZE: Number
 	}
@@ -61,7 +61,7 @@ open external class MeshBatchUvs(uvBuffer: Buffer, uvMatrix: Matrix) {
 	open var uvBuffer: Buffer
 	open var uvMatrix: TextureMatrix
 	open var _updateID: Number
-
+	
 	open fun update(forceUpdate: Boolean = definedExternally)
 }
 
@@ -78,6 +78,6 @@ open external class MeshMaterial(uSampler: Texture<Resource>, options: IMeshMate
 	open var texture: Texture<Resource>
 	open var alpha: Number
 	open var tint: Number
-
+	
 	open fun update()
 }

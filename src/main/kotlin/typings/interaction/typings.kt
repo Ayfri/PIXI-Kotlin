@@ -47,7 +47,7 @@ open external class InteractionData {
 		point: P = definedExternally,
 		globalPos: IPointData = definedExternally
 	): P
-
+	
 	open fun getLocalPosition(displayObject: DisplayObject, point: Point = definedExternally, globalPos: IPointData = definedExternally): Point
 	open fun copyEvent(event: Touch)
 	open fun copyEvent(event: PointerEvent)
@@ -90,7 +90,7 @@ open external class InteractionManager(renderer: AbstractRenderer, options: Inte
 	protected open var mouseOverRenderer: Boolean
 	open var useSystemTicker: Boolean
 	open val lastObjectRendered: DisplayObject
-
+	
 	open fun hitTest(globalPoint: Point, root: DisplayObject = definedExternally): DisplayObject
 	open fun setTargetElement(element: HTMLElement, resolution: Number = definedExternally)
 	open fun tickerUpdate(deltaTime: Number)
@@ -103,7 +103,7 @@ open external class InteractionManager(renderer: AbstractRenderer, options: Inte
 		func: InteractionCallback = definedExternally,
 		hitTest: Boolean = definedExternally
 	)
-
+	
 	open fun destroy()
 }
 
@@ -119,7 +119,7 @@ open external class InteractionTrackingData(pointerId: Number) {
 	open var over: Boolean
 	open var rightDown: Boolean
 	open var leftDown: Boolean
-
+	
 	companion object {
 		val FLAGS: InteractionTrackingFlagsReadOnly
 	}
@@ -157,7 +157,7 @@ open external class TreeSearch {
 		hitTest: Boolean = definedExternally,
 		interactive: Boolean = definedExternally
 	): Boolean
-
+	
 	open fun findHit(
 		interactionEvent: InteractionEvent,
 		displayObject: DisplayObject,

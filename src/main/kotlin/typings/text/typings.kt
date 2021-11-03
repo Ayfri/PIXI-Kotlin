@@ -53,7 +53,7 @@ open external class Text(
 	canvas: HTMLCanvasElement = definedExternally
 ) : Sprite {
 	constructor(text: String, style: TextStyle = definedExternally, canvas: HTMLCanvasElement = definedExternally)
-
+	
 	open var canvas: HTMLCanvasElement
 	open var context: CanvasRenderingContext2D
 	open var localStyleID: Number
@@ -69,12 +69,12 @@ open external class Text(
 	open var style: PartialTextStyle
 	open var text: String
 	open var resolution: Number
-
+	
 	open fun updateText(respectDirty: Boolean)
 	override fun _render(renderer: Renderer)
 	override fun getLocalBounds(rect: Rectangle): Rectangle
 	override fun _calculateBounds()
-
+	
 	companion object {
 		var nextLineHeightBehavior: Boolean
 	}
@@ -100,7 +100,7 @@ open external class TextMetrics(
 	open var lineHeight: Number
 	open var maxLineWidth: Number
 	open var fontProperties: IFontMetrics
-
+	
 	companion object {
 		var METRICS_STRING: String
 		var BASELINE_SYMBOL: String
@@ -111,21 +111,21 @@ open external class TextMetrics(
 		var _fonts: Indexed<String, IFontMetrics>
 		var _newlines: Array<Number>
 		var _breakingSpaces: Array<Number>
-
+		
 		fun measureText(
 			text: String,
 			style: TextStyle,
 			wordWrap: Boolean,
 			canvas: HTMLCanvasElement = definedExternally
 		): TextMetrics
-
+		
 		fun measureText(
 			text: String,
 			style: TextStyle,
 			wordWrap: Boolean,
 			canvas: OffscreenCanvas = definedExternally
 		): TextMetrics
-
+		
 		fun isBreakingSpace(char: String, _nextChar: String = definedExternally): Boolean
 		fun canBreakWords(_token: String, breakWords: Boolean): Boolean
 		fun canBreakChars(
@@ -135,7 +135,7 @@ open external class TextMetrics(
 			_index: Number,
 			_breakWords: Boolean
 		): Boolean
-
+		
 		fun wordWrapSplit(token: String): Array<String>
 		fun measureFont(font: String): IFontMetrics
 		fun clearMetrics(font: String = definedExternally)
@@ -172,9 +172,9 @@ open external class TextStyle(style: PartialTextStyle) {
 	protected open var _wordWrap: Boolean
 	protected open var _wordWrapWidth: Number
 	protected open var _leading: Number
-
+	
 	open var styleID: Number
-
+	
 	open var align: TextStyleAlign
 	open var breakWords: Boolean
 	open var dropShadow: Boolean
@@ -204,7 +204,7 @@ open external class TextStyle(style: PartialTextStyle) {
 	open var whiteSpace: TextStyleWhiteSpace
 	open var wordWrap: Boolean
 	open var wordWrapWidth: Number
-
+	
 	open fun clone(): TextStyle
 	open fun reset()
 	open fun toFontString(): String
@@ -212,7 +212,7 @@ open external class TextStyle(style: PartialTextStyle) {
 
 open external class PartialTextStyle {
 	open var styleID: Number?
-
+	
 	open var align: TextStyleAlign?
 	open var breakWords: Boolean?
 	open var dropShadow: Boolean?
