@@ -3,7 +3,6 @@ package typings.math
 import seskar.js.JsInt
 import seskar.js.JsUnion
 
-
 @JsUnion
 external enum class SHAPES {
 	@JsInt(0)

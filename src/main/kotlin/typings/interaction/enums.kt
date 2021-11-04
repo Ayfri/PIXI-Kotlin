@@ -3,7 +3,6 @@ package typings.interaction
 import seskar.js.Case
 import seskar.js.JsUnion
 
-
 @JsUnion(case = Case.SNAKE)
 external enum class Cursor {
 	AUTO,

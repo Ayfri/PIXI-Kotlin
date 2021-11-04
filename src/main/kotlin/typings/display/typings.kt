@@ -80,7 +80,6 @@ open external class Container : DisplayObject {
 	override fun render(renderer: Renderer)
 }
 
-
 abstract external class DisplayObject : EventEmitter {
 	abstract var sortDirty: Boolean
 	open var parent: Container

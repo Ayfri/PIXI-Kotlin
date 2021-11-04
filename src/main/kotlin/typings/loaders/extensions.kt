@@ -10,7 +10,6 @@ inline var ILoaderResource.texture: Texture<Resource>
 		asDynamic().texture = value
 	}
 
-
 inline var IApplicationOptions.sharedLoader: Boolean?
 	get() = asDynamic().sharedLoader as? Boolean
 	set(value) {

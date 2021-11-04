@@ -5,7 +5,6 @@ import seskar.js.JsInt
 import seskar.js.JsString
 import seskar.js.JsUnion
 
-
 @JsUnion
 external enum class TEXT_GRADIENT {
 	@JsInt(0)

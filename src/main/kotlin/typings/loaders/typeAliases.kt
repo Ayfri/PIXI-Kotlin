@@ -12,7 +12,6 @@ typealias OnProgressSignalResource = (resource: LoaderResource, percentage: Numb
 typealias OnCompleteSignalResource = (resource: LoaderResource) -> Unit
 typealias MiddlewareFn = (resource: LoaderResource, next: () -> Unit) -> Unit
 
-
 typealias OnStartSignal = (loader: Loader) -> Unit
 typealias OnProgressSignal = (loader: Loader, resource: LoaderResource) -> Unit
 typealias OnLoadSignal = (loader: Loader, resource: LoaderResource) -> Unit
