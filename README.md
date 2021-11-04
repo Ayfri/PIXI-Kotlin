@@ -1,9 +1,9 @@
 # PIXI-Kotlin
 
 This is a simple example of what a PIXI transcription in Kotlin could look like.
-It's just a demonstration, I do not advise you to use it for now.
 
-I'm searching how to make it run.
+Use this template to create your own PIXI-Kotlin projects.
 
-For know, there are all the classes, interfaces, enums, functions and objects.
+For now, there are all the classes, interfaces, enums, functions, type aliases, and objects.
+Classes with only static members have been changed to Kotlin Objects. 
 The private members are not present.
