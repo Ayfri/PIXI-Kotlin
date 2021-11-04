@@ -19,8 +19,12 @@ external enum class ALPHA_MODES {
 	@JsInt(1)
 	PREMULTIPLY_ON_UPLOAD,
 	
+	@Deprecated("undocumented", replaceWith = ReplaceWith("PREMULTIPLIED_ALPHA"))
 	@JsInt(2)
-	PREMULTIPLY_ALPHA
+	PREMULTIPLY_ALPHA,
+	
+	@JsInt(2)
+	PREMULTIPLIED_ALPHA
 }
 
 external enum class BLEND_MODES {

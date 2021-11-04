@@ -47,6 +47,12 @@ external interface ITextStyle {
 	var leading: Number
 }
 
+@Suppress("INTERFACE_WITH_SUPERCLASS")
+external interface ModernContext2D : CanvasRenderingContext2D {
+	var textLetterSpacing: Number?
+	var letterSpacing: Number?
+}
+
 open external class Text(
 	text: String,
 	style: PartialTextStyle = definedExternally,
@@ -55,7 +61,7 @@ open external class Text(
 	constructor(text: String, style: TextStyle = definedExternally, canvas: HTMLCanvasElement = definedExternally)
 	
 	open var canvas: HTMLCanvasElement
-	open var context: CanvasRenderingContext2D
+	open var context: ModernContext2D
 	open var localStyleID: Number
 	open var dirty: Boolean
 	open var _resolution: Number
@@ -135,6 +141,9 @@ open external class TextMetrics(
 			_index: Number,
 			_breakWords: Boolean
 		): Boolean
+		
+		fun wordWrap(text: String, style: TextStyle, canvas: HTMLCanvasElement = definedExternally): String
+		fun wordWrap(text: String, style: TextStyle, canvas: OffscreenCanvas = definedExternally): String
 		
 		fun wordWrapSplit(token: String): Array<String>
 		fun measureFont(font: String): IFontMetrics

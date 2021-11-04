@@ -21,6 +21,9 @@ open external class Extract(renderer: Renderer) : IRendererPlugin {
 	open fun canvas(target: DisplayObject): HTMLCanvasElement
 	open fun canvas(target: RenderTexture): HTMLCanvasElement
 	
+	open fun pixels(target: DisplayObject = definedExternally): Uint8Array
+	open fun pixels(target: RenderTexture = definedExternally): Uint8Array
+	
 	override fun destroy()
 	
 	companion object {

@@ -843,7 +843,6 @@ external interface IRendererPlugin {
 	fun destroy()
 }
 
-
 external interface IRendererPluginConstructor {
 	operator fun invoke(renderer: Renderer, options: Any = definedExternally): IRendererPlugin
 }
@@ -864,6 +863,11 @@ external interface ISpriteMaskTarget : IMaskTarget {
 	var _texture: Texture<Resource>
 	var worldAlpha: Number
 	var anchor: Point
+}
+
+@Suppress("INTERFACE_WITH_SUPERCLASS")
+external interface ISpriteMaskFilter : Filter {
+	var maskSprite: IMaskTarget
 }
 
 external interface ISupportDict {
@@ -929,10 +933,15 @@ open external class MaskData(maskObject: IMaskTarget) {
 	open var isMaskData: Boolean /* true */
 	open var resolution: Number
 	open var multisample: MSAA_QUALITY
+	open var enabled: Boolean
+	open var _filters: Array<ISpriteMaskFilter>
 	open var _stencilCounter: Number
 	open var _scissorCounter: Number
 	open var _scissorRect: Rectangle
+	open var _scissorRectLocal: Rectangle
 	open var _target: IMaskTarget
+	
+	open var filter: ISpriteMaskFilter
 	
 	open fun reset()
 	open fun copyCounterOrReset(maskAbove: MaskData)
@@ -949,14 +958,14 @@ open external class MaskSystem(renderer: Renderer) : ISystem {
 	fun pop(target: IMaskTarget)
 	fun detect(maskData: MaskData)
 	fun pushSpriteMask(maskData: MaskData)
-	fun popSpriteMask()
+	fun popSpriteMask(maskData: MaskData)
 	override fun destroy()
 }
 
-open external class ObjectRenderer(renderer: Renderer) {
+open external class ObjectRenderer(renderer: Renderer) : ISystem {
 	protected open var renderer: Renderer
 	open fun flush()
-	open fun destroy()
+	override fun destroy()
 	open fun start()
 	open fun stop()
 	fun render(_object: Any)
@@ -1096,7 +1105,7 @@ open external class RenderTexturePool(textureOptions: IBaseTextureOptions<Any> =
 open external class RenderTextureSystem(renderer: Renderer) : ISystem {
 	open var clearColor: Array<Number>
 	open var defaultMaskStack: Array<MaskData>
-	open var current: RenderTexture
+	open var current: RenderTexture?
 	open val sourceFrame: Rectangle
 	open val destinationFrame: Rectangle
 	open val viewportFrame: Rectangle
@@ -1150,6 +1159,8 @@ external val resources: Dict<Any>
 
 open external class ScissorsSystem(renderer: Renderer) : AbstractMaskSystem {
 	override fun getStackLength(): Number
+	open fun calcScissorRect(maskData: MaskData)
+	open fun testScissor(maskData: MaskData)
 	open fun push(maskData: MaskData)
 	open fun pop()
 	open fun _useCurrent()
@@ -1192,6 +1203,9 @@ open external class ShaderSystem(renderer: Renderer) : ISystem {
 }
 
 open external class SpriteMaskFilter(sprite: IMaskTarget) : Filter {
+	constructor(vertexSrc: String = definedExternally, fragmentSrc: String = definedExternally, uniforms: Dict<Any> = definedExternally)
+	
+	open var _maskSprite: IMaskTarget
 	open var maskSprite: IMaskTarget
 	open var maskMatrix: Matrix
 	open fun apply(filterManager: FilterSystem, input: RenderTexture, output: RenderTexture, clearMode: CLEAR_MODES)
@@ -1241,11 +1255,6 @@ open external class StateSystem : ISystem {
 	open fun reset()
 	open fun updateCheck(func: (system: StateSystem /* this */, state: State) -> Unit, value: Boolean)
 	override fun destroy()
-	
-	companion object {
-		fun checkBlendMode(system: StateSystem, state: State)
-		fun checkPolygonOffset(system: StateSystem, state: State)
-	}
 }
 
 open external class StencilSystem(renderer: Renderer) : AbstractMaskSystem {
@@ -1507,6 +1516,7 @@ open external class VideoResource(source: HTMLVideoElement, options: IVideoResou
 	protected open var _isConnectedToTicker: Boolean
 	protected open var _updateFPS: Number
 	protected open var _msToNextUpdate: Number
+	override var source: ImageSource /* HTMLVideoElement */
 	open val autoUpdate: Boolean
 	open val updateFPS: Number
 	

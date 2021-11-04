@@ -56,11 +56,11 @@ open external class ParticleBuffer(properties: Array<IParticleRendererProperty>,
 
 open external class ParticleContainer(
 	maxSize: Number,
-	properties: IParticleProperties = definedExternally,
+	properties: IParticleProperties,
 	batchSize: Number = definedExternally,
 	autoResize: Number = definedExternally
 ) : Container {
-	open val blendMode: BLEND_MODES
+	open var blendMode: BLEND_MODES
 	open var autoResize: Boolean
 	open var roundPixelms: Boolean
 	open var baseTexture: BaseTexture<Resource, IAutoDetectOptions>

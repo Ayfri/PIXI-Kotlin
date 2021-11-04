@@ -60,7 +60,7 @@ open external class Container : DisplayObject {
 	open var width: Number
 	open var height: Number
 	
-	open fun <T : DisplayObject> addChild(vararg child: T): T /* T[0] */
+	open fun <T : DisplayObject> addChild(vararg child: T): T
 	open fun <T : DisplayObject> addChildAt(child: T, index: Number): T
 	open fun swapChildren(child: DisplayObject, child2: DisplayObject)
 	open fun getChildIndex(child: DisplayObject): Number

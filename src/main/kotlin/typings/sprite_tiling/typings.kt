@@ -50,5 +50,6 @@ open external class TilingSpriteRenderer(renderer: Renderer) : ObjectRenderer {
 	open var quad: QuadUv
 	open val state: State
 	
+	open fun contextChange()
 	open fun render(ts: TilingSprite)
 }

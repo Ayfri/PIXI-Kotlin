@@ -6,6 +6,7 @@ import org.khronos.webgl.Float32Array
 import org.khronos.webgl.Uint16Array
 import org.w3c.dom.XMLDocument
 import typings.VarArgFun
+import typings.core.Renderer
 import typings.core.Resource
 import typings.core.Texture
 import typings.display.Container
@@ -27,6 +28,8 @@ open external class BitMapFont(data: BitMapFontData, textures: Array<Texture<Res
 	open val lineHeight: Number
 	open val chars: Dict<IBitmapFontCharacter>
 	open val pageTextures: Dict<Texture<Resource>>
+	open val distanceFieldRange: Number
+	open val distanceFieldType: String
 	
 	open fun destroy()
 	
@@ -59,6 +62,7 @@ open external class BitMapFontData {
 	open var page: Array<IBitmapFontDataPage>
 	open var char: Array<IBitmapFontDataChar>
 	open var kerning: Array<IBitmapFontDataKerning>
+	open var distanceField: IBitmapFontDataDistanceField
 }
 
 external object BitmapFontLoader {
@@ -96,6 +100,7 @@ open external class BitmapText(text: String, style: IBitmapTextStylePartial = de
 	
 	open fun updateText()
 	override fun updateTransform()
+	override fun _render(renderer: Renderer)
 	protected open fun validate()
 	
 	companion object {
@@ -128,6 +133,11 @@ external interface IBitmapFontDataCommon {
 	var lineHeight: Number
 }
 
+external interface IBitmapFontDataDistanceField {
+	var fieldType: String
+	var distanceRange: Number
+}
+
 external interface IBitmapFontDataInfo {
 	var face: String
 	var size: Number
@@ -143,7 +153,6 @@ external interface IBitmapFontDataPage {
 	var id: Number
 	var file: String
 }
-
 
 external interface IBitmapFontOptions {
 	var chars: dynamic? /* String | Array<String> | Array<Array<String>> */

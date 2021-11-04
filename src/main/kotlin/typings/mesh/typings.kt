@@ -26,7 +26,6 @@ open external class Mesh<T : Shader /* = MeshMaterial */>(
 	state: State = definedExternally,
 	drawMode: DRAW_MODES = definedExternally
 ) : Container {
-	open val geometry: Geometry
 	open var shader: T
 	open var state: State
 	open var drawMode: DRAW_MODES
@@ -42,6 +41,8 @@ open external class Mesh<T : Shader /* = MeshMaterial */>(
 	open var blendMode: BLEND_MODES
 	open var roundPixels: Boolean
 	open var texture: Texture<Resource>
+	
+	open var geometry: Geometry
 	
 	override fun _render(renderer: Renderer)
 	protected open fun _renderDefault(renderer: Renderer)

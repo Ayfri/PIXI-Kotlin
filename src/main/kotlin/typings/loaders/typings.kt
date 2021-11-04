@@ -159,7 +159,9 @@ open external class Loader(baseUrl: String = definedExternally, concurrency: Num
 	): Loader /* this */
 	
 	open fun pre(fn: ILoaderMiddleware)
+	open fun pre(fn: ILoaderMiddleware2)
 	open fun use(fn: ILoaderMiddleware)
+	open fun use(fn: ILoaderMiddleware2)
 	open fun reset(): Loader /* this */
 	open fun load(cb: OnCompleteSignal = definedExternally): Loader /* this */
 	open fun load(cb: () -> Unit = definedExternally): Loader /* this */
@@ -332,10 +334,7 @@ open external class SignalBending<CbType>(fn: CbType, once: Boolean, thisArg: An
 	open fun detach(): Boolean
 }
 
-@Suppress("ABSTRACT_MEMBER_NOT_IMPLEMENTED")
-open external class TextureLoader : ILoaderPlugin {
-	companion object {
-		fun add()
-		fun use(resource: LoaderResource, next: VarArgFun<Any, Unit>)
-	}
+external object TextureLoader {
+	fun add()
+	fun use(resource: LoaderResource, next: VarArgFun<Any, Unit>)
 }
