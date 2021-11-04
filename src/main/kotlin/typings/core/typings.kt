@@ -409,7 +409,6 @@ external val defaultVertex: String
 
 open external class Filter(vertexSrc: String = definedExternally, fragmentSrc: String = definedExternally, uniforms: Dict<Any> = definedExternally) {
 	open val padding: Number
-	open val resolution: Number
 	open val multisample: MSAA_QUALITY
 	open val enabled: Boolean
 	open val autoFit: Boolean
@@ -424,6 +423,8 @@ open external class Filter(vertexSrc: String = definedExternally, fragmentSrc: S
 	)
 	
 	open var blendMode: BLEND_MODES
+	open val resolution: Number
+	protected open val _resolution: Number
 	
 	companion object {
 		val defaultVertexSrc: String
@@ -1000,7 +1001,6 @@ open external class QuadUv : Geometry {
 	open fun invalidate(): QuadUv /* this */
 }
 
-
 open external class Renderer(options: IRendererOptions = definedExternally) : AbstractRenderer {
 	open var gl: IRenderingContext
 	open var globalUniforms: UniformGroup<Dict<Any>>
@@ -1253,7 +1253,6 @@ open external class StencilSystem(renderer: Renderer) : AbstractMaskSystem {
 	open fun push(maskData: MaskData)
 	open fun pop(maskObject: IMaskTarget)
 	open fun _useCurrent()
-	open fun _getBitwiseMask()
 }
 
 open external class SVGResource(sourceBase64: String, options: ISVGResourceOptions) : BaseImageResource {

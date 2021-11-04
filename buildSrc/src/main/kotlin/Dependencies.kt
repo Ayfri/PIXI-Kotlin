@@ -9,7 +9,7 @@ object Versions {
 	const val seskar = "0.1.0"
 	const val kotlinExtensions = "1.0.1-pre.263-kotlin-1.5.31"
 	const val kotlinHtml = "0.7.3"
-	const val pixi = "6.1.2"
+	const val pixi = "6.1.3"
 }
 
 object Dependencies {

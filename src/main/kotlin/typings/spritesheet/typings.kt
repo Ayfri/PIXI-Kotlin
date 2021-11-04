@@ -54,6 +54,8 @@ open external class Spritesheet(texture: Texture<Resource>, data: ISpritesheetDa
 	open var renderer: Number
 	
 	open fun destroy(destroyBase: Boolean = definedExternally)
+	open fun parse(callback: (textures: Dict<Texture<Resource>>) -> Unit)
+	open fun parse(callback: () -> Unit)
 	
 	companion object {
 		val BATCH_SIZE: Number /* = 1000 */
