@@ -25,8 +25,4 @@ class ApplicationsOptions : IApplicationOptions {
 	override var backgroundAlpha: Number? = null
 	override var powerPreference: WebGLPowerPreference? = null
 	override var context: IRenderingContext? = null
-	
-	init {
-		typings.require("pixi.js")
-	}
 }

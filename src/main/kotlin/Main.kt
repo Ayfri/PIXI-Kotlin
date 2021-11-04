@@ -12,6 +12,7 @@ import kotlin.random.Random
 lateinit var app: Application
 
 fun main() {
+	typings.require("pixi.js")
 	app = Application.create { backgroundColor = 08080808f }
 	app.resizeTo = window
 	
@@ -26,10 +27,8 @@ fun start() {
 		x = window.innerWidth / 2
 		y = window.innerHeight / 2
 	}
-
-	var i = 0
+	
 	Ticker.shared.add<Any>({ _, _ ->
-		i++
 		sprite.apply {
 			x = Random.nextFloat() * window.innerWidth
 			y = Random.nextFloat() * window.innerHeight
