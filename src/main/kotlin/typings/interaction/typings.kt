@@ -14,6 +14,7 @@ import typings.math.IPointData
 import typings.math.Point
 import typings.utils.Dict
 import typings.utils.EventEmitter
+import typings.Number
 
 external interface DelayedEvent {
 	var displayObject: DisplayObject

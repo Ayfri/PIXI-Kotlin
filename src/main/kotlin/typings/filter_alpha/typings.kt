@@ -2,6 +2,7 @@
 
 package typings.filter_alpha
 
+import typings.Number
 import typings.core.Filter
 
 open external class AlphaFilter(alpha: Number = definedExternally) : Filter {

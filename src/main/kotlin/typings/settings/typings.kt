@@ -3,6 +3,7 @@
 package typings.settings
 
 import org.w3c.dom.HTMLCanvasElement
+import typings.Number
 import typings.constants.ENV
 import typings.constants.GC_MODES
 import typings.constants.MIPMAP_MODES

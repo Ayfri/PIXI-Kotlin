@@ -10,6 +10,7 @@ import org.w3c.dom.HTMLImageElement
 import org.w3c.dom.HTMLVideoElement
 import org.w3c.dom.ImageBitmap
 import typings.Indexed
+import typings.Number
 import typings.compressed_textures.WEBGL_compressed_texture_astc
 import typings.compressed_textures.WEBGL_compressed_texture_s3tc
 import typings.compressed_textures.WEBGL_compressed_texture_s3tc_srgb

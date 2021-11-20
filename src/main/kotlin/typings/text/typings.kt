@@ -8,6 +8,7 @@ import typings.Indexed
 import typings.core.Renderer
 import typings.math.Rectangle
 import typings.sprite.Sprite
+import typings.Number
 
 external interface IFontMetrics {
 	var ascent: Number

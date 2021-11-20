@@ -17,6 +17,7 @@ import typings.core.Resource
 import typings.core.ViewableBuffer
 import typings.loaders.LoaderResource
 import kotlin.js.Promise
+import typings.Number
 
 abstract external class BlobResource(source: String, options: IBlobOptions = definedExternally) : BufferResource {
 	constructor(source: Uint32Array, options: IBlobOptions = definedExternally)

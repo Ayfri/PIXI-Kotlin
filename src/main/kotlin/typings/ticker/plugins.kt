@@ -2,7 +2,7 @@ package typings.ticker
 
 import typings.app.Application
 
-inline var Application.ticker: Ticker
+inline var Application.ticker
 	get() = asDynamic().ticker as Ticker
 	set(value) {
 		asDynamic().ticker = value

@@ -3,6 +3,7 @@
 package typings.filter_noise
 
 import typings.core.Filter
+import typings.Number
 
 open external class NoiseFilter(noise: Number = definedExternally, seed: Number = definedExternally) : Filter {
 	open var noise: Number

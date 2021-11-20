@@ -13,7 +13,7 @@ lateinit var app: Application
 
 fun main() {
 	typings.require("pixi.js")
-	app = Application.create { backgroundColor = 08080808f }
+	app = Application.create { backgroundColor = 08080808.0 }
 	app.resizeTo = window
 	
 	Loader.shared.add("test", "test.png").load(::start)
@@ -22,16 +22,16 @@ fun main() {
 
 fun start() {
 	val sprite = Sprite.from("test.png").apply {
-		width = 100
-		height = 100
-		x = window.innerWidth / 2
-		y = window.innerHeight / 2
+		width = 100.0
+		height = 100.0
+		x = window.innerWidth / 2.0
+		y = window.innerHeight / 2.0
 	}
 	
 	Ticker.shared.add<Any>({ _, _ ->
 		sprite.apply {
-			x = Random.nextFloat() * window.innerWidth
-			y = Random.nextFloat() * window.innerHeight
+			x = Random.nextDouble() * window.innerWidth
+			y = Random.nextDouble() * window.innerHeight
 		}
 	})
 	

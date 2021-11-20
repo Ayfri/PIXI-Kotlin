@@ -7,6 +7,7 @@ import typings.constants.CLEAR_MODES
 import typings.core.Filter
 import typings.core.FilterSystem
 import typings.core.RenderTexture
+import typings.Number
 
 open external class BlurFilter(
 	strength: Number = definedExternally,

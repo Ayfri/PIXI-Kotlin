@@ -4,6 +4,7 @@ package typings.graphics
 
 import kotlinext.js.Record
 import org.khronos.webgl.Float32Array
+import typings.Number
 import typings.constants.BLEND_MODES
 import typings.core.BatchDrawCall
 import typings.core.BatchGeometry

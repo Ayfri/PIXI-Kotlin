@@ -10,6 +10,7 @@ import typings.core.Texture
 import typings.loaders.LoaderResource
 import typings.math.IPointData
 import typings.utils.Dict
+import typings.Number
 
 external interface ISpritesheetDataMeta {
 	var scale: String

@@ -2,13 +2,13 @@ package typings.ticker
 
 import typings.app.IApplicationOptions
 
-inline var IApplicationOptions.autoStart: Boolean?
+inline var IApplicationOptions.autoStart
 	get() = asDynamic().autoStart as? Boolean
 	set(value) {
 		asDynamic().autoStart = value
 	}
 
-inline var IApplicationOptions.sharedTicker: Boolean?
+inline var IApplicationOptions.sharedTicker
 	get() = asDynamic().sharedTicker as? Boolean
 	set(value) {
 		asDynamic().sharedTicker = value

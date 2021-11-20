@@ -16,6 +16,7 @@ import typings.math.ObservablePoint
 import typings.math.Rectangle
 import typings.math.Transform
 import typings.sprite.Sprite
+import typings.Number
 
 @Suppress("VAR_TYPE_MISMATCH_ON_OVERRIDE")
 external interface TilingSpriteFromOptions : IBaseTextureOptions<Any> {

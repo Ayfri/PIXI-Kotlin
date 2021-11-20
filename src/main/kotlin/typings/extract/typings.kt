@@ -10,6 +10,7 @@ import typings.core.IRendererPlugin
 import typings.core.RenderTexture
 import typings.core.Renderer
 import typings.display.DisplayObject
+import typings.Number
 
 open external class Extract(renderer: Renderer) : IRendererPlugin {
 	open fun image(target: DisplayObject, format: String = definedExternally, quality: Number = definedExternally): HTMLImageElement

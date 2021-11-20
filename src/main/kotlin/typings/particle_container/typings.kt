@@ -19,6 +19,7 @@ import typings.core.State
 import typings.display.Container
 import typings.display.DisplayObject
 import typings.math.Matrix
+import typings.Number
 
 external interface IParticleProperties {
 	var vertices: Boolean?

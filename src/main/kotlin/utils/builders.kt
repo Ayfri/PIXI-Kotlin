@@ -1,6 +1,7 @@
 package utils
 
 import org.w3c.dom.HTMLCanvasElement
+import typings.Number
 import typings.app.Application
 import typings.app.IApplicationOptions
 import typings.core.IRenderingContext

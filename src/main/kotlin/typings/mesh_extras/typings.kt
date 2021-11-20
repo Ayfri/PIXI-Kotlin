@@ -12,6 +12,7 @@ import typings.math.IPoint
 import typings.mesh.Mesh
 import typings.mesh.MeshGeometry
 import typings.mesh.MeshMaterial
+import typings.Number
 
 open external class NineSlicePlane(
 	texture: Texture<Resource>,

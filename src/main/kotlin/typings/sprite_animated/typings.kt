@@ -5,6 +5,7 @@ package typings.sprite_animated
 import typings.core.Resource
 import typings.core.Texture
 import typings.sprite.Sprite
+import typings.Number
 
 open external class AnimatedSprite(textures: Array<Texture<Resource>>, autoUpdate: Boolean = definedExternally) : Sprite {
 	constructor(textures: Array<FrameObject>, autoUpdate: Boolean = definedExternally)

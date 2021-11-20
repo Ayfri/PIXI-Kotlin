@@ -8,6 +8,7 @@ import org.w3c.dom.HTMLCanvasElement
 import org.w3c.dom.HTMLImageElement
 import org.w3c.dom.HTMLVideoElement
 import org.w3c.dom.ImageBitmap
+import typings.Number
 import typings.constants.BLEND_MODES
 import typings.core.BaseTexture
 import typings.core.IAutoDetectOptions

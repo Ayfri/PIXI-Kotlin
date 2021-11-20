@@ -5,6 +5,7 @@ import org.w3c.dom.*
 import org.w3c.dom.events.EventTarget
 import org.w3c.files.Blob
 import kotlin.js.Promise
+import typings.Number
 
 external interface ImageEncodeOptions {
 	var quality: Number?

@@ -14,6 +14,7 @@ import typings.core.IBaseTextureOptions
 import typings.core.Resource
 import typings.core.Texture
 import typings.utils.Dict
+import typings.Number
 
 external object AppLoaderPlugin : IApplicationPlugin {
 	var loader: Loader

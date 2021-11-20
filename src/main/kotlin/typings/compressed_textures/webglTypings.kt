@@ -1,5 +1,7 @@
 package typings.compressed_textures
 
+import typings.Number
+
 external interface WEBGL_compressed_texture_astc {
 	fun getSupportedProfiles(): Array<String>
 	var COMPRESSED_RGBA_ASTC_10x10_KHR: GLenum

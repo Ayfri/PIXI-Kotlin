@@ -4,6 +4,7 @@ import org.khronos.webgl.ArrayBuffer
 import typings.IIndexed
 import typings.Indexed
 import typings.VarArgFun
+import typings.Number
 
 typealias ImageSource = Any
 typealias IArrayBuffer = ArrayBuffer

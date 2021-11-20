@@ -2,6 +2,7 @@
 
 package typings.ticker
 
+import typings.Number
 import typings.app.IApplicationOptions
 import typings.app.IApplicationPlugin
 

@@ -3,6 +3,7 @@
 package typings.filter_color_matrix
 
 import typings.core.Filter
+import typings.Number
 
 open external class ColorMatrixFilter : Filter {
 	open var grayscale: (scale: Number, multiply: Boolean) -> Unit

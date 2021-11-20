@@ -2,8 +2,8 @@
 
 package typings.math
 
-import kotlinx.html.P
 import org.khronos.webgl.Float32Array
+import typings.Number
 
 open external class Circle(x: Number = definedExternally, y: Number = definedExternally, radius: Number = definedExternally) {
 	open var x: Number

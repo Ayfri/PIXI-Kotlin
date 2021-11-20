@@ -7,6 +7,7 @@ import typings.core.Renderer
 import typings.core.Resource
 import typings.core.Texture
 import typings.display.DisplayObject
+import typings.Number
 
 open external class BasePrepare(renderer: AbstractRenderer) {
 	protected open var renderer: AbstractRenderer

@@ -18,6 +18,7 @@ import typings.core.ITypedArray
 import typings.core.Program
 import typings.core.Resource
 import kotlin.js.RegExp
+import typings.Number
 
 external val BaseTextureCache: Indexed<String, BaseTexture<Resource, IAutoDetectOptions>>
 

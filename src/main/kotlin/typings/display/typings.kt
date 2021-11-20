@@ -3,6 +3,7 @@
 package typings.display
 
 import org.khronos.webgl.Float32Array
+import typings.Number
 import typings.core.Filter
 import typings.core.Renderer
 import typings.math.IPointData

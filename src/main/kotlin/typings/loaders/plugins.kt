@@ -3,7 +3,7 @@ package typings.loaders
 import typings.VarArgFun
 import typings.app.Application
 
-inline var Application.loader: Loader
+inline var Application.loader
 	get() = asDynamic()?.loader as Loader? ?: Loader.shared
 	set(value) {
 		asDynamic()?.loader = value
