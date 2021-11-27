@@ -1,4 +1,4 @@
-@file:JsModule("@pixi/app")
+@file:JsModule("@pixi/getApp")
 
 package typings.app
 
