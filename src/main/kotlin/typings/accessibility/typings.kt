@@ -3,11 +3,11 @@
 package typings.accessibility
 
 import org.w3c.dom.HTMLElement
+import typings.Number
 import typings.core.AbstractRenderer
 import typings.core.Renderer
 import typings.display.DisplayObject
 import typings.math.Rectangle
-import typings.Number
 
 open external class AccessibilityManager(renderer: Renderer) {
 	constructor(renderer: AbstractRenderer)

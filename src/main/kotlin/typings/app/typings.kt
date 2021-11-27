@@ -8,7 +8,10 @@ import typings.display.Container
 import typings.display.IDestroyOptions
 import typings.math.Rectangle
 
-open external class Application(options: IApplicationOptions = definedExternally) {
+open external class Application {
+	@JsName("constructor")
+	constructor(options: IApplicationOptions = definedExternally)
+	
 	open var stage: Container
 	open var renderer: dynamic /* AbstractRenderer | Renderer */
 	open val view: HTMLCanvasElement

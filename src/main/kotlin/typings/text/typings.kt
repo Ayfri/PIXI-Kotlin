@@ -5,10 +5,10 @@ package typings.text
 import org.w3c.dom.CanvasRenderingContext2D
 import org.w3c.dom.HTMLCanvasElement
 import typings.Indexed
+import typings.Number
 import typings.core.Renderer
 import typings.math.Rectangle
 import typings.sprite.Sprite
-import typings.Number
 
 external interface IFontMetrics {
 	var ascent: Number

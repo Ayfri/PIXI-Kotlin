@@ -8,5 +8,5 @@ inline var Application.ticker
 		asDynamic().ticker = value
 	}
 
-inline fun Application.stop(): Unit = asDynamic().stop() as Unit
+inline fun Application.stop() = asDynamic().stop() as Unit
 inline fun Application.start() = asDynamic().start() as Unit
