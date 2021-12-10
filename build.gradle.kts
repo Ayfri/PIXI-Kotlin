@@ -25,6 +25,14 @@ tasks {
     withType<KotlinCompile> {
         kotlinOptions.jvmTarget = Versions.java
     }
+    
+    create("buildAndPublish") {
+        group = "publishing"
+        description = "Builds and publishes the project"
+        dependsOn("clean")
+        dependsOn("build")
+        dependsOn("publishAllPublicationsToSonatypeRepository", "closeAndReleaseSonatypeStagingRepository")
+    }
 }
 
 fun getExtraString(name: String) = ext[name]?.toString()
@@ -32,7 +40,7 @@ fun getExtraString(name: String) = ext[name]?.toString()
 nexusPublishing {
     repositories {
         sonatype {
-            nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"))
+            nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
         }
     }
 }
