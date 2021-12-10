@@ -1,5 +1,5 @@
 object Project {
-	const val group = "fr.ayfri.pixi-kotlin"
+	const val group = "io.github.ayfri.pixi-kotlin"
 	const val version = "0.1.0"
 	const val name = "pixi-kotlin"
 	const val description = "Kotlin bindings for library PIXI.js"
