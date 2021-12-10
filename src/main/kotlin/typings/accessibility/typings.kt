@@ -5,15 +5,12 @@ package typings.accessibility
 import org.w3c.dom.HTMLElement
 import typings.Number
 import typings.core.AbstractRenderer
-import typings.core.Renderer
 import typings.display.DisplayObject
 import typings.math.Rectangle
 
-open external class AccessibilityManager(renderer: Renderer) {
-	constructor(renderer: AbstractRenderer)
-	
+open external class AccessibilityManager(renderer: AbstractRenderer) {
 	var debug: Boolean
-	var renderer: dynamic /* AbstractRenderer | Renderer */
+	var renderer: AbstractRenderer
 	val isActive: Boolean
 	val isMobileAccessibility: Boolean
 	fun updateDebugHTML(div: IAccessibleHTMLElement)

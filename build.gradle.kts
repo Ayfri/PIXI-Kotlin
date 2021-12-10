@@ -1,7 +1,9 @@
+
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+val projectName = Project.name
 group = Project.group
 version = Project.version
 
@@ -22,6 +24,16 @@ dependencies {
 tasks {
     withType<KotlinCompile> {
         kotlinOptions.jvmTarget = Versions.java
+    }
+}
+
+fun getExtraString(name: String) = ext[name]?.toString()
+
+nexusPublishing {
+    repositories {
+        sonatype {
+            nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"))
+        }
     }
 }
 

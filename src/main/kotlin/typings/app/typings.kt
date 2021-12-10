@@ -3,6 +3,7 @@
 package typings.app
 
 import org.w3c.dom.HTMLCanvasElement
+import typings.core.AbstractRenderer
 import typings.core.IRendererOptionsAuto
 import typings.display.Container
 import typings.display.IDestroyOptions
@@ -10,7 +11,7 @@ import typings.math.Rectangle
 
 open external class Application(options: IApplicationOptions = definedExternally) {
 	open var stage: Container
-	open var renderer: dynamic /* AbstractRenderer | Renderer */
+	open var renderer: AbstractRenderer
 	open val view: HTMLCanvasElement
 	open val screen: Rectangle
 	
