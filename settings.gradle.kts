@@ -1,1 +1,1 @@
-rootProject.name = "PIXI-Test"
+rootProject.name = "PIXI-Kotlin"
