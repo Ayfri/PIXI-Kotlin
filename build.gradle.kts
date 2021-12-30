@@ -1,3 +1,7 @@
+import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin
+import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 
 object Project {
     const val group = "io.github.ayfri.pixi-kotlin"
@@ -11,10 +15,10 @@ object Project {
 plugins {
     kotlin("js") version "1.6.0"
     id("com.github.turansky.seskar") version "0.2.0"
-//    id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
-//    id("com.github.turansky.kfc.library") version "4.50.0"
-//    id("com.github.turansky.kfc.maven-central-publish") version "4.50.0"
-//    `maven-publish`
+    id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
+    //id("com.github.turansky.kfc.library") version "4.50.0"
+    //id("com.github.turansky.kfc.maven-central-publish") version "4.50.0"
+    `maven-publish`
 }
 
 val projectName = Project.name
@@ -36,31 +40,26 @@ dependencies {
     implementation(npm("pixi.js", "6.2.0"))
 }
 
-//tasks {
-//    create("buildAndPublish") {
-//        group = "publishing"
-//        description = "Builds and publishes the project"
-//        dependsOn("clean")
-//        dependsOn("build")
-//        dependsOn("publishAllPublicationsToSonatypeRepository", "closeAndReleaseSonatypeStagingRepository")
-//    }
-//}
-//
-//fun getExtraString(name: String) = ext[name]?.toString()
-//
-//nexusPublishing {
-//    repositories {
-//        sonatype {
-//            nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
-//        }
-//    }
-//}
+tasks {
+    create("buildAndPublish") {
+        group = "publishing"
+        description = "Builds and publishes the project"
+        dependsOn("clean")
+        dependsOn("build")
+        dependsOn("publishAllPublicationsToSonatypeRepository", "closeAndReleaseSonatypeStagingRepository")
+    }
+}
 
-//rootProject.plugins.withType<YarnPlugin> {
-//    rootProject.the<YarnRootExtension>().apply {
-//        resolution("@webpack-cli/serve", "1.5.2")
-//    }
-//}
+fun getExtraString(name: String) = ext[name]?.toString()
+
+nexusPublishing {
+    repositories {
+        sonatype {
+            nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
+        }
+    }
+}
+
 
 kotlin {
     kotlinDaemonJvmArgs = listOf("-Xopt-in=kotlin.RequiresOptIn")
@@ -77,19 +76,19 @@ kotlin {
     }
 }
 
-//val sourcesJar by tasks.registering(Jar::class) {
-//    archiveClassifier.set("sources")
-//    from(kotlin.sourceSets.main.get().kotlin)
-//}
-//
-//publishing {
-//    publications {
-//        create<MavenPublication>("maven") {
-//            groupId = project.group.toString()
-//            artifactId = project.name
-//            version = project.version.toString()
-//            from(components["kotlin"])
-//            artifact(tasks["sourcesJar"])
-//        }
-//    }
-//}
+val sourcesJar by tasks.registering(Jar::class) {
+    archiveClassifier.set("sources")
+    from(kotlin.sourceSets.main.get().kotlin)
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = project.group.toString()
+            artifactId = project.name
+            version = project.version.toString()
+            from(components["kotlin"])
+            artifact(tasks["sourcesJar"])
+        }
+    }
+}
