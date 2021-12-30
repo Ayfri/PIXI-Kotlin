@@ -6,8 +6,8 @@ import org.khronos.webgl.ArrayBuffer
 import org.khronos.webgl.Float32Array
 import org.khronos.webgl.Uint32Array
 import org.khronos.webgl.Uint8Array
-import typings.Indexed
 import typings.Number
+import typings.Object
 import typings.VarArgFun
 import typings.core.BaseTexture
 import typings.core.BufferResource
@@ -63,7 +63,7 @@ external interface PartialCompressedTextureExtensions {
 open external class CompressedTextureLoader {
 	companion object {
 		var textureExtensions: PartialCompressedTextureExtensions
-		var textureFormats: Indexed<INTERNAL_FORMATS, Number>
+		var textureFormats: Object<INTERNAL_FORMATS, Number>
 		fun use(resource: LoaderResource, next: VarArgFun<Any?, Unit>)
 		fun add()
 	}
@@ -96,7 +96,7 @@ external class DDSLoader {
 	}
 }
 
-external val FORMATS_TO_COMPONENTS: Indexed<Number, Number>
+external val FORMATS_TO_COMPONENTS: Object<Number, Number>
 
 external interface IBlobOptions {
 	var autoLoad: Boolean?
@@ -112,7 +112,7 @@ external interface ICompressedTextureResourceOptions {
 	var levelBuffers: Array<CompressedLevelBuffer>?
 }
 
-external val INTERNAL_FORMAT_TO_BYTES_PER_PIXEL: Indexed<Number, Number>
+external val INTERNAL_FORMAT_TO_BYTES_PER_PIXEL: Object<Number, Number>
 
 external class KTXLoader {
 	companion object {
@@ -120,6 +120,6 @@ external class KTXLoader {
 	}
 }
 
-external val TYPES_TO_BYTES_PER_COMPONENT: Indexed<Number, Number>
+external val TYPES_TO_BYTES_PER_COMPONENT: Object<Number, Number>
 
-external val TYPES_TO_BYTES_PER_PIXEL: Indexed<Number, Number>
+external val TYPES_TO_BYTES_PER_PIXEL: Object<Number, Number>

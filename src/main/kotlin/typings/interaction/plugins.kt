@@ -1,6 +1,6 @@
 package typings.interaction
 
-import typings.Indexed
+import typings.Object
 import typings.display.DisplayObject
 
 var DisplayObject.interactive
@@ -34,13 +34,13 @@ var DisplayObject.buttonMode
 	}
 
 var DisplayObject.trackedPointers
-	get() = asDynamic().trackedPointers as Indexed<Number, InteractionTrackingData>
+	get() = asDynamic().trackedPointers as Object<Number, InteractionTrackingData>
 	set(value) {
 		asDynamic().trackedPointers = value
 	}
 
 var DisplayObject._trackedPointers
-	get() = asDynamic()._trackedPointers as Indexed<Number, InteractionTrackingData>
+	get() = asDynamic()._trackedPointers as Object<Number, InteractionTrackingData>
 	set(value) {
 		asDynamic()._trackedPointers = value
 	}

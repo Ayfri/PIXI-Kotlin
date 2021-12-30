@@ -1,6 +1,6 @@
 package typings.spritesheet
 
-import typings.Indexed
+import typings.Object
 import typings.core.Resource
 import typings.core.Texture
 import typings.loaders.LoaderResource
@@ -12,7 +12,7 @@ inline var LoaderResource.spritesheet
 	}
 
 inline var LoaderResource.textures
-	get() = asDynamic().textures as Indexed<String, Texture<Resource>>?
+	get() = asDynamic().textures as Object<String, Texture<Resource>>?
 	set(value) {
 		asDynamic().textures = value
 	}

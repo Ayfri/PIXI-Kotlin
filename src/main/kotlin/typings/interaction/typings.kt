@@ -7,8 +7,8 @@ import org.w3c.dom.Touch
 import org.w3c.dom.TouchEvent
 import org.w3c.dom.events.MouseEvent
 import org.w3c.dom.pointerevents.PointerEvent
-import typings.Indexed
 import typings.Number
+import typings.Object
 import typings.core.AbstractRenderer
 import typings.display.DisplayObject
 import typings.math.IPointData
@@ -73,7 +73,7 @@ open external class InteractionEvent {
 }
 
 open external class InteractionManager(renderer: AbstractRenderer, options: InteractionManagerOptions = definedExternally) : EventEmitter {
-	open val activeInteractionData: Indexed<Number, InteractionData>
+	open val activeInteractionData: Object<Number, InteractionData>
 	open val supportsTouchEvents: Boolean
 	open val supportsPointerEvents: Boolean
 	open var interactionDataPool: Array<InteractionData>
@@ -158,8 +158,8 @@ external interface InteractiveTarget {
 	var hitArea: IHitArea
 	var cursor: dynamic /* Cursor | String */
 	var buttonMode: Boolean
-	var trackedPointers: Indexed<Number, InteractionTrackingData>
-	var _trackedPointers: Indexed<Number, InteractionTrackingData>
+	var trackedPointers: Object<Number, InteractionTrackingData>
+	var _trackedPointers: Object<Number, InteractionTrackingData>
 }
 
 external object interactiveTarget : InteractiveTarget {
@@ -168,8 +168,8 @@ external object interactiveTarget : InteractiveTarget {
 	override var hitArea: IHitArea
 	override var cursor: dynamic /* Cursor | String */
 	override var buttonMode: Boolean
-	override var trackedPointers: Indexed<Number, InteractionTrackingData>
-	override var _trackedPointers: Indexed<Number, InteractionTrackingData>
+	override var trackedPointers: Object<Number, InteractionTrackingData>
+	override var _trackedPointers: Object<Number, InteractionTrackingData>
 }
 
 open external class TreeSearch {

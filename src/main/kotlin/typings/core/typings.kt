@@ -9,8 +9,8 @@ import org.w3c.dom.HTMLCanvasElement
 import org.w3c.dom.HTMLImageElement
 import org.w3c.dom.HTMLVideoElement
 import org.w3c.dom.ImageBitmap
-import typings.Indexed
 import typings.Number
+import typings.Object
 import typings.compressed_textures.WEBGL_compressed_texture_astc
 import typings.compressed_textures.WEBGL_compressed_texture_s3tc
 import typings.compressed_textures.WEBGL_compressed_texture_s3tc_srgb
@@ -219,7 +219,7 @@ open external class BaseTexture<R : Resource /*= Resource*/, R0 /*= IAutoDetectO
 	open val uid: Number
 	open var touched: Number
 	open var isPowerOfTwo: Boolean
-	open var _glTextures: Indexed<Number, GLTexture>
+	open var _glTextures: Object<Number, GLTexture>
 	open var dirtyId: Number
 	open var dirtyStyleId: Number
 	open var cacheId: String
@@ -322,8 +322,8 @@ external val BatchRenderer: AbstractBatchRenderer
 open external class BatchShaderGenerator(vertexSrc: String, fragTemplate: String) {
 	open val vertexSrc: String
 	open val fragTemplate: String
-	open val programCache: Indexed<Number, Program>
-	open val defaultGroupCache: Indexed<Number, UniformGroup<Dict<Any>>>
+	open val programCache: Object<Number, Program>
+	open val defaultGroupCache: Object<Number, UniformGroup<Dict<Any>>>
 	open fun generateShader(maxTextures: Number): Shader
 	open fun generateSampleSrc(maxTextures: Number): String
 }
@@ -353,7 +353,7 @@ open external class Buffer(data: IArrayBuffer = definedExternally, _static: Bool
 	open var static: Boolean
 	open var id: Number
 	open var disposeRunner: Runner
-	open var _glBuffers: Indexed<Number, GLBuffer>
+	open var _glBuffers: Object<Number, GLBuffer>
 	open var _updateID: Number
 	open var index: Boolean
 	open fun update(data: IArrayBuffer = definedExternally)
@@ -386,8 +386,8 @@ open external class BufferResource(source: Float32Array, options: ISize) : Resou
 open external class BufferSystem(renderer: Renderer) : ISystem {
 	open var CONTEXT_UID: Number
 	open var gl: IRenderingContext
-	open val managedBuffers: Indexed<Number, Buffer>
-	open val boundBufferBases: Indexed<Number, Buffer>
+	open val managedBuffers: Object<Number, Buffer>
+	open val boundBufferBases: Object<Number, Buffer>
 	override fun destroy()
 	protected open fun contextChange()
 	open fun bind(buffer: Buffer)
@@ -539,7 +539,7 @@ open external class Framebuffer(width: Number, height: Number) {
 	open var dirtySize: Number
 	open var depthTexture: BaseTexture<Resource, IAutoDetectOptions>
 	open var colorTextures: Array<BaseTexture<Resource, IAutoDetectOptions>>
-	open var glFramebuffers: Indexed<String, GLFramebuffer>
+	open var glFramebuffers: Object<String, GLFramebuffer>
 	open var disposeRunner: Runner
 	open val colorTexture: BaseTexture<Resource, IAutoDetectOptions>
 	
@@ -598,14 +598,14 @@ external interface UniformBuffer {
 
 external fun generateUniformBufferSync(group: UniformGroup<Dict<Any>>, uniformData: Dict<Any>): UniformBuffer
 
-open external class Geometry(buffers: Array<Buffer> = definedExternally, attributes: Indexed<String, Attribute> = definedExternally) {
+open external class Geometry(buffers: Array<Buffer> = definedExternally, attributes: Object<String, Attribute> = definedExternally) {
 	open var buffers: Array<Buffer>
 	open var indexBuffer: Buffer
-	open var attributes: Indexed<String, Attribute>
+	open var attributes: Object<String, Attribute>
 	open var id: Number
 	open var instanced: Boolean
 	open var instanceCount: Number
-	open var glVertexArrayObjects: Indexed<Number, Indexed<String, WebGLVertexArrayObject>>
+	open var glVertexArrayObjects: Object<Number, Object<String, WebGLVertexArrayObject>>
 	open var disposeRunner: Runner
 	open var refCount: Number
 	
@@ -679,7 +679,7 @@ open external class GeometrySystem(renderer: Renderer) : ISystem {
 	protected open var _activeGeometry: Geometry
 	protected open var _activeVao: WebGLVertexArrayObject
 	protected open var _boundBuffer: GLBuffer
-	open val managedGeometries: Indexed<Number, Geometry>
+	open val managedGeometries: Object<Number, Geometry>
 	
 	protected open fun contextChange()
 	open fun bind(geometry: Geometry = definedExternally, shader: Shader = definedExternally)
@@ -725,7 +725,7 @@ open external class GLFramebuffer(framebuffer: WebGLTexture) {
 	open var mipLevel: Number
 }
 
-open external class GLProgram(program: WebGLProgram, uniformData: Indexed<String, IGLUniformData>) {
+open external class GLProgram(program: WebGLProgram, uniformData: Object<String, IGLUniformData>) {
 	open var program: WebGLProgram
 	open var uniformData: Dict<Any>
 	open var uniformGroups: Dict<Any>
@@ -1036,9 +1036,9 @@ open external class Program(vertexSrc: String = definedExternally, fragmentSrc: 
 	open var vertexSrc: String
 	open var fragmentSrc: String
 	open var nameCache: Any
-	open var glPrograms: Indexed<Number, GLProgram>
-	open var attributeData: Indexed<String, IAttributeData>
-	open var uniformData: Indexed<String, IUniformData>
+	open var glPrograms: Object<Number, GLProgram>
+	open var attributeData: Object<String, IAttributeData>
+	open var uniformData: Object<String, IUniformData>
 	
 	companion object {
 		val defaultVertexSrc: String
@@ -1091,7 +1091,7 @@ open external class Renderer(options: IRendererOptions = definedExternally) : Ab
 	open var filter: FilterSystem
 	open var renderTexture: RenderTextureSystem
 	open var batch: BatchSystem
-	open var runners: Indexed<String, Runner>
+	open var runners: Object<String, Runner>
 	open val extract: Any
 	
 	protected open fun contextChange()
@@ -1149,7 +1149,7 @@ open external class RenderTexture(baseRenderTexture: BaseRenderTexture, frame: R
 open external class RenderTexturePool(textureOptions: IBaseTextureOptions<Any> = definedExternally) {
 	open var textureOptions: IBaseTextureOptions<Any>
 	open var enableFullScreen: Boolean
-	open var texturePool: Indexed<dynamic /* string | number */, Array<RenderTexture>>
+	open var texturePool: Object<dynamic /* string | number */, Array<RenderTexture>>
 	open fun createTexture(realWidth: Number, realHeight: Number, multisample: MSAA_QUALITY = definedExternally): RenderTexture
 	open fun getOptimalTexture(
 		minWidth: Number,
@@ -1496,12 +1496,12 @@ open external class TextureSystem(renderer: Renderer) : ISystem {
 	protected open var hasIntegerTextures: Boolean
 	protected open var CONTEXT_UID: Number
 	protected open var gl: IRenderingContext
-	protected open var internalFormats: Indexed<Number, Indexed<Number, Number>>
+	protected open var internalFormats: Object<Number, Object<Number, Number>>
 	protected open var webGLVersion: Number
 	protected open var unknownTexture: BaseTexture<Resource, IAutoDetectOptions>
 	protected open var _unknownBoundTextures: Number
 	open var currentLocation: Number
-	open var emptyTextures: Indexed<Number, GLTexture>
+	open var emptyTextures: Object<Number, GLTexture>
 	
 	open fun contextChange()
 	open fun bind(texture: Texture<Resource>, location: Number = definedExternally)

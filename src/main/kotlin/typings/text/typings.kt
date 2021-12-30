@@ -4,8 +4,8 @@ package typings.text
 
 import org.w3c.dom.CanvasRenderingContext2D
 import org.w3c.dom.HTMLCanvasElement
-import typings.Indexed
 import typings.Number
+import typings.Object
 import typings.core.Renderer
 import typings.display.IDestroyOptions
 import typings.math.Rectangle
@@ -119,7 +119,7 @@ open external class TextMetrics(
 		var HEIGHT_MULTIPLIER: Number
 		var _canvas: dynamic /* HTMLCanvasElement | OffscreenCanvas */
 		var _context: dynamic /* CanvasRenderingContext2D | OffscreenCanvasRenderingContext2D */
-		var _fonts: Indexed<String, IFontMetrics>
+		var _fonts: Object<String, IFontMetrics>
 		var _newlines: Array<Number>
 		var _breakingSpaces: Array<Number>
 		

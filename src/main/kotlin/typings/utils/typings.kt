@@ -11,9 +11,8 @@ import org.w3c.dom.HTMLCanvasElement
 import org.w3c.dom.ImageData
 import org.w3c.dom.Location
 import org.w3c.dom.url.URL
-import typings.IIndexed
-import typings.Indexed
 import typings.Number
+import typings.Object
 import typings.core.BaseTexture
 import typings.core.IAutoDetectOptions
 import typings.core.ITypedArray
@@ -22,7 +21,7 @@ import typings.core.Resource
 import typings.core.Texture
 import kotlin.js.RegExp
 
-external val BaseTextureCache: Indexed<String, BaseTexture<Resource, IAutoDetectOptions>>
+external val BaseTextureCache: Object<String, BaseTexture<Resource, IAutoDetectOptions>>
 
 open external class CanvasRenderTarget(width: Number, height: Number, resolution: Number = definedExternally) {
 	open var canvas: HTMLCanvasElement
@@ -82,9 +81,11 @@ external fun isWebGLSupported(): Boolean
 external fun log2(v: Number): Number
 external fun nextPow2(v: Number): Number
 
-external interface ParsedUrlQuery : IIndexed<String, dynamic /* String | Array<String> */>
+@Suppress("INTERFACE_WITH_SUPERCLASS")
+external interface ParsedUrlQuery : Object<String, dynamic /* String | Array<String> */>
 
-external interface ParsedUrlQueryInput : IIndexed<String, Any? /* unknown */>
+@Suppress("INTERFACE_WITH_SUPERCLASS")
+external interface ParsedUrlQueryInput : Object<String, Any? /* unknown */>
 
 external interface ParseFunction {
 	operator fun invoke(urlStr: String): UrlWithStringQuery
@@ -99,7 +100,7 @@ external fun premultiplyRgba(rg: Float32Array, alpha: Number, out: Float32Array 
 external fun premultiplyTint(tint: Number, alpha: Number): Number
 external fun premultiplyTintToRgba(tint: Number, alpha: Number, out: Float32Array, premultiply: Boolean = definedExternally): Float32Array
 
-external val ProgramCache: Indexed<String, Program>
+external val ProgramCache: Object<String, Program>
 
 external fun removeItems(arr: Array<Any?>, startIdx: Number, removeCount: Number)
 
@@ -111,7 +112,7 @@ external fun sign(n: Number): Sign
 external fun skipHello()
 external fun string2Hex(string: String): Number
 
-external val TextureCache: Indexed<String, Texture<Resource>>
+external val TextureCache: Object<String, Texture<Resource>>
 
 external interface TrimmedCanvas {
 	var width: Number
