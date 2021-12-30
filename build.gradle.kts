@@ -4,10 +4,10 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 
 object Project {
-    const val group = "io.github.ayfri.pixi-kotlin"
+    const val group = "io.github.ayfri"
     const val version = "0.1.0"
-    const val name = "pixi-kotlin"
-    const val description = "Kotlin bindings for library PIXI.js"
+    const val name = "PIXI-Kotlin"
+    const val description = "Kotlin bindings for PIXI.js"
     const val url = "https://github.com/Ayfri/PIXI-kotlin"
 }
 
