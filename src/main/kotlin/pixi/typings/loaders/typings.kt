@@ -129,13 +129,13 @@ open external class Loader(baseUrl: String = definedExternally, concurrency: Num
 	
 	open var concurrency: Number
 	
-	open fun add(`this`: Loader, name: String, url: String, callback: OnCompleteSignal = definedExternally): Loader
-	open fun add(`this`: Loader, name: String, url: String, options: IAddOptions = definedExternally, callback: OnCompleteSignal = definedExternally): Loader
-	open fun add(`this`: Loader, url: String, callback: OnCompleteSignal = definedExternally): Loader
-	open fun add(`this`: Loader, url: String, options: IAddOptions = definedExternally, callback: OnCompleteSignal = definedExternally): Loader
-	open fun add(`this`: Loader, options: IAddOptions, callback: OnCompleteSignal = definedExternally): Loader
-	open fun add(`this`: Loader, resources: Array<String>, callback: OnCompleteSignal = definedExternally): Loader
-	open fun add(`this`: Loader, resources: Array<IAddOptions>, callback: OnCompleteSignal = definedExternally): Loader
+	open fun add(name: String, url: String, callback: OnCompleteSignal = definedExternally): Loader
+	open fun add(name: String, url: String, options: IAddOptions = definedExternally, callback: OnCompleteSignal = definedExternally): Loader
+	open fun add(url: String, callback: OnCompleteSignal = definedExternally): Loader
+	open fun add(url: String, options: IAddOptions = definedExternally, callback: OnCompleteSignal = definedExternally): Loader
+	open fun add(options: IAddOptions, callback: OnCompleteSignal = definedExternally): Loader
+	open fun add(resources: Array<String>, callback: OnCompleteSignal = definedExternally): Loader
+	open fun add(resources: Array<IAddOptions>, callback: OnCompleteSignal = definedExternally): Loader
 	protected open fun _add(name: String, url: String, options: IAddOptions, callback: OnCompleteSignalResource = definedExternally): Loader /* this */
 	open fun pre(fn: ILoaderMiddleware)
 	open fun use(fn: ILoaderMiddleware)

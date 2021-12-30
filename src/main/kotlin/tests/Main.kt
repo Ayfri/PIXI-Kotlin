@@ -19,7 +19,7 @@ fun main() {
 		resizeTo = window
 	}
 	
-	//Loader.shared.add("test", "test.png").load(::start)
+	Loader.shared.add("test", "test.png").load(::start)
 	document.getElementById("root")!!.appendChild(app.view)
 }
 
