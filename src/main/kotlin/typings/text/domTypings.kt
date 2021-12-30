@@ -4,8 +4,8 @@ import org.khronos.webgl.WebGLContextAttributes
 import org.w3c.dom.*
 import org.w3c.dom.events.EventTarget
 import org.w3c.files.Blob
-import kotlin.js.Promise
 import typings.Number
+import kotlin.js.Promise
 
 external interface ImageEncodeOptions {
 	var quality: Number?
@@ -33,7 +33,7 @@ external interface OffscreenCanvas : EventTarget {
 	
 	fun getContext(
 		contextId: String /* "2d" | "bitmaprenderer" | "webgl" | "webgl2" */,
-		options: Any = definedExternally
+		options: Any? = definedExternally
 	): dynamic /* OffscreenCanvasRenderingContext2D? | ImageBitmapRenderingContext? | WebGLRenderingContext? | WebGL2RenderingContext? */
 	
 	fun transferToImageBitmap(): ImageBitmap

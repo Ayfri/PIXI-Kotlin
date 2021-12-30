@@ -21,10 +21,10 @@ open external class Bounds {
 	open var maxY: Number
 	open var rect: Rectangle
 	open var updateID: Number
+	
 	open fun isEmpty(): Boolean
 	open fun clear()
-	open fun getRectangle(rect: Rectangle): Rectangle
-	open fun getRectangle(): Rectangle
+	open fun getRectangle(rect: Rectangle = definedExternally): Rectangle
 	open fun addPoint(point: IPointData)
 	open fun addPointMatrix(matrix: Matrix, point: IPointData)
 	open fun addQuad(vertices: Float32Array)
@@ -57,28 +57,36 @@ open external class Container : DisplayObject {
 	override var sortDirty: Boolean
 	override var parent: Container
 	open var containerUpdateTransform: () -> Unit
-	protected open fun onChildrenChange(_length: Number = definedExternally)
+	protected open var _width: Number
+	protected open var _height: Number
 	open var width: Number
 	open var height: Number
 	
+	protected open fun onChildrenChange(_length: Number = definedExternally)
 	open fun <T : DisplayObject> addChild(vararg child: T): T
 	open fun <T : DisplayObject> addChildAt(child: T, index: Number): T
 	open fun swapChildren(child: DisplayObject, child2: DisplayObject)
 	open fun getChildIndex(child: DisplayObject): Number
 	open fun setChildIndex(child: DisplayObject, index: Number)
 	open fun getChildAt(index: Number): DisplayObject
+	
+	@Suppress("CANNOT_WEAKEN_ACCESS_PRIVILEGE")
+	internal override fun removeChild(child: DisplayObject)
+	
+	@Suppress("RETURN_TYPE_MISMATCH_ON_OVERRIDE")
 	open fun <T : DisplayObject> removeChild(vararg child: T): T
-	override fun removeChild(child: DisplayObject): DisplayObject
 	open fun removeChildAt(index: Number): DisplayObject
 	open fun removeChildren(beginIndex: Number = definedExternally, endIndex: Number = definedExternally): Array<DisplayObject>
 	open fun sortChildren()
 	override fun updateTransform()
 	override fun calculateBounds()
 	open fun getLocalBounds(rect: Rectangle = definedExternally, skipChildrenUpdate: Boolean = definedExternally): Rectangle
-	protected open fun renderAdvanced(renderer: Renderer)
-	protected open fun _render(_renderer: Renderer)
 	protected open fun _calculateBounds()
 	override fun render(renderer: Renderer)
+	protected open fun renderAdvanced(renderer: Renderer)
+	protected open fun _render(_renderer: Renderer)
+	override fun destroy(options: Boolean)
+	override fun destroy(options: IDestroyOptions)
 }
 
 abstract external class DisplayObject : EventEmitter {
@@ -93,14 +101,40 @@ abstract external class DisplayObject : EventEmitter {
 	open var filters: Array<Filter>?
 	open var isSprite: Boolean
 	open var isMask: Boolean
-	open val displayObjectUpdateTransform: () -> Unit
+	open var _lastSortedIndex: Number
+	open var _mask: dynamic /* Container | MaskData */
+	open var _bounds: Bounds
+	open var _localBounds: Bounds
+	protected open var _zIndex: Number
+	protected open var _enabledFilters: Array<Filter>
+	protected open var _boundsID: Number
+	protected open var _boundsRect: Rectangle
+	protected open var _lastBoundsRect: Rectangle
+	protected open var _destroyed: Boolean
+	open var displayObjectUpdateTransform: () -> Unit
 	open val destroyed: Boolean
+	open val _tempDisplayObjectParent: TemporaryDisplayObject
+	
+	open var x: Number
+	open var y: Number
+	open val worldTransform: Transform
+	open val localTransform: Matrix
+	open var position: ObservablePoint<Any?>
+	open var scale: ObservablePoint<Any?>
+	open var pivot: ObservablePoint<Any?>
+	open var skew: ObservablePoint<Any?>
+	open var rotation: Number
+	open var angle: Number
+	open var zIndex: Number
+	open val worldVisible: Boolean
+	open var mask: dynamic? /* Container | MaskData | null */
+	
 	abstract fun calculateBounds()
-	abstract fun removeChild(child: DisplayObject): DisplayObject
+	abstract fun removeChild(child: DisplayObject)
 	abstract fun render(renderer: Renderer)
+	protected open fun _recursivePostUpdateTransform()
 	open fun updateTransform()
-	open fun getBounds(skipUpdate: Boolean, rect: Rectangle = definedExternally): Rectangle
-	open fun getBounds(): Rectangle
+	open fun getBounds(skipUpdate: Boolean = definedExternally, rect: Rectangle = definedExternally): Rectangle
 	open fun getLocalBounds(rect: Rectangle = definedExternally): Rectangle
 	open fun <P : IPointData> toGlobal(position: IPointData, point: P = definedExternally, skipUpdate: Boolean = definedExternally): P
 	open fun <P : IPointData> toLocal(
@@ -125,23 +159,8 @@ abstract external class DisplayObject : EventEmitter {
 	
 	open fun destroy(_options: IDestroyOptions = definedExternally)
 	open fun destroy(_options: Boolean = definedExternally)
-	open val _tempDisplayObjectParent: TemporaryDisplayObject
 	open fun enableTempParent(): Container
 	open fun disableTempParent(cacheParent: Container)
-	open var x: Number
-	open var y: Number
-	open val worldTransform: Transform
-	open val localTransform: Matrix
-	open var position: ObservablePoint<Any>
-	open val scale: ObservablePoint<Any>
-	open val pivot: ObservablePoint<Any>
-	open val skew: ObservablePoint<Any>
-	open var rotation: Number
-	open var angle: Number
-	open var zIndex: Number
-	open val worldVisible: Boolean
-	open var mask: dynamic? /* Container | MaskData | null */
-	
 	
 	companion object {
 		fun mixin(source: Dict<Any>)

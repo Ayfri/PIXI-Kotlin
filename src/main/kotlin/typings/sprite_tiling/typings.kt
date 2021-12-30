@@ -2,6 +2,7 @@
 
 package typings.sprite_tiling
 
+import typings.Number
 import typings.core.IBaseTextureOptions
 import typings.core.ObjectRenderer
 import typings.core.QuadUv
@@ -11,15 +12,16 @@ import typings.core.Shader
 import typings.core.State
 import typings.core.Texture
 import typings.core.TextureMatrix
+import typings.display.IDestroyOptions
 import typings.math.IPointData
+import typings.math.ISize
 import typings.math.ObservablePoint
 import typings.math.Rectangle
 import typings.math.Transform
 import typings.sprite.Sprite
-import typings.Number
 
 @Suppress("VAR_TYPE_MISMATCH_ON_OVERRIDE")
-external interface TilingSpriteFromOptions : IBaseTextureOptions<Any> {
+external interface TilingSpriteFromOptions : ISize, IBaseTextureOptions<Any?> {
 	override var width: Number
 	override var height: Number
 }
@@ -28,9 +30,10 @@ open external class TilingSprite(texture: Texture<Resource>, width: Number = def
 	open var tileTransform: Transform
 	open var uvMatrix: TextureMatrix
 	open var uvRespectAnchor: Boolean
+	
 	open var clampMargin: Number
-	open var tileScale: ObservablePoint<Any>
-	open var tilePosition: ObservablePoint<Any>
+	open var tileScale: ObservablePoint<Any?>
+	open var tilePosition: ObservablePoint<Any?>
 	override var width: Number
 	override var height: Number
 	
@@ -39,6 +42,8 @@ open external class TilingSprite(texture: Texture<Resource>, width: Number = def
 	override fun _calculateBounds()
 	override fun getLocalBounds(rect: Rectangle): Rectangle
 	override fun containsPoint(point: IPointData): Boolean
+	override fun destroy(options: Boolean)
+	override fun destroy(options: IDestroyOptions)
 	
 	companion object {
 		fun from(source: String, options: TilingSpriteFromOptions): TilingSprite

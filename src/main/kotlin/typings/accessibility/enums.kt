@@ -11,7 +11,7 @@ external enum class PointerEvents {
 	@JsString("none")
 	NONE,
 	
-	@JsString("visiblePainter")
+	@JsString("visiblePainted")
 	VISIBLE_PAINTED,
 	
 	@JsString("visibleFill")

@@ -16,6 +16,7 @@ open external class DisplacementFilter(sprite: ISpriteMaskTarget, scale: Number 
 	open var maskSprite: ISpriteMaskTarget
 	open var maskMatrix: Matrix
 	open var scale: Point
+	
 	open var map: Texture<Resource>
 	
 	open fun apply(filterManager: FilterSystem, input: RenderTexture, output: RenderTexture, clearMode: CLEAR_MODES)

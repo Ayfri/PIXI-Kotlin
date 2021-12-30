@@ -8,6 +8,7 @@ import typings.constants.BLEND_MODES
 import typings.constants.DRAW_MODES
 import typings.core.*
 import typings.display.Container
+import typings.display.IDestroyOptions
 import typings.math.IPointData
 import typings.math.Matrix
 import typings.utils.Dict
@@ -35,6 +36,8 @@ open external class Mesh<T : Shader /* = MeshMaterial */>(
 	open var indices: Uint16Array
 	open var _tintRGB: Number
 	open var _texture: Texture<Resource>
+	
+	open var geometry: Geometry
 	open val uvBuffer: Buffer
 	open val verticesBuffer: Buffer
 	open var material: T
@@ -42,7 +45,6 @@ open external class Mesh<T : Shader /* = MeshMaterial */>(
 	open var roundPixels: Boolean
 	open var texture: Texture<Resource>
 	
-	open var geometry: Geometry
 	
 	override fun _render(renderer: Renderer)
 	protected open fun _renderDefault(renderer: Renderer)
@@ -51,6 +53,8 @@ open external class Mesh<T : Shader /* = MeshMaterial */>(
 	open fun calculateUvs()
 	override fun _calculateBounds()
 	open fun containsPoint(point: IPointData): Boolean
+	override fun destroy(options: IDestroyOptions)
+	override fun destroy(options: Boolean)
 	
 	companion object {
 		var BATCHABLE_SIZE: Number
@@ -66,16 +70,17 @@ open external class MeshBatchUvs(uvBuffer: Buffer, uvMatrix: Matrix) {
 	open fun update(forceUpdate: Boolean = definedExternally)
 }
 
-open external class MeshGeometry(vertices: IArrayBuffer = definedExternally, uvs: IArrayBuffer = definedExternally, index: IArrayBuffer = definedExternally) :
-	Geometry {
+open external class MeshGeometry(vertices: IArrayBuffer = definedExternally, uvs: IArrayBuffer = definedExternally, index: IArrayBuffer = definedExternally) : Geometry {
 	open var _updateID: Number
+	
 	open val vertexDirtyId: Number
 }
 
 open external class MeshMaterial(uSampler: Texture<Resource>, options: IMeshMaterialOptions = definedExternally) : Shader {
 	open val uvMatrix: TextureMatrix
 	open var batchable: Boolean
-	open var pluginNAme: String
+	open var pluginName: String
+	
 	open var texture: Texture<Resource>
 	open var alpha: Number
 	open var tint: Number

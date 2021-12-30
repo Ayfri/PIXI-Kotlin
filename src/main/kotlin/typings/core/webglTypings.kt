@@ -92,6 +92,12 @@ external interface WEBGL_lose_context {
 	fun restoreContext()
 }
 
+open external class WebGL2RenderingContext
+
+open external class WebGLRenderbuffer
+
+open external class WebGLVertexArrayObject
+
 typealias WebGLVertexArrayObjectOES = WebGLObject
 
 typealias GLboolean = Boolean

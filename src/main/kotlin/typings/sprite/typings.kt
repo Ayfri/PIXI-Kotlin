@@ -12,6 +12,7 @@ import typings.Number
 import typings.constants.BLEND_MODES
 import typings.core.BaseTexture
 import typings.core.IAutoDetectOptions
+import typings.core.IBaseTextureOptions
 import typings.core.Renderer
 import typings.core.Resource
 import typings.core.Texture
@@ -24,20 +25,21 @@ open external class Sprite(texture: Texture<Resource> = definedExternally) : Con
 	open var blendMode: BLEND_MODES
 	open var indices: Uint16Array
 	open var pluginName: String
-	open var _width: Number
-	open var _height: Number
+	override var _width: Number
+	override var _height: Number
 	open var _texture: Texture<Resource>
 	open var _textureID: Number
 	open var _cachedTint: Number
 	protected open var _textureTrimmedID: Number
 	protected open var uvs: Float32Array
-	protected open var _anchor: ObservablePoint<Any>
+	protected open var _anchor: ObservablePoint<Any?>
 	protected open var vertexData: Float32Array
 	open var _tintRGB: Number
+	
 	open var roundPixels: Boolean
 	override var width: Number
 	override var height: Number
-	open val anchor: ObservablePoint<Any>
+	open val anchor: ObservablePoint<Any?>
 	open var tint: Number
 	open var texture: Texture<Resource>
 	
@@ -50,12 +52,12 @@ open external class Sprite(texture: Texture<Resource> = definedExternally) : Con
 	open fun containsPoint(point: IPointData): Boolean
 	
 	companion object {
-		fun from(source: Texture<out Resource>): Sprite
-		fun from(source: String): Sprite
-		fun from(source: BaseTexture<Resource, IAutoDetectOptions>): Sprite
-		fun from(source: HTMLImageElement): Sprite
-		fun from(source: HTMLCanvasElement): Sprite
-		fun from(source: HTMLVideoElement): Sprite
-		fun from(source: ImageBitmap): Sprite
+		fun from(source: Texture<out Resource>, options: IBaseTextureOptions<Any> = definedExternally): Sprite
+		fun from(source: String, options: IBaseTextureOptions<Any> = definedExternally): Sprite
+		fun from(source: BaseTexture<Resource, IAutoDetectOptions>, options: IBaseTextureOptions<Any> = definedExternally): Sprite
+		fun from(source: HTMLImageElement, options: IBaseTextureOptions<Any> = definedExternally): Sprite
+		fun from(source: HTMLCanvasElement, options: IBaseTextureOptions<Any> = definedExternally): Sprite
+		fun from(source: HTMLVideoElement, options: IBaseTextureOptions<Any> = definedExternally): Sprite
+		fun from(source: ImageBitmap, options: IBaseTextureOptions<Any> = definedExternally): Sprite
 	}
 }

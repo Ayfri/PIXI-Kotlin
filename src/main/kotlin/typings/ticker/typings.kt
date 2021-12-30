@@ -4,7 +4,6 @@ package typings.ticker
 
 import typings.Number
 import typings.app.IApplicationOptions
-import typings.app.IApplicationPlugin
 
 open external class Ticker {
 	open var autoStart: Boolean
@@ -14,24 +13,25 @@ open external class Ticker {
 	open var lastTime: Number
 	open var speed: Number
 	open val started: Boolean
+	
 	open val count: Number
 	open val FPS: Number
 	open var minFPS: Number
 	open var maxFPS: Number
 	
-	open fun <T> add(
+	open fun <T /* = Any */> add(
 		fn: TickerCallback<T>,
 		context: T = definedExternally,
 		priority: UPDATE_PRIORITY = definedExternally
 	): Ticker /* this */
 	
-	open fun <T> addOnce(
+	open fun <T /* = Any */> addOnce(
 		fn: TickerCallback<T>,
 		context: T = definedExternally,
 		priority: UPDATE_PRIORITY = definedExternally
 	): Ticker /* this */
 	
-	open fun <T> remove(fn: TickerCallback<T>, context: T = definedExternally): Ticker /* this */
+	open fun <T /* = Any */> remove(fn: TickerCallback<T>, context: T = definedExternally): Ticker /* this */
 	open fun start()
 	open fun stop()
 	open fun destroy()
@@ -43,11 +43,14 @@ open external class Ticker {
 	}
 }
 
-external object TickerPlugin : IApplicationPlugin {
-	var start: () -> Unit
-	var stop: () -> Unit
-	var _ticker: Ticker
-	var ticker: Ticker
-	override fun init(options: IApplicationOptions)
-	override fun destroy()
+
+open external class TickerPlugin {
+	companion object {
+		var start: () -> Unit
+		var stop: () -> Unit
+		var _ticker: Ticker
+		var ticker: Ticker
+		fun init(options: IApplicationOptions = definedExternally)
+		fun destroy()
+	}
 }

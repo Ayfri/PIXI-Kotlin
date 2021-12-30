@@ -4,6 +4,7 @@ package typings.particle_container
 
 import org.khronos.webgl.Float32Array
 import org.khronos.webgl.Uint32Array
+import typings.Number
 import typings.VarArgFun
 import typings.constants.BLEND_MODES
 import typings.constants.TYPES
@@ -18,8 +19,8 @@ import typings.core.Shader
 import typings.core.State
 import typings.display.Container
 import typings.display.DisplayObject
+import typings.display.IDestroyOptions
 import typings.math.Matrix
-import typings.Number
 
 external interface IParticleProperties {
 	var vertices: Boolean?
@@ -35,7 +36,7 @@ external interface IParticleRendererProperty {
 	var attributeName: String
 	var size: Number
 	var type: TYPES?
-	var uploadFunction: VarArgFun<Any, Any>
+	var uploadFunction: VarArgFun<Any?, Any?>
 	var offset: Number
 }
 
@@ -47,6 +48,7 @@ open external class ParticleBuffer(properties: Array<IParticleRendererProperty>,
 	open var staticDataUint32: Uint32Array
 	open var dynamicStride: Number
 	open var dynamicData: Float32Array
+	open var dynamicDataUnit32: Uint32Array
 	open var _updateID: Number
 	open var indexBuffer: Buffer
 	
@@ -56,8 +58,8 @@ open external class ParticleBuffer(properties: Array<IParticleRendererProperty>,
 }
 
 open external class ParticleContainer(
-	maxSize: Number,
-	properties: IParticleProperties,
+	maxSize: Number = definedExternally,
+	properties: IParticleProperties = definedExternally,
 	batchSize: Number = definedExternally,
 	autoResize: Number = definedExternally
 ) : Container {
@@ -72,6 +74,7 @@ open external class ParticleContainer(
 	open var _properties: Array<Boolean>
 	open var _bufferUpdateIDs: Array<Number>
 	open var _updateID: Number
+	
 	open var tint: Number
 	
 	open fun setProperties(properties: IParticleProperties)
@@ -79,6 +82,8 @@ open external class ParticleContainer(
 	override fun render(renderer: Renderer)
 	override fun onChildrenChange(smallestChildIndex: Number)
 	open fun dispose()
+	override fun destroy(options: Boolean)
+	override fun destroy(options: IDestroyOptions)
 }
 
 open external class ParticleRenderer(renderer: Renderer) : ObjectRenderer {
@@ -87,7 +92,7 @@ open external class ParticleRenderer(renderer: Renderer) : ObjectRenderer {
 	open var tempMatrix: Matrix
 	open var properties: Array<IParticleRendererProperty>
 	
-	open fun render(renderer: Renderer)
+	open fun render(container: ParticleContainer)
 	open fun uploadVertices(children: Array<DisplayObject>, startIndex: Number, amount: Number, array: Array<Number>, stride: Number, offset: Number)
 	open fun uploadPosition(children: Array<DisplayObject>, startIndex: Number, amount: Number, array: Array<Number>, stride: Number, offset: Number)
 	open fun uploadRotation(children: Array<DisplayObject>, startIndex: Number, amount: Number, array: Array<Number>, stride: Number, offset: Number)

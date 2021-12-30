@@ -11,5 +11,4 @@ inline var DisplayObject.name
 		asDynamic().name = value
 	}
 
-inline fun Container.getChildByName(name: String, isRecursive: Boolean) = asDynamic().getChildByName(name, isRecursive) as DisplayObject
-inline fun Container.getChildByName(name: String) = asDynamic().getChildByName(name) as DisplayObject
+inline fun Container.getChildByName(name: String, isRecursive: Boolean = false) = asDynamic().getChildByName(name, isRecursive) as DisplayObject

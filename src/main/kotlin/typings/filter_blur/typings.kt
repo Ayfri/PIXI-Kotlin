@@ -2,12 +2,12 @@
 
 package typings.filter_blur
 
+import typings.Number
 import typings.constants.BLEND_MODES
 import typings.constants.CLEAR_MODES
 import typings.core.Filter
 import typings.core.FilterSystem
 import typings.core.RenderTexture
-import typings.Number
 
 open external class BlurFilter(
 	strength: Number = definedExternally,
@@ -17,6 +17,7 @@ open external class BlurFilter(
 ) : Filter {
 	open var blurXFilter: BlurFilterPass
 	open var blurYFilter: BlurFilterPass
+	
 	open var blur: Number
 	open var quality: Number
 	open var blurX: Number
@@ -25,7 +26,7 @@ open external class BlurFilter(
 	open var repeatEdgePixels: Boolean
 	
 	open fun apply(filterManager: FilterSystem, input: RenderTexture, output: RenderTexture, clearMode: CLEAR_MODES)
-	protected fun updatePadding()
+	protected open fun updatePadding()
 }
 
 open external class BlurFilterPass(
@@ -38,6 +39,7 @@ open external class BlurFilterPass(
 	open var horizontal: Boolean
 	open var strength: Number
 	open var passes: Number
+	
 	open var blur: Number
 	open var quality: Number
 	

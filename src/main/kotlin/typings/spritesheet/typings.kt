@@ -2,6 +2,7 @@
 
 package typings.spritesheet
 
+import typings.Number
 import typings.VarArgFun
 import typings.core.BaseTexture
 import typings.core.IAutoDetectOptions
@@ -10,7 +11,6 @@ import typings.core.Texture
 import typings.loaders.LoaderResource
 import typings.math.IPointData
 import typings.utils.Dict
-import typings.Number
 
 external interface ISpritesheetDataMeta {
 	var scale: String
@@ -34,7 +34,7 @@ external interface ISpritesheetFrameDataSourceSize {
 	var h: Number
 }
 
-external interface ISpritesheetFrameDataSpriteSourceSize : ISpritesheetFrameDataSourceSize
+external interface ISpritesheetFrameDataSpriteSourceSize : IPointData
 
 external interface ISpritesheetFrameData {
 	var frame: ISpritesheetFrameDataFrame
@@ -63,7 +63,9 @@ open external class Spritesheet(texture: Texture<Resource>, data: ISpritesheetDa
 	}
 }
 
-external object SpriteSheetLoader {
-	fun use(resource: LoaderResource, next: VarArgFun<Any? /* unknown */, Unit>)
-	fun getResourcePath(resource: LoaderResource, baseUrl: String)
+external class SpriteSheetLoader {
+	companion object {
+		fun use(resource: LoaderResource, next: VarArgFun<Any? /* unknown */, Unit>)
+		fun getResourcePath(resource: LoaderResource, baseUrl: String)
+	}
 }

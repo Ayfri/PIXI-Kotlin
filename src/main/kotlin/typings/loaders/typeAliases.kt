@@ -3,8 +3,7 @@ package typings.loaders
 import typings.VarArgFun
 import typings.utils.Dict
 
-typealias ILoaderMiddleware = (resource: LoaderResource, next: VarArgFun<Any, Unit>) -> Unit
-typealias ILoaderMiddleware2 = (resource: LoaderResource) -> Unit
+typealias ILoaderMiddleware = (resource: LoaderResource, next: VarArgFun<Any?, Unit>) -> Unit
 typealias ILoaderResource = LoaderResource
 
 typealias OnStartSignalResource = (resource: LoaderResource) -> Unit

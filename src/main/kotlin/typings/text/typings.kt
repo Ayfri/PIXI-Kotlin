@@ -7,6 +7,7 @@ import org.w3c.dom.HTMLCanvasElement
 import typings.Indexed
 import typings.Number
 import typings.core.Renderer
+import typings.display.IDestroyOptions
 import typings.math.Rectangle
 import typings.sprite.Sprite
 
@@ -71,6 +72,7 @@ open external class Text(
 	protected open var _font: String
 	protected open var _style: TextStyle
 	protected open var _styleListener: () -> Unit
+	
 	override var width: Number
 	override var height: Number
 	open var style: PartialTextStyle
@@ -81,6 +83,8 @@ open external class Text(
 	override fun _render(renderer: Renderer)
 	override fun getLocalBounds(rect: Rectangle): Rectangle
 	override fun _calculateBounds()
+	override fun destroy(options: Boolean)
+	override fun destroy(options: IDestroyOptions)
 	
 	companion object {
 		var nextLineHeightBehavior: Boolean
@@ -122,14 +126,14 @@ open external class TextMetrics(
 		fun measureText(
 			text: String,
 			style: TextStyle,
-			wordWrap: Boolean,
+			wordWrap: Boolean = definedExternally,
 			canvas: HTMLCanvasElement = definedExternally
 		): TextMetrics
 		
 		fun measureText(
 			text: String,
 			style: TextStyle,
-			wordWrap: Boolean,
+			wordWrap: Boolean = definedExternally,
 			canvas: OffscreenCanvas = definedExternally
 		): TextMetrics
 		
@@ -143,16 +147,14 @@ open external class TextMetrics(
 			_breakWords: Boolean
 		): Boolean
 		
-		fun wordWrap(text: String, style: TextStyle, canvas: HTMLCanvasElement = definedExternally): String
-		fun wordWrap(text: String, style: TextStyle, canvas: OffscreenCanvas = definedExternally): String
-		
 		fun wordWrapSplit(token: String): Array<String>
 		fun measureFont(font: String): IFontMetrics
 		fun clearMetrics(font: String = definedExternally)
 	}
 }
 
-open external class TextStyle(style: PartialTextStyle) {
+open external class TextStyle(style: PartialTextStyle = definedExternally) {
+	open var styleID: Number
 	protected open var _align: TextStyleAlign
 	protected open var _breakWords: Boolean
 	protected open var _dropShadow: Boolean
@@ -182,8 +184,6 @@ open external class TextStyle(style: PartialTextStyle) {
 	protected open var _wordWrap: Boolean
 	protected open var _wordWrapWidth: Number
 	protected open var _leading: Number
-	
-	open var styleID: Number
 	
 	open var align: TextStyleAlign
 	open var breakWords: Boolean
@@ -220,36 +220,36 @@ open external class TextStyle(style: PartialTextStyle) {
 	open fun toFontString(): String
 }
 
-open external class PartialTextStyle {
-	open var styleID: Number?
+external interface PartialTextStyle {
+	var styleID: Number?
 	
-	open var align: TextStyleAlign?
-	open var breakWords: Boolean?
-	open var dropShadow: Boolean?
-	open var dropShadowAlpha: Number?
-	open var dropShadowAngle: Number?
-	open var dropShadowBlur: Number?
-	open var dropShadowColor: dynamic? /* String | Number */
-	open var dropShadowDistance: Number?
-	open var fill: TextStyleFill?
-	open var fillGradientType: TEXT_GRADIENT?
-	open var fillGradientStops: Array<Number>?
-	open var fontFamily: dynamic? /* String | Array<String> */
-	open var fontSize: dynamic? /* Number | String */
-	open var fontStyle: TextStyleFontStyle?
-	open var fontVariant: TextStyleFontVariant?
-	open var fontWeight: TextStyleFontWeight?
-	open var letterSpacing: Number?
-	open var lineHeight: Number?
-	open var leading: Number?
-	open var lineJoin: TextStyleLineJoin?
-	open var miterLimit: Number?
-	open var padding: Number?
-	open var stroke: dynamic? /* String | Number */
-	open var strokeThickness: Number?
-	open var textBaseline: TextStyleTextBaseline?
-	open var trim: Boolean?
-	open var whiteSpace: TextStyleWhiteSpace?
-	open var wordWrap: Boolean?
-	open var wordWrapWidth: Number?
+	var align: TextStyleAlign?
+	var breakWords: Boolean?
+	var dropShadow: Boolean?
+	var dropShadowAlpha: Number?
+	var dropShadowAngle: Number?
+	var dropShadowBlur: Number?
+	var dropShadowColor: dynamic? /* String | Number */
+	var dropShadowDistance: Number?
+	var fill: TextStyleFill?
+	var fillGradientType: TEXT_GRADIENT?
+	var fillGradientStops: Array<Number>?
+	var fontFamily: dynamic? /* String | Array<String> */
+	var fontSize: dynamic? /* Number | String */
+	var fontStyle: TextStyleFontStyle?
+	var fontVariant: TextStyleFontVariant?
+	var fontWeight: TextStyleFontWeight?
+	var letterSpacing: Number?
+	var lineHeight: Number?
+	var leading: Number?
+	var lineJoin: TextStyleLineJoin?
+	var miterLimit: Number?
+	var padding: Number?
+	var stroke: dynamic? /* String | Number */
+	var strokeThickness: Number?
+	var textBaseline: TextStyleTextBaseline?
+	var trim: Boolean?
+	var whiteSpace: TextStyleWhiteSpace?
+	var wordWrap: Boolean?
+	var wordWrapWidth: Number?
 }

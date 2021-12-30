@@ -20,9 +20,10 @@ open external class AccessibilityManager(renderer: AbstractRenderer) {
 
 external val accessibleTarget: IAccessibleTarget
 
-abstract external class IAccessibleHTMLElement : HTMLElement {
-	abstract var type: String?
-	abstract var displayObject: DisplayObject?
+@Suppress("INTERFACE_WITH_SUPERCLASS")
+external interface IAccessibleHTMLElement : HTMLElement {
+	var type: String?
+	var displayObject: DisplayObject?
 }
 
 external interface IAccessibleTarget {

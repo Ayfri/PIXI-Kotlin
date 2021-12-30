@@ -5,7 +5,7 @@ import typings.core.Resource
 import typings.core.Texture
 
 inline var ILoaderResource.texture
-	get() = asDynamic().texture as Texture<Resource>
+	get() = asDynamic().texture as Texture<Resource>?
 	set(value) {
 		asDynamic().texture = value
 	}

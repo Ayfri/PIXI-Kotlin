@@ -2,11 +2,12 @@
 
 package typings.filter_color_matrix
 
-import typings.core.Filter
 import typings.Number
+import typings.core.Filter
 
 open external class ColorMatrixFilter : Filter {
 	open var grayscale: (scale: Number, multiply: Boolean) -> Unit
+	
 	open var matrix: ColorMatrix
 	open var alpha: Number
 	

@@ -8,13 +8,13 @@ import org.w3c.dom.TouchEvent
 import org.w3c.dom.events.MouseEvent
 import org.w3c.dom.pointerevents.PointerEvent
 import typings.Indexed
+import typings.Number
 import typings.core.AbstractRenderer
 import typings.display.DisplayObject
 import typings.math.IPointData
 import typings.math.Point
 import typings.utils.Dict
 import typings.utils.EventEmitter
-import typings.Number
 
 external interface DelayedEvent {
 	var displayObject: DisplayObject
@@ -40,9 +40,12 @@ open external class InteractionData {
 	open var tiltY: Number
 	open var pointerType: String
 	open var pressure: Number
+	open var rotationAngle: Number
 	open var twist: Number
 	open var tangentialPressure: Number
+	
 	open val pointerId: Number
+	
 	open fun <P : IPointData /* = Point */> getLocalPosition(
 		displayObject: DisplayObject,
 		point: P = definedExternally,
@@ -89,6 +92,7 @@ open external class InteractionManager(renderer: AbstractRenderer, options: Inte
 	protected open var interactionDOMElement: HTMLElement
 	protected open var eventsAdded: Boolean
 	protected open var mouseOverRenderer: Boolean
+	
 	open var useSystemTicker: Boolean
 	open val lastObjectRendered: DisplayObject
 	
@@ -105,6 +109,13 @@ open external class InteractionManager(renderer: AbstractRenderer, options: Inte
 		hitTest: Boolean = definedExternally
 	)
 	
+	open fun processInteractive(
+		interactionEvent: InteractionEvent,
+		displayObject: DisplayObject,
+		func: InteractionCallbackDefaultValue = definedExternally,
+		hitTest: Boolean = definedExternally
+	)
+	
 	open fun destroy()
 }
 
@@ -117,6 +128,7 @@ external interface InteractionManagerOptions {
 open external class InteractionTrackingData(pointerId: Number) {
 	open val pointerId: Number
 	open var flags: Number
+	open val none: Boolean
 	open var over: Boolean
 	open var rightDown: Boolean
 	open var leftDown: Boolean
@@ -140,14 +152,24 @@ external interface InteractionTrackingFlagsReadOnly {
 	val NONE: Number
 }
 
-external object interactiveTarget {
+external interface InteractiveTarget {
 	var interactive: Boolean
 	var interactiveChildren: Boolean
 	var hitArea: IHitArea
-	var cursor: Cursor
+	var cursor: dynamic /* Cursor | String */
 	var buttonMode: Boolean
 	var trackedPointers: Indexed<Number, InteractionTrackingData>
 	var _trackedPointers: Indexed<Number, InteractionTrackingData>
+}
+
+external object interactiveTarget : InteractiveTarget {
+	override var interactive: Boolean
+	override var interactiveChildren: Boolean
+	override var hitArea: IHitArea
+	override var cursor: dynamic /* Cursor | String */
+	override var buttonMode: Boolean
+	override var trackedPointers: Indexed<Number, InteractionTrackingData>
+	override var _trackedPointers: Indexed<Number, InteractionTrackingData>
 }
 
 open external class TreeSearch {
@@ -159,10 +181,25 @@ open external class TreeSearch {
 		interactive: Boolean = definedExternally
 	): Boolean
 	
+	open fun recursiveFindHit(
+		interactionEvent: InteractionEvent,
+		displayObject: DisplayObject,
+		func: InteractionCallbackDefaultValue = definedExternally,
+		hitTest: Boolean = definedExternally,
+		interactive: Boolean = definedExternally
+	): Boolean
+	
 	open fun findHit(
 		interactionEvent: InteractionEvent,
 		displayObject: DisplayObject,
 		func: InteractionCallback = definedExternally,
+		hitTest: Boolean = definedExternally
+	)
+	
+	open fun findHit(
+		interactionEvent: InteractionEvent,
+		displayObject: DisplayObject,
+		func: InteractionCallbackDefaultValue = definedExternally,
 		hitTest: Boolean = definedExternally
 	)
 }

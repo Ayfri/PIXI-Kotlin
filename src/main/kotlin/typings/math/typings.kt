@@ -53,7 +53,7 @@ external object groupD8 {
 	var rotate180: (rotation: Number) -> Number
 	var isVertical: (rotation: GD8Symmetry) -> Boolean
 	var byDirection: (dx: Number, dy: Number) -> GD8Symmetry
-	var matrixAppendRotationInv: (matrix: Matrix, rotation: GD8Symmetry, tx: Number, ty: Number) -> Unit
+	var matrixAppendRotationInv: (matrix: Matrix, rotation: GD8Symmetry, tx: Number?, ty: Number?) -> Unit
 }
 
 external interface IPoint : IPointData {
@@ -117,6 +117,7 @@ open external class Matrix(
 	open fun clone(): Matrix
 	open fun copyTo(matrix: Matrix): Matrix
 	open fun copyFrom(matrix: Matrix): Matrix /* this */
+	override fun toString(): String
 	
 	companion object {
 		val IDENTITY: Matrix
@@ -125,17 +126,16 @@ open external class Matrix(
 }
 
 @Suppress("RETURN_TYPE_MISMATCH_ON_OVERRIDE")
-open external class ObservablePoint<T>(context: (self: T) -> Any, scope: T, x: Number = definedExternally, y: Number = definedExternally) : IPoint {
-	open var cb: (self: T) -> Any
-	open var scope: T
+open external class ObservablePoint<T /* = Any */>(context: (self: T) -> Any?, scope: T, x: Number = definedExternally, y: Number = definedExternally) : IPoint {
+	open var cb: (self: T) -> Any?
+	open var scope: Any?
 	open var _x: Number
 	open var _y: Number
+	
 	override var x: Number
 	override var y: Number
-	open fun clone(cb: (`this`: T) -> Any, scope: Any): ObservablePoint<Any>
 	
-	open fun clone(cb: (`this`: T) -> Any): ObservablePoint<Any>
-	open fun clone(): ObservablePoint<Any>
+	open fun clone(cb: (`this`: T) -> Any? = definedExternally, scope: Any? = definedExternally): ObservablePoint<Any?>
 	override fun set(x: Number, y: Number): ObservablePoint<T> /* this */
 	override fun copyFrom(p: IPointData): ObservablePoint<T> /* this */
 	override fun <T : IPoint> copyTo(p: T): T
@@ -180,6 +180,7 @@ open external class Rectangle(x: Number = definedExternally, y: Number = defined
 	open var width: Number
 	open var height: Number
 	open var type: SHAPES
+	
 	open val left: Number
 	open val right: Number
 	open val top: Number
@@ -188,10 +189,9 @@ open external class Rectangle(x: Number = definedExternally, y: Number = defined
 	open fun clone(): Rectangle
 	open fun copyFrom(rectangle: Rectangle): Rectangle
 	open fun contains(x: Number, y: Number): Boolean
-	open fun pad(paddingX: Number, paddingY: Number): Rectangle /* this */
+	open fun pad(paddingX: Number = definedExternally, paddingY: Number = definedExternally): Rectangle /* this */
 	open fun fit(rectangle: Rectangle): Rectangle /* this */
-	open fun ceil(resolution: Number, eps: Number = definedExternally): Rectangle /* this */
-	open fun ceil(): Rectangle /* this */
+	open fun ceil(resolution: Number = definedExternally, eps: Number = definedExternally): Rectangle /* this */
 	open fun enlarge(rectangle: Rectangle): Rectangle /* this */
 	override fun toString(): String
 	
@@ -222,17 +222,19 @@ open external class RoundedRectangle(
 open external class Transform {
 	open var worldTransform: Matrix
 	open var localTransform: Matrix
-	open var position: ObservablePoint<Any>
-	open var scale: ObservablePoint<Any>
-	open var pivot: ObservablePoint<Any>
-	open var skew: ObservablePoint<Any>
+	open var position: ObservablePoint<Any?>
+	open var scale: ObservablePoint<Any?>
+	open var pivot: ObservablePoint<Any?>
+	open var skew: ObservablePoint<Any?>
 	open var _parentID: Number
 	open var _worldID: Number
 	protected open var _rotation: Number
 	protected open var _cx: Number
 	protected open var _cy: Number
+	protected open var _sy: Number
 	protected open var _localID: Number
 	protected open var _currentLocalID: Number
+	
 	open var rotation: Number
 	
 	protected open fun onChange()

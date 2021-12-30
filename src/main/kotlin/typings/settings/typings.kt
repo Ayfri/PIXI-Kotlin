@@ -47,7 +47,7 @@ external interface ISettings {
 	var CREATE_IMAGE_BITMAP: Boolean
 	var ROUND_PIXELS: Boolean
 	var RETINA_PREFIX: RegExp?
-	var FAIL_IF_MAJOR_PERFORMANCE_CAVEAT: Boolean
+	var FAIL_IF_MAJOR_PERFORMANCE_CAVEAT: Boolean?
 	var UPLOADS_PER_FRAME: Number?
 	var SORTABLE_CHILDREN: Boolean?
 	var PREFER_ENV: ENV?

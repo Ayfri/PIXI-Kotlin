@@ -5,14 +5,17 @@ package typings.text_bitmap
 import org.khronos.webgl.Float32Array
 import org.khronos.webgl.Uint16Array
 import org.w3c.dom.XMLDocument
+import typings.Number
 import typings.VarArgFun
 import typings.core.Renderer
 import typings.core.Resource
 import typings.core.Texture
 import typings.display.Container
+import typings.display.IDestroyOptions
 import typings.loaders.Loader
 import typings.loaders.LoaderResource
 import typings.math.ObservablePoint
+import typings.math.Rectangle
 import typings.mesh.Mesh
 import typings.mesh.MeshMaterial
 import typings.text.PartialTextStyle
@@ -21,7 +24,7 @@ import typings.text.TextStyleAlign
 import typings.utils.Dict
 
 open external class BitMapFont(data: BitMapFontData, textures: Array<Texture<Resource>>, ownsTextures: Boolean = definedExternally) {
-	constructor(data: BitMapFontData, textures: Dict<Texture<Resource>>)
+	constructor(data: BitMapFontData, textures: Dict<Texture<Resource>>, ownsTextures: Boolean = definedExternally)
 	
 	open val font: String
 	open val size: Number
@@ -41,16 +44,16 @@ open external class BitMapFont(data: BitMapFontData, textures: Array<Texture<Res
 		val defaultOptions: IBitmapFontOptions
 		val available: Dict<BitMapFont>
 		
-		fun install(data: String, texture: Texture<Resource>, ownsTextures: Boolean = definedExternally): BitMapFont
-		fun install(data: XMLDocument, texture: Texture<Resource>, ownsTextures: Boolean = definedExternally): BitMapFont
-		fun install(data: BitMapFontData, texture: Texture<Resource>, ownsTextures: Boolean = definedExternally): BitMapFont
-		fun install(data: String, texture: Array<Texture<Resource>>, ownsTextures: Boolean = definedExternally): BitMapFont
-		fun install(data: XMLDocument, texture: Array<Texture<Resource>>, ownsTextures: Boolean = definedExternally): BitMapFont
-		fun install(data: BitMapFontData, texture: Array<Texture<Resource>>, ownsTextures: Boolean = definedExternally): BitMapFont
-		fun install(data: String, texture: Dict<Texture<Resource>>, ownsTextures: Boolean = definedExternally): BitMapFont
-		fun install(data: XMLDocument, texture: Dict<Texture<Resource>>, ownsTextures: Boolean = definedExternally): BitMapFont
-		fun install(data: BitMapFontData, texture: Dict<Texture<Resource>>, ownsTextures: Boolean = definedExternally): BitMapFont
-		
+		fun install(data: String, textures: Texture<Resource>, ownsTextures: Boolean = definedExternally): BitMapFont
+		fun install(data: XMLDocument, textures: Texture<Resource>, ownsTextures: Boolean = definedExternally): BitMapFont
+		fun install(data: BitMapFontData, textures: Texture<Resource>, ownsTextures: Boolean = definedExternally): BitMapFont
+		fun install(data: String, textures: Array<Texture<Resource>>, ownsTextures: Boolean = definedExternally): BitMapFont
+		fun install(data: XMLDocument, textures: Array<Texture<Resource>>, ownsTextures: Boolean = definedExternally): BitMapFont
+		fun install(data: BitMapFontData, textures: Array<Texture<Resource>>, ownsTextures: Boolean = definedExternally): BitMapFont
+		fun install(data: String, textures: Dict<Texture<Resource>>, ownsTextures: Boolean = definedExternally): BitMapFont
+		fun install(data: XMLDocument, textures: Dict<Texture<Resource>>, ownsTextures: Boolean = definedExternally): BitMapFont
+		fun install(data: BitMapFontData, textures: Dict<Texture<Resource>>, ownsTextures: Boolean = definedExternally): BitMapFont
+		fun uninstall(name: String)
 		fun from(name: String, textStyle: TextStyle = definedExternally, options: IBitmapFontOptions = definedExternally): BitMapFont
 		fun from(name: String, textStyle: PartialTextStyle = definedExternally, options: IBitmapFontOptions = definedExternally): BitMapFont
 	}
@@ -65,12 +68,14 @@ open external class BitMapFontData {
 	open var distanceField: IBitmapFontDataDistanceField
 }
 
-external object BitmapFontLoader {
-	fun add()
-	fun use(self: Loader, resource: LoaderResource, next: VarArgFun<Any, Unit>)
+external class BitmapFontLoader {
+	companion object {
+		fun add()
+		fun use(`this`: Loader, resource: LoaderResource, next: VarArgFun<Any?, Unit>)
+	}
 }
 
-open external class BitmapText(text: String, style: IBitmapTextStylePartial = definedExternally) : Container {
+open external class BitmapText(text: String, style: PartialIBitmapTextStyle = definedExternally) : Container {
 	open var dirty: Boolean
 	protected open var _textWidth: Number
 	protected open var _textHeight: Number
@@ -78,18 +83,19 @@ open external class BitmapText(text: String, style: IBitmapTextStylePartial = de
 	protected open var _maxWidth: Number
 	protected open var _maxLineHeight: Number
 	protected open var _letterSpacing: Number
-	protected open var _anchor: ObservablePoint<Any>
+	protected open var _anchor: ObservablePoint<Any?>
 	protected open var _fontName: String
 	protected open var _fontSize: Number
 	protected open var _align: TextStyleAlign
 	protected open var _activePageMeshData: Array<PageMeshData>
 	protected open var _tint: Number
 	protected open var _roundPixels: Boolean
+	
 	open var tint: Number
 	open var align: TextStyleAlign
 	open var fontName: String
 	open var fontSize: Number
-	open var anchor: ObservablePoint<Any>
+	open var anchor: ObservablePoint<Any?>
 	open var text: String
 	open var maxWidth: Number
 	open val maxLineHeight: Number
@@ -101,10 +107,13 @@ open external class BitmapText(text: String, style: IBitmapTextStylePartial = de
 	open fun updateText()
 	override fun updateTransform()
 	override fun _render(renderer: Renderer)
+	fun getLocalBounds(): Rectangle
 	protected open fun validate()
+	override fun destroy(options: Boolean)
+	override fun destroy(options: IDestroyOptions)
 	
 	companion object {
-		var styleDefaults: IBitmapTextStylePartial
+		var styleDefaults: PartialIBitmapTextStyle
 	}
 }
 
@@ -114,7 +123,7 @@ external interface IBitmapFontCharacter {
 	var xAdvance: Number
 	var texture: Texture<Resource>
 	var page: Number
-	var kerning: Dict<Any>
+	var kerning: Dict<Number>
 }
 
 external interface IBitmapFontDataChar {
@@ -176,15 +185,6 @@ external interface IBitmapTextStyle {
 	var maxWidth: Number
 }
 
-external interface IBitmapTextStylePartial {
-	var fontName: String?
-	var fontSize: Number?
-	var tint: Number?
-	var align: TextStyleAlign?
-	var letterSpacing: Number?
-	var maxWidth: Number?
-}
-
 external interface PageMeshData {
 	var index: Number
 	var indexCount: Number
@@ -195,4 +195,13 @@ external interface PageMeshData {
 	var vertices: Float32Array?
 	var uvs: Float32Array?
 	var indices: Uint16Array?
+}
+
+external interface PartialIBitmapTextStyle {
+	var fontName: String?
+	var fontSize: Number?
+	var tint: Number?
+	var align: TextStyleAlign?
+	var letterSpacing: Number?
+	var maxWidth: Number?
 }

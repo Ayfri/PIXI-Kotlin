@@ -7,6 +7,7 @@ import org.khronos.webgl.Float32Array
 import org.khronos.webgl.Uint32Array
 import org.khronos.webgl.Uint8Array
 import typings.Indexed
+import typings.Number
 import typings.VarArgFun
 import typings.core.BaseTexture
 import typings.core.BufferResource
@@ -17,18 +18,17 @@ import typings.core.Resource
 import typings.core.ViewableBuffer
 import typings.loaders.LoaderResource
 import kotlin.js.Promise
-import typings.Number
 
 abstract external class BlobResource(source: String, options: IBlobOptions = definedExternally) : BufferResource {
 	constructor(source: Uint32Array, options: IBlobOptions = definedExternally)
 	constructor(source: Uint8Array, options: IBlobOptions = definedExternally)
 	constructor(source: Float32Array, options: IBlobOptions = definedExternally)
 	
-	protected var origin: String
-	protected var buffer: ViewableBuffer
-	protected var loaded: Boolean
+	protected open var origin: String
+	protected open var buffer: ViewableBuffer
+	protected open var loaded: Boolean
 	
-	protected fun onBlobLoaded(_data: ArrayBuffer)
+	protected open fun onBlobLoaded(_data: ArrayBuffer)
 	
 	override fun load(): Promise<Resource>
 }
@@ -63,15 +63,15 @@ external interface PartialCompressedTextureExtensions {
 open external class CompressedTextureLoader {
 	companion object {
 		var textureExtensions: PartialCompressedTextureExtensions
-		var textureFormats: Indexed<INTERNAL_FORMATS?, Number>
-		fun use(resource: LoaderResource, next: VarArgFun<String, Unit>)
+		var textureFormats: Indexed<INTERNAL_FORMATS, Number>
+		fun use(resource: LoaderResource, next: VarArgFun<Any?, Unit>)
 		fun add()
 	}
 }
 
 external interface TextureManifest {
 	var src: String
-	var format: KEYOF_INTERNAL_FORMATS
+	var format: KEYOF_INTERNAL_FORMATS?
 }
 
 external interface CompressedTextureManifest {
@@ -87,11 +87,13 @@ open external class CompressedTextureResource(source: String, options: ICompress
 	open var levels: Number
 	override fun upload(renderer: Renderer, _texture: BaseTexture<Resource, IAutoDetectOptions>, _glTexture: GLTexture): Boolean
 	
-	protected fun onBlobLoaded()
+	protected open fun onBlobLoaded()
 }
 
-external object DDSLoader {
-	fun use(resource: LoaderResource, next: VarArgFun<String, Unit>)
+external class DDSLoader {
+	companion object {
+		fun use(resource: LoaderResource, next: VarArgFun<Any?, Unit>)
+	}
 }
 
 external val FORMATS_TO_COMPONENTS: Indexed<Number, Number>
@@ -112,8 +114,10 @@ external interface ICompressedTextureResourceOptions {
 
 external val INTERNAL_FORMAT_TO_BYTES_PER_PIXEL: Indexed<Number, Number>
 
-external object KTXLoader {
-	fun use(resource: LoaderResource, next: VarArgFun<String, Unit>)
+external class KTXLoader {
+	companion object {
+		fun use(resource: LoaderResource, next: VarArgFun<Any?, Unit>)
+	}
 }
 
 external val TYPES_TO_BYTES_PER_COMPONENT: Indexed<Number, Number>

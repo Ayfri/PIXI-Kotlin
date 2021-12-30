@@ -2,17 +2,18 @@
 
 package typings.mesh_extras
 
+import typings.Number
 import typings.constants.DRAW_MODES
 import typings.core.IArrayBuffer
 import typings.core.ITypedArray
 import typings.core.Renderer
 import typings.core.Resource
 import typings.core.Texture
+import typings.display.IDestroyOptions
 import typings.math.IPoint
 import typings.mesh.Mesh
 import typings.mesh.MeshGeometry
 import typings.mesh.MeshMaterial
-import typings.Number
 
 open external class NineSlicePlane(
 	texture: Texture<Resource>,
@@ -25,6 +26,7 @@ open external class NineSlicePlane(
 	open var _rightWidth: Number
 	open var _topHeight: Number
 	open var _bottomHeight: Number
+	
 	open var vertices: ITypedArray
 	override var width: Number
 	override var height: Number
@@ -55,7 +57,8 @@ open external class PlaneGeometry(
 open external class RopeGeometry(width: Number, points: Array<IPoint>, textureScale: Number = definedExternally) : MeshGeometry {
 	open var points: Array<IPoint>
 	open val textureScale: Number
-	open var _wdith: Number
+	open var _width: Number
+	
 	open val width: Number
 	
 	open fun updateVertices()
@@ -67,20 +70,25 @@ open external class SimpleMesh(
 	vertices: IArrayBuffer = definedExternally,
 	uvs: IArrayBuffer = definedExternally,
 	indices: IArrayBuffer = definedExternally,
-	drawModes: DRAW_MODES = definedExternally
+	drawMode: DRAW_MODES = definedExternally
 ) : Mesh<MeshMaterial> {
 	open var autoUpdate: Boolean
+	
 	open var vertices: ITypedArray
+	
 	override fun _render(renderer: Renderer)
 }
 
 open external class SimplePlane(texture: Texture<Resource>, verticesX: Number, verticesY: Number) : Mesh<MeshMaterial> {
 	open var autoUpdate: Boolean
 	protected open var _textureID: Number
+	
 	override var texture: Texture<Resource>
 	
 	open fun textureUpdated()
 	override fun _render(renderer: Renderer)
+	override fun destroy(options: Boolean)
+	override fun destroy(options: IDestroyOptions)
 }
 
 open external class SimpleRope(texture: Texture<Resource>, points: Array<IPoint>, textureScale: Number = definedExternally) : Mesh<MeshMaterial> {
