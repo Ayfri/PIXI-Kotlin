@@ -1,16 +1,16 @@
 import kotlinx.browser.document
 import kotlinx.browser.window
-import typings.app.Application
-import typings.loaders.Loader
-import typings.sprite.Sprite
-import typings.ticker.Ticker
-import utils.Application
+import pixi.typings.app.Application
+import pixi.typings.loaders.Loader
+import pixi.typings.sprite.Sprite
+import pixi.typings.ticker.Ticker
+import pixi.utils.Application
 import kotlin.random.Random
 
 lateinit var app: Application
 
 fun main() {
-	typings.require("pixi.js")
+	pixi.typings.require("pixi.js")
 	app = Application {
 		backgroundColor = (0xf0f0f0).toDouble()
 		resizeTo = window
