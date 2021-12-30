@@ -9,8 +9,8 @@ object Project {
 
 
 plugins {
-    kotlin("js") version "1.5.31"
-    id("com.github.turansky.seskar") version "0.1.0"
+    kotlin("js") version "1.6.0"
+    id("com.github.turansky.seskar") version "0.2.0"
 //    id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
 //    id("com.github.turansky.kfc.library") version "4.50.0"
 //    id("com.github.turansky.kfc.maven-central-publish") version "4.50.0"
@@ -26,8 +26,10 @@ repositories {
     uri("https://maven.pkg.jetbrains.space/kotlin/p/kotlin/kotlin-js-wrappers")
 }
 
+
+
 dependencies {
-    implementation(kotlin("stdlib-js"))
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-js:1.6.0")
     implementation("com.github.turansky.seskar:seskar-core:0.2.0")
     implementation("org.jetbrains.kotlinx:kotlinx-html:0.7.3")
     implementation("org.jetbrains.kotlin-wrappers:kotlin-extensions:1.0.1-pre.263-kotlin-1.5.31")
@@ -71,6 +73,7 @@ kotlin {
                 outputFileName = "dist.js"
             }
         }
+        binaries.executable()
     }
 }
 

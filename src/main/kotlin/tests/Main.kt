@@ -1,3 +1,5 @@
+package tests
+
 import kotlinx.browser.document
 import kotlinx.browser.window
 import pixi.typings.app.Application
@@ -10,6 +12,7 @@ import kotlin.random.Random
 lateinit var app: Application
 
 fun main() {
+	println("executing main")
 	pixi.typings.require("pixi.js")
 	app = Application {
 		backgroundColor = (0xf0f0f0).toDouble()
