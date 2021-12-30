@@ -8,6 +8,11 @@ The private members are not present.
 
 just add this to your dependencies:
 ```kotlin
+repositories {
+    ...
+    mavenLocal()
+}
+
 dependencies {
     implementation("io.github.ayfri:PIXI-Kotlin:0.1.0")}
 ```
