@@ -1,11 +1,6 @@
-import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin
-import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
-
 object Project {
     const val group = "io.github.ayfri"
-    const val version = "0.1.0"
+    const val version = "0.1.0-SNAPSHOT"
     const val name = "PIXI-Kotlin"
     const val description = "Kotlin bindings for PIXI.js"
     const val url = "https://github.com/Ayfri/PIXI-kotlin"
@@ -16,9 +11,8 @@ plugins {
     kotlin("js") version "1.6.0"
     id("com.github.turansky.seskar") version "0.2.0"
     id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
-    //id("com.github.turansky.kfc.library") version "4.50.0"
-    //id("com.github.turansky.kfc.maven-central-publish") version "4.50.0"
     `maven-publish`
+    signing
 }
 
 val projectName = Project.name
@@ -52,14 +46,6 @@ tasks {
 
 fun getExtraString(name: String) = ext[name]?.toString()
 
-nexusPublishing {
-    repositories {
-        sonatype {
-            nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
-        }
-    }
-}
-
 
 kotlin {
     kotlinDaemonJvmArgs = listOf("-Xopt-in=kotlin.RequiresOptIn")
@@ -89,6 +75,60 @@ publishing {
             version = project.version.toString()
             from(components["kotlin"])
             artifact(tasks["sourcesJar"])
+            pom {
+                name.set("PIXI-Kotlin")
+                description.set("Library for using PIXI.js in Kotlin-js")
+                url.set("https://github.com/Ayfri/PIXI-Kotlin")
+                licenses {
+                    license {
+                        name.set("GPLv3")
+                        url.set("https://www.gnu.org/licenses/gpl-3.0.en.html")
+                    }
+                }
+                developers {
+                    developer {
+                        id.set("Ayfri")
+                        name.set("Roy Pierre")
+                        email.set("me@ayfri.fr")
+                    }
+                    developer {
+                        id.set("…")
+                        name.set("…")
+                        email.set("…")
+                    }
+                    developer {
+                        id.set("…")
+                        name.set("…")
+                        email.set("…")
+                    }
+                }
+                scm { // TODO not sure what this is. https://en.wikipedia.org/wiki/Software_configuration_management
+                    connection.set("…")
+                    developerConnection.set("…")
+                    url.set("…")
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            name = "OSSRH"
+            setUrl("https://oss.sonatype.org/service/local/staging/deploy/maven2")
+            credentials {
+                username = System.getenv("OSSRH_USER") ?: return@credentials
+                password = System.getenv("OSSRH_PASSWORD") ?: return@credentials
+            }
         }
     }
 }
+
+
+
+signing {
+    val key = System.getenv("SIGNING_KEY") ?: return@signing
+    val password = System.getenv("SIGNING_PASSWORD") ?: return@signing
+    val publishing: PublishingExtension by project
+    useInMemoryPgpKeys(key, password)
+    sign(publishing.publications)
+}
+
