@@ -1,3 +1,5 @@
+@file:JsModule("pixi.js")
+
 package pixi.typings.constants
 
 import seskar.js.JsInt
