@@ -19,22 +19,22 @@ fun main() {
 		resizeTo = window
 	}
 	
-	Loader.shared.add("test", "test.png").load(::start)
+	Loader.shared.add("test", "test.png").load { _, _ -> start() }
 	document.getElementById("root")!!.appendChild(app.view)
 }
 
 fun start() {
+	val size = 250.0
 	val sprite = Sprite.from("test.png").apply {
-		width = 100.0
-		height = 100.0
-		x = window.innerWidth / 2.0
-		y = window.innerHeight / 2.0
+		width = size
+		height = size
+		anchor.set(0.5)
 	}
 	
 	Ticker.shared.add<Any>({ _, _ ->
 		sprite.apply {
-			x = Random.nextDouble() * window.innerWidth
-			y = Random.nextDouble() * window.innerHeight
+			x = (Random.nextDouble() * window.innerWidth).coerceIn(size / 2, window.innerWidth - size / 2)
+			y = (Random.nextDouble() * window.innerHeight).coerceIn(size / 2, window.innerHeight - size / 2)
 		}
 	})
 	
