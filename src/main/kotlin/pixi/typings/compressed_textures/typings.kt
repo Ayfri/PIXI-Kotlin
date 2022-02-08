@@ -50,7 +50,7 @@ external interface CompressedTextureExtensions {
 	var astc: WEBGL_compressed_texture_astc
 }
 
-external interface PartialCompressedTextureExtensions {
+external interface CompressedTextureExtensionsPartial {
 	var s3tc: WEBGL_compressed_texture_s3tc?
 	var s3tc_sRGB: WEBGL_compressed_texture_s3tc_srgb?
 	var etc: Any?
@@ -62,7 +62,7 @@ external interface PartialCompressedTextureExtensions {
 
 open external class CompressedTextureLoader {
 	companion object {
-		var textureExtensions: PartialCompressedTextureExtensions
+		var textureExtensions: CompressedTextureExtensionsPartial
 		var textureFormats: Object<INTERNAL_FORMATS, Number>
 		fun use(resource: LoaderResource, next: VarArgFun<Any?, Unit>)
 		fun add()

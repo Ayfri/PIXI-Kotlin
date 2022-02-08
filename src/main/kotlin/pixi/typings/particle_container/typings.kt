@@ -48,7 +48,7 @@ open external class ParticleBuffer(properties: Array<IParticleRendererProperty>,
 	open var staticDataUint32: Uint32Array
 	open var dynamicStride: Number
 	open var dynamicData: Float32Array
-	open var dynamicDataUnit32: Uint32Array
+	open var dynamicDataUint32: Uint32Array
 	open var _updateID: Number
 	open var indexBuffer: Buffer
 	
@@ -65,7 +65,7 @@ open external class ParticleContainer(
 ) : Container {
 	open var blendMode: BLEND_MODES
 	open var autoResize: Boolean
-	open var roundPixelms: Boolean
+	open var roundPixels: Boolean
 	open var baseTexture: BaseTexture<Resource, IAutoDetectOptions>
 	open var tintRgb: Float32Array
 	open var _maxSize: Number

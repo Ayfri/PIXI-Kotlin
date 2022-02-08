@@ -295,13 +295,13 @@ external enum class MSAA_QUALITY {
 }
 
 external enum class PRECISION {
-	@JsString("low")
+	@JsString("lowp")
 	LOW,
 	
-	@JsString("medium")
+	@JsString("mediump")
 	MEDIUM,
 	
-	@JsString("high")
+	@JsString("highp")
 	HIGH
 }
 

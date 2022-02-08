@@ -5,17 +5,20 @@ package pixi.typings.accessibility
 import org.w3c.dom.HTMLElement
 import pixi.typings.Number
 import pixi.typings.core.AbstractRenderer
+import pixi.typings.core.Renderer
 import pixi.typings.display.DisplayObject
 import pixi.typings.math.Rectangle
 
 open external class AccessibilityManager(renderer: AbstractRenderer) {
-	var debug: Boolean
-	var renderer: AbstractRenderer
-	val isActive: Boolean
-	val isMobileAccessibility: Boolean
-	fun updateDebugHTML(div: IAccessibleHTMLElement)
-	fun capHitArea(hitArea: Rectangle)
-	fun destroy()
+	constructor(renderer: Renderer)
+	
+	open var debug: Boolean
+	open var renderer: AbstractRenderer
+	open val isActive: Boolean
+	open val isMobileAccessibility: Boolean
+	open fun updateDebugHTML(div: IAccessibleHTMLElement)
+	open fun capHitArea(hitArea: Rectangle)
+	open fun destroy()
 }
 
 external val accessibleTarget: IAccessibleTarget

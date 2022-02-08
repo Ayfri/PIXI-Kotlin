@@ -5,9 +5,6 @@ package pixi.typings.loaders
 import org.w3c.dom.HTMLElement
 import org.w3c.files.Blob
 import org.w3c.xhr.XMLHttpRequest
-import seskar.js.JsInt
-import seskar.js.JsString
-import seskar.js.JsUnion
 import pixi.typings.Number
 import pixi.typings.VarArgFun
 import pixi.typings.app.IApplicationOptions
@@ -15,6 +12,9 @@ import pixi.typings.core.IBaseTextureOptions
 import pixi.typings.core.Resource
 import pixi.typings.core.Texture
 import pixi.typings.utils.Dict
+import seskar.js.JsInt
+import seskar.js.JsString
+import seskar.js.JsUnion
 
 external class AppLoaderPlugin {
 	companion object {
@@ -118,8 +118,6 @@ open external class Loader(baseUrl: String = definedExternally, concurrency: Num
 	open var progress: Number
 	open var loading: Boolean
 	open var defaultQueryString: String
-	open var _boundLoadResource: (r: LoaderResource, d: () -> Unit) -> Unit
-	open var _queue: AsyncQueue<Any?>
 	open val resources: Dict<LoaderResource>
 	open val onProgress: Signal<OnProgressSignal>
 	open val onError: Signal<OnErrorSignal>
@@ -137,12 +135,10 @@ open external class Loader(baseUrl: String = definedExternally, concurrency: Num
 	open fun add(resources: Array<String>, callback: OnCompleteSignal = definedExternally): Loader
 	open fun add(resources: Array<IAddOptions>, callback: OnCompleteSignal = definedExternally): Loader
 	protected open fun _add(name: String, url: String, options: IAddOptions, callback: OnCompleteSignalResource = definedExternally): Loader /* this */
-	open fun pre(fn: ILoaderMiddleware)
-	open fun use(fn: ILoaderMiddleware)
+	open fun pre(fn: ILoaderMiddleware): Loader /* this */
+	open fun use(fn: ILoaderMiddleware): Loader /* this */
 	open fun reset(): Loader /* this */
 	open fun load(cb: OnCompleteSignal = definedExternally): Loader /* this */
-	open fun load(cb: () -> Unit = definedExternally): Loader /* this */
-	open fun _loadResource(resource: LoaderResource, dequeue: () -> Unit)
 	open fun destroy()
 	
 	companion object {
