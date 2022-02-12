@@ -1,0 +1,22 @@
+name: Publish
+
+on: workflow_dispatch
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: install jdk
+        uses: actions/setup-java@v2
+        with:
+          java-version: 17
+
+      - name: run gradle task
+        env:
+          OSSRH_USER: ${{ secrets.OSSRH_USER }}
+          OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
+          SIGNING_USER: ${{ secrets.SIGNING_USER }}
+        run: ./gradlew buildAndPublish
