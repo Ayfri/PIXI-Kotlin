@@ -117,8 +117,9 @@ signing {
 	println("Signing ...")
 	val key = System.getenv("SIGNING_KEY") ?: return@signing
 	val password = System.getenv("SIGNING_PASSWORD") ?: return@signing
+	val extension = extensions.getByName("publishing") as PublishingExtension
 	
 	useInMemoryPgpKeys(key, password)
-	sign(publishing.publications["maven"])
+	sign(extension.publications)
 	println("Signed publications!")
 }
