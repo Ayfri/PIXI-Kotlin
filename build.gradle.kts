@@ -114,10 +114,12 @@ nexusPublishing {
 }
 
 configure<SigningExtension> {
+	println("Signing ...")
 	val key = System.getenv("SIGNING_KEY") ?: return@configure
 	val password = System.getenv("SIGNING_PASSWORD") ?: return@configure
 	val publishing: PublishingExtension by project
 	
 	useInMemoryPgpKeys(key, password)
 	sign(publishing.publications)
+	println("Signed publications!")
 }
