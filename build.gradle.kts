@@ -88,9 +88,8 @@ publishing {
 						email.set("pierre.ayfri@gmail.com")
 					}
 					developer {
-						id.set("…")
-						name.set("…")
-						email.set("…")
+						id.set("maxonline")
+						name.set("Maximilian Skog")
 					}
 				}
 				scm {
