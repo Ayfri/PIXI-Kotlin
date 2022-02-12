@@ -112,12 +112,11 @@ publishing {
 	}
 }
 
-
-signing {
-	val key = System.getenv("SIGNING_KEY") ?: return@signing
-	val password = System.getenv("SIGNING_PASSWORD") ?: return@signing
-	val publishing: PublishingExtension by project
-	useInMemoryPgpKeys(key, password)
-	sign(publishing.publications)
+nexusPublishing {
+	repositories {
+		sonatype {
+			username.set(System.getenv("OSSRH_USER") ?: return@sonatype)
+			password.set(System.getenv("OSSRH_PASSWORD") ?: return@sonatype)
+		}
+	}
 }
-
