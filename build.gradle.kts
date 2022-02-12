@@ -114,7 +114,7 @@ nexusPublishing {
 }
 
 signing {
-	println("Signing ...")
+	println("Signing ... present? SIGNING_KEY:${System.getenv("SIGNING_KEY") != null} SIGNING_PASSWORD:${System.getenv("SIGNING_PASSWORD") != null}")
 	val key = System.getenv("SIGNING_KEY") ?: return@signing
 	val password = System.getenv("SIGNING_PASSWORD") ?: return@signing
 	val extension = extensions.getByName("publishing") as PublishingExtension
