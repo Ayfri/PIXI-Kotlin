@@ -38,7 +38,7 @@ tasks {
 		description = "Builds and publishes the project"
 		dependsOn("clean")
 		dependsOn("build")
-		dependsOn("publishAllPublicationsToOSSRHRepository", "closeAndReleaseStagingRepository")
+		dependsOn("publishToSonatype", "closeAndReleaseSonatypeStagingRepository ")
 	}
 }
 
