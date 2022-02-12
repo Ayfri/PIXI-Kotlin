@@ -85,12 +85,7 @@ publishing {
 					developer {
 						id.set("Ayfri")
 						name.set("Roy Pierre")
-						email.set("me@ayfri.fr")
-					}
-					developer {
-						id.set("…")
-						name.set("…")
-						email.set("…")
+						email.set("pierre.ayfri@gmail.com")
 					}
 					developer {
 						id.set("…")
@@ -98,10 +93,10 @@ publishing {
 						email.set("…")
 					}
 				}
-				scm { // TODO not sure what this is. https://en.wikipedia.org/wiki/Software_configuration_management
-					connection.set("…")
-					developerConnection.set("…")
-					url.set("…")
+				scm {
+					connection.set("scm:svn:https://github.com/Ayfri/PIXI-Kotlin")
+					developerConnection.set("scm:svn:https://github.com/Ayfri/PIXI-Kotlin")
+					url.set("https://github.com/Ayfri/PIXI-Kotlin")
 				}
 			}
 		}
