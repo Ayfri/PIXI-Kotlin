@@ -93,8 +93,8 @@ publishing {
 					}
 				}
 				scm {
-					connection.set("scm:svn:https://github.com/Ayfri/PIXI-Kotlin")
-					developerConnection.set("scm:svn:https://github.com/Ayfri/PIXI-Kotlin")
+					connection.set("scm:git:git://github.com/Ayfri/PIXI-Kotlin")
+					developerConnection.set("scm:git:git://github.com/Ayfri/PIXI-Kotlin")
 					url.set("https://github.com/Ayfri/PIXI-Kotlin")
 				}
 			}
