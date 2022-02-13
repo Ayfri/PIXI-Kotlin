@@ -3,7 +3,10 @@ object Project {
 	const val version = "0.1.0"
 	const val name = "PIXI-Kotlin"
 	const val description = "Kotlin bindings for PIXI.js"
-	const val url = "https://github.com/Ayfri/PIXI-kotlin"
+	const val githubUrl = "Ayfri/PIXI-kotlin"
+	const val url = "https://github.com/$githubUrl"
+	const val publishUrl = "https://s01.oss.sonatype.org/service/local/"
+	const val snapshotUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
 }
 
 
@@ -72,15 +75,17 @@ publishing {
 			from(components["kotlin"])
 			artifact(tasks["sourcesJar"])
 			pom {
-				name.set("PIXI-Kotlin")
-				description.set("Library for using PIXI.js in Kotlin-js")
-				url.set("https://github.com/Ayfri/PIXI-Kotlin")
+				name.set(Project.name)
+				description.set(Project.description)
+				url.set(Project.url)
+				
 				licenses {
 					license {
 						name.set("GPLv3")
 						url.set("https://www.gnu.org/licenses/gpl-3.0.en.html")
 					}
 				}
+				
 				developers {
 					developer {
 						id.set("Ayfri")
@@ -92,10 +97,11 @@ publishing {
 						name.set("Maximilian Skog")
 					}
 				}
+				
 				scm {
-					connection.set("scm:git:git://github.com/Ayfri/PIXI-Kotlin")
-					developerConnection.set("scm:git:git://github.com/Ayfri/PIXI-Kotlin")
-					url.set("https://github.com/Ayfri/PIXI-Kotlin")
+					connection.set("scm:git:git://github.com/${Project.githubUrl}")
+					developerConnection.set("scm:git:git://github.com/${Project.githubUrl}")
+					url.set(Project.url)
 				}
 			}
 		}
@@ -105,8 +111,8 @@ publishing {
 nexusPublishing {
 	repositories {
 		sonatype {
-			nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
-			snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
+			nexusUrl.set(uri(Project.publishUrl))
+			snapshotRepositoryUrl.set(uri(Project.snapshotUrl))
 			username.set(System.getenv("OSSRH_USER") ?: return@sonatype)
 			password.set(System.getenv("OSSRH_PASSWORD") ?: return@sonatype)
 		}
@@ -114,12 +120,10 @@ nexusPublishing {
 }
 
 signing {
-	println("Signing ... present? SIGNING_KEY:${System.getenv("SIGNING_KEY") != null} SIGNING_PASSWORD:${System.getenv("SIGNING_PASSWORD") != null}")
 	val key = System.getenv("SIGNING_KEY") ?: return@signing
 	val password = System.getenv("SIGNING_PASSWORD") ?: return@signing
 	val extension = extensions.getByName("publishing") as PublishingExtension
 	
 	useInMemoryPgpKeys(key, password)
 	sign(extension.publications)
-	println("Signed publications!")
 }
