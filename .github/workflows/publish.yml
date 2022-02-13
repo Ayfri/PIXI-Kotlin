@@ -8,13 +8,16 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: install jdk
+      - name: Install jdk
         uses: actions/setup-java@v2
         with:
           java-version: 17
           distribution: adopt
+          
+      - name: Validate Gradle wrapper
+        uses: gradle/wrapper-validation-action@e6e38bacfdf1a337459f332974bb2327a31aaf4b
 
-      - name: run gradle task
+      - name: Publish
         env:
           OSSRH_USER: ${{ secrets.OSSRH_USER }}
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
