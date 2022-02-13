@@ -19,5 +19,5 @@ jobs:
           OSSRH_USER: ${{ secrets.OSSRH_USER }}
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
           SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
-          SIGNING_USER: ${{ secrets.SIGNING_USER }}
+          SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
         run: ./gradlew buildAndPublish
