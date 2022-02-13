@@ -1,3 +1,7 @@
+![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/Ayfri/PIXI-Kotlin/Kotlin%20CI/mastere?style=flat-square)
+![Sonatype Nexus (Releases)](https://img.shields.io/nexus/r/io.github.ayfri/PIXI-Kotlin?style=flat-square&label=Latest%20Version)
+![PIXI.js Version](https://img.shields.io/badge/pixi.js-6.2.2-blue?style=flat-square&logo=npm)
+
 # PIXI-Kotlin
 
 This is a simple example of what a [PIXI.js](https://github.com/pixijs/pixijs) transcription in Kotlin could look like.
@@ -17,13 +21,6 @@ repositories {
 }
 
 dependencies {
-	implementation("io.github.ayfri:PIXI-Kotlin:0.1.0")
+	implementation("io.github.ayfri:PIXI-Kotlin:VERSION")
 }
 ```
-
-For now, you have to build the lib locally by running:
-
-```
-./gradlew publishToMavenLocal
-```
-
