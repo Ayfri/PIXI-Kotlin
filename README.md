@@ -1,5 +1,5 @@
-![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/Ayfri/PIXI-Kotlin/Kotlin%20CI/mastere?style=flat-square)
-![Sonatype Nexus (Releases)](https://img.shields.io/nexus/r/io.github.ayfri/PIXI-Kotlin?server=https%3A%2F%2Fs01.oss.sonatype.org&label=Latest%20Version)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/Ayfri/PIXI-Kotlin/Kotlin%20CI?style=flat-square)
+![Sonatype Nexus (Releases)](https://img.shields.io/nexus/r/io.github.ayfri/PIXI-Kotlin?server=https%3A%2F%2Fs01.oss.sonatype.org&style=flat-square&label=Latest%20Version)
 ![PIXI.js Version](https://img.shields.io/badge/pixi.js-6.2.2-blue?style=flat-square&logo=npm)
 
 # PIXI-Kotlin
