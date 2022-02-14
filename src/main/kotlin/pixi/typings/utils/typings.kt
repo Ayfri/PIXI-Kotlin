@@ -3,6 +3,7 @@
 package pixi.typings.utils
 
 import externals.Color
+import externals.ColorArr
 import org.khronos.webgl.ArrayBufferView
 import org.khronos.webgl.Float32Array
 import org.khronos.webgl.Uint16Array
@@ -73,7 +74,7 @@ external interface FormatFunction {
 
 external fun getBufferType(array: ITypedArray): BufferType?
 external fun getResolutionOfUrl(url: String, default: Int = definedExternally): Double
-external fun hex2rgb(hex: Color, out: Array<Double> = definedExternally): Array<Double>
+external fun hex2rgb(hex: Color, out: ColorArr = definedExternally): ColorArr
 external fun hex2rgb(hex: Color, out: Float32Array): Float32Array
 external fun hex2string(hex: Color): String
 external fun interleaveTypedArrays(arrays: Array<PackedArray>, sizes: Array<Int>): Float32Array
@@ -96,7 +97,7 @@ external interface ParseFunction {
 
 external val premultiplyBlendMode: Array<Array<BLEND_MODES>>
 
-external fun premultiplyRgba(rg: Array<Double>, alpha: Double, out: Float32Array = definedExternally, premultiply: Boolean = definedExternally): Float32Array
+external fun premultiplyRgba(rg: ColorArr, alpha: Double, out: Float32Array = definedExternally, premultiply: Boolean = definedExternally): Float32Array
 external fun premultiplyRgba(rg: Float32Array, alpha: Double, out: Float32Array = definedExternally, premultiply: Boolean = definedExternally): Float32Array
 external fun premultiplyTint(tint: Color, alpha: Double): Int
 external fun premultiplyTintToRgba(tint: Color, alpha: Double, out: Float32Array, premultiply: Boolean = definedExternally): Float32Array
@@ -105,7 +106,7 @@ external val ProgramCache: Object<String, Program>
 
 external fun removeItems(arr: Array<Any?>, startIdx: Int, removeCount: Int)
 
-external fun rgb2hex(rgb: Array<Double>): Color
+external fun rgb2hex(rgb: ColorArr): Color
 external fun rgb2hex(rgb: Float32Array): Color
 external fun sayHello(type: String)
 

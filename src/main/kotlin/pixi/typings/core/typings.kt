@@ -4,6 +4,7 @@
 package pixi.typings.core
 
 import externals.Color
+import externals.ColorArr
 import externals.WEBGLVersion
 import org.khronos.webgl.*
 import org.w3c.dom.ErrorEvent
@@ -109,7 +110,7 @@ abstract external class AbstractRenderer(type: RENDERER_TYPE = definedExternally
 	open val preserveDrawingBuffer: Boolean
 	protected open var _backgroundColor: Color
 	protected open var _backgroundColorString: String
-	open var _backgroundColorRgba: Array<Double>
+	open var _backgroundColorRgba: ColorArr
 	
 	open fun initPlugins(staticMap: IRendererPlugins)
 	open val width: Int
@@ -193,7 +194,7 @@ open external class BaseImageResource(source: ImageSource) : Resource {
 }
 
 open external class BaseRenderTexture(options: IBaseTextureOptions<Any?> = definedExternally) : BaseTexture<Resource, IAutoDetectOptions> {
-	open var clearColor: Array<Double>
+	open var clearColor: ColorArr
 	open var frameBuffer: Framebuffer
 	open var maskStack: Array<MaskData>
 	open var filterStack: Array<Any?>
@@ -1170,14 +1171,14 @@ open external class RenderTexturePool(textureOptions: IBaseTextureOptions<Any> =
 }
 
 open external class RenderTextureSystem(renderer: Renderer) : ISystem {
-	open var clearColor: Array<Double>
+	open var clearColor: ColorArr
 	open var defaultMaskStack: Array<MaskData>
 	open var current: RenderTexture?
 	open val sourceFrame: Rectangle
 	open val destinationFrame: Rectangle
 	open val viewportFrame: Rectangle
 	open fun bind(renderTexture: RenderTexture = definedExternally, sourceFrame: Rectangle = definedExternally, destinationFrame: Rectangle = definedExternally)
-	open fun clear(clearColor: Array<Double> = definedExternally, mask: BUFFER_BITS = definedExternally)
+	open fun clear(clearColor: ColorArr = definedExternally, mask: BUFFER_BITS = definedExternally)
 	open fun resize()
 	open fun reset()
 	override fun destroy()

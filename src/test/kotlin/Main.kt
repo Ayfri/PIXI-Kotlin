@@ -1,5 +1,6 @@
 package tests
 
+import externals.Color
 import kotlinx.browser.document
 import kotlinx.browser.window
 import pixi.typings.app.Application
@@ -7,6 +8,8 @@ import pixi.typings.loaders.Loader
 import pixi.typings.sprite.Sprite
 import pixi.typings.ticker.Ticker
 import utils.Application
+import utils.add
+import utils.load
 import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertContains
@@ -21,12 +24,12 @@ class Tests {
 		println("executing main")
 		pixi.typings.require("pixi.js")
 		app = Application {
-			backgroundColor = 0xf0f0f0
+			backgroundColor = Color("#fff")
 			resizeTo = window
 		}
 		
-		Loader.shared.add("test", "test.png").load { _, _ -> start() }
-		document.getElementById("root")!!.appendChild(app.view)
+		Loader.shared.add("test", "test.png").load(::start)
+		document.querySelector("#root")!!.appendChild(app.view)
 	}
 	
 	fun start() {
@@ -37,12 +40,12 @@ class Tests {
 			anchor.set(0.5)
 		}
 		
-		Ticker.shared.add<Any>({ _, _ ->
+		Ticker.shared.add {
 			sprite.apply {
 				x = (Random.nextDouble() * window.innerWidth).coerceIn(size / 2, window.innerWidth - size / 2)
 				y = (Random.nextDouble() * window.innerHeight).coerceIn(size / 2, window.innerHeight - size / 2)
 			}
-		})
+		}
 		
 		app.stage.addChild(sprite)
 	}

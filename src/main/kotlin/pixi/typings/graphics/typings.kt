@@ -3,6 +3,7 @@
 package pixi.typings.graphics
 
 import externals.Color
+import externals.ColorArr
 import kotlinext.js.Record
 import org.khronos.webgl.ArrayBufferView
 import org.khronos.webgl.Float32Array
@@ -173,7 +174,7 @@ open external class GraphicsGeometry : BatchGeometry {
 	open var indicesUint16Array: ArrayBufferView /* Uint16Array | Uint32Array */
 	open var batchable: Boolean
 	open var points: Array<Double>
-	open var colors: Array<Double>
+	open var colors: ColorArr
 	open var uvs: Array<Double>
 	open var indices: Array<Double>
 	open var textureIds: Array<Int>
