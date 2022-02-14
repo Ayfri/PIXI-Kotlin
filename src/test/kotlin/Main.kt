@@ -3,13 +3,13 @@ package tests
 import kotlinx.browser.document
 import kotlinx.browser.window
 import pixi.externals.Color
+import pixi.externals.add
+import pixi.externals.load
 import pixi.typings.app.Application
 import pixi.typings.loaders.Loader
 import pixi.typings.sprite.Sprite
 import pixi.typings.ticker.Ticker
 import pixi.utils.Application
-import pixi.utils.add
-import pixi.utils.load
 import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertContains
