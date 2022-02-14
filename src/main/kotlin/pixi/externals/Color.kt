@@ -1,4 +1,4 @@
-package externals
+package pixi.externals
 
 import kotlin.math.roundToInt
 

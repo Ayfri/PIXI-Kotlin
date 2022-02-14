@@ -2,13 +2,13 @@
 
 package pixi.typings.sprite
 
-import externals.Color
 import org.khronos.webgl.Float32Array
 import org.khronos.webgl.Uint16Array
 import org.w3c.dom.HTMLCanvasElement
 import org.w3c.dom.HTMLImageElement
 import org.w3c.dom.HTMLVideoElement
 import org.w3c.dom.ImageBitmap
+import pixi.externals.Color
 import pixi.typings.constants.BLEND_MODES
 import pixi.typings.core.BaseTexture
 import pixi.typings.core.IAutoDetectOptions

@@ -1,4 +1,4 @@
-package externals
+package pixi.externals
 
 import kotlinx.browser.window
 import pixi.typings.ListenerFn

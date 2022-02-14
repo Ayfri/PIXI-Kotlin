@@ -1,4 +1,4 @@
-package externals
+package pixi.externals
 
 interface Tuple<T1, T2, T3> {
 	operator fun component1(): T1

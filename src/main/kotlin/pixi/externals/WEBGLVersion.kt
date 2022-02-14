@@ -1,4 +1,4 @@
-package externals
+package pixi.externals
 
 import seskar.js.JsInt
 import seskar.js.JsUnion

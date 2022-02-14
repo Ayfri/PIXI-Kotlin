@@ -2,9 +2,9 @@
 
 package pixi.typings.particle_container
 
-import externals.Color
 import org.khronos.webgl.Float32Array
 import org.khronos.webgl.Uint32Array
+import pixi.externals.Color
 import pixi.typings.VarArgFun
 import pixi.typings.constants.BLEND_MODES
 import pixi.typings.constants.TYPES

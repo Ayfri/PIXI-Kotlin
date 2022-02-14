@@ -1,4 +1,4 @@
-package utils
+package pixi.utils
 
 import kotlinext.js.jso
 import pixi.typings.app.Application

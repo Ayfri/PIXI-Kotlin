@@ -2,8 +2,6 @@
 
 package pixi.typings.utils
 
-import externals.Color
-import externals.ColorArr
 import org.khronos.webgl.ArrayBufferView
 import org.khronos.webgl.Float32Array
 import org.khronos.webgl.Uint16Array
@@ -13,6 +11,8 @@ import org.w3c.dom.HTMLCanvasElement
 import org.w3c.dom.ImageData
 import org.w3c.dom.Location
 import org.w3c.dom.url.URL
+import pixi.externals.Color
+import pixi.externals.ColorArr
 import pixi.typings.Object
 import pixi.typings.constants.BLEND_MODES
 import pixi.typings.core.BaseTexture

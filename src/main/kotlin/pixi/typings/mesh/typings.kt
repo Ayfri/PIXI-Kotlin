@@ -2,9 +2,9 @@
 
 package pixi.typings.mesh
 
-import externals.Color
 import org.khronos.webgl.Float32Array
 import org.khronos.webgl.Uint16Array
+import pixi.externals.Color
 import pixi.typings.constants.BLEND_MODES
 import pixi.typings.constants.DRAW_MODES
 import pixi.typings.core.*

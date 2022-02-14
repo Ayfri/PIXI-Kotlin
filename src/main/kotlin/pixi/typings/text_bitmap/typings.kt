@@ -2,10 +2,10 @@
 
 package pixi.typings.text_bitmap
 
-import externals.Color
 import org.khronos.webgl.Float32Array
 import org.khronos.webgl.Uint16Array
 import org.w3c.dom.XMLDocument
+import pixi.externals.Color
 import pixi.typings.VarArgFun
 import pixi.typings.core.Renderer
 import pixi.typings.core.Resource

@@ -1,4 +1,4 @@
-package externals
+package pixi.externals
 
 import pixi.typings.ListenerFn
 import pixi.typings.display.Container

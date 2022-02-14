@@ -1,4 +1,4 @@
-package externals
+package pixi.externals
 
 import pixi.typings.math.IPoint
 import kotlin.math.abs

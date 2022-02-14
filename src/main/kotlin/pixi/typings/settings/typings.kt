@@ -2,8 +2,8 @@
 
 package pixi.typings.settings
 
-import externals.Color
 import org.w3c.dom.HTMLCanvasElement
+import pixi.externals.Color
 import pixi.typings.constants.ENV
 import pixi.typings.constants.GC_MODES
 import pixi.typings.constants.MIPMAP_MODES

@@ -2,11 +2,11 @@
 
 package pixi.typings.graphics
 
-import externals.Color
-import externals.ColorArr
 import kotlinext.js.Record
 import org.khronos.webgl.ArrayBufferView
 import org.khronos.webgl.Float32Array
+import pixi.externals.Color
+import pixi.externals.ColorArr
 import pixi.typings.constants.BLEND_MODES
 import pixi.typings.core.BatchDrawCall
 import pixi.typings.core.BatchGeometry

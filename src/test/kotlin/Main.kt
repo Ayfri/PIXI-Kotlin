@@ -1,15 +1,15 @@
 package tests
 
-import externals.Color
 import kotlinx.browser.document
 import kotlinx.browser.window
+import pixi.externals.Color
 import pixi.typings.app.Application
 import pixi.typings.loaders.Loader
 import pixi.typings.sprite.Sprite
 import pixi.typings.ticker.Ticker
-import utils.Application
-import utils.add
-import utils.load
+import pixi.utils.Application
+import pixi.utils.add
+import pixi.utils.load
 import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertContains
