@@ -4,7 +4,7 @@ import kotlinx.browser.window
 import org.w3c.dom.events.KeyboardEvent
 import pixi.typings.utils.EventEmitter
 
-sealed interface KeyboardEvents<T> {
+sealed interface KeyboardEvents<T : Any> {
 	object keydown : KeyboardEvents<KeyboardEvent>
 	object keyup : KeyboardEvents<KeyboardEvent>
 }
@@ -19,55 +19,55 @@ class KeyboardManager(var enabled: Boolean = true, var ignoreCase: Boolean = fal
 	
 	fun enable() {
 		if (enabled) return
-		on<KeyboardEvents.keydown>(::onKeyDown)
-		on<KeyboardEvents.keyup>(::onKeyUp)
+		on(KeyboardEvents.keydown, ::onKeyDown)
+		on(KeyboardEvents.keyup, ::onKeyUp)
 		enabled = true
 	}
 	
 	fun disable() {
 		if (!enabled) return
-		off<KeyboardEvents.keydown>(::onKeyDown)
-		off<KeyboardEvents.keyup>(::onKeyUp)
+		off(KeyboardEvents.keydown, ::onKeyDown)
+		off(KeyboardEvents.keyup, ::onKeyUp)
 		enabled = false
 	}
 	
 	fun isDown(key: KeyboardEvent) = key.keyCode in keyPressed
 	fun isUp(key: KeyboardEvent) = !isDown(key)
 	
-	inline fun <reified T : KeyboardEvents<*>> on(crossinline callback: (KeyboardEvent) -> Unit) {
-		window.addEventListener(T::class.simpleName!!, { callback(it as KeyboardEvent) })
+	fun <T : Any> off(event: KeyboardEvents<T>, callback: (KeyboardEvent) -> Unit) {
+		window.addEventListener(event::class.simpleName!!, { callback(it as KeyboardEvent) })
 	}
 	
-	inline fun onPress(crossinline callback: (KeyboardEvent) -> Unit) {
+	fun <T : Any> on(event: KeyboardEvents<T>, callback: (KeyboardEvent) -> Unit) {
+		window.addEventListener(event::class.simpleName!!, { callback(it as KeyboardEvent) })
+	}
+	
+	fun onPress(callback: (KeyboardEvent) -> Unit) {
 		window.addEventListener("keydown", { callback(it as KeyboardEvent) })
 	}
 	
-	inline fun onRelease(crossinline callback: (KeyboardEvent) -> Unit) {
+	fun onRelease(callback: (KeyboardEvent) -> Unit) {
 		window.addEventListener("keyup", { callback(it as KeyboardEvent) })
 	}
 	
-	inline fun onPress(key: Int, crossinline callback: (event: KeyboardEvent) -> Unit) = onPress {
+	fun onPress(key: Int, callback: (event: KeyboardEvent) -> Unit) = onPress {
 		if (ignoreCase && it.keyCode.toChar() == key.toChar()) callback(it)
 		else if (!ignoreCase && it.keyCode == key) callback(it)
 	}
 	
-	inline fun onPress(key: String, crossinline callback: (event: KeyboardEvent) -> Unit) = onPress {
+	fun onPress(key: String, callback: (event: KeyboardEvent) -> Unit) = onPress {
 		if (ignoreCase && it.key.lowercase() == key.lowercase()) callback(it)
 		else if (!ignoreCase && it.key == key) callback(it)
 	}
 	
-	inline fun onRelease(key: Int, crossinline callback: (event: KeyboardEvent) -> Unit) = onRelease {
+	fun onRelease(key: Int, callback: (event: KeyboardEvent) -> Unit) = onRelease {
 		if (ignoreCase && it.keyCode.toChar() == key.toChar()) callback(it)
 		else if (!ignoreCase && it.keyCode == key) callback(it)
 	}
 	
-	inline fun onRelease(key: String, crossinline callback: (event: KeyboardEvent) -> Unit) = onRelease {
+	fun onRelease(key: String, callback: (event: KeyboardEvent) -> Unit) = onRelease {
 		if (ignoreCase && it.key.lowercase() == key.lowercase()) callback(it)
 		else if (!ignoreCase && it.key == key) callback(it)
-	}
-	
-	inline fun <reified T : KeyboardEvents<*>> off(crossinline callback: (KeyboardEvent) -> Unit) {
-		window.removeEventListener(T::class.simpleName!!, { callback(it as KeyboardEvent) })
 	}
 	
 	private fun onKeyDown(event: KeyboardEvent) {

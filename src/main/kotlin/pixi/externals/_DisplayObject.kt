@@ -9,7 +9,7 @@ import pixi.typings.event.FederatedPointerEvent
 import pixi.typings.event.FederatedWheelEvent
 
 @Suppress("ClassName")
-sealed interface DisplayObjectEvents<T> {
+sealed interface DisplayObjectEvents<T : Any> {
 	object added : DisplayObjectEvents<Container>
 	object click : DisplayObjectEvents<FederatedPointerEvent>
 	object clickcapture : DisplayObjectEvents<FederatedPointerEvent>
@@ -87,9 +87,9 @@ fun DisplayObject.hide() {
 }
 
 inline fun <reified T : DisplayObjectEvents<*>> DisplayObject.emit(vararg arguments: T) = emit(T::class.simpleName!!, arguments as Array<Any?>)
-inline fun <reified T : DisplayObjectEvents<*>> DisplayObject.on(noinline callback: (T) -> Unit) = on(T::class.simpleName!!, callback as ListenerFn, null)
-inline fun <reified T : DisplayObjectEvents<*>> DisplayObject.once(noinline callback: (T) -> Unit) = once(T::class.simpleName!!, callback as ListenerFn, null)
-inline fun <reified T : DisplayObjectEvents<*>> DisplayObject.off(noinline callback: (T) -> Unit) = off(T::class.simpleName!!, callback as ListenerFn, null)
+fun <T : Any> DisplayObject.on(event: DisplayObjectEvents<T>, callback: (T) -> Unit) = on(event::class.simpleName!!, callback as ListenerFn, null)
+fun <T : Any> DisplayObject.once(event: DisplayObjectEvents<T>, callback: (T) -> Unit) = once(event::class.simpleName!!, callback as ListenerFn, null)
+fun <T : Any> DisplayObject.off(event: DisplayObjectEvents<T>, callback: (T) -> Unit) = off(event::class.simpleName!!, callback as ListenerFn, null)
 
 fun DisplayObject.removeFromApplication(application: Application) {
 	application.stage.removeChild(this)
