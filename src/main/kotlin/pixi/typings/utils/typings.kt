@@ -2,6 +2,7 @@
 
 package pixi.typings.utils
 
+import externals.Color
 import org.khronos.webgl.ArrayBufferView
 import org.khronos.webgl.Float32Array
 import org.khronos.webgl.Uint16Array
@@ -72,9 +73,9 @@ external interface FormatFunction {
 
 external fun getBufferType(array: ITypedArray): BufferType?
 external fun getResolutionOfUrl(url: String, default: Int = definedExternally): Double
-external fun hex2rgb(hex: Int, out: Array<Double> = definedExternally): Array<Double>
-external fun hex2rgb(hex: Int, out: Float32Array): Float32Array
-external fun hex2string(hex: Int): String
+external fun hex2rgb(hex: Color, out: Array<Double> = definedExternally): Array<Double>
+external fun hex2rgb(hex: Color, out: Float32Array): Float32Array
+external fun hex2string(hex: Color): String
 external fun interleaveTypedArrays(arrays: Array<PackedArray>, sizes: Array<Int>): Float32Array
 external fun isPow2(v: Int): Boolean
 external fun isWebGLSupported(): Boolean
@@ -97,20 +98,20 @@ external val premultiplyBlendMode: Array<Array<BLEND_MODES>>
 
 external fun premultiplyRgba(rg: Array<Double>, alpha: Double, out: Float32Array = definedExternally, premultiply: Boolean = definedExternally): Float32Array
 external fun premultiplyRgba(rg: Float32Array, alpha: Double, out: Float32Array = definedExternally, premultiply: Boolean = definedExternally): Float32Array
-external fun premultiplyTint(tint: Int, alpha: Double): Int
-external fun premultiplyTintToRgba(tint: Int, alpha: Double, out: Float32Array, premultiply: Boolean = definedExternally): Float32Array
+external fun premultiplyTint(tint: Color, alpha: Double): Int
+external fun premultiplyTintToRgba(tint: Color, alpha: Double, out: Float32Array, premultiply: Boolean = definedExternally): Float32Array
 
 external val ProgramCache: Object<String, Program>
 
 external fun removeItems(arr: Array<Any?>, startIdx: Int, removeCount: Int)
 
-external fun rgb2hex(rgb: Array<Double>): Int
-external fun rgb2hex(rgb: Float32Array): Int
+external fun rgb2hex(rgb: Array<Double>): Color
+external fun rgb2hex(rgb: Float32Array): Color
 external fun sayHello(type: String)
 
 external fun sign(n: Number): Sign
 external fun skipHello()
-external fun string2Hex(string: String): Int
+external fun string2Hex(string: String): Color
 
 external val TextureCache: Object<String, Texture<Resource>>
 

@@ -2,6 +2,7 @@
 
 package pixi.typings.graphics
 
+import externals.Color
 import kotlinext.js.Record
 import org.khronos.webgl.ArrayBufferView
 import org.khronos.webgl.Float32Array
@@ -62,7 +63,7 @@ external class BezierUtils {
 external fun buildLine(graphicsData: GraphicsData, graphicsGeometry: GraphicsGeometry)
 
 open external class FillStyle {
-	open var color: Int
+	open var color: Color
 	open var alpha: Double
 	open var texture: Texture<Resource>
 	open var matrix: Matrix
@@ -85,18 +86,18 @@ open external class Graphics(geometry: GraphicsGeometry = definedExternally) : C
 	protected open var _matrix: Matrix
 	protected open var _holeMode: Boolean
 	protected open var _transformID: Int
-	protected open var _tint: Int
+	protected open var _tint: Color
 	
 	open val geometry: GraphicsGeometry
 	open var blendMode: BLEND_MODES
-	open var tint: Int
+	open var tint: Color
 	open val fill: FillStyle
 	open val line: LineStyle
 	
 	open fun clone(): Graphics
 	open fun lineStyle(
 		width: Double,
-		color: Int = definedExternally,
+		color: Color = definedExternally,
 		alpha: Double = definedExternally,
 		alignment: Double = definedExternally,
 		native: Boolean = definedExternally
@@ -113,7 +114,7 @@ open external class Graphics(geometry: GraphicsGeometry = definedExternally) : C
 	open fun bezierCurveTo(cpX: Double, cpY: Double, cpX2: Double, cpY2: Double, toX: Double, toY: Double): Graphics /* this */
 	open fun arcTo(x1: Double, y1: Double, x2: Double, y2: Double, radius: Double)
 	open fun arc(cx: Double, cy: Double, radius: Double, startAngle: Double, endAngle: Double, anticlockwise: Boolean = definedExternally): Graphics /* this */
-	open fun beginFill(color: Int = definedExternally, alpha: Double = definedExternally): Graphics /* this */
+	open fun beginFill(color: Color = definedExternally, alpha: Double = definedExternally): Graphics /* this */
 	open fun beginTextureFill(options: IFillStyleOptions = definedExternally): Graphics /* this */
 	open fun endFill(): Graphics /* this */
 	open fun drawRect(x: Double, y: Double, width: Double, height: Double): Graphics /* this */
@@ -215,7 +216,7 @@ open external class GraphicsGeometry : BatchGeometry {
 	protected open fun processHoles(data: Array<GraphicsData>)
 	protected open fun calculateBounds()
 	protected open fun transformPoints(points: Array<Double>, matrix: Matrix)
-	protected open fun addColors(colors: Array<Int>, color: Int, alpha: Double, size: Int, offset: Int = definedExternally)
+	protected open fun addColors(colors: Array<Int>, color: Color, alpha: Double, size: Int, offset: Int = definedExternally)
 	protected open fun addTextureIds(textureIds: Array<Int>, id: Int, size: Int, offset: Int = definedExternally)
 	protected open fun addUvs(vers: Array<Double>, uvs: Array<Double>, texture: Texture<Resource>, start: Int, size: Int, matrix: Matrix = definedExternally)
 	protected open fun adjustUvs(uvs: Array<Double>, texture: Texture<Resource>, start: Int, size: Int)
@@ -250,7 +251,7 @@ external interface IArcLikeShape {
 }
 
 external interface IFillStyleOptions {
-	var color: Int?
+	var color: Color?
 	var alpha: Double?
 	var texture: Texture<Resource>?
 	var matrix: Matrix?
@@ -264,7 +265,7 @@ external interface IGraphicsBatchElement {
 	var alpha: Double
 	var worldAlpha: Double
 	var _batchRGB: Array<Int>
-	var _tintRGB: Int
+	var _tintRGB: Color
 	var _texture: Texture<Resource>
 }
 

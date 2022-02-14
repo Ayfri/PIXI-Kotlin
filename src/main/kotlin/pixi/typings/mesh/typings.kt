@@ -2,6 +2,7 @@
 
 package pixi.typings.mesh
 
+import externals.Color
 import org.khronos.webgl.Float32Array
 import org.khronos.webgl.Uint16Array
 import pixi.typings.constants.BLEND_MODES
@@ -15,7 +16,7 @@ import pixi.typings.utils.Dict
 
 external interface IMeshMaterialOptions {
 	var alpha: Double?
-	var tint: Int?
+	var tint: Color?
 	var pluginName: String?
 	var program: Program?
 	var uniforms: Dict<Any>?
@@ -34,7 +35,7 @@ open external class Mesh<T : Shader /* = MeshMaterial */>(
 	open var size: Int
 	open var uvs: Float32Array
 	open var indices: Uint16Array
-	open var _tintRGB: Int
+	open var _tintRGB: Color
 	open var _texture: Texture<Resource>
 	
 	open var geometry: Geometry
@@ -83,7 +84,7 @@ open external class MeshMaterial(uSampler: Texture<Resource>, options: IMeshMate
 	
 	open var texture: Texture<Resource>
 	open var alpha: Double
-	open var tint: Int
+	open var tint: Color
 	
 	open fun update()
 }

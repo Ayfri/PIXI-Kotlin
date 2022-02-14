@@ -3,6 +3,7 @@
 
 package pixi.typings.core
 
+import externals.Color
 import externals.WEBGLVersion
 import org.khronos.webgl.*
 import org.w3c.dom.ErrorEvent
@@ -106,7 +107,7 @@ abstract external class AbstractRenderer(type: RENDERER_TYPE = definedExternally
 	open val useContextAlpha: dynamic /* boolean | 'notMultiplied' */
 	open val autoDensity: Boolean
 	open val preserveDrawingBuffer: Boolean
-	protected open var _backgroundColor: Int
+	protected open var _backgroundColor: Color
 	protected open var _backgroundColorString: String
 	open var _backgroundColorRgba: Array<Double>
 	
@@ -124,7 +125,7 @@ abstract external class AbstractRenderer(type: RENDERER_TYPE = definedExternally
 	
 	abstract fun render(displayObject: IRenderableObject, options: IRendererRenderOptions = definedExternally)
 	open fun destroy(removeView: Boolean = definedExternally)
-	open var backgroundColor: Int
+	open var backgroundColor: Color
 	open var backgroundAlpha: Double
 }
 
@@ -784,7 +785,7 @@ external interface IBatchableElement {
 	var indices: dynamic /* Uint16Array | Uint32Array | Array<Int> */
 	var uvs: Float32Array
 	var worldAlpha: Double
-	var _tintRGB: Int
+	var _tintRGB: Color
 	var blendMode: BLEND_MODES
 }
 
@@ -883,7 +884,7 @@ external interface IRendererOptions {
 	var resolution: Double?
 	var preserveDrawingBuffer: Boolean?
 	var clearBeforeRender: Boolean?
-	var backgroundColor: Int?
+	var backgroundColor: Color?
 	var backgroundAlpha: Double?
 	var powerPreference: WebGLPowerPreference?
 	var context: IRenderingContext?

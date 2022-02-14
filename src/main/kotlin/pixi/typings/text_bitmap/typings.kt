@@ -2,6 +2,7 @@
 
 package pixi.typings.text_bitmap
 
+import externals.Color
 import org.khronos.webgl.Float32Array
 import org.khronos.webgl.Uint16Array
 import org.w3c.dom.XMLDocument
@@ -87,10 +88,10 @@ open external class BitmapText(text: String, style: PartialIBitmapTextStyle = de
 	protected open var _fontSize: Double
 	protected open var _align: TextStyleAlign
 	protected open var _activePageMeshData: Array<PageMeshData>
-	protected open var _tint: Int
+	protected open var _tint: Color
 	protected open var _roundPixels: Boolean
 	
-	open var tint: Int
+	open var tint: Color
 	open var align: TextStyleAlign
 	open var fontName: String
 	open var fontSize: Double
@@ -178,7 +179,7 @@ external interface IBitmapTextFontDescriptor {
 external interface IBitmapTextStyle {
 	var fontName: String
 	var fontSize: Double
-	var tint: Int
+	var tint: Color
 	var align: TextStyleAlign
 	var letterSpacing: Double
 	var maxWidth: Double
@@ -199,7 +200,7 @@ external interface PageMeshData {
 external interface PartialIBitmapTextStyle {
 	var fontName: String?
 	var fontSize: Double?
-	var tint: Int?
+	var tint: Color?
 	var align: TextStyleAlign?
 	var letterSpacing: Double?
 	var maxWidth: Double?

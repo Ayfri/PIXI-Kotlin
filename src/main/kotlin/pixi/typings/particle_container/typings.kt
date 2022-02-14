@@ -2,6 +2,7 @@
 
 package pixi.typings.particle_container
 
+import externals.Color
 import org.khronos.webgl.Float32Array
 import org.khronos.webgl.Uint32Array
 import pixi.typings.VarArgFun
@@ -74,7 +75,7 @@ open external class ParticleContainer(
 	open var _bufferUpdateIDs: Array<Int>
 	open var _updateID: Int
 	
-	open var tint: Int
+	open var tint: Color
 	
 	open fun setProperties(properties: IParticleProperties)
 	override fun updateTransform()

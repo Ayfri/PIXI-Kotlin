@@ -2,6 +2,7 @@
 
 package pixi.typings.settings
 
+import externals.Color
 import org.w3c.dom.HTMLCanvasElement
 import pixi.typings.constants.ENV
 import pixi.typings.constants.GC_MODES
@@ -16,8 +17,8 @@ import kotlin.js.RegExp
 external interface IRenderOptions {
 	var view: HTMLCanvasElement
 	var antialias: Boolean
-	var autoDdensity: Boolean
-	var backgroundColor: Int
+	var autoDensity: Boolean
+	var backgroundColor: Color
 	var backgroundAlpha: Double
 	var useContextAlpha: dynamic /* boolean | 'notMultiplied' */
 	var clearBeforeRender: Boolean

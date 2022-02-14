@@ -2,6 +2,7 @@
 
 package pixi.typings.sprite
 
+import externals.Color
 import org.khronos.webgl.Float32Array
 import org.khronos.webgl.Uint16Array
 import org.w3c.dom.HTMLCanvasElement
@@ -33,13 +34,13 @@ open external class Sprite(texture: Texture<Resource> = definedExternally) : Con
 	protected open var uvs: Float32Array
 	protected open var _anchor: ObservablePoint<Any?>
 	protected open var vertexData: Float32Array
-	open var _tintRGB: Int
+	open var _tintRGB: Color
 	
 	open var roundPixels: Boolean
 	override var width: Double
 	override var height: Double
 	open val anchor: ObservablePoint<Any?>
-	open var tint: Int
+	open var tint: Color
 	open var texture: Texture<Resource>
 	
 	protected open fun _onTextureUpdate()
