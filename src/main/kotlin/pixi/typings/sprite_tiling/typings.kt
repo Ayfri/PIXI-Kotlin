@@ -2,7 +2,6 @@
 
 package pixi.typings.sprite_tiling
 
-import pixi.typings.Number
 import pixi.typings.core.IBaseTextureOptions
 import pixi.typings.core.ObjectRenderer
 import pixi.typings.core.QuadUv
@@ -22,20 +21,20 @@ import pixi.typings.sprite.Sprite
 
 @Suppress("VAR_TYPE_MISMATCH_ON_OVERRIDE")
 external interface TilingSpriteFromOptions : ISize, IBaseTextureOptions<Any?> {
-	override var width: Number
-	override var height: Number
+	override var width: Int
+	override var height: Int
 }
 
-open external class TilingSprite(texture: Texture<Resource>, width: Number = definedExternally, height: Number = definedExternally) : Sprite {
+open external class TilingSprite(texture: Texture<Resource>, width: Int = definedExternally, height: Int = definedExternally) : Sprite {
 	open var tileTransform: Transform
 	open var uvMatrix: TextureMatrix
 	open var uvRespectAnchor: Boolean
 	
-	open var clampMargin: Number
+	open var clampMargin: Double
 	open var tileScale: ObservablePoint<Any?>
 	open var tilePosition: ObservablePoint<Any?>
-	override var width: Number
-	override var height: Number
+	override var width: Double
+	override var height: Double
 	
 	override fun _onTextureUpdate()
 	override fun _render(renderer: Renderer)

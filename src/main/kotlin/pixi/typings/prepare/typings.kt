@@ -2,7 +2,6 @@
 
 package pixi.typings.prepare
 
-import pixi.typings.Number
 import pixi.typings.core.AbstractRenderer
 import pixi.typings.core.BaseTexture
 import pixi.typings.core.IAutoDetectOptions
@@ -38,9 +37,9 @@ open external class BasePrepare(renderer: AbstractRenderer) {
 	open fun destroy()
 }
 
-open external class CountLimiter(maxItemsPerFrame: Number) {
-	open var maxItemsPerFrame: Number
-	open var itemsLeft: Number
+open external class CountLimiter(maxItemsPerFrame: Int) {
+	open var maxItemsPerFrame: Int
+	open var itemsLeft: Int
 	
 	open fun beginFrame()
 	open fun allowedToUpload()
@@ -55,9 +54,9 @@ external interface IDisplayObjectExtended : DisplayObject {
 
 open external class Prepare(renderer: Renderer) : BasePrepare
 
-open external class TimeLimiter(maxMilliseconds: Number) {
-	open var maxMilliseconds: Number
-	open var frameStart: Number
+open external class TimeLimiter(maxMilliseconds: Int) {
+	open var maxMilliseconds: Int
+	open var frameStart: Int
 	
 	open fun beginFrame()
 	open fun allowedToUpload()

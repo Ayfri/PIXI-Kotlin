@@ -11,8 +11,8 @@ import org.w3c.dom.HTMLCanvasElement
 import org.w3c.dom.ImageData
 import org.w3c.dom.Location
 import org.w3c.dom.url.URL
-import pixi.typings.Number
 import pixi.typings.Object
+import pixi.typings.constants.BLEND_MODES
 import pixi.typings.core.BaseTexture
 import pixi.typings.core.IAutoDetectOptions
 import pixi.typings.core.ITypedArray
@@ -23,28 +23,28 @@ import kotlin.js.RegExp
 
 external val BaseTextureCache: Object<String, BaseTexture<Resource, IAutoDetectOptions>>
 
-open external class CanvasRenderTarget(width: Number, height: Number, resolution: Number = definedExternally) {
+open external class CanvasRenderTarget(width: Int, height: Int, resolution: Double = definedExternally) {
 	open var canvas: HTMLCanvasElement
 	open var context: CanvasRenderingContext2D
-	open var resolution: Number
+	open var resolution: Double
 	
-	open var width: Number
-	open var height: Number
+	open var width: Int
+	open var height: Int
 	
 	open fun clear()
-	open fun resize(desiredWidth: Number, desiredHeight: Number)
+	open fun resize(desiredWidth: Int, desiredHeight: Int)
 	open fun destroy()
 }
 
 external fun clearTextureCache()
-external fun correctBlendMode(blendMode: Number, premultiplied: Boolean): Number
+external fun correctBlendMode(blendMode: Short, premultiplied: Boolean): BLEND_MODES
 external fun createIndicesForQuads(
-	size: Number,
+	size: Int,
 	outBuffer: Uint16Array = definedExternally
 ): ArrayBufferView /* Uint16Array | Uint32Array */
 
 external fun createIndicesForQuads(
-	size: Number,
+	size: Int,
 	outBuffer: Uint32Array = definedExternally
 ): ArrayBufferView /* Uint16Array | Uint32Array */
 
@@ -60,7 +60,7 @@ external interface DecomposedDataUri {
 	var data: String
 }
 
-external fun deprecation(version: String, message: String, ignoreDepth: Number = definedExternally)
+external fun deprecation(version: String, message: String, ignoreDepth: Int = definedExternally)
 external fun destroyTextureCache()
 external fun determineCrossOrigin(url: String, loc: Location = definedExternally): String
 
@@ -71,15 +71,15 @@ external interface FormatFunction {
 }
 
 external fun getBufferType(array: ITypedArray): BufferType?
-external fun getResolutionOfUrl(url: String, default: Number = definedExternally): Number
-external fun hex2rgb(hex: Number, out: Array<Number> = definedExternally): dynamic /* Array<Number> | Float32Array */
-external fun hex2rgb(hex: Number, out: Float32Array = definedExternally): dynamic /* Array<Number> | Float32Array */
-external fun hex2string(hex: Number): String
-external fun interleaveTypedArrays(arrays: Array<PackedArray>, sizes: Array<Number>): Float32Array
-external fun isPow2(v: Number): Boolean
+external fun getResolutionOfUrl(url: String, default: Int = definedExternally): Double
+external fun hex2rgb(hex: Int, out: Array<Double> = definedExternally): Array<Double>
+external fun hex2rgb(hex: Int, out: Float32Array): Float32Array
+external fun hex2string(hex: Int): String
+external fun interleaveTypedArrays(arrays: Array<PackedArray>, sizes: Array<Int>): Float32Array
+external fun isPow2(v: Int): Boolean
 external fun isWebGLSupported(): Boolean
-external fun log2(v: Number): Number
-external fun nextPow2(v: Number): Number
+external fun log2(v: Number): Int
+external fun nextPow2(v: Number): Int
 
 @Suppress("INTERFACE_WITH_SUPERCLASS")
 external interface ParsedUrlQuery : Object<String, dynamic /* String | Array<String> */>
@@ -93,39 +93,39 @@ external interface ParseFunction {
 	operator fun invoke(urlString: String, parseQueryString: Boolean, slashesDenoteHost: Boolean = definedExternally): Url
 }
 
-external val premultiplyBlendMode: Array<Array<Number>>
+external val premultiplyBlendMode: Array<Array<BLEND_MODES>>
 
-external fun premultiplyRgba(rg: Array<Number>, alpha: Number, out: Float32Array = definedExternally, premultiply: Boolean = definedExternally): Float32Array
-external fun premultiplyRgba(rg: Float32Array, alpha: Number, out: Float32Array = definedExternally, premultiply: Boolean = definedExternally): Float32Array
-external fun premultiplyTint(tint: Number, alpha: Number): Number
-external fun premultiplyTintToRgba(tint: Number, alpha: Number, out: Float32Array, premultiply: Boolean = definedExternally): Float32Array
+external fun premultiplyRgba(rg: Array<Double>, alpha: Double, out: Float32Array = definedExternally, premultiply: Boolean = definedExternally): Float32Array
+external fun premultiplyRgba(rg: Float32Array, alpha: Double, out: Float32Array = definedExternally, premultiply: Boolean = definedExternally): Float32Array
+external fun premultiplyTint(tint: Int, alpha: Double): Int
+external fun premultiplyTintToRgba(tint: Int, alpha: Double, out: Float32Array, premultiply: Boolean = definedExternally): Float32Array
 
 external val ProgramCache: Object<String, Program>
 
-external fun removeItems(arr: Array<Any?>, startIdx: Number, removeCount: Number)
+external fun removeItems(arr: Array<Any?>, startIdx: Int, removeCount: Int)
 
-external fun rgb2hex(rgb: Array<Number>): Number
-external fun rgb2hex(rgb: Float32Array): Number
+external fun rgb2hex(rgb: Array<Double>): Int
+external fun rgb2hex(rgb: Float32Array): Int
 external fun sayHello(type: String)
 
 external fun sign(n: Number): Sign
 external fun skipHello()
-external fun string2Hex(string: String): Number
+external fun string2Hex(string: String): Int
 
 external val TextureCache: Object<String, Texture<Resource>>
 
 external interface TrimmedCanvas {
-	var width: Number
-	var height: Number
+	var width: Int
+	var height: Int
 	var data: ImageData?
 }
 
 external fun trimCanvas(canvas: HTMLCanvasElement): TrimmedCanvas
-external fun uid(): Number
+external fun uid(): Int
 
 external interface Url : UrlObjectCommon {
 	var port: String?
-	var query: dynamic? /* string | null | ParsedUrlQuery */
+	var query: dynamic? /* String | null | ParsedUrlQuery */
 }
 
 external interface UrlUtil {

@@ -7,7 +7,6 @@ import org.w3c.dom.Touch
 import org.w3c.dom.TouchEvent
 import org.w3c.dom.events.MouseEvent
 import org.w3c.dom.pointerevents.PointerEvent
-import pixi.typings.Number
 import pixi.typings.Object
 import pixi.typings.core.AbstractRenderer
 import pixi.typings.display.DisplayObject
@@ -23,28 +22,28 @@ external interface DelayedEvent {
 }
 
 external interface IHitArea {
-	fun contains(x: Number, y: Number): Boolean
+	fun contains(x: Double, y: Double): Boolean
 }
 
 open external class InteractionData {
 	open var global: Point
 	open var target: DisplayObject
 	open var originalEvent: InteractivePointerEvent
-	open var identifier: Number
+	open var identifier: Int
 	open var isPrimary: Boolean
-	open var button: Number
-	open var buttons: Number
-	open var width: Number
-	open var height: Number
-	open var tiltX: Number
-	open var tiltY: Number
-	open var pointerType: String
-	open var pressure: Number
-	open var rotationAngle: Number
-	open var twist: Number
-	open var tangentialPressure: Number
+	open var button: Button
+	open var buttons: Short
+	open var width: Int
+	open var height: Int
+	open var tiltX: Short
+	open var tiltY: Short
+	open var pointerType: String?
+	open var pressure: Double
+	open var rotationAngle: Short
+	open var twist: Int
+	open var tangentialPressure: Double
 	
-	open val pointerId: Number
+	open val pointerId: Int
 	
 	open fun <P : IPointData /* = Point */> getLocalPosition(
 		displayObject: DisplayObject,
@@ -73,7 +72,7 @@ open external class InteractionEvent {
 }
 
 open external class InteractionManager(renderer: AbstractRenderer, options: InteractionManagerOptions = definedExternally) : EventEmitter {
-	open val activeInteractionData: Object<Number, InteractionData>
+	open val activeInteractionData: Object<Int, InteractionData>
 	open val supportsTouchEvents: Boolean
 	open val supportsPointerEvents: Boolean
 	open var interactionDataPool: Array<InteractionData>
@@ -82,13 +81,13 @@ open external class InteractionManager(renderer: AbstractRenderer, options: Inte
 	open var search: TreeSearch
 	open var renderer: AbstractRenderer
 	open var autoPreventDefault: Boolean
-	open var interactionFrequency: Number
+	open var interactionFrequency: Int
 	open var mouse: InteractionData
 	open var eventData: InteractionEvent
 	open var moveWhenInside: Boolean
-	open var cursorStyle: Dict<dynamic /* string | (mode: String) -> Unit | CSSStyleDeclaration */>
+	open var cursorStyle: Dict<dynamic /* String | (mode: String) -> Unit | CSSStyleDeclaration */>
 	open var currentCursorMode: String
-	open var resolution: Number
+	open var resolution: Double
 	protected open var interactionDOMElement: HTMLElement
 	protected open var eventsAdded: Boolean
 	protected open var mouseOverRenderer: Boolean
@@ -97,11 +96,11 @@ open external class InteractionManager(renderer: AbstractRenderer, options: Inte
 	open val lastObjectRendered: DisplayObject
 	
 	open fun hitTest(globalPoint: Point, root: DisplayObject = definedExternally): DisplayObject
-	open fun setTargetElement(element: HTMLElement, resolution: Number = definedExternally)
-	open fun tickerUpdate(deltaTime: Number)
+	open fun setTargetElement(element: HTMLElement, resolution: Double = definedExternally)
+	open fun tickerUpdate(deltaTime: Int)
 	open fun update()
 	open fun setCursorMode(mode: String)
-	open fun mapPositionToPoint(point: IPointData, x: Number, y: Number)
+	open fun mapPositionToPoint(point: IPointData, x: Int, y: Int)
 	open fun processInteractive(
 		interactionEvent: InteractionEvent,
 		displayObject: DisplayObject,
@@ -121,13 +120,13 @@ open external class InteractionManager(renderer: AbstractRenderer, options: Inte
 
 external interface InteractionManagerOptions {
 	var autoPreventDefault: Boolean?
-	var interactionFrequency: Number?
+	var interactionFrequency: Int?
 	var useSystemTicker: Boolean?
 }
 
-open external class InteractionTrackingData(pointerId: Number) {
-	open val pointerId: Number
-	open var flags: Number
+open external class InteractionTrackingData(pointerId: Int) {
+	open val pointerId: Int
+	open var flags: Short
 	open val none: Boolean
 	open var over: Boolean
 	open var rightDown: Boolean
@@ -139,37 +138,37 @@ open external class InteractionTrackingData(pointerId: Number) {
 }
 
 external interface InteractionTrackingFlags {
-	var OVER: Number
-	var LEFT_DOWN: Number
-	var RIGHT_DOWN: Number
-	var NONE: Number
+	var OVER: Short
+	var LEFT_DOWN: Short
+	var RIGHT_DOWN: Short
+	var NONE: Short
 }
 
 external interface InteractionTrackingFlagsReadOnly {
-	val OVER: Number
-	val LEFT_DOWN: Number
-	val RIGHT_DOWN: Number
-	val NONE: Number
+	val OVER: Short
+	val LEFT_DOWN: Short
+	val RIGHT_DOWN: Short
+	val NONE: Short
 }
 
 external interface InteractiveTarget {
 	var interactive: Boolean
 	var interactiveChildren: Boolean
-	var hitArea: IHitArea
+	var hitArea: IHitArea?
 	var cursor: dynamic /* Cursor | String */
 	var buttonMode: Boolean
-	var trackedPointers: Object<Number, InteractionTrackingData>
-	var _trackedPointers: Object<Number, InteractionTrackingData>
+	var trackedPointers: Object<Int, InteractionTrackingData>
+	var _trackedPointers: Object<Int, InteractionTrackingData>
 }
 
 external object interactiveTarget : InteractiveTarget {
 	override var interactive: Boolean
 	override var interactiveChildren: Boolean
-	override var hitArea: IHitArea
+	override var hitArea: IHitArea?
 	override var cursor: dynamic /* Cursor | String */
 	override var buttonMode: Boolean
-	override var trackedPointers: Object<Number, InteractionTrackingData>
-	override var _trackedPointers: Object<Number, InteractionTrackingData>
+	override var trackedPointers: Object<Int, InteractionTrackingData>
+	override var _trackedPointers: Object<Int, InteractionTrackingData>
 }
 
 open external class TreeSearch {

@@ -2,7 +2,6 @@
 
 package pixi.typings.spritesheet
 
-import pixi.typings.Number
 import pixi.typings.VarArgFun
 import pixi.typings.core.BaseTexture
 import pixi.typings.core.IAutoDetectOptions
@@ -23,15 +22,15 @@ external interface ISpritesheetData {
 }
 
 external interface ISpritesheetFrameDataFrame {
-	var x: Number
-	var y: Number
-	var w: Number
-	var h: Number
+	var x: Int
+	var y: Int
+	var w: Int
+	var h: Int
 }
 
 external interface ISpritesheetFrameDataSourceSize {
-	var w: Number
-	var h: Number
+	var w: Int
+	var h: Int
 }
 
 external interface ISpritesheetFrameDataSpriteSourceSize : IPointData
@@ -52,14 +51,14 @@ open external class Spritesheet(texture: Texture<Resource>, data: ISpritesheetDa
 	open var textures: Dict<Texture<Resource>>
 	open var animations: Dict<Array<Texture<Resource>>>
 	open var data: ISpritesheetData
-	open var renderer: Number
+	open var resolution: Double
 	
 	open fun destroy(destroyBase: Boolean = definedExternally)
 	open fun parse(callback: (textures: Dict<Texture<Resource>>) -> Unit)
 	open fun parse(callback: () -> Unit)
 	
 	companion object {
-		val BATCH_SIZE: Number /* = 1000 */
+		val BATCH_SIZE: Int /* = 1000 */
 	}
 }
 

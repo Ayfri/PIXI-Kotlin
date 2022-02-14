@@ -3,7 +3,6 @@
 package pixi.typings.accessibility
 
 import org.w3c.dom.HTMLElement
-import pixi.typings.Number
 import pixi.typings.core.AbstractRenderer
 import pixi.typings.core.Renderer
 import pixi.typings.display.DisplayObject
@@ -33,11 +32,11 @@ external interface IAccessibleTarget {
 	var accessible: Boolean
 	var accessibleTitle: String
 	var accessibleHint: String
-	var tabIndex: Number
+	var tabIndex: Int
 	var _accessibleActive: Boolean
 	var _accessibleDiv: IAccessibleHTMLElement
 	var accessibleType: String
 	var accessiblePointerEvents: PointerEvents
 	var accessibleChildren: Boolean /* true */
-	var renderId: Number
+	var renderId: Int
 }

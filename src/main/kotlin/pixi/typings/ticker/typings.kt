@@ -2,22 +2,21 @@
 
 package pixi.typings.ticker
 
-import pixi.typings.Number
 import pixi.typings.app.IApplicationOptions
 
 open external class Ticker {
 	open var autoStart: Boolean
-	open var deltaTime: Number
-	open var deltaMS: Number
-	open var elapsedMS: Number
-	open var lastTime: Number
-	open var speed: Number
+	open var deltaTime: Double
+	open var deltaMS: Int
+	open var elapsedMS: Int
+	open var lastTime: Int
+	open var speed: Double
 	open val started: Boolean
 	
-	open val count: Number
-	open val FPS: Number
-	open var minFPS: Number
-	open var maxFPS: Number
+	open val count: Int
+	open val FPS: Double
+	open var minFPS: Double
+	open var maxFPS: Int
 	
 	open fun <T /* = Any */> add(
 		fn: TickerCallback<T>,
@@ -35,7 +34,7 @@ open external class Ticker {
 	open fun start()
 	open fun stop()
 	open fun destroy()
-	open fun update(currentTime: Number = definedExternally)
+	open fun update(currentTime: Int = definedExternally)
 	
 	companion object {
 		val shared: Ticker

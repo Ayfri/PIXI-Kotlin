@@ -34,13 +34,13 @@ var DisplayObject.buttonMode
 	}
 
 var DisplayObject.trackedPointers
-	get() = asDynamic().trackedPointers as Object<Number, InteractionTrackingData>
+	get() = asDynamic().trackedPointers as Object<Int, InteractionTrackingData>
 	set(value) {
 		asDynamic().trackedPointers = value
 	}
 
 var DisplayObject._trackedPointers
-	get() = asDynamic()._trackedPointers as Object<Number, InteractionTrackingData>
+	get() = asDynamic()._trackedPointers as Object<Int, InteractionTrackingData>
 	set(value) {
 		asDynamic()._trackedPointers = value
 	}

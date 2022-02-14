@@ -5,7 +5,6 @@ package pixi.typings.text_bitmap
 import org.khronos.webgl.Float32Array
 import org.khronos.webgl.Uint16Array
 import org.w3c.dom.XMLDocument
-import pixi.typings.Number
 import pixi.typings.VarArgFun
 import pixi.typings.core.Renderer
 import pixi.typings.core.Resource
@@ -27,11 +26,11 @@ open external class BitMapFont(data: BitMapFontData, textures: Array<Texture<Res
 	constructor(data: BitMapFontData, textures: Dict<Texture<Resource>>, ownsTextures: Boolean = definedExternally)
 	
 	open val font: String
-	open val size: Number
-	open val lineHeight: Number
+	open val size: Double
+	open val lineHeight: Double
 	open val chars: Dict<IBitmapFontCharacter>
 	open val pageTextures: Dict<Texture<Resource>>
-	open val distanceFieldRange: Number
+	open val distanceFieldRange: Double
 	open val distanceFieldType: String
 	
 	open fun destroy()
@@ -77,32 +76,32 @@ external class BitmapFontLoader {
 
 open external class BitmapText(text: String, style: PartialIBitmapTextStyle = definedExternally) : Container {
 	open var dirty: Boolean
-	protected open var _textWidth: Number
-	protected open var _textHeight: Number
+	protected open var _textWidth: Double
+	protected open var _textHeight: Double
 	protected open var _text: String
-	protected open var _maxWidth: Number
-	protected open var _maxLineHeight: Number
-	protected open var _letterSpacing: Number
+	protected open var _maxWidth: Double
+	protected open var _maxLineHeight: Double
+	protected open var _letterSpacing: Double
 	protected open var _anchor: ObservablePoint<Any?>
 	protected open var _fontName: String
-	protected open var _fontSize: Number
+	protected open var _fontSize: Double
 	protected open var _align: TextStyleAlign
 	protected open var _activePageMeshData: Array<PageMeshData>
-	protected open var _tint: Number
+	protected open var _tint: Int
 	protected open var _roundPixels: Boolean
 	
-	open var tint: Number
+	open var tint: Int
 	open var align: TextStyleAlign
 	open var fontName: String
-	open var fontSize: Number
+	open var fontSize: Double
 	open var anchor: ObservablePoint<Any?>
 	open var text: String
-	open var maxWidth: Number
-	open val maxLineHeight: Number
-	open val textWidth: Number
-	open var letterSpacing: Number
+	open var maxWidth: Double
+	open val maxLineHeight: Double
+	open val textWidth: Double
+	open var letterSpacing: Double
 	open var roundPixels: Boolean
-	open val textHeight: Number
+	open val textHeight: Double
 	
 	open fun updateText()
 	override fun updateTransform()
@@ -118,79 +117,79 @@ open external class BitmapText(text: String, style: PartialIBitmapTextStyle = de
 }
 
 external interface IBitmapFontCharacter {
-	var xOffset: Number
-	var yOffset: Number
-	var xAdvance: Number
+	var xOffset: Double
+	var yOffset: Double
+	var xAdvance: Double
 	var texture: Texture<Resource>
-	var page: Number
-	var kerning: Dict<Number>
+	var page: Int
+	var kerning: Dict<Double>
 }
 
 external interface IBitmapFontDataChar {
-	var id: Number
-	var page: Number
-	var x: Number
-	var y: Number
-	var width: Number
-	var height: Number
-	var xoffset: Number
-	var yoffset: Number
-	var xadvance: Number
+	var id: Int
+	var page: Int
+	var x: Double
+	var y: Double
+	var width: Double
+	var height: Double
+	var xoffset: Double
+	var yoffset: Double
+	var xadvance: Double
 }
 
 external interface IBitmapFontDataCommon {
-	var lineHeight: Number
+	var lineHeight: Double
 }
 
 external interface IBitmapFontDataDistanceField {
 	var fieldType: String
-	var distanceRange: Number
+	var distanceRange: Double
 }
 
 external interface IBitmapFontDataInfo {
 	var face: String
-	var size: Number
+	var size: Double
 }
 
 external interface IBitmapFontDataKerning {
-	var first: Number
-	var second: Number
-	var amount: Number
+	var first: Int
+	var second: Int
+	var amount: Double
 }
 
 external interface IBitmapFontDataPage {
-	var id: Number
+	var id: Int
 	var file: String
 }
 
 external interface IBitmapFontOptions {
 	var chars: dynamic? /* String | Array<String> | Array<Array<String>> */
-	var resolution: Number?
-	var padding: Number?
-	var textureWidth: Number?
-	var textureHeight: Number?
+	var resolution: Double?
+	var padding: Int?
+	var textureWidth: Int?
+	var textureHeight: Int?
 }
 
 external interface IBitmapTextFontDescriptor {
 	var name: String
-	var size: Number
+	var size: Double
 }
 
 external interface IBitmapTextStyle {
 	var fontName: String
-	var fontSize: Number
-	var tint: Number
+	var fontSize: Double
+	var tint: Int
 	var align: TextStyleAlign
-	var letterSpacing: Number
-	var maxWidth: Number
+	var letterSpacing: Double
+	var maxWidth: Double
 }
 
 external interface PageMeshData {
-	var index: Number
-	var indexCount: Number
-	var vertexCount: Number
-	var uvsCount: Number
-	var total: Number
+	var index: Int
+	var indexCount: Int
+	var vertexCount: Int
+	var uvsCount: Int
+	var total: Int
 	var mesh: Mesh<MeshMaterial>
 	var vertices: Float32Array?
 	var uvs: Float32Array?
@@ -199,9 +198,9 @@ external interface PageMeshData {
 
 external interface PartialIBitmapTextStyle {
 	var fontName: String?
-	var fontSize: Number?
-	var tint: Number?
+	var fontSize: Double?
+	var tint: Int?
 	var align: TextStyleAlign?
-	var letterSpacing: Number?
-	var maxWidth: Number?
+	var letterSpacing: Double?
+	var maxWidth: Double?
 }

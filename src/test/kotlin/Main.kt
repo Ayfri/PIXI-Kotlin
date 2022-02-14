@@ -21,7 +21,7 @@ class Tests {
 		println("executing main")
 		pixi.typings.require("pixi.js")
 		app = Application {
-			backgroundColor = (0xf0f0f0).toDouble()
+			backgroundColor = 0xf0f0f0
 			resizeTo = window
 		}
 		

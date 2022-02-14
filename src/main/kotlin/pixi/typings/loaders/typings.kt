@@ -5,7 +5,6 @@ package pixi.typings.loaders
 import org.w3c.dom.HTMLElement
 import org.w3c.files.Blob
 import org.w3c.xhr.XMLHttpRequest
-import pixi.typings.Number
 import pixi.typings.VarArgFun
 import pixi.typings.app.IApplicationOptions
 import pixi.typings.core.IBaseTextureOptions
@@ -24,10 +23,10 @@ external class AppLoaderPlugin {
 	}
 }
 
-open external class AsyncQueue<TaskData>(worker: (x: TaskData, next: () -> Unit) -> Unit, concurrency: Number = definedExternally) {
-	open var workers: Number
-	open var concurrency: Number
-	open var buffer: Number
+open external class AsyncQueue<TaskData>(worker: (x: TaskData, next: () -> Unit) -> Unit, concurrency: Int = definedExternally) {
+	open var workers: Int
+	open var concurrency: Int
+	open var buffer: Double
 	open var saturated: () -> Unit
 	open var unsaturated: () -> Unit
 	open var empty: () -> Unit
@@ -42,8 +41,8 @@ open external class AsyncQueue<TaskData>(worker: (x: TaskData, next: () -> Unit)
 	open fun push(data: Any?, callback: VarArgFun<Any?, Unit> = definedExternally)
 	open fun kill()
 	open fun unshift(data: Any?, callback: VarArgFun<Any?, Unit> = definedExternally)
-	open fun length(): Number
-	open fun running(): Number
+	open fun length(): Int
+	open fun running(): Int
 	open fun idle(): Boolean
 	open fun pause()
 	open fun resume()
@@ -77,7 +76,7 @@ open external class AsyncQueue<TaskData>(worker: (x: TaskData, next: () -> Unit)
 			deferNext: Boolean = definedExternally
 		)
 		
-		fun queue(worker: (x: Any?, next: VarArgFun<Any?, Unit>) -> Unit, concurrency: Number = definedExternally): AsyncQueue<Any?>
+		fun queue(worker: (x: Any?, next: VarArgFun<Any?, Unit>) -> Unit, concurrency: Int = definedExternally): AsyncQueue<Any?>
 	}
 }
 
@@ -91,7 +90,7 @@ external interface IAddOptions {
 	var key: String?
 	var url: String?
 	var crossOrigin: dynamic? /* undefined | String | Boolean */
-	var timeout: Number?
+	var timeout: Int?
 	var parentResource: LoaderResource?
 	var loadType: LoaderResource.LOAD_TYPE?
 	var xhrType: LoaderResource.XHR_RESPONSE_TYPE?
@@ -113,9 +112,9 @@ external interface IResourceMetadata : IBaseTextureOptions<Any?> {
 	var imageMetadata: IResourceMetadata?
 }
 
-open external class Loader(baseUrl: String = definedExternally, concurrency: Number = definedExternally) {
+open external class Loader(baseUrl: String = definedExternally, concurrency: Int = definedExternally) {
 	open var baseUrl: String
-	open var progress: Number
+	open var progress: Short
 	open var loading: Boolean
 	open var defaultQueryString: String
 	open val resources: Dict<LoaderResource>
@@ -125,7 +124,7 @@ open external class Loader(baseUrl: String = definedExternally, concurrency: Num
 	open val onStart: Signal<OnStartSignal>
 	open val onComplete: Signal<OnCompleteSignal>
 	
-	open var concurrency: Number
+	open var concurrency: Int
 	
 	open fun add(name: String, url: String, callback: OnCompleteSignal = definedExternally): Loader
 	open fun add(name: String, url: String, options: IAddOptions = definedExternally, callback: OnCompleteSignal = definedExternally): Loader
@@ -157,7 +156,7 @@ open external class LoaderResource(name: String, url: Array<String>, options: Lo
 	open val extension: String
 	open var data: Any?
 	open var crossOrigin: dynamic /* string | boolean */
-	open var timeout: Number
+	open var timeout: Int
 	open var loadType: LOAD_TYPE
 	open var xhrType: String
 	open var metadata: IResourceMetadata
@@ -165,7 +164,7 @@ open external class LoaderResource(name: String, url: Array<String>, options: Lo
 	open var xhr: XMLHttpRequest
 	open val children: Array<LoaderResource>
 	open val type: TYPE
-	open val progressChunk: Number
+	open val progressChunk: Double
 	open val onStart: Signal<OnStartSignalResource>
 	open val onProgress: Signal<OnProgressSignalResource>
 	open val onComplete: Signal<OnCompleteSignalResource>
@@ -185,7 +184,7 @@ open external class LoaderResource(name: String, url: Array<String>, options: Lo
 	open fun _getMimeFromXhrType(type: XHR_RESPONSE_TYPE)
 	
 	companion object {
-		val _loadTypeMap: Dict<Number>
+		val _loadTypeMap: Dict<LOAD_TYPE>
 		val _xhrTypeMap: Dict<XHR_RESPONSE_TYPE>
 		val EMPTY_GIF: String
 		
@@ -195,7 +194,7 @@ open external class LoaderResource(name: String, url: Array<String>, options: Lo
 	
 	interface LoaderOptions {
 		var crossOrigin: dynamic? /* string | boolean */
-		var timeout: Number?
+		var timeout: Int?
 		var loadType: LOAD_TYPE?
 		var xhrType: XHR_RESPONSE_TYPE?
 		var metadata: IResourceMetadata?

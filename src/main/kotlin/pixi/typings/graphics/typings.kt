@@ -5,7 +5,6 @@ package pixi.typings.graphics
 import kotlinext.js.Record
 import org.khronos.webgl.ArrayBufferView
 import org.khronos.webgl.Float32Array
-import pixi.typings.Number
 import pixi.typings.constants.BLEND_MODES
 import pixi.typings.core.BatchDrawCall
 import pixi.typings.core.BatchGeometry
@@ -25,46 +24,46 @@ import pixi.typings.math.SHAPES
 
 external class ArcUtils {
 	companion object {
-		fun curveTo(x1: Number, y1: Number, x2: Number, y2: Number, radius: Number, points: Array<Number>): IArcLikeShape
+		fun curveTo(x1: Double, y1: Double, x2: Double, y2: Double, radius: Double, points: Array<Double>): IArcLikeShape?
 		fun arc(
-			_startX: Number,
-			_startY: Number,
-			cx: Number,
-			cy: Number,
-			radius: Number,
-			startAngle: Number,
-			endAngle: Number,
+			_startX: Double,
+			_startY: Double,
+			cx: Double,
+			cy: Double,
+			radius: Double,
+			startAngle: Double,
+			endAngle: Double,
 			_anticlockwise: Boolean,
-			points: Array<Number>
+			points: Array<Double>
 		)
 	}
 }
 
 open external class BatchPart {
 	open var style: dynamic /* LineStyle | FillStyle */
-	open var start: Number
-	open var size: Number
-	open var attribStart: Number
-	open var attribSize: Number
+	open var start: Int
+	open var size: Int
+	open var attribStart: Int
+	open var attribSize: Int
 	
-	open fun begin(style: LineStyle, startIndex: Number, attribStart: Number)
-	open fun begin(style: FillStyle, startIndex: Number, attribStart: Number)
-	open fun end(endIndex: Number, endAttrib: Number)
+	open fun begin(style: LineStyle, startIndex: Int, attribStart: Int)
+	open fun begin(style: FillStyle, startIndex: Int, attribStart: Int)
+	open fun end(endIndex: Int, endAttrib: Int)
 	open fun reset()
 }
 
 external class BezierUtils {
 	companion object {
-		fun curveLength(fromX: Number, fromY: Number, cpX: Number, cpY: Number, cpX2: Number, cpY2: Number, toX: Number, toY: Number): Number
-		fun curveTo(cpX: Number, cpY: Number, cpX2: Number, cpY2: Number, toX: Number, toY: Number, points: Array<Number>)
+		fun curveLength(fromX: Double, fromY: Double, cpX: Double, cpY: Double, cpX2: Double, cpY2: Double, toX: Double, toY: Double): Double
+		fun curveTo(cpX: Double, cpY: Double, cpX2: Double, cpY2: Double, toX: Double, toY: Double, points: Array<Double>)
 	}
 }
 
 external fun buildLine(graphicsData: GraphicsData, graphicsGeometry: GraphicsGeometry)
 
 open external class FillStyle {
-	open var color: Number
-	open var alpha: Number
+	open var color: Int
+	open var alpha: Double
 	open var texture: Texture<Resource>
 	open var matrix: Matrix
 	open var visible: Boolean
@@ -78,52 +77,52 @@ open external class Graphics(geometry: GraphicsGeometry = definedExternally) : C
 	open var pluginName: String
 	open var currentPath: Polygon
 	protected open var batches: Array<IGraphicsBatchElement>
-	protected open var batchTint: Number
-	protected open var batchDirty: Number
+	protected open var batchTint: Int
+	protected open var batchDirty: Int
 	protected open var vertexData: Float32Array
 	protected open var _fillStyle: FillStyle
 	protected open var _lineStyle: LineStyle
 	protected open var _matrix: Matrix
 	protected open var _holeMode: Boolean
-	protected open var _transformID: Number
-	protected open var _tint: Number
+	protected open var _transformID: Int
+	protected open var _tint: Int
 	
 	open val geometry: GraphicsGeometry
 	open var blendMode: BLEND_MODES
-	open var tint: Number
+	open var tint: Int
 	open val fill: FillStyle
 	open val line: LineStyle
 	
 	open fun clone(): Graphics
 	open fun lineStyle(
-		width: Number,
-		color: Number = definedExternally,
-		alpha: Number = definedExternally,
-		alignment: Number = definedExternally,
-		native: Number = definedExternally
+		width: Double,
+		color: Int = definedExternally,
+		alpha: Double = definedExternally,
+		alignment: Double = definedExternally,
+		native: Boolean = definedExternally
 	): Graphics /* this */
 	
 	open fun lineStyle(options: ILineStyleOptions = definedExternally): Graphics /* this */
 	open fun lineTextureStyle(options: ILineStyleOptions): Graphics /* this */
 	protected open fun startPoly()
 	open fun finishPoly()
-	open fun moveTo(x: Number, y: Number): Graphics /* this */
-	open fun lineTo(x: Number, y: Number): Graphics /* this */
-	protected open fun _initCurve(x: Number = definedExternally, y: Number = definedExternally)
-	open fun quadraticCurveTo(cpX: Number, cpY: Number, toX: Number, toY: Number): Graphics /* this */
-	open fun bezierCurveTo(cpX: Number, cpY: Number, cpX2: Number, cpY2: Number, toX: Number, toY: Number): Graphics /* this */
-	open fun arcTo(x1: Number, y1: Number, x2: Number, y2: Number, radius: Number)
-	open fun arc(cx: Number, cy: Number, radius: Number, startAngle: Number, endAngle: Number, anticlockwise: Boolean = definedExternally): Graphics /* this */
-	open fun beginFill(color: Number = definedExternally, alpha: Number = definedExternally): Graphics /* this */
+	open fun moveTo(x: Double, y: Double): Graphics /* this */
+	open fun lineTo(x: Double, y: Double): Graphics /* this */
+	protected open fun _initCurve(x: Double = definedExternally, y: Double = definedExternally)
+	open fun quadraticCurveTo(cpX: Double, cpY: Double, toX: Double, toY: Double): Graphics /* this */
+	open fun bezierCurveTo(cpX: Double, cpY: Double, cpX2: Double, cpY2: Double, toX: Double, toY: Double): Graphics /* this */
+	open fun arcTo(x1: Double, y1: Double, x2: Double, y2: Double, radius: Double)
+	open fun arc(cx: Double, cy: Double, radius: Double, startAngle: Double, endAngle: Double, anticlockwise: Boolean = definedExternally): Graphics /* this */
+	open fun beginFill(color: Int = definedExternally, alpha: Double = definedExternally): Graphics /* this */
 	open fun beginTextureFill(options: IFillStyleOptions = definedExternally): Graphics /* this */
 	open fun endFill(): Graphics /* this */
-	open fun drawRect(x: Number, y: Number, width: Number, height: Number): Graphics /* this */
-	open fun drawRoundedRect(x: Number, y: Number, width: Number, height: Number, radius: Number): Graphics /* this */
-	open fun drawCircle(x: Number, y: Number, radius: Number): Graphics /* this */
-	open fun drawEllipse(x: Number, y: Number, width: Number, height: Number): Graphics /* this */
-	open fun drawPolygon(vararg path: Array<Number>): Graphics /* this */
+	open fun drawRect(x: Double, y: Double, width: Double, height: Double): Graphics /* this */
+	open fun drawRoundedRect(x: Double, y: Double, width: Double, height: Double, radius: Double): Graphics /* this */
+	open fun drawCircle(x: Double, y: Double, radius: Double): Graphics /* this */
+	open fun drawEllipse(x: Double, y: Double, width: Double, height: Double): Graphics /* this */
+	open fun drawPolygon(vararg path: Array<Double>): Graphics /* this */
 	open fun drawPolygon(vararg path: Array<Point>): Graphics /* this */
-	open fun drawPolygon(path: Array<Number>): Graphics /* this */
+	open fun drawPolygon(path: Array<Double>): Graphics /* this */
 	open fun drawPolygon(path: Array<Point>): Graphics /* this */
 	open fun drawPolygon(path: Polygon): Graphics /* this */
 	open fun drawShape(shape: IShape): Graphics /* this */
@@ -159,7 +158,7 @@ open external class GraphicsData(shape: IShape, fillStyle: FillStyle = definedEx
 	open var fillStyle: FillStyle
 	open var matrix: Matrix
 	open var type: SHAPES
-	open var points: Array<Number>
+	open var points: Array<Double>
 	open var holes: Array<GraphicsData>
 	
 	open fun clone(): GraphicsData
@@ -167,26 +166,26 @@ open external class GraphicsData(shape: IShape, fillStyle: FillStyle = definedEx
 }
 
 open external class GraphicsGeometry : BatchGeometry {
-	open var closePointEps: Number
-	open var boundsPadding: Number
+	open var closePointEps: Double
+	open var boundsPadding: Double
 	open var uvsFloat32: Float32Array
 	open var indicesUint16Array: ArrayBufferView /* Uint16Array | Uint32Array */
 	open var batchable: Boolean
-	open var points: Array<Number>
-	open var colors: Array<Number>
-	open var uvs: Array<Number>
-	open var indices: Array<Number>
-	open var textureIds: Array<Number>
+	open var points: Array<Double>
+	open var colors: Array<Double>
+	open var uvs: Array<Double>
+	open var indices: Array<Double>
+	open var textureIds: Array<Int>
 	open var graphicsData: Array<GraphicsData>
 	open var drawCalls: Array<BatchDrawCall>
-	open var batchDirty: Number
+	open var batchDirty: Int
 	open var batches: Array<BatchPart>
-	protected open var dirty: Number
-	protected open var cacheDirty: Number
-	protected open var clearDirty: Number
-	protected open var shapeIndex: Number
+	protected open var dirty: Int
+	protected open var cacheDirty: Int
+	protected open var clearDirty: Int
+	protected open var shapeIndex: Int
 	protected open var _bounds: Bounds
-	protected open var boundsDirty: Number
+	protected open var boundsDirty: Int
 	
 	open var bounds: Bounds
 	
@@ -215,14 +214,14 @@ open external class GraphicsGeometry : BatchGeometry {
 	protected open fun processLine(data: GraphicsData)
 	protected open fun processHoles(data: Array<GraphicsData>)
 	protected open fun calculateBounds()
-	protected open fun transformPoints(points: Array<Number>, matrix: Matrix)
-	protected open fun addColors(colors: Array<Number>, color: Number, alpha: Number, size: Number, offset: Number = definedExternally)
-	protected open fun addTextureIds(textureIds: Array<Number>, id: Number, size: Number, offset: Number = definedExternally)
-	protected open fun addUvs(vers: Array<Number>, uvs: Array<Number>, texture: Texture<Resource>, start: Number, size: Number, matrix: Matrix = definedExternally)
-	protected open fun adjustUvs(uvs: Array<Number>, texture: Texture<Resource>, start: Number, size: Number)
+	protected open fun transformPoints(points: Array<Double>, matrix: Matrix)
+	protected open fun addColors(colors: Array<Int>, color: Int, alpha: Double, size: Int, offset: Int = definedExternally)
+	protected open fun addTextureIds(textureIds: Array<Int>, id: Int, size: Int, offset: Int = definedExternally)
+	protected open fun addUvs(vers: Array<Double>, uvs: Array<Double>, texture: Texture<Resource>, start: Int, size: Int, matrix: Matrix = definedExternally)
+	protected open fun adjustUvs(uvs: Array<Double>, texture: Texture<Resource>, start: Int, size: Int)
 	
 	companion object {
-		var BATCHABLE_SIZE: Number
+		var BATCHABLE_SIZE: Short
 	}
 }
 
@@ -242,17 +241,17 @@ external object graphicsUtils {
 }
 
 external interface IArcLikeShape {
-	var cx: Number
-	var cy: Number
-	var radius: Number
-	var startAngle: Number
-	var endAngle: Number
+	var cx: Double
+	var cy: Double
+	var radius: Double
+	var startAngle: Double
+	var endAngle: Double
 	var anticlockwise: Boolean
 }
 
 external interface IFillStyleOptions {
-	var color: Number?
-	var alpha: Number?
+	var color: Int?
+	var alpha: Double?
 	var texture: Texture<Resource>?
 	var matrix: Matrix?
 }
@@ -262,29 +261,29 @@ external interface IGraphicsBatchElement {
 	var blendMode: BLEND_MODES
 	var indices: ArrayBufferView /* Uint16Array | Uint32Array */
 	var uvs: Float32Array
-	var alpha: Number
-	var worldAlpha: Number
-	var _batchRGB: Array<Number>
-	var _tintRGB: Number
+	var alpha: Double
+	var worldAlpha: Double
+	var _batchRGB: Array<Int>
+	var _tintRGB: Int
 	var _texture: Texture<Resource>
 }
 
 external interface IGraphicsCurvesSettings {
 	var adaptive: Boolean
-	var maxLength: Number
-	var minSegments: Number
-	var maxSegments: Number
-	var epsilon: Number
-	fun _segmentsCount(length: Number, defaultSegments: Number = definedExternally): Number
+	var maxLength: Int
+	var minSegments: Int
+	var maxSegments: Int
+	var epsilon: Double
+	fun _segmentsCount(length: Int, defaultSegments: Int = definedExternally): Int
 }
 
 external interface ILineStyleOptions : IFillStyleOptions {
-	var width: Number?
-	var alignment: Number?
+	var width: Double?
+	var alignment: Double?
 	var native: Boolean?
 	var cap: LINE_CAP?
 	var join: LINE_JOIN?
-	var miterLimit: Number?
+	var miterLimit: Int?
 }
 
 external interface IShapeBuildCommand {
@@ -293,12 +292,12 @@ external interface IShapeBuildCommand {
 }
 
 open external class LineStyle : FillStyle {
-	open var width: Number
-	open var alignment: Number
+	open var width: Int
+	open var alignment: Double
 	open var native: Boolean
 	open var cap: LINE_CAP
 	open var join: LINE_JOIN
-	open var miterLimit: Number
+	open var miterLimit: Int
 	
 	override fun clone(): LineStyle
 	override fun reset()
@@ -306,8 +305,7 @@ open external class LineStyle : FillStyle {
 
 external class QuadraticUtils {
 	companion object {
-		fun curveLength(fromX: Number, fromY: Number, cpX: Number, cpY: Number, toX: Number, toY: Number): Number
-		fun curveTo(cpX: Number, cpY: Number, toX: Number, toY: Number, points: Array<Number>)
-		
+		fun curveLength(fromX: Double, fromY: Double, cpX: Double, cpY: Double, toX: Double, toY: Double): Int
+		fun curveTo(cpX: Double, cpY: Double, toX: Double, toY: Double, points: Array<Double>)
 	}
 }

@@ -3,7 +3,6 @@
 package pixi.typings.display
 
 import org.khronos.webgl.Float32Array
-import pixi.typings.Number
 import pixi.typings.core.Filter
 import pixi.typings.core.Renderer
 import pixi.typings.math.IPointData
@@ -15,12 +14,12 @@ import pixi.typings.utils.Dict
 import pixi.typings.utils.EventEmitter
 
 open external class Bounds {
-	open var minX: Number
-	open var maxX: Number
-	open var minY: Number
-	open var maxY: Number
+	open var minX: Double
+	open var maxX: Double
+	open var minY: Double
+	open var maxY: Double
 	open var rect: Rectangle
-	open var updateID: Number
+	open var updateID: Int
 	
 	open fun isEmpty(): Boolean
 	open fun clear()
@@ -28,27 +27,25 @@ open external class Bounds {
 	open fun addPoint(point: IPointData)
 	open fun addPointMatrix(matrix: Matrix, point: IPointData)
 	open fun addQuad(vertices: Float32Array)
-	open fun addFrame(transform: Transform, x0: Number, y0: Number, x1: Number, y1: Number)
-	open fun addFrameMatrix(matrix: Matrix, x0: Number, y0: Number, x1: Number, y1: Number)
-	open fun addVertexData(vertexData: Float32Array, beginOffset: Number, endOffset: Number)
-	open fun addVertices(transform: Transform, vertices: Float32Array, beginOffset: Number, endOffset: Number)
+	open fun addFrame(transform: Transform, x0: Double, y0: Double, x1: Double, y1: Double)
+	open fun addFrameMatrix(matrix: Matrix, x0: Double, y0: Double, x1: Double, y1: Double)
+	open fun addVertexData(vertexData: Float32Array, beginOffset: Int, endOffset: Int)
+	open fun addVertices(transform: Transform, vertices: Float32Array, beginOffset: Int, endOffset: Int)
 	open fun addVerticesMatrix(
 		matrix: Matrix,
 		vertices: Float32Array,
-		beginOffset: Number,
-		endOffset: Number,
-		padX: Number = definedExternally,
-		padY: Number = definedExternally
+		beginOffset: Int,
+		endOffset: Int,
+		padX: Double = definedExternally,
+		padY: Double = definedExternally
 	)
 	
 	open fun addBounds(bounds: Bounds)
 	open fun addBoundsMask(bounds: Bounds, mask: Bounds)
 	open fun addBoundsMatrix(bounds: Bounds, matrix: Matrix)
 	open fun addBoundsArea(bounds: Bounds, area: Rectangle)
-	open fun pad(paddingX: Number, paddingY: Number)
-	open fun pad(paddingX: Number)
-	open fun pad()
-	open fun addFramePad(x0: Number, y0: Number, x1: Number, y1: Number, padX: Number, padY: Number)
+	open fun pad(paddingX: Double = definedExternally, paddingY: Double = definedExternally)
+	open fun addFramePad(x0: Double, y0: Double, x1: Double, y1: Double, padX: Double, padY: Double)
 }
 
 open external class Container : DisplayObject {
@@ -57,26 +54,26 @@ open external class Container : DisplayObject {
 	override var sortDirty: Boolean
 	override var parent: Container
 	open var containerUpdateTransform: () -> Unit
-	protected open var _width: Number
-	protected open var _height: Number
-	open var width: Number
-	open var height: Number
+	protected open var _width: Double
+	protected open var _height: Double
+	open var width: Double
+	open var height: Double
 	
-	protected open fun onChildrenChange(_length: Number = definedExternally)
+	protected open fun onChildrenChange(_length: Int = definedExternally)
 	open fun <T : DisplayObject> addChild(vararg child: T): T
-	open fun <T : DisplayObject> addChildAt(child: T, index: Number): T
+	open fun <T : DisplayObject> addChildAt(child: T, index: Int): T
 	open fun swapChildren(child: DisplayObject, child2: DisplayObject)
-	open fun getChildIndex(child: DisplayObject): Number
-	open fun setChildIndex(child: DisplayObject, index: Number)
-	open fun getChildAt(index: Number): DisplayObject
+	open fun getChildIndex(child: DisplayObject): Int
+	open fun setChildIndex(child: DisplayObject, index: Int)
+	open fun getChildAt(index: Int): DisplayObject
 	
 	@Suppress("CANNOT_WEAKEN_ACCESS_PRIVILEGE")
 	internal override fun removeChild(child: DisplayObject)
 	
 	@Suppress("RETURN_TYPE_MISMATCH_ON_OVERRIDE")
 	open fun <T : DisplayObject> removeChild(vararg child: T): T
-	open fun removeChildAt(index: Number): DisplayObject
-	open fun removeChildren(beginIndex: Number = definedExternally, endIndex: Number = definedExternally): Array<DisplayObject>
+	open fun removeChildAt(index: Int): DisplayObject
+	open fun removeChildren(beginIndex: Int = definedExternally, endIndex: Int = definedExternally): Array<DisplayObject>
 	open fun sortChildren()
 	override fun updateTransform()
 	override fun calculateBounds()
@@ -92,22 +89,22 @@ open external class Container : DisplayObject {
 abstract external class DisplayObject : EventEmitter {
 	abstract var sortDirty: Boolean
 	open var parent: Container
-	open var worldAlpha: Number
+	open var worldAlpha: Double
 	open var transform: Transform
-	open var alpha: Number
+	open var alpha: Double
 	open var visible: Boolean
-	open var renderable: Number
+	open var renderable: Boolean
 	open var filterArea: Rectangle
 	open var filters: Array<Filter>?
 	open var isSprite: Boolean
 	open var isMask: Boolean
-	open var _lastSortedIndex: Number
+	open var _lastSortedIndex: Int
 	open var _mask: dynamic /* Container | MaskData */
 	open var _bounds: Bounds
 	open var _localBounds: Bounds
-	protected open var _zIndex: Number
+	protected open var _zIndex: Int
 	protected open var _enabledFilters: Array<Filter>
-	protected open var _boundsID: Number
+	protected open var _boundsID: Int
 	protected open var _boundsRect: Rectangle
 	protected open var _lastBoundsRect: Rectangle
 	protected open var _destroyed: Boolean
@@ -115,17 +112,17 @@ abstract external class DisplayObject : EventEmitter {
 	open val destroyed: Boolean
 	open val _tempDisplayObjectParent: TemporaryDisplayObject
 	
-	open var x: Number
-	open var y: Number
+	open var x: Double
+	open var y: Double
 	open val worldTransform: Transform
 	open val localTransform: Matrix
 	open var position: ObservablePoint<Any?>
 	open var scale: ObservablePoint<Any?>
 	open var pivot: ObservablePoint<Any?>
 	open var skew: ObservablePoint<Any?>
-	open var rotation: Number
-	open var angle: Number
-	open var zIndex: Number
+	open var rotation: Double
+	open var angle: Double
+	open var zIndex: Int
 	open val worldVisible: Boolean
 	open var mask: dynamic? /* Container | MaskData | null */
 	
@@ -146,15 +143,15 @@ abstract external class DisplayObject : EventEmitter {
 	
 	open fun setParent(container: Container): Container
 	open fun setTransform(
-		x: Number = definedExternally,
-		y: Number = definedExternally,
-		scaleX: Number = definedExternally,
-		scaleY: Number = definedExternally,
-		rotation: Number = definedExternally,
-		skewX: Number = definedExternally,
-		skewY: Number = definedExternally,
-		pivotX: Number = definedExternally,
-		pivotY: Number = definedExternally
+		x: Double = definedExternally,
+		y: Double = definedExternally,
+		scaleX: Double = definedExternally,
+		scaleY: Double = definedExternally,
+		rotation: Double = definedExternally,
+		skewX: Double = definedExternally,
+		skewY: Double = definedExternally,
+		pivotX: Double = definedExternally,
+		pivotY: Double = definedExternally
 	): DisplayObject /* this */
 	
 	open fun destroy(_options: IDestroyOptions = definedExternally)

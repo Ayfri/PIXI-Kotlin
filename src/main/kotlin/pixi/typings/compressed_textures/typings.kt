@@ -6,9 +6,10 @@ import org.khronos.webgl.ArrayBuffer
 import org.khronos.webgl.Float32Array
 import org.khronos.webgl.Uint32Array
 import org.khronos.webgl.Uint8Array
-import pixi.typings.Number
 import pixi.typings.Object
 import pixi.typings.VarArgFun
+import pixi.typings.constants.FORMATS
+import pixi.typings.constants.TYPES
 import pixi.typings.core.BaseTexture
 import pixi.typings.core.BufferResource
 import pixi.typings.core.GLTexture
@@ -34,9 +35,9 @@ abstract external class BlobResource(source: String, options: IBlobOptions = def
 }
 
 external interface CompressedLevelBuffer {
-	var levelID: Number
-	var levelWidth: Number
-	var levelHeight: Number
+	var levelID: Int
+	var levelWidth: Int
+	var levelHeight: Int
 	var levelBuffer: Uint8Array
 }
 
@@ -84,7 +85,7 @@ open external class CompressedTextureResource(source: String, options: ICompress
 	constructor(source: Uint32Array, options: ICompressedTextureResourceOptions)
 	
 	open var format: INTERNAL_FORMATS
-	open var levels: Number
+	open var levels: Int
 	override fun upload(renderer: Renderer, _texture: BaseTexture<Resource, IAutoDetectOptions>, _glTexture: GLTexture): Boolean
 	
 	protected open fun onBlobLoaded()
@@ -96,23 +97,23 @@ external class DDSLoader {
 	}
 }
 
-external val FORMATS_TO_COMPONENTS: Object<Number, Number>
+external val FORMATS_TO_COMPONENTS: Object<Int, Int>
 
 external interface IBlobOptions {
 	var autoLoad: Boolean?
-	var width: Number
-	var height: Number
+	var width: Int
+	var height: Int
 }
 
 external interface ICompressedTextureResourceOptions {
 	var format: INTERNAL_FORMATS
-	var width: Number
-	var height: Number
-	var levels: Number?
+	var width: Int
+	var height: Int
+	var levels: Int?
 	var levelBuffers: Array<CompressedLevelBuffer>?
 }
 
-external val INTERNAL_FORMAT_TO_BYTES_PER_PIXEL: Object<Number, Number>
+external val INTERNAL_FORMAT_TO_BYTES_PER_PIXEL: Object<INTERNAL_FORMATS, Double>
 
 external class KTXLoader {
 	companion object {
@@ -120,6 +121,6 @@ external class KTXLoader {
 	}
 }
 
-external val TYPES_TO_BYTES_PER_COMPONENT: Object<Number, Number>
+external val TYPES_TO_BYTES_PER_COMPONENT: Object<FORMATS, Int>
 
-external val TYPES_TO_BYTES_PER_PIXEL: Object<Number, Number>
+external val TYPES_TO_BYTES_PER_PIXEL: Object<TYPES, Int>

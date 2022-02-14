@@ -14,8 +14,8 @@ import pixi.typings.math.Matrix
 import pixi.typings.utils.Dict
 
 external interface IMeshMaterialOptions {
-	var alpha: Number?
-	var tint: Number?
+	var alpha: Double?
+	var tint: Int?
 	var pluginName: String?
 	var program: Program?
 	var uniforms: Dict<Any>?
@@ -30,11 +30,11 @@ open external class Mesh<T : Shader /* = MeshMaterial */>(
 	open var shader: T
 	open var state: State
 	open var drawMode: DRAW_MODES
-	open var start: Number
-	open var size: Number
+	open var start: Int
+	open var size: Int
 	open var uvs: Float32Array
 	open var indices: Uint16Array
-	open var _tintRGB: Number
+	open var _tintRGB: Int
 	open var _texture: Texture<Resource>
 	
 	open var geometry: Geometry
@@ -57,7 +57,7 @@ open external class Mesh<T : Shader /* = MeshMaterial */>(
 	override fun destroy(options: Boolean)
 	
 	companion object {
-		var BATCHABLE_SIZE: Number
+		var BATCHABLE_SIZE: Short
 	}
 }
 
@@ -65,15 +65,15 @@ open external class MeshBatchUvs(uvBuffer: Buffer, uvMatrix: Matrix) {
 	open val data: Float32Array
 	open var uvBuffer: Buffer
 	open var uvMatrix: TextureMatrix
-	open var _updateID: Number
+	open var _updateID: Int
 	
 	open fun update(forceUpdate: Boolean = definedExternally)
 }
 
 open external class MeshGeometry(vertices: IArrayBuffer = definedExternally, uvs: IArrayBuffer = definedExternally, index: IArrayBuffer = definedExternally) : Geometry {
-	open var _updateID: Number
+	open var _updateID: Int
 	
-	open val vertexDirtyId: Number
+	open val vertexDirtyId: Int
 }
 
 open external class MeshMaterial(uSampler: Texture<Resource>, options: IMeshMaterialOptions = definedExternally) : Shader {
@@ -82,8 +82,8 @@ open external class MeshMaterial(uSampler: Texture<Resource>, options: IMeshMate
 	open var pluginName: String
 	
 	open var texture: Texture<Resource>
-	open var alpha: Number
-	open var tint: Number
+	open var alpha: Double
+	open var tint: Int
 	
 	open fun update()
 }

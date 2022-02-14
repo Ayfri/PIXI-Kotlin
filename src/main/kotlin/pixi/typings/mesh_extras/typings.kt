@@ -2,7 +2,6 @@
 
 package pixi.typings.mesh_extras
 
-import pixi.typings.Number
 import pixi.typings.constants.DRAW_MODES
 import pixi.typings.core.IArrayBuffer
 import pixi.typings.core.ITypedArray
@@ -17,23 +16,23 @@ import pixi.typings.mesh.MeshMaterial
 
 open external class NineSlicePlane(
 	texture: Texture<Resource>,
-	leftWidth: Number = definedExternally,
-	topHeight: Number = definedExternally,
-	rightWidth: Number = definedExternally,
-	bottomHeight: Number = definedExternally
+	leftWidth: Double = definedExternally,
+	topHeight: Double = definedExternally,
+	rightWidth: Double = definedExternally,
+	bottomHeight: Double = definedExternally
 ) : SimplePlane {
-	open var _leftWidth: Number
-	open var _rightWidth: Number
-	open var _topHeight: Number
-	open var _bottomHeight: Number
+	open var _leftWidth: Double
+	open var _rightWidth: Double
+	open var _topHeight: Double
+	open var _bottomHeight: Double
 	
 	open var vertices: ITypedArray
-	override var width: Number
-	override var height: Number
-	open var leftWidth: Number
-	open var rightWidth: Number
-	open var topHeight: Number
-	open var bottomHeight: Number
+	override var width: Double
+	override var height: Double
+	open var leftWidth: Double
+	open var rightWidth: Double
+	open var topHeight: Double
+	open var bottomHeight: Double
 	
 	override fun textureUpdated()
 	open fun updateHorizontalVertices()
@@ -41,25 +40,25 @@ open external class NineSlicePlane(
 }
 
 open external class PlaneGeometry(
-	width: Number,
-	height: Number = definedExternally,
-	segWidth: Number = definedExternally,
-	segHeight: Number = definedExternally
+	width: Double,
+	height: Double = definedExternally,
+	segWidth: Double = definedExternally,
+	segHeight: Double = definedExternally
 ) : MeshGeometry {
-	open var segWidth: Number
-	open var segHeight: Number
-	open var width: Number
-	open var height: Number
+	open var segWidth: Double
+	open var segHeight: Double
+	open var width: Double
+	open var height: Double
 	
 	open fun build()
 }
 
-open external class RopeGeometry(width: Number, points: Array<IPoint>, textureScale: Number = definedExternally) : MeshGeometry {
+open external class RopeGeometry(width: Double, points: Array<IPoint>, textureScale: Double = definedExternally) : MeshGeometry {
 	open var points: Array<IPoint>
-	open val textureScale: Number
-	open var _width: Number
+	open val textureScale: Double
+	open var _width: Double
 	
-	open val width: Number
+	open val width: Double
 	
 	open fun updateVertices()
 	open fun update()
@@ -79,9 +78,9 @@ open external class SimpleMesh(
 	override fun _render(renderer: Renderer)
 }
 
-open external class SimplePlane(texture: Texture<Resource>, verticesX: Number, verticesY: Number) : Mesh<MeshMaterial> {
+open external class SimplePlane(texture: Texture<Resource>, verticesX: Int, verticesY: Int) : Mesh<MeshMaterial> {
 	open var autoUpdate: Boolean
-	protected open var _textureID: Number
+	protected open var _textureID: Int
 	
 	override var texture: Texture<Resource>
 	
@@ -91,7 +90,7 @@ open external class SimplePlane(texture: Texture<Resource>, verticesX: Number, v
 	override fun destroy(options: IDestroyOptions)
 }
 
-open external class SimpleRope(texture: Texture<Resource>, points: Array<IPoint>, textureScale: Number = definedExternally) : Mesh<MeshMaterial> {
+open external class SimpleRope(texture: Texture<Resource>, points: Array<IPoint>, textureScale: Double = definedExternally) : Mesh<MeshMaterial> {
 	open var autoUpdate: Boolean
 	
 	override fun _render(renderer: Renderer)

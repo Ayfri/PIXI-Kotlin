@@ -1,6 +1,4 @@
 package pixi.typings.math
 
-import pixi.typings.Number
-
-typealias GD8Symmetry = Number
+typealias GD8Symmetry = Short
 typealias IShape = Any /* Circle | Ellipse | Polygon | Rectangle | RoundedRectangle */

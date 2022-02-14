@@ -4,7 +4,7 @@ package pixi.typings
 open external class EventEmitter<EventTypes : String> {
 	open fun eventNames(): Array<EventTypes>
 	open fun listeners(event: EventTypes): Array<ListenerFn>
-	open fun listenerCount(event: EventTypes): Number
+	open fun listenerCount(event: EventTypes): Int
 	open fun emit(event: EventTypes, vararg args: Array<Any?>): Boolean
 	open fun on(event: EventTypes, fn: ListenerFn, context: Any? = definedExternally): EventEmitter<EventTypes> /* this */
 	open fun addListener(event: EventTypes, fn: ListenerFn, context: Any? = definedExternally): EventEmitter<EventTypes> /* this */

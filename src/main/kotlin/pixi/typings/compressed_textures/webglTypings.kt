@@ -1,7 +1,5 @@
 package pixi.typings.compressed_textures
 
-import pixi.typings.Number
-
 external interface WEBGL_compressed_texture_astc {
 	fun getSupportedProfiles(): Array<String>
 	var COMPRESSED_RGBA_ASTC_10x10_KHR: GLenum
@@ -48,4 +46,4 @@ external interface WEBGL_compressed_texture_s3tc_srgb {
 	var COMPRESSED_SRGB_S3TC_DXT1_EXT: GLenum
 }
 
-typealias GLenum = Number
+typealias GLenum = Double

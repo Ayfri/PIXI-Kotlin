@@ -3,13 +3,13 @@
 
 package pixi.typings.core
 
+import externals.WEBGLVersion
 import org.khronos.webgl.*
 import org.w3c.dom.ErrorEvent
 import org.w3c.dom.HTMLCanvasElement
 import org.w3c.dom.HTMLImageElement
 import org.w3c.dom.HTMLVideoElement
 import org.w3c.dom.ImageBitmap
-import pixi.typings.Number
 import pixi.typings.Object
 import pixi.typings.compressed_textures.WEBGL_compressed_texture_astc
 import pixi.typings.compressed_textures.WEBGL_compressed_texture_s3tc
@@ -28,22 +28,22 @@ import kotlin.js.RegExp
 
 open external class AbstractBatchRenderer(renderer: Renderer) : ObjectRenderer {
 	open val state: State
-	open var size: Number
-	open var MAX_TEXTURES: Number
+	open var size: Int
+	open var MAX_TEXTURES: Int
 	protected open var shaderGenerator: BatchShaderGenerator
 	protected open var geometryClass: BatchGeometry
-	protected open var vertexSize: Number
-	protected open var _vertexCount: Number
-	protected open var _indexCount: Number
+	protected open var vertexSize: Int
+	protected open var _vertexCount: Int
+	protected open var _indexCount: Int
 	protected open var _bufferedElements: Array<IBatchableElement>
 	protected open var _bufferedTextures: Array<BaseTexture<Resource, IAutoDetectOptions>>
-	protected open var _bufferSize: Number
+	protected open var _bufferSize: Int
 	protected open var _shader: Shader
 	protected open var _aBuffers: Array<ViewableBuffer>
 	protected open var _iBuffers: Array<Uint16Array>
-	protected open var _dcIndex: Number
-	protected open var _aIndex: Number
-	protected open var _iIndex: Number
+	protected open var _dcIndex: Int
+	protected open var _aIndex: Int
+	protected open var _iIndex: Int
 	protected open var _attributeBuffer: ViewableBuffer
 	protected open var _indexBuffer: Uint16Array
 	protected open var _tempBoundTextures: Array<BaseTexture<Resource, IAutoDetectOptions>>
@@ -53,7 +53,7 @@ open external class AbstractBatchRenderer(renderer: Renderer) : ObjectRenderer {
 	open fun onPrerender()
 	open fun render(element: IBatchableElement)
 	open fun buildTexturesAndDrawCalls()
-	open fun buildDrawCalls(texArray: BatchTextureArray, start: Number, finish: Number)
+	open fun buildDrawCalls(texArray: BatchTextureArray, start: Int, finish: Int)
 	open fun bindAndClearTexArray(texArray: BatchTextureArray)
 	open fun updateGeometry()
 	open fun drawBatches()
@@ -61,9 +61,9 @@ open external class AbstractBatchRenderer(renderer: Renderer) : ObjectRenderer {
 	override fun start()
 	override fun stop()
 	override fun destroy()
-	open fun getAttributeBuffer(size: Number): ViewableBuffer
-	open fun getIndexBuffer(size: Number): Uint16Array
-	open fun packInterleavedGeometry(element: IBatchableElement, attributeBuffer: ViewableBuffer, indexBuffer: Uint16Array, aIndex: Number, iIndex: Number)
+	open fun getAttributeBuffer(size: Int): ViewableBuffer
+	open fun getIndexBuffer(size: Int): Uint16Array
+	open fun packInterleavedGeometry(element: IBatchableElement, attributeBuffer: ViewableBuffer, indexBuffer: Uint16Array, aIndex: Int, iIndex: Int)
 	
 	companion object {
 		var _drawCallPool: Array<BatchDrawCall>
@@ -73,94 +73,94 @@ open external class AbstractBatchRenderer(renderer: Renderer) : ObjectRenderer {
 
 open external class AbstractMaskSystem(renderer: Renderer) : ISystem {
 	protected open var maskStack: Array<MaskData>
-	protected open var glConst: Number
+	protected open var glConst: Int
 	protected open var renderer: Renderer
-	open fun getStackLength(): Number
+	open fun getStackLength(): Int
 	open fun setMaskStack(stack: Array<MaskData>)
 	protected open fun _useCurrent()
 	override fun destroy()
 }
 
-abstract external class AbstractMultiResource(length: Number, options: ISize = definedExternally) : Resource {
-	open val length: Number
+abstract external class AbstractMultiResource(length: Int, options: ISize = definedExternally) : Resource {
+	open val length: Int
 	open var items: Array<BaseTexture<Resource, IAutoDetectOptions>>
-	open var itemDirtyIds: Array<Number>
+	open var itemDirtyIds: Array<Int>
 	open var baseTexture: BaseTexture<Resource, IAutoDetectOptions>
 	protected open fun initFromArray(resources: Array<Any?>, options: IAutoDetectOptions = definedExternally)
 	override fun dispose()
-	abstract fun addBaseTextureAt(baseTexture: BaseTexture<Resource, IAutoDetectOptions>, index: Number): AbstractMultiResource /* this */
-	open fun addResourceAt(resource: Resource, index: Number): AbstractMultiResource /* this */
+	abstract fun addBaseTextureAt(baseTexture: BaseTexture<Resource, IAutoDetectOptions>, index: Int): AbstractMultiResource /* this */
+	open fun addResourceAt(resource: Resource, index: Int): AbstractMultiResource /* this */
 	override fun bind(baseTexture: BaseTexture<Resource, IAutoDetectOptions>)
 	open fun unbind(baseTexture: BaseTexture<Resource, IAutoDetectOptions>)
 	override fun load(): Promise<AbstractMultiResource /* this */>
 }
 
 abstract external class AbstractRenderer(type: RENDERER_TYPE = definedExternally, options: IRendererOptions = definedExternally) : EventEmitter {
-	open var resolution: Number
+	open var resolution: Double
 	open var clearBeforeRender: Boolean?
 	open val options: IRendererOptions
 	open val type: RENDERER_TYPE
 	open val screen: Rectangle
 	open val view: HTMLCanvasElement
 	open val plugins: IRendererPlugins
-	open val useContextAlpha: dynamic /* boolean | 'notMultiplied */
+	open val useContextAlpha: dynamic /* boolean | 'notMultiplied' */
 	open val autoDensity: Boolean
 	open val preserveDrawingBuffer: Boolean
-	protected open var _backgroundColor: Number
+	protected open var _backgroundColor: Int
 	protected open var _backgroundColorString: String
-	open var _backgroundColorRgba: Array<Number>
+	open var _backgroundColorRgba: Array<Double>
 	
 	open fun initPlugins(staticMap: IRendererPlugins)
-	open val width: Number
-	open val height: Number
-	open fun resize(desiredScreenWidth: Number, desiredScreenHeight: Number)
+	open val width: Int
+	open val height: Int
+	open fun resize(desiredScreenWidth: Int, desiredScreenHeight: Int)
 	open fun generateTexture(displayObject: IRenderableObject, options: IGenerateTextureOptions = definedExternally): RenderTexture
 	open fun generateTexture(
 		displayObject: IRenderableObject,
 		scaleMode: SCALE_MODES = definedExternally,
-		resolution: Number = definedExternally,
+		resolution: Double = definedExternally,
 		region: Rectangle = definedExternally
 	): RenderTexture
 	
 	abstract fun render(displayObject: IRenderableObject, options: IRendererRenderOptions = definedExternally)
 	open fun destroy(removeView: Boolean = definedExternally)
-	open var backgroundColor: Number
-	open var backgroundAlpha: Number
+	open var backgroundColor: Int
+	open var backgroundAlpha: Double
 }
 
-open external class ArrayResource(source: Number, options: ISize = definedExternally) : AbstractMultiResource {
+open external class ArrayResource(source: Int, options: ISize = definedExternally) : AbstractMultiResource {
 	constructor(source: Array<Any?>, options: ISize = definedExternally)
 	
-	override fun addBaseTextureAt(baseTexture: BaseTexture<Resource, IAutoDetectOptions>, index: Number): ArrayResource /* this */
+	override fun addBaseTextureAt(baseTexture: BaseTexture<Resource, IAutoDetectOptions>, index: Int): ArrayResource /* this */
 	override fun bind(baseTexture: BaseTexture<Resource, IAutoDetectOptions>)
 	override fun upload(renderer: Renderer, texture: BaseTexture<Resource, IAutoDetectOptions>, glTexture: GLTexture): Boolean
 }
 
 open external class Attribute(
-	buffer: Number,
-	size: Number = definedExternally,
+	buffer: Int,
+	size: Int = definedExternally,
 	normalized: Boolean = definedExternally,
 	type: TYPES = definedExternally,
-	stride: Number = definedExternally,
-	start: Number = definedExternally,
+	stride: Int = definedExternally,
+	start: Int = definedExternally,
 	instance: Boolean = definedExternally
 ) {
-	open var buffer: Number
-	open var size: Number
+	open var buffer: Int
+	open var size: Int
 	open var normalized: Boolean
 	open var type: TYPES
-	open var stride: Number
-	open var start: Number
+	open var stride: Int
+	open var start: Int
 	open var instance: Boolean
 	open fun destroy()
 	
 	companion object {
 		fun from(
-			buffer: Number,
-			size: Number = definedExternally,
+			buffer: Int,
+			size: Int = definedExternally,
 			normalized: Boolean = definedExternally,
 			type: TYPES = definedExternally,
-			stride: Number = definedExternally
+			stride: Int = definedExternally
 		): Attribute
 	}
 }
@@ -192,11 +192,11 @@ open external class BaseImageResource(source: ImageSource) : Resource {
 }
 
 open external class BaseRenderTexture(options: IBaseTextureOptions<Any?> = definedExternally) : BaseTexture<Resource, IAutoDetectOptions> {
-	open var clearColor: Array<Number>
+	open var clearColor: Array<Double>
 	open var frameBuffer: Framebuffer
 	open var maskStack: Array<MaskData>
 	open var filterStack: Array<Any?>
-	open fun resize(desiredWidth: Number, desiredHeight: Number)
+	open fun resize(desiredWidth: Int, desiredHeight: Int)
 	override fun dispose()
 	override fun destroy()
 }
@@ -208,39 +208,39 @@ open external class BaseTexture<R : Resource /*= Resource*/, R0 /*= IAutoDetectO
 	constructor(resource: ImageSource = definedExternally, options: IBaseTextureOptions<R0> = definedExternally)
 	constructor(resource: String = definedExternally, options: IBaseTextureOptions<R0> = definedExternally)
 	
-	open var width: Number
-	open var height: Number
-	open var resolution: Number
+	open var width: Double
+	open var height: Double
+	open var resolution: Double
 	open var alphaMode: ALPHA_MODES?
-	open var anisotropicLevel: Number?
+	open var anisotropicLevel: Int?
 	open var format: FORMATS?
 	open var type: TYPES?
 	open var target: TARGETS?
-	open val uid: Number
-	open var touched: Number
+	open val uid: Int
+	open var touched: Int
 	open var isPowerOfTwo: Boolean
-	open var _glTextures: Object<Number, GLTexture>
-	open var dirtyId: Number
-	open var dirtyStyleId: Number
+	open var _glTextures: Object<Int, GLTexture>
+	open var dirtyId: Int
+	open var dirtyStyleId: Int
 	open var cacheId: String
 	open var valid: Boolean
 	open var textureCacheIds: Array<String>
 	open var destroyed: Boolean
 	open var resource: R
-	open var _batchEnabled: Number
-	open var _batchLocation: Number
+	open var _batchEnabled: Int
+	open var _batchLocation: Int
 	open var parentTextureArray: BaseTexture<Resource, IAutoDetectOptions>
-	open val realWith: Number
-	open val realHeight: Number
+	open val realWith: Int
+	open val realHeight: Int
 	open var mipmap: MIPMAP_MODES
 	open var scaleMode: SCALE_MODES
 	open var wrapMode: WRAP_MODES
 	
 	open fun setStyle(scaleMode: SCALE_MODES = definedExternally, mipmap: MIPMAP_MODES = definedExternally): BaseTexture<R, R0> /* this */
-	open fun setSize(desiredWidth: Number, desiredHeight: Number, resolution: Number = definedExternally): BaseTexture<R, R0> /* this */
-	open fun setRealSize(realWidth: Number, realHeight: Number, resolution: Number = definedExternally): BaseTexture<R, R0> /* this */
+	open fun setSize(desiredWidth: Double, desiredHeight: Double, resolution: Double = definedExternally): BaseTexture<R, R0> /* this */
+	open fun setRealSize(realWidth: Double, realHeight: Double, resolution: Double = definedExternally): BaseTexture<R, R0> /* this */
 	protected open fun _refreshPOT()
-	open fun setResolution(resolution: Number): BaseTexture<R, R0> /* this */
+	open fun setResolution(resolution: Double): BaseTexture<R, R0> /* this */
 	open fun setResource(resource: R): BaseTexture<R, R0> /* this */
 	open fun update()
 	open fun onError(event: ErrorEvent)
@@ -249,7 +249,7 @@ open external class BaseTexture<R : Resource /*= Resource*/, R0 /*= IAutoDetectO
 	open fun castToBaseTexture(): BaseTexture<Resource, IAutoDetectOptions>
 	
 	companion object {
-		var _globalBatch: Number
+		var _globalBatch: Int
 		
 		fun <R : Resource, R0 : IAutoDetectOptions> from(
 			source: ImageSource,
@@ -277,15 +277,15 @@ open external class BaseTexture<R : Resource /*= Resource*/, R0 /*= IAutoDetectO
 		
 		fun fromBuffer(
 			buffer: Float32Array,
-			width: Number,
-			height: Number,
+			width: Double,
+			height: Double,
 			options: IBaseTextureOptions<IAutoDetectOptions> = definedExternally
 		): BaseTexture<BufferResource, IAutoDetectOptions>
 		
 		fun fromBuffer(
 			buffer: Uint8Array,
-			width: Number,
-			height: Number,
+			width: Double,
+			height: Double,
 			options: IBaseTextureOptions<IAutoDetectOptions> = definedExternally
 		): BaseTexture<BufferResource, IAutoDetectOptions>
 		
@@ -299,8 +299,8 @@ open external class BatchDrawCall {
 	open var texArray: BatchTextureArray
 	open var type: DRAW_MODES
 	open var blend: BLEND_MODES
-	open var start: Number
-	open var size: Number
+	open var start: Int
+	open var size: Int
 	open var data: Any?
 }
 
@@ -322,10 +322,10 @@ external val BatchRenderer: AbstractBatchRenderer
 open external class BatchShaderGenerator(vertexSrc: String, fragTemplate: String) {
 	open val vertexSrc: String
 	open val fragTemplate: String
-	open val programCache: Object<Number, Program>
-	open val defaultGroupCache: Object<Number, UniformGroup<Dict<Any>>>
-	open fun generateShader(maxTextures: Number): Shader
-	open fun generateSampleSrc(maxTextures: Number): String
+	open val programCache: Object<Int, Program>
+	open val defaultGroupCache: Object<Int, UniformGroup<Dict<Any>>>
+	open fun generateShader(maxTextures: Int): Shader
+	open fun generateSampleSrc(maxTextures: Int): String
 }
 
 open external class BatchSystem(renderer: Renderer) : ISystem {
@@ -334,37 +334,37 @@ open external class BatchSystem(renderer: Renderer) : ISystem {
 	open fun setObjectRenderer(objectRenderer: ObjectRenderer)
 	open fun flush()
 	open fun reset()
-	open fun copyBoundTextures(arr: Array<BaseTexture<Resource, IAutoDetectOptions>>, maxTextures: Number)
-	open fun boundArray(texArray: BatchTextureArray, boundTextures: Array<BaseTexture<Resource, IAutoDetectOptions>>, batchId: Number, maxTextures: Number)
+	open fun copyBoundTextures(arr: Array<BaseTexture<Resource, IAutoDetectOptions>>, maxTextures: Int)
+	open fun boundArray(texArray: BatchTextureArray, boundTextures: Array<BaseTexture<Resource, IAutoDetectOptions>>, batchId: Int, maxTextures: Int)
 	
 	override fun destroy()
 }
 
 open external class BatchTextureArray {
 	open var elements: Array<BaseTexture<Resource, IAutoDetectOptions>>
-	open var ids: Array<Number>
-	open var count: Number
+	open var ids: Array<Int>
+	open var count: Int
 	open fun clear()
 }
 
-open external class Buffer(data: IArrayBuffer = definedExternally, _static: Boolean = definedExternally, index: Number = definedExternally) {
+open external class Buffer(data: IArrayBuffer = definedExternally, _static: Boolean = definedExternally, index: Boolean = definedExternally) {
 	open var data: ITypedArray
 	open var type: BUFFER_TYPE
 	open var static: Boolean
-	open var id: Number
+	open var id: Int
 	open var disposeRunner: Runner
-	open var _glBuffers: Object<Number, GLBuffer>
-	open var _updateID: Number
+	open var _glBuffers: Object<Int, GLBuffer>
+	open var _updateID: Int
 	open var index: Boolean
 	open fun update(data: IArrayBuffer = definedExternally)
-	open fun update(data: Array<Number> = definedExternally)
+	open fun update(data: Array<Double> = definedExternally)
 	open fun update()
 	open fun dispose()
 	open fun destroy()
 	
 	companion object {
 		fun from(data: IArrayBuffer): Buffer
-		fun from(data: Array<Number>): Buffer
+		fun from(data: Array<Double>): Buffer
 	}
 }
 
@@ -384,15 +384,15 @@ open external class BufferResource(source: Float32Array, options: ISize) : Resou
 }
 
 open external class BufferSystem(renderer: Renderer) : ISystem {
-	open var CONTEXT_UID: Number
+	open var CONTEXT_UID: Int
 	open var gl: IRenderingContext
-	open val managedBuffers: Object<Number, Buffer>
-	open val boundBufferBases: Object<Number, Buffer>
+	open val managedBuffers: Object<Int, Buffer>
+	open val boundBufferBases: Object<Int, Buffer>
 	override fun destroy()
 	protected open fun contextChange()
 	open fun bind(buffer: Buffer)
-	open fun bindBufferBase(buffer: Buffer, index: Number)
-	open fun bindBufferRange(buffer: Buffer, index: Number = definedExternally, offset: Number = definedExternally)
+	open fun bindBufferBase(buffer: Buffer, index: Int)
+	open fun bindBufferRange(buffer: Buffer, index: Int = definedExternally, offset: Int = definedExternally)
 	open fun update(buffer: Buffer)
 	open fun dispose(buffer: Buffer, contextLost: Boolean = definedExternally)
 	open fun disposeAll(contextLost: Boolean = definedExternally)
@@ -405,12 +405,12 @@ open external class CanvasResource(source: HTMLCanvasElement) : BaseImageResourc
 	}
 }
 
-external fun checkMaxIfStatementsInShader(maxIfs: Number, gl: IRenderingContext): Number
+external fun checkMaxIfStatementsInShader(maxIfs: Int, gl: IRenderingContext): Int
 
 open external class ContextSystem(renderer: Renderer) : ISystem {
-	open var webGLVersion: Number
+	open var webGLVersion: WEBGLVersion
 	open val supports: ISupportDict
-	protected open var CONTEXT_UID: Number
+	protected open var CONTEXT_UID: Int
 	protected open var gl: IRenderingContext
 	open var extensions: WebGLExtensions
 	open val isLost: Boolean
@@ -428,7 +428,7 @@ open external class ContextSystem(renderer: Renderer) : ISystem {
 
 external interface UBOElements {
 	val uboElements: Array<UBOElement>
-	val size: Number
+	val size: Int
 }
 
 external fun createUBOElements(uniformData: Array<IUniformData>): UBOElements
@@ -439,12 +439,12 @@ open external class CubeResource(source: Array<String> = definedExternally, opti
 	override var items: Array<BaseTexture<Resource, IAutoDetectOptions>>
 	open var linkBaseTexture: Boolean
 	override fun bind(baseTexture: BaseTexture<Resource, IAutoDetectOptions>)
-	open fun addBaseTextureAt(baseTexture: BaseTexture<Resource, IAutoDetectOptions>, index: Number, linkBaseTexture: Boolean = definedExternally): CubeResource
-	override fun addBaseTextureAt(baseTexture: BaseTexture<Resource, IAutoDetectOptions>, index: Number): CubeResource
+	open fun addBaseTextureAt(baseTexture: BaseTexture<Resource, IAutoDetectOptions>, index: Int, linkBaseTexture: Boolean = definedExternally): CubeResource
+	override fun addBaseTextureAt(baseTexture: BaseTexture<Resource, IAutoDetectOptions>, index: Int): CubeResource
 	override fun upload(renderer: Renderer, _baseTexture: BaseTexture<Resource, IAutoDetectOptions>, glTexture: GLTexture): Boolean
 	
 	companion object {
-		var SIDES: Number
+		var SIDES: Short
 		fun <S : Any? /* unknown */> test(source: Array<S>): Boolean /* S is Array<String | Resource> */
 	}
 }
@@ -453,13 +453,13 @@ external val defaultFilterVertex: String
 external val defaultVertex: String
 
 open external class Filter(vertexSrc: String = definedExternally, fragmentSrc: String = definedExternally, uniforms: Dict<Any> = definedExternally) : Shader {
-	open var padding: Number
+	open var padding: Int
 	open var multisample: MSAA_QUALITY
 	open var enabled: Boolean
 	open var autoFit: Boolean
 	open var legacy: Boolean
 	open var state: State
-	protected open var _resolution: Number
+	protected open var _resolution: Double
 	open fun apply(
 		filterManager: FilterSystem,
 		input: RenderTexture,
@@ -469,7 +469,7 @@ open external class Filter(vertexSrc: String = definedExternally, fragmentSrc: S
 	)
 	
 	open var blendMode: BLEND_MODES
-	open val resolution: Number
+	open val resolution: Double
 	
 	companion object {
 		val defaultVertexSrc: String
@@ -482,7 +482,7 @@ open external class FilterState {
 	open var renderTexture: RenderTexture
 	open var target: IFilterTarget
 	open var legacy: Boolean
-	open var resolution: Number
+	open var resolution: Double
 	open var multisample: MSAA_QUALITY
 	open var sourceFrame: Rectangle
 	open var destinationFrame: Rectangle
@@ -511,15 +511,15 @@ open external class FilterSystem(renderer: Renderer) : ISystem {
 	open fun calculateSpriteMatrix(outputMatrix: Matrix, sprite: ISpriteMaskTarget): Matrix
 	override fun destroy()
 	protected open fun getOptimalFilterTexture(
-		minWidth: Number,
-		minHeight: Number,
-		resolution: Number = definedExternally,
+		minWidth: Double,
+		minHeight: Double,
+		resolution: Double = definedExternally,
 		multisample: MSAA_QUALITY = definedExternally
 	): RenderTexture
 	
 	open fun getFilterTexture(
 		input: RenderTexture = definedExternally,
-		resolution: Number = definedExternally,
+		resolution: Double = definedExternally,
 		multisample: MSAA_QUALITY = definedExternally
 	): RenderTexture
 	
@@ -528,26 +528,26 @@ open external class FilterSystem(renderer: Renderer) : ISystem {
 	open fun resize()
 }
 
-open external class Framebuffer(width: Number, height: Number) {
-	open var width: Number
-	open var height: Number
+open external class Framebuffer(width: Int, height: Int) {
+	open var width: Int
+	open var height: Int
 	open var multisample: MSAA_QUALITY
 	open var stencil: Boolean
 	open var depth: Boolean
-	open var dirtyId: Boolean
-	open var dirtyFormat: Number
-	open var dirtySize: Number
+	open var dirtyId: Int
+	open var dirtyFormat: Int
+	open var dirtySize: Int
 	open var depthTexture: BaseTexture<Resource, IAutoDetectOptions>
 	open var colorTextures: Array<BaseTexture<Resource, IAutoDetectOptions>>
 	open var glFramebuffers: Object<String, GLFramebuffer>
 	open var disposeRunner: Runner
 	open val colorTexture: BaseTexture<Resource, IAutoDetectOptions>
 	
-	open fun addColorTexture(index: Number = definedExternally, texture: BaseTexture<Resource, IAutoDetectOptions> = definedExternally): Framebuffer /* this */
+	open fun addColorTexture(index: Int = definedExternally, texture: BaseTexture<Resource, IAutoDetectOptions> = definedExternally): Framebuffer /* this */
 	open fun addDepthTexture(texture: BaseTexture<Resource, IAutoDetectOptions> = definedExternally): Framebuffer /* this */
 	open fun enableDepth(): Framebuffer /* this */
 	open fun enableStencil(): Framebuffer /* this */
-	open fun resize(width: Number, height: Number)
+	open fun resize(width: Int, height: Int)
 	open fun dispose()
 	open fun destroyDepthTexture()
 }
@@ -558,20 +558,20 @@ open external class FramebufferSystem(renderer: Renderer) : ISystem {
 	open var viewport: Rectangle
 	open var hasMRT: Boolean
 	open var writeDepthTexture: Boolean
-	protected open var CONTEXT_UID: Number
+	protected open var CONTEXT_UID: Int
 	protected open var gl: IRenderingContext
 	protected open var unknownFramebuffer: Framebuffer
-	protected open var msaaSamples: Array<Number>
+	protected open var msaaSamples: Array<Int>
 	open var renderer: Renderer
 	
 	protected open fun contextChange()
-	open fun bind(framebuffer: Framebuffer = definedExternally, frame: Rectangle = definedExternally, mipLevel: Number = definedExternally)
-	open fun setViewport(x: Number, y: Number, width: Number, height: Number)
+	open fun bind(framebuffer: Framebuffer = definedExternally, frame: Rectangle = definedExternally, mipLevel: Int = definedExternally)
+	open fun setViewport(x: Int, y: Int, width: Int, height: Int)
 	open val size: Size
-	open fun clear(r: Number, g: Number, b: Number, a: Number, mask: BUFFER_BITS = definedExternally)
+	open fun clear(r: Double, g: Double, b: Double, a: Double, mask: BUFFER_BITS = definedExternally)
 	open fun initFramebuffer(framebuffer: Framebuffer): GLFramebuffer
 	open fun resizeFramebuffer(framebuffer: Framebuffer)
-	open fun updateFramebuffer(framebuffer: Framebuffer, mipLevel: Number)
+	open fun updateFramebuffer(framebuffer: Framebuffer, mipLevel: Int)
 	protected open fun canMultisampleFramebuffer(framebuffer: Framebuffer): Boolean
 	protected open fun detectSamples(samples: MSAA_QUALITY): MSAA_QUALITY
 	open fun blit(framebuffer: Framebuffer = definedExternally, sourcePixels: Rectangle = definedExternally, destPixels: Rectangle = definedExternally)
@@ -582,17 +582,17 @@ open external class FramebufferSystem(renderer: Renderer) : ISystem {
 	override fun destroy()
 	
 	interface Size {
-		val x: Number
-		val y: Number
-		val width: Number
-		val height: Number
+		val x: Int
+		val y: Int
+		val width: Int
+		val height: Int
 	}
 }
 
 external fun generateProgram(gl: IRenderingContext, program: Program): GLProgram
 
 external interface UniformBuffer {
-	var size: Number
+	var size: Int
 	var syncFunc: UniformsSyncCallback
 }
 
@@ -602,54 +602,54 @@ open external class Geometry(buffers: Array<Buffer> = definedExternally, attribu
 	open var buffers: Array<Buffer>
 	open var indexBuffer: Buffer
 	open var attributes: Object<String, Attribute>
-	open var id: Number
+	open var id: Int
 	open var instanced: Boolean
-	open var instanceCount: Number
-	open var glVertexArrayObjects: Object<Number, Object<String, WebGLVertexArrayObject>>
+	open var instanceCount: Int
+	open var glVertexArrayObjects: Object<Int, Object<String, WebGLVertexArrayObject>>
 	open var disposeRunner: Runner
-	open var refCount: Number
+	open var refCount: Int
 	
 	open fun addAttribute(
 		id: String,
 		buffer: Buffer,
-		size: Number = definedExternally,
+		size: Int = definedExternally,
 		normalized: Boolean = definedExternally,
 		type: TYPES = definedExternally,
-		stride: Number = definedExternally,
-		start: Number = definedExternally,
+		stride: Int = definedExternally,
+		start: Int = definedExternally,
 		instance: Boolean = definedExternally
 	): Geometry
 	
 	open fun addAttribute(
 		id: String,
 		buffer: Float32Array,
-		size: Number = definedExternally,
+		size: Int = definedExternally,
 		normalized: Boolean = definedExternally,
 		type: TYPES = definedExternally,
-		stride: Number = definedExternally,
-		start: Number = definedExternally,
+		stride: Int = definedExternally,
+		start: Int = definedExternally,
 		instance: Boolean = definedExternally
 	): Geometry
 	
 	open fun addAttribute(
 		id: String,
 		buffer: Uint32Array,
-		size: Number = definedExternally,
+		size: Int = definedExternally,
 		normalized: Boolean = definedExternally,
 		type: TYPES = definedExternally,
-		stride: Number = definedExternally,
-		start: Number = definedExternally,
+		stride: Int = definedExternally,
+		start: Int = definedExternally,
 		instance: Boolean = definedExternally
 	): Geometry
 	
 	open fun addAttribute(
 		id: String,
-		buffer: Array<Number>,
-		size: Number = definedExternally,
+		buffer: Array<Int>,
+		size: Int = definedExternally,
 		normalized: Boolean = definedExternally,
 		type: TYPES = definedExternally,
-		stride: Number = definedExternally,
-		start: Number = definedExternally,
+		stride: Int = definedExternally,
+		start: Int = definedExternally,
 		instance: Boolean = definedExternally
 	): Geometry
 	
@@ -657,10 +657,10 @@ open external class Geometry(buffers: Array<Buffer> = definedExternally, attribu
 	open fun getBuffer(id: String): Buffer
 	open fun addIndex(buffer: Buffer = definedExternally): Geometry
 	open fun addIndex(buffer: ArrayBuffer = definedExternally): Geometry
-	open fun addIndex(buffer: Array<Number> = definedExternally): Geometry
+	open fun addIndex(buffer: Array<Int> = definedExternally): Geometry
 	open fun getIndex(): Buffer
 	open fun interleave(): Geometry
-	open fun getSize(): Number
+	open fun getSize(): Int
 	open fun dispose()
 	open fun destroy()
 	open fun clone(): Geometry
@@ -674,12 +674,12 @@ open external class GeometrySystem(renderer: Renderer) : ISystem {
 	open var hasVao: Boolean
 	open var hasInstance: Boolean
 	open var canUseUInt32ElementIndex: Boolean
-	protected open var CONTEXT_UID: Number
+	protected open var CONTEXT_UID: Int
 	protected open var gl: IRenderingContext
 	protected open var _activeGeometry: Geometry
 	protected open var _activeVao: WebGLVertexArrayObject
 	protected open var _boundBuffer: GLBuffer
-	open val managedGeometries: Object<Number, Geometry>
+	open val managedGeometries: Object<Int, Geometry>
 	
 	protected open fun contextChange()
 	open fun bind(geometry: Geometry = definedExternally, shader: Shader = definedExternally)
@@ -693,9 +693,9 @@ open external class GeometrySystem(renderer: Renderer) : ISystem {
 	protected open fun activateVao(geometry: Geometry, program: Program)
 	open fun draw(
 		type: DRAW_MODES,
-		size: Number = definedExternally,
-		start: Number = definedExternally,
-		instanceCount: Number = definedExternally
+		size: Int = definedExternally,
+		start: Int = definedExternally,
+		instanceCount: Int = definedExternally
 	): GeometrySystem /* this */
 	
 	protected open fun unbind()
@@ -708,9 +708,9 @@ external fun getUBOData(uniforms: Dict<Any>, uniformData: Dict<Any>): Array<Any?
 
 open external class GLBuffer(buffer: WebGLBuffer = definedExternally) {
 	open var buffer: WebGLBuffer
-	open var updateID: Number
-	open var byteLength: Number
-	open var refCount: Number
+	open var updateID: Int
+	open var byteLength: Int
+	open var refCount: Int
 }
 
 open external class GLFramebuffer(framebuffer: WebGLTexture) {
@@ -719,10 +719,10 @@ open external class GLFramebuffer(framebuffer: WebGLTexture) {
 	open var multisample: MSAA_QUALITY
 	open var msaaBuffer: WebGLRenderbuffer
 	open var bitFramebuffer: Framebuffer
-	open var dirtyId: Number
-	open var dirtyFormat: Number
-	open var dirtySize: Number
-	open var mipLevel: Number
+	open var dirtyId: Int
+	open var dirtyFormat: Int
+	open var dirtySize: Int
+	open var mipLevel: Int
 }
 
 open external class GLProgram(program: WebGLProgram, uniformData: Object<String, IGLUniformData>) {
@@ -737,21 +737,21 @@ open external class GLProgram(program: WebGLProgram, uniformData: Object<String,
 
 open external class GLTexture(texture: WebGLTexture) {
 	open var texture: WebGLTexture
-	open var width: Number
-	open var height: Number
+	open var width: Int
+	open var height: Int
 	open var mipmap: Boolean
-	open var wrapMode: Number
-	open var type: Number
-	open var internalFormat: Number
-	open var samplerType: Number
-	open var dirtyId: Number
-	open var dirtyStyleId: Number
+	open var wrapMode: Int
+	open var type: Int
+	open var internalFormat: Int
+	open var samplerType: Int
+	open var dirtyId: Int
+	open var dirtyStyleId: Int
 }
 
 external interface IAttributeData {
 	var type: String
-	var size: Number
-	var location: Number
+	var size: Int
+	var location: Int
 	var name: String
 }
 
@@ -764,15 +764,15 @@ external interface IAutoDetectOptions : ISize {
 external interface IBaseTextureOptions<R /* = Any */> {
 	var alphaMode: ALPHA_MODES?
 	var mimap: MIPMAP_MODES?
-	var anisotropicLevel: Number?
+	var anisotropicLevel: Int?
 	var scaleMode: SCALE_MODES?
-	var width: Number?
-	var height: Number?
+	var width: Int?
+	var height: Int?
 	var wrapMode: WRAP_MODES?
 	var format: FORMATS?
 	var type: TYPES?
 	var target: TARGETS?
-	var resolution: Number?
+	var resolution: Double?
 	var multisample: MSAA_QUALITY?
 	var resourceOptions: R?
 	var pixiIdPrefix: String?
@@ -781,10 +781,10 @@ external interface IBaseTextureOptions<R /* = Any */> {
 external interface IBatchableElement {
 	var _texture: Texture<Resource>
 	var vertexData: Float32Array
-	var indices: dynamic /* Uint16Array | Uint32Array | Array<Number> */
+	var indices: dynamic /* Uint16Array | Uint32Array | Array<Int> */
 	var uvs: Float32Array
-	var worldAlpha: Number
-	var _tintRGB: Number
+	var worldAlpha: Double
+	var _tintRGB: Int
 	var blendMode: BLEND_MODES
 }
 
@@ -792,7 +792,7 @@ external interface IBatchFactoryOptions {
 	var vertex: String?
 	var fragment: String?
 	var geometryClass: BatchGeometry?
-	var vertexSize: Number?
+	var vertexSize: Int?
 }
 
 external interface ICubeResourceOptions : ISize {
@@ -807,7 +807,7 @@ external interface IFilterTarget {
 
 external interface IGenerateTextureOptions {
 	var scaleMode: SCALE_MODES?
-	var resolution: Number?
+	var resolution: Double?
 	var region: Rectangle?
 	var multisample: MSAA_QUALITY?
 }
@@ -873,18 +873,18 @@ external interface IRenderableObject {
 }
 
 external interface IRendererOptions {
-	var width: Number?
-	var height: Number?
+	var width: Int?
+	var height: Int?
 	var view: HTMLCanvasElement?
 	var useContextAlpha: dynamic? /* boolean | 'notMultiplied' */
 	var transparent: Boolean?
 	var autoDensity: Boolean?
 	var antiAlias: Boolean?
-	var resolution: Number?
+	var resolution: Double?
 	var preserveDrawingBuffer: Boolean?
 	var clearBeforeRender: Boolean?
-	var backgroundColor: Number?
-	var backgroundAlpha: Number?
+	var backgroundColor: Int?
+	var backgroundAlpha: Double?
 	var powerPreference: WebGLPowerPreference?
 	var context: IRenderingContext?
 }
@@ -920,10 +920,9 @@ external interface ISpriteMaskFilter : Filter {
 
 external interface ISpriteMaskTarget : IMaskTarget {
 	var _texture: Texture<Resource>
-	var worldAlpha: Number
+	var worldAlpha: Double
 	var anchor: Point
 }
-
 
 external interface ISupportDict {
 	var uint32Indices: Boolean
@@ -931,9 +930,9 @@ external interface ISupportDict {
 
 external interface ISVGResourceOptions {
 	var source: String?
-	var scale: Number?
-	var width: Number?
-	var height: Number?
+	var scale: Double?
+	var width: Double?
+	var height: Double?
 	var autoLoad: Boolean?
 	var crossorigin: dynamic? /* boolean | string */
 }
@@ -948,16 +947,16 @@ external interface ISystemConstructor<R /* = Renderer */> {
 
 @Suppress("INTERFACE_WITH_SUPERCLASS")
 external interface ITypedArray : IArrayBuffer {
-	val length: Number
-	operator fun get(key: Number): Number
-	operator fun set(key: Number, value: Number)
-	val BYTES_PER_ELEMENT: Number
+	val length: Int
+	operator fun get(key: Int): Int
+	operator fun set(key: Int, value: Int)
+	val BYTES_PER_ELEMENT: Int
 }
 
 external interface IUniformData {
-	var index: Number
+	var index: Int
 	var type: String
-	var size: Number
+	var size: Int
 	var isArray: Boolean
 	var value: Any
 	var name: String
@@ -977,7 +976,7 @@ external interface IUnloadableTexture {
 external interface IVideoResourceOptions {
 	var autoLoad: Boolean?
 	var autoPlay: Boolean?
-	var updateFPS: Number?
+	var updateFPS: Double?
 	var crossorigin: dynamic? /* boolean | string */
 }
 
@@ -992,13 +991,13 @@ open external class MaskData(maskObject: IMaskTarget = definedExternally) {
 	open var maskObject: IMaskTarget
 	open var pooled: Boolean
 	open var isMaskData: Boolean
-	open var resolution: Number
+	open var resolution: Double?
 	open var multisample: MSAA_QUALITY
 	open var enabled: Boolean
 	open var _filters: Array<ISpriteMaskFilter>
-	open var _stencilCounter: Number
-	open var _scissorCounter: Number
-	open var _scissorRect: Rectangle
+	open var _stencilCounter: Int
+	open var _scissorCounter: Int
+	open var _scissorRect: Rectangle?
 	open var _scissorRectLocal: Rectangle
 	open var _target: IMaskTarget
 	
@@ -1011,7 +1010,7 @@ open external class MaskData(maskObject: IMaskTarget = definedExternally) {
 open external class MaskSystem(renderer: Renderer) : ISystem {
 	open var enableScissor: Boolean
 	protected open val alphaMaskPool: Array<Array<SpriteMaskFilter>>
-	protected open var alphaMaskIndex: Number
+	protected open var alphaMaskIndex: Double
 	fun setMaskStack(maskStack: Array<MaskData>)
 	fun push(target: IMaskTarget, maskDataOrTarget: MaskData)
 	fun push(target: IMaskTarget, maskDataOrTarget: IMaskTarget)
@@ -1032,11 +1031,11 @@ open external class ObjectRenderer(renderer: Renderer) : ISystem {
 }
 
 open external class Program(vertexSrc: String = definedExternally, fragmentSrc: String = definedExternally, name: String = definedExternally) {
-	open var id: Number
+	open var id: Int
 	open var vertexSrc: String
 	open var fragmentSrc: String
 	open var nameCache: Any
-	open var glPrograms: Object<Number, GLProgram>
+	open var glPrograms: Object<Int, GLProgram>
 	open var attributeData: Object<String, IAttributeData>
 	open var uniformData: Object<String, IUniformData>
 	
@@ -1053,8 +1052,8 @@ open external class ProjectionSystem(renderer: Renderer) : ISystem {
 	open var defaultFrame: Rectangle
 	open var projectionMatrix: Matrix
 	open var transform: Matrix
-	open fun update(destinationFrame: Rectangle, sourceFrame: Rectangle, resolution: Number, root: Boolean)
-	open fun calculateProject(_destinationFrame: Rectangle, sourceFrame: Rectangle, _resolution: Number, root: Boolean)
+	open fun update(destinationFrame: Rectangle, sourceFrame: Rectangle, resolution: Double, root: Boolean)
+	open fun calculateProject(_destinationFrame: Rectangle, sourceFrame: Rectangle, _resolution: Double, root: Boolean)
 	open fun setTransform(_matrix: Matrix)
 	override fun destroy()
 }
@@ -1073,7 +1072,7 @@ open external class QuadUv : Geometry {
 open external class Renderer(options: IRendererOptions = definedExternally) : AbstractRenderer {
 	open var gl: IRenderingContext
 	open var globalUniforms: UniformGroup<Dict<Any>>
-	open var CONTEXT_UID: Number
+	open var CONTEXT_UID: Int
 	open var renderingToScreen: Boolean
 	open var multisample: MSAA_QUALITY
 	open var mask: MaskSystem
@@ -1108,14 +1107,14 @@ open external class Renderer(options: IRendererOptions = definedExternally) : Ab
 	open fun generateTexture(
 		displayObject: IRenderableObject,
 		options: IGenerateTextureOptions = definedExternally,
-		resolution: Number = definedExternally,
+		resolution: Double = definedExternally,
 		region: Rectangle = definedExternally
 	): RenderTexture
 	
 	override fun generateTexture(
 		displayObject: IRenderableObject,
-		options: SCALE_MODES,
-		resolution: Number,
+		scaleMode: SCALE_MODES,
+		resolution: Double,
 		region: Rectangle
 	): RenderTexture
 	
@@ -1137,11 +1136,11 @@ open external class RenderTexture(baseRenderTexture: BaseRenderTexture, frame: R
 	open var filterPoolKey: dynamic? /* string | number | null */
 	open val frameBuffer: Framebuffer
 	open var multisample: MSAA_QUALITY
-	open fun resize(desiredWidth: Number, desiredHeight: Number, resizeBaseTexture: Boolean = definedExternally)
-	open fun setResolution(resolution: Number)
+	open fun resize(desiredWidth: Int, desiredHeight: Int, resizeBaseTexture: Boolean = definedExternally)
+	open fun setResolution(resolution: Double)
 	
 	companion object {
-		fun create(width: Number, height: Number, scaleMode: SCALE_MODES = definedExternally, resolution: Number = definedExternally): RenderTexture
+		fun create(width: Int, height: Int, scaleMode: SCALE_MODES = definedExternally, resolution: Double = definedExternally): RenderTexture
 		fun create(options: IBaseTextureOptions<Any> = definedExternally): RenderTexture
 	}
 }
@@ -1150,54 +1149,54 @@ open external class RenderTexturePool(textureOptions: IBaseTextureOptions<Any> =
 	open var textureOptions: IBaseTextureOptions<Any>
 	open var enableFullScreen: Boolean
 	open var texturePool: Object<dynamic /* string | number */, Array<RenderTexture>>
-	open fun createTexture(realWidth: Number, realHeight: Number, multisample: MSAA_QUALITY = definedExternally): RenderTexture
+	open fun createTexture(realWidth: Int, realHeight: Int, multisample: MSAA_QUALITY = definedExternally): RenderTexture
 	open fun getOptimalTexture(
-		minWidth: Number,
-		minHeight: Number,
-		resolution: Number = definedExternally,
+		minWidth: Int,
+		minHeight: Int,
+		resolution: Double = definedExternally,
 		multisample: MSAA_QUALITY = definedExternally
 	): RenderTexture
 	
-	open fun getFilterTexture(input: RenderTexture, resolution: Number = definedExternally, multisample: MSAA_QUALITY = definedExternally): RenderTexture
+	open fun getFilterTexture(input: RenderTexture, resolution: Double = definedExternally, multisample: MSAA_QUALITY = definedExternally): RenderTexture
 	open fun returnTexture(renderTexture: RenderTexture)
 	open fun returnFilterTexture(renderTexture: RenderTexture)
 	open fun clear(destroyTextures: Boolean = definedExternally)
 	open fun setScreenSize(size: ISize)
 	
 	companion object {
-		var SCREEN_KEY: Number
+		var SCREEN_KEY: Short
 	}
 }
 
 open external class RenderTextureSystem(renderer: Renderer) : ISystem {
-	open var clearColor: Array<Number>
+	open var clearColor: Array<Double>
 	open var defaultMaskStack: Array<MaskData>
 	open var current: RenderTexture?
 	open val sourceFrame: Rectangle
 	open val destinationFrame: Rectangle
 	open val viewportFrame: Rectangle
 	open fun bind(renderTexture: RenderTexture = definedExternally, sourceFrame: Rectangle = definedExternally, destinationFrame: Rectangle = definedExternally)
-	open fun clear(clearColor: Array<Number> = definedExternally, mask: BUFFER_BITS = definedExternally)
+	open fun clear(clearColor: Array<Double> = definedExternally, mask: BUFFER_BITS = definedExternally)
 	open fun resize()
 	open fun reset()
 	override fun destroy()
 }
 
-abstract external class Resource(width: Number = definedExternally, height: Number = definedExternally) {
+abstract external class Resource(width: Int = definedExternally, height: Int = definedExternally) {
 	open var destroyed: Boolean
 	open var internal: Boolean
-	protected open var _width: Number
-	protected open var _height: Number
+	protected open var _width: Int
+	protected open var _height: Int
 	protected open var onResize: Runner
 	protected open var onUpdate: Runner
 	protected open var onError: Runner
 	open val valid: Boolean
-	open val width: Number
-	open val height: Number
+	open val width: Int
+	open val height: Int
 	
 	open fun bind(baseTexture: BaseTexture<Resource, IAutoDetectOptions>)
 	open fun unBind(baseTexture: BaseTexture<Resource, IAutoDetectOptions>)
-	open fun resize(width: Number, height: Number)
+	open fun resize(width: Int, height: Int)
 	open fun update()
 	open fun load(): Promise<Resource>
 	abstract fun upload(
@@ -1224,7 +1223,7 @@ abstract external class Resource(width: Number = definedExternally, height: Numb
 external val resources: Dict<Any>
 
 open external class ScissorsSystem(renderer: Renderer) : AbstractMaskSystem {
-	override fun getStackLength(): Number
+	override fun getStackLength(): Int
 	open fun calcScissorRect(maskData: MaskData)
 	open fun testScissor(maskData: MaskData)
 	open fun push(maskData: MaskData)
@@ -1235,7 +1234,7 @@ open external class ScissorsSystem(renderer: Renderer) : AbstractMaskSystem {
 open external class Shader(program: Program, uniforms: Dict<Any> = definedExternally) {
 	open var program: Program
 	open var uniformGroup: UniformGroup<Dict<Any>>
-	open var uniformBindCount: Number
+	open var uniformBindCount: Int
 	open val uniforms: Dict<Any>
 	
 	open fun checkUniformExists(name: String, group: UniformGroup<Dict<Any>>): Boolean
@@ -1250,7 +1249,7 @@ open external class ShaderSystem(renderer: Renderer) : ISystem {
 	protected open var gl: IRenderingContext
 	open var shader: Shader
 	open var program: Program
-	open var id: Number
+	open var id: Int
 	open var destroyed: Boolean
 	
 	open fun systemCheck()
@@ -1278,16 +1277,16 @@ open external class SpriteMaskFilter(sprite: IMaskTarget) : Filter {
 }
 
 open external class State {
-	open var data: Number
+	open var data: Double
 	open var _blendMode: BLEND_MODES
-	open var _polygonOffset: Number
+	open var _polygonOffset: Double
 	open var blend: Boolean
 	open var offsets: Boolean
 	open var culling: Boolean
 	open var depthTest: Boolean
 	open var clockwiseFrontFace: Boolean
 	open var blendMode: BLEND_MODES
-	open var polygonOffset: Number
+	open var polygonOffset: Double
 	
 	override fun toString(): String
 	
@@ -1297,12 +1296,12 @@ open external class State {
 }
 
 open external class StateSystem : ISystem {
-	open var stateId: Number
-	open var polygonOffset: Number
+	open var stateId: Double
+	open var polygonOffset: Double
 	open var blendMode: BLEND_MODES
 	protected open var _blendEq: Boolean
 	protected open var gl: IRenderingContext
-	protected open var blendModes: Array<Array<Number>>
+	protected open var blendModes: Array<Array<Int>>
 	protected open val map: Array<(value: Boolean) -> Unit>
 	protected open val checks: Array<(system: StateSystem /* this */, state: State) -> Unit>
 	protected open var defaultState: State
@@ -1316,15 +1315,15 @@ open external class StateSystem : ISystem {
 	open fun setDepthMask(value: Boolean)
 	open fun setCullFace(value: Boolean)
 	open fun setFrontFace(value: Boolean)
-	open fun setBlendMode(value: Number)
-	open fun setPolygonOffset(value: Number, scale: Number)
+	open fun setBlendMode(value: Int)
+	open fun setPolygonOffset(value: Double, scale: Double)
 	open fun reset()
 	open fun updateCheck(func: (system: StateSystem /* this */, state: State) -> Unit, value: Boolean)
 	override fun destroy()
 }
 
 open external class StencilSystem(renderer: Renderer) : AbstractMaskSystem {
-	override fun getStackLength(): Number
+	override fun getStackLength(): Int
 	open fun push(maskData: MaskData)
 	open fun pop(maskObject: IMaskTarget)
 	override fun _useCurrent()
@@ -1332,9 +1331,9 @@ open external class StencilSystem(renderer: Renderer) : AbstractMaskSystem {
 
 open external class SVGResource(sourceBase64: String, options: ISVGResourceOptions = definedExternally) : BaseImageResource {
 	open val svg: String
-	open val scale: Number
-	open val _overrideWidth: Number
-	open val _overrideHeight: Number
+	open val scale: Double
+	open val _overrideWidth: Double
+	open val _overrideHeight: Double
 	override fun load(): Promise<SVGResource>
 	override fun dispose()
 	
@@ -1360,7 +1359,7 @@ open external class Texture<R : Resource /* = Resource */>(
 	frame: Rectangle = definedExternally,
 	orig: Rectangle = definedExternally,
 	trim: Rectangle = definedExternally,
-	rotate: Number = definedExternally,
+	rotate: Int = definedExternally,
 	anchor: IPointData = definedExternally
 ) : EventEmitter {
 	open var baseTexture: BaseTexture<R, IAutoDetectOptions>
@@ -1370,17 +1369,17 @@ open external class Texture<R : Resource /* = Resource */>(
 	open var noFrame: Boolean
 	open var defaultAnchor: Point
 	open var uvMatrix: TextureMatrix
-	protected open var _rotate: Number
-	open var _updateID: Number
+	protected open var _rotate: Int
+	open var _updateID: Double
 	open var _frame: Rectangle
 	open var _uvs: TextureUvs
 	open var textureCacheIds: Array<String>
 	
-	open val resolution: Number
+	open val resolution: Double
 	open var frame: Rectangle
-	open var rotate: Number
-	open var width: Number
-	open var height: Number
+	open var rotate: Int
+	open var width: Double
+	open var height: Double
 	
 	open fun update()
 	open fun onBaseTextureUpdated(baseTexture: BaseTexture<Resource, IAutoDetectOptions>)
@@ -1411,8 +1410,8 @@ open external class Texture<R : Resource /* = Resource */>(
 		
 		fun <R : Resource, R0> fromUrl(url: String, options: IBaseTextureOptions<R0> = definedExternally): Promise<Texture<R>>
 		fun fromUrl(url: String, options: IBaseTextureOptions<Any> = definedExternally): Promise<Texture<Resource>>
-		fun fromBuffer(buffer: Float32Array, width: Number, height: Number, options: IBaseTextureOptions<ISize> = definedExternally): Texture<BufferResource>
-		fun fromBuffer(buffer: Uint8Array, width: Number, height: Number, options: IBaseTextureOptions<ISize> = definedExternally): Texture<BufferResource>
+		fun fromBuffer(buffer: Float32Array, width: Double, height: Double, options: IBaseTextureOptions<ISize> = definedExternally): Texture<BufferResource>
+		fun fromBuffer(buffer: Uint8Array, width: Double, height: Double, options: IBaseTextureOptions<ISize> = definedExternally): Texture<BufferResource>
 		fun <R : Resource> fromLoader(
 			source: HTMLImageElement,
 			imageUrl: String,
@@ -1462,10 +1461,10 @@ open external class Texture<R : Resource /* = Resource */>(
 }
 
 open external class TextureGCSystem(renderer: Renderer) : ISystem {
-	open var count: Number
-	open var checkCount: Number
-	open var maxIdle: Number
-	open var checkCountMax: Number
+	open var count: Int
+	open var checkCount: Int
+	open var maxIdle: Int
+	open var checkCountMax: Int
 	open var mode: GC_MODES
 	
 	protected open fun postrender()
@@ -1474,14 +1473,14 @@ open external class TextureGCSystem(renderer: Renderer) : ISystem {
 	override fun destroy()
 }
 
-open external class TextureMatrix(texture: Texture<Resource>, clampMargin: Number = definedExternally) {
+open external class TextureMatrix(texture: Texture<Resource>, clampMargin: Double = definedExternally) {
 	open var mapCoord: Matrix
-	open var clampOffset: Number
-	open var clampMargin: Number
+	open var clampOffset: Double
+	open var clampMargin: Double
 	open val uClampFrame: Float32Array
 	open val uClampOffset: Float32Array
-	open var _textureID: Number
-	open var _updateID: Number
+	open var _textureID: Int
+	open var _updateID: Int
 	open var _texture: Texture<Resource>
 	open var isSimple: Boolean
 	open var texture: Texture<Resource>
@@ -1494,21 +1493,21 @@ open external class TextureSystem(renderer: Renderer) : ISystem {
 	open var boundTextures: Array<BaseTexture<Resource, IAutoDetectOptions>>
 	open var managerTextures: Array<BaseTexture<Resource, IAutoDetectOptions>>
 	protected open var hasIntegerTextures: Boolean
-	protected open var CONTEXT_UID: Number
+	protected open var CONTEXT_UID: Int
 	protected open var gl: IRenderingContext
-	protected open var internalFormats: Object<Number, Object<Number, Number>>
-	protected open var webGLVersion: Number
+	protected open var internalFormats: Object<TYPES, Object<FORMATS, Int>>
+	protected open var webGLVersion: WEBGLVersion
 	protected open var unknownTexture: BaseTexture<Resource, IAutoDetectOptions>
-	protected open var _unknownBoundTextures: Number
-	open var currentLocation: Number
-	open var emptyTextures: Object<Number, GLTexture>
+	protected open var _unknownBoundTextures: Boolean
+	open var currentLocation: Int
+	open var emptyTextures: Object<Int, GLTexture>
 	
 	open fun contextChange()
-	open fun bind(texture: Texture<Resource>, location: Number = definedExternally)
-	open fun bind(texture: BaseTexture<Resource, IAutoDetectOptions>, location: Number = definedExternally)
+	open fun bind(texture: Texture<Resource>, location: Int = definedExternally)
+	open fun bind(texture: BaseTexture<Resource, IAutoDetectOptions>, location: Int = definedExternally)
 	open fun reset()
 	open fun unbind(texture: BaseTexture<Resource, IAutoDetectOptions> = definedExternally)
-	open fun ensureSamplerType(maxTextures: Number)
+	open fun ensureSamplerType(maxTextures: Int)
 	open fun initTexture(texture: BaseTexture<Resource, IAutoDetectOptions>): GLTexture
 	open fun initTextureType(texture: BaseTexture<Resource, IAutoDetectOptions>, glTexture: GLTexture)
 	open fun updateTexture(texture: BaseTexture<Resource, IAutoDetectOptions>)
@@ -1520,25 +1519,25 @@ open external class TextureSystem(renderer: Renderer) : ISystem {
 }
 
 open external class TextureUvs {
-	open var x0: Number
-	open var y0: Number
-	open var x1: Number
-	open var y1: Number
-	open var x2: Number
-	open var y2: Number
-	open var x3: Number
-	open var y3: Number
+	open var x0: Double
+	open var y0: Double
+	open var x1: Double
+	open var y1: Double
+	open var x2: Double
+	open var y2: Double
+	open var x3: Double
+	open var y3: Double
 	open var uvsFloat32: Float32Array
 	
-	open fun set(frame: Rectangle, baseFrame: ISize, rotate: Number)
+	open fun set(frame: Rectangle, baseFrame: ISize, rotate: Int)
 	override fun toString(): String
 }
 
 external interface UBOElement {
 	var data: IUniformData
-	var offset: Number
-	var dataLen: Number
-	var dirty: Number
+	var offset: Int
+	var dataLen: Int
+	var dirty: Int
 }
 
 open external class UniformGroup<LAYOUT /* = Dict<Any> */>(uniforms: LAYOUT, isStatic: Boolean = definedExternally, isUbo: Boolean = definedExternally) {
@@ -1546,9 +1545,9 @@ open external class UniformGroup<LAYOUT /* = Dict<Any> */>(uniforms: LAYOUT, isS
 	
 	open val uniforms: LAYOUT
 	open val group: Boolean
-	open var id: Number
+	open var id: Int
 	open var syncUniforms: Dict<UniformsSyncCallback_2>
-	open var dirtyId: Number
+	open var dirtyId: Int
 	open var static: Boolean
 	open var ubo: Boolean
 	open var buffer: Buffer?
@@ -1575,13 +1574,13 @@ open external class VideoResource(source: HTMLVideoElement, options: IVideoResou
 	override var source: ImageSource /* HTMLVideoElement */
 	protected open var _autoUpdate: Boolean
 	protected open var _isConnectedToTicker: Boolean
-	protected open var _updateFPS: Number
-	protected open var _msToNextUpdate: Number
+	protected open var _updateFPS: Double
+	protected open var _msToNextUpdate: Int
 	protected open var autoPlay: Boolean
 	open val autoUpdate: Boolean
-	open val updateFPS: Number
+	open val updateFPS: Double
 	
-	open fun update(_deltaTime: Number)
+	open fun update(_deltaTime: Int)
 	override fun load(): Promise<VideoResource>
 	
 	companion object {
@@ -1592,8 +1591,8 @@ open external class VideoResource(source: HTMLVideoElement, options: IVideoResou
 	}
 }
 
-open external class ViewableBuffer(length: Number) {
-	open var size: Number
+open external class ViewableBuffer(length: Int) {
+	open var size: Int
 	open var rawBinaryData: ArrayBuffer
 	open var uint32View: Uint32Array
 	open var float32View: Float32Array
@@ -1607,38 +1606,38 @@ open external class ViewableBuffer(length: Number) {
 	open fun destroy()
 	
 	companion object {
-		fun sizeOf(type: String): Number
+		fun sizeOf(type: String): Int
 	}
 }
 
 external interface WEBGL_compressed_texture_atc {
-	var COMPRESSED_RGB_ATC_WEBGL: Number
-	var COMPRESSED_RGBA_ATC_EXPLICIT_ALPHA_WEBGL: Number
-	var COMPRESSED_RGBA_ATC_INTERPOLATED_ALPHA_WEBGL: Number
+	var COMPRESSED_RGB_ATC_WEBGL: Int
+	var COMPRESSED_RGBA_ATC_EXPLICIT_ALPHA_WEBGL: Int
+	var COMPRESSED_RGBA_ATC_INTERPOLATED_ALPHA_WEBGL: Int
 }
 
 external interface WEBGL_compressed_texture_etc {
-	var COMPRESSED_R11_EAC: Number
-	var COMPRESSED_SIGNED_R11_EAC: Number
-	var COMPRESSED_RG11_EAC: Number
-	var COMPRESSED_SIGNED_RG11_EAC: Number
-	var COMPRESSED_RGB8_ETC2: Number
-	var COMPRESSED_RGBA8_ETC2_EAC: Number
-	var COMPRESSED_SRGB8_ETC2: Number
-	var COMPRESSED_SRGB8_ALPHA8_ETC2_EAC: Number
-	var COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2: Number
-	var COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2: Number
+	var COMPRESSED_R11_EAC: Int
+	var COMPRESSED_SIGNED_R11_EAC: Int
+	var COMPRESSED_RG11_EAC: Int
+	var COMPRESSED_SIGNED_RG11_EAC: Int
+	var COMPRESSED_RGB8_ETC2: Int
+	var COMPRESSED_RGBA8_ETC2_EAC: Int
+	var COMPRESSED_SRGB8_ETC2: Int
+	var COMPRESSED_SRGB8_ALPHA8_ETC2_EAC: Int
+	var COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2: Int
+	var COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2: Int
 }
 
 external interface WEBGL_compressed_texture_etc1 {
-	var COMPRESSED_RGB_ETC1_WEBGL: Number
+	var COMPRESSED_RGB_ETC1_WEBGL: Int
 }
 
 external interface WEBGL_compressed_texture_pvrtc {
-	var COMPRESSED_RGB_PVRTC_4BPPV1_IMG: Number
-	var COMPRESSED_RGBA_PVRTC_4BPPV1_IMG: Number
-	var COMPRESSED_RGB_PVRTC_2BPPV1_IMG: Number
-	var COMPRESSED_RGBA_PVRTC_2BPPV1_IMG: Number
+	var COMPRESSED_RGB_PVRTC_4BPPV1_IMG: Int
+	var COMPRESSED_RGBA_PVRTC_4BPPV1_IMG: Int
+	var COMPRESSED_RGB_PVRTC_2BPPV1_IMG: Int
+	var COMPRESSED_RGBA_PVRTC_2BPPV1_IMG: Int
 }
 
 external interface WebGLExtensions {

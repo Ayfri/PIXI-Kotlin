@@ -21,7 +21,7 @@ inline var DisplayObject.accessibleHint
 	}
 
 inline var DisplayObject.tabIndex
-	get() = asDynamic().tabIndex as Number
+	get() = asDynamic().tabIndex as Int
 	set(value) {
 		asDynamic().tabIndex = value
 	}
@@ -57,7 +57,7 @@ inline var DisplayObject.accessibleChildren
 	}
 
 inline var DisplayObject.renderId
-	get() = asDynamic().renderId as Number
+	get() = asDynamic().renderId as Int
 	set(value) {
 		asDynamic().renderId = value
 	}

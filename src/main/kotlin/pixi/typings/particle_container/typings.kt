@@ -4,7 +4,6 @@ package pixi.typings.particle_container
 
 import org.khronos.webgl.Float32Array
 import org.khronos.webgl.Uint32Array
-import pixi.typings.Number
 import pixi.typings.VarArgFun
 import pixi.typings.constants.BLEND_MODES
 import pixi.typings.constants.TYPES
@@ -34,53 +33,53 @@ external interface IParticleProperties {
 
 external interface IParticleRendererProperty {
 	var attributeName: String
-	var size: Number
+	var size: Int
 	var type: TYPES?
 	var uploadFunction: VarArgFun<Any?, Any?>
-	var offset: Number
+	var offset: Int
 }
 
-open external class ParticleBuffer(properties: Array<IParticleRendererProperty>, dynamicPropertyFlags: Array<Boolean>, size: Number) {
+open external class ParticleBuffer(properties: Array<IParticleRendererProperty>, dynamicPropertyFlags: Array<Boolean>, size: Int) {
 	open var geometry: Geometry
-	open var staticStride: Number
+	open var staticStride: Int
 	open var staticBuffer: Buffer
 	open var staticData: Float32Array
 	open var staticDataUint32: Uint32Array
-	open var dynamicStride: Number
+	open var dynamicStride: Int
 	open var dynamicData: Float32Array
 	open var dynamicDataUint32: Uint32Array
-	open var _updateID: Number
+	open var _updateID: Int
 	open var indexBuffer: Buffer
 	
-	open fun uploadDynamic(children: Array<DisplayObject>, startIndex: Number, amount: Number)
-	open fun uploadStatic(children: Array<DisplayObject>, startIndex: Number, amount: Number)
+	open fun uploadDynamic(children: Array<DisplayObject>, startIndex: Int, amount: Int)
+	open fun uploadStatic(children: Array<DisplayObject>, startIndex: Int, amount: Int)
 	open fun destroy()
 }
 
 open external class ParticleContainer(
-	maxSize: Number = definedExternally,
+	maxSize: Int = definedExternally,
 	properties: IParticleProperties = definedExternally,
-	batchSize: Number = definedExternally,
-	autoResize: Number = definedExternally
+	batchSize: Int = definedExternally,
+	autoResize: Boolean = definedExternally
 ) : Container {
 	open var blendMode: BLEND_MODES
 	open var autoResize: Boolean
 	open var roundPixels: Boolean
 	open var baseTexture: BaseTexture<Resource, IAutoDetectOptions>
 	open var tintRgb: Float32Array
-	open var _maxSize: Number
+	open var _maxSize: Int
 	open var _buffers: Array<ParticleBuffer>
-	open var _batchSize: Number
+	open var _batchSize: Int
 	open var _properties: Array<Boolean>
-	open var _bufferUpdateIDs: Array<Number>
-	open var _updateID: Number
+	open var _bufferUpdateIDs: Array<Int>
+	open var _updateID: Int
 	
-	open var tint: Number
+	open var tint: Int
 	
 	open fun setProperties(properties: IParticleProperties)
 	override fun updateTransform()
 	override fun render(renderer: Renderer)
-	override fun onChildrenChange(smallestChildIndex: Number)
+	override fun onChildrenChange(smallestChildIndex: Int)
 	open fun dispose()
 	override fun destroy(options: Boolean)
 	override fun destroy(options: IDestroyOptions)
@@ -93,10 +92,10 @@ open external class ParticleRenderer(renderer: Renderer) : ObjectRenderer {
 	open var properties: Array<IParticleRendererProperty>
 	
 	open fun render(container: ParticleContainer)
-	open fun uploadVertices(children: Array<DisplayObject>, startIndex: Number, amount: Number, array: Array<Number>, stride: Number, offset: Number)
-	open fun uploadPosition(children: Array<DisplayObject>, startIndex: Number, amount: Number, array: Array<Number>, stride: Number, offset: Number)
-	open fun uploadRotation(children: Array<DisplayObject>, startIndex: Number, amount: Number, array: Array<Number>, stride: Number, offset: Number)
-	open fun uploadUvs(children: Array<DisplayObject>, startIndex: Number, amount: Number, array: Array<Number>, stride: Number, offset: Number)
-	open fun uploadTint(children: Array<DisplayObject>, startIndex: Number, amount: Number, array: Array<Number>, stride: Number, offset: Number)
+	open fun uploadVertices(children: Array<DisplayObject>, startIndex: Int, amount: Int, array: Array<Double>, stride: Int, offset: Int)
+	open fun uploadPosition(children: Array<DisplayObject>, startIndex: Int, amount: Int, array: Array<Double>, stride: Int, offset: Int)
+	open fun uploadRotation(children: Array<DisplayObject>, startIndex: Int, amount: Int, array: Array<Double>, stride: Int, offset: Int)
+	open fun uploadUvs(children: Array<DisplayObject>, startIndex: Int, amount: Int, array: Array<Double>, stride: Int, offset: Int)
+	open fun uploadTint(children: Array<DisplayObject>, startIndex: Int, amount: Int, array: Array<Int>, stride: Int, offset: Int)
 	override fun destroy()
 }

@@ -12,7 +12,7 @@ import pixi.typings.core.Texture
 import pixi.typings.math.Matrix
 import pixi.typings.math.Point
 
-open external class DisplacementFilter(sprite: ISpriteMaskTarget, scale: Number = definedExternally) : Filter {
+open external class DisplacementFilter(sprite: ISpriteMaskTarget, scale: Double = definedExternally) : Filter {
 	open var maskSprite: ISpriteMaskTarget
 	open var maskMatrix: Matrix
 	open var scale: Point

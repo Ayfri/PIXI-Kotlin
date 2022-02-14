@@ -3,46 +3,45 @@
 package pixi.typings.math
 
 import org.khronos.webgl.Float32Array
-import pixi.typings.Number
 
-open external class Circle(x: Number = definedExternally, y: Number = definedExternally, radius: Number = definedExternally) {
-	open var x: Number
-	open var y: Number
-	open var radius: Number
+open external class Circle(x: Double = definedExternally, y: Double = definedExternally, radius: Double = definedExternally) {
+	open var x: Double
+	open var y: Double
+	open var radius: Double
 	open val type: SHAPES
 	open fun clone(): Circle
-	open fun contains(x: Number, y: Number): Boolean
+	open fun contains(x: Double, y: Double): Boolean
 	open fun getBounds(): Rectangle
 	override fun toString(): String
 }
 
-external val DEG_TO_RAD: Number
+external val DEG_TO_RAD: Double
 
-open external class Ellipse(x: Number = definedExternally, y: Number = definedExternally, width: Number = definedExternally, height: Number = definedExternally) {
-	open var x: Number
-	open var y: Number
-	open var width: Number
-	open var height: Number
+open external class Ellipse(x: Double = definedExternally, y: Double = definedExternally, width: Double = definedExternally, height: Double = definedExternally) {
+	open var x: Double
+	open var y: Double
+	open var width: Double
+	open var height: Double
 	open val type: SHAPES
 	open fun clone(): Circle
-	open fun contains(x: Number, y: Number): Boolean
+	open fun contains(x: Double, y: Double): Boolean
 	open fun getBounds(): Rectangle
 	override fun toString(): String
 }
 
 external object groupD8 {
-	var E: Number
-	var SE: Number
-	var S: Number
-	var SW: Number
-	var W: Number
-	var NW: Number
-	var N: Number
-	var NE: Number
-	var MIRROR_VERTICAL: Number
-	var MAIN_DIAGONAL: Number
-	var MIRROR_HORIZONTAL: Number
-	var REVERSE_DIAGONAL: Number
+	var E: Short
+	var SE: Short
+	var S: Short
+	var SW: Short
+	var W: Short
+	var NW: Short
+	var N: Short
+	var NE: Short
+	var MIRROR_VERTICAL: Short
+	var MAIN_DIAGONAL: Short
+	var MIRROR_HORIZONTAL: Short
+	var REVERSE_DIAGONAL: Short
 	var uX: (ind: GD8Symmetry) -> GD8Symmetry
 	var uY: (ind: GD8Symmetry) -> GD8Symmetry
 	var vX: (ind: GD8Symmetry) -> GD8Symmetry
@@ -50,64 +49,64 @@ external object groupD8 {
 	var inv: (rotation: GD8Symmetry) -> GD8Symmetry
 	var add: (rotationSecond: GD8Symmetry, rotationFirst: GD8Symmetry) -> GD8Symmetry
 	var sub: (rotationSecond: GD8Symmetry, rotationFirst: GD8Symmetry) -> GD8Symmetry
-	var rotate180: (rotation: Number) -> Number
+	var rotate180: (rotation: Short) -> Short
 	var isVertical: (rotation: GD8Symmetry) -> Boolean
-	var byDirection: (dx: Number, dy: Number) -> GD8Symmetry
-	var matrixAppendRotationInv: (matrix: Matrix, rotation: GD8Symmetry, tx: Number?, ty: Number?) -> Unit
+	var byDirection: (dx: Short, dy: Short) -> GD8Symmetry
+	var matrixAppendRotationInv: (matrix: Matrix, rotation: GD8Symmetry, tx: Short?, ty: Short?) -> Unit
 }
 
 external interface IPoint : IPointData {
 	fun copyFrom(p: IPointData): IPoint /* this */
 	fun <T : IPoint> copyTo(p: T): T
 	fun equals(p: IPointData): Boolean
-	fun set(x: Number = definedExternally, y: Number = definedExternally)
+	fun set(x: Double = definedExternally, y: Double = definedExternally)
 }
 
 external interface IPointData {
-	var x: Number
-	var y: Number
+	var x: Double
+	var y: Double
 }
 
 external interface ISize {
-	var width: Number
-	var height: Number
+	var width: Double
+	var height: Double
 }
 
 open external class Matrix(
-	a: Number = definedExternally,
-	b: Number = definedExternally,
-	c: Number = definedExternally,
-	d: Number = definedExternally,
-	tx: Number = definedExternally,
-	ty: Number = definedExternally
+	a: Double = definedExternally,
+	b: Double = definedExternally,
+	c: Double = definedExternally,
+	d: Double = definedExternally,
+	tx: Double = definedExternally,
+	ty: Double = definedExternally
 ) {
-	open var a: Number
-	open var b: Number
-	open var c: Number
-	open var d: Number
-	open var tx: Number
-	open var ty: Number
+	open var a: Double
+	open var b: Double
+	open var c: Double
+	open var d: Double
+	open var tx: Double
+	open var ty: Double
 	open var array: Float32Array?
 	
-	open fun fromArray(array: Array<Number>)
-	open fun set(a: Number, b: Number, c: Number, d: Number, tx: Number): Matrix /* this */
+	open fun fromArray(array: Array<Double>)
+	open fun set(a: Double, b: Double, c: Double, d: Double, tx: Double): Matrix /* this */
 	open fun toArray(transpose: Boolean, out: Float32Array = definedExternally): Float32Array
 	open fun <P : IPointData /* = Point */> apply(pos: IPointData, newPos: P = definedExternally): P
 	open fun <P : IPointData /* = Point */> applyInverse(pose: IPointData, newPos: P = definedExternally): P
-	open fun translate(x: Number, y: Number): Matrix /* this */
-	open fun scale(x: Number, y: Number): Matrix /* this */
-	open fun rotate(angle: Number): Matrix /* this */
+	open fun translate(x: Double, y: Double): Matrix /* this */
+	open fun scale(x: Double, y: Double): Matrix /* this */
+	open fun rotate(angle: Double): Matrix /* this */
 	open fun append(matrix: Matrix): Matrix /* this */
 	open fun setTransform(
-		x: Number,
-		y: Number,
-		pivotX: Number,
-		pivotY: Number,
-		scaleX: Number,
-		scaleY: Number,
-		rotation: Number,
-		skewX: Number,
-		skewY: Number
+		x: Double,
+		y: Double,
+		pivotX: Double,
+		pivotY: Double,
+		scaleX: Double,
+		scaleY: Double,
+		rotation: Double,
+		skewX: Double,
+		skewY: Double
 	): Matrix /* this */
 	
 	open fun prepend(matrix: Matrix): Matrix /* this */
@@ -126,72 +125,72 @@ open external class Matrix(
 }
 
 @Suppress("RETURN_TYPE_MISMATCH_ON_OVERRIDE")
-open external class ObservablePoint<T /* = Any */>(context: (self: T) -> Any?, scope: T, x: Number = definedExternally, y: Number = definedExternally) : IPoint {
+open external class ObservablePoint<T /* = Any */>(context: (self: T) -> Any?, scope: T, x: Double = definedExternally, y: Double = definedExternally) : IPoint {
 	open var cb: (self: T) -> Any?
 	open var scope: Any?
-	open var _x: Number
-	open var _y: Number
+	open var _x: Double
+	open var _y: Double
 	
-	override var x: Number
-	override var y: Number
+	override var x: Double
+	override var y: Double
 	
 	open fun clone(cb: (`this`: T) -> Any? = definedExternally, scope: Any? = definedExternally): ObservablePoint<Any?>
-	override fun set(x: Number, y: Number): ObservablePoint<T> /* this */
+	override fun set(x: Double, y: Double): ObservablePoint<T> /* this */
 	override fun copyFrom(p: IPointData): ObservablePoint<T> /* this */
 	override fun <T : IPoint> copyTo(p: T): T
 	override fun equals(p: IPointData): Boolean
 	override fun toString(): String
 }
 
-external val PI_2: Number
+external val PI_2: Double
 
 @Suppress("RETURN_TYPE_MISMATCH_ON_OVERRIDE")
-open external class Point(x: Number = definedExternally, y: Number = definedExternally) : IPoint {
-	override var x: Number
-	override var y: Number
+open external class Point(x: Double = definedExternally, y: Double = definedExternally) : IPoint {
+	override var x: Double
+	override var y: Double
 	
 	open fun clone(): Point
 	override fun copyFrom(p: IPointData): Point
 	override fun <T : IPoint> copyTo(p: T): T
 	override fun equals(p: IPointData): Boolean
-	override fun set(x: Number, y: Number): Point
+	override fun set(x: Double, y: Double): Point
 	override fun toString(): String
 }
 
 open external class Polygon(points: Array<IPointData>) {
-	constructor(points: Array<Number>)
+	constructor(points: Array<Double>)
 	constructor(vararg points: Array<IPointData>)
-	constructor(vararg points: Array<Number>)
+	constructor(vararg points: Array<Double>)
 	
-	open var points: Array<Number>
+	open var points: Array<Double>
 	open var closeStroke: Boolean
 	open val type: SHAPES
 	
 	open fun clone(): Polygon
-	open fun contains(x: Number, y: Number): Boolean
+	open fun contains(x: Double, y: Double): Boolean
 	override fun toString(): String
 }
 
-external val RAD_TO_DEG: Number
+external val RAD_TO_DEG: Double
 
-open external class Rectangle(x: Number = definedExternally, y: Number = definedExternally, width: Number = definedExternally, height: Number = definedExternally) {
-	open var x: Number
-	open var y: Number
-	open var width: Number
-	open var height: Number
+open external class Rectangle(x: Double = definedExternally, y: Double = definedExternally, width: Double = definedExternally, height: Double = definedExternally) {
+	open var x: Double
+	open var y: Double
+	open var width: Double
+	open var height: Double
 	open var type: SHAPES
 	
-	open val left: Number
-	open val right: Number
-	open val top: Number
-	open val bottom: Number
+	open val left: Double
+	open val right: Double
+	open val top: Double
+	open val bottom: Double
 	
 	open fun clone(): Rectangle
 	open fun copyFrom(rectangle: Rectangle): Rectangle
-	open fun contains(x: Number, y: Number): Boolean
-	open fun pad(paddingX: Number = definedExternally, paddingY: Number = definedExternally): Rectangle /* this */
+	open fun contains(x: Double, y: Double): Boolean
+	open fun pad(paddingX: Double = definedExternally, paddingY: Double = definedExternally): Rectangle /* this */
 	open fun fit(rectangle: Rectangle): Rectangle /* this */
-	open fun ceil(resolution: Number = definedExternally, eps: Number = definedExternally): Rectangle /* this */
+	open fun ceil(resolution: Double = definedExternally, eps: Double = definedExternally): Rectangle /* this */
 	open fun enlarge(rectangle: Rectangle): Rectangle /* this */
 	override fun toString(): String
 	
@@ -201,21 +200,21 @@ open external class Rectangle(x: Number = definedExternally, y: Number = defined
 }
 
 open external class RoundedRectangle(
-	x: Number = definedExternally,
-	y: Number = definedExternally,
-	width: Number = definedExternally,
-	height: Number = definedExternally,
-	radius: Number = definedExternally
+	x: Double = definedExternally,
+	y: Double = definedExternally,
+	width: Double = definedExternally,
+	height: Double = definedExternally,
+	radius: Double = definedExternally
 ) {
-	open var x: Number
-	open var y: Number
-	open var width: Number
-	open var height: Number
-	open var radius: Number
+	open var x: Double
+	open var y: Double
+	open var width: Double
+	open var height: Double
+	open var radius: Double
 	open val type: SHAPES
 	
 	open fun clone(): RoundedRectangle
-	open fun contains(x: Number, y: Number): Boolean
+	open fun contains(x: Double, y: Double): Boolean
 	override fun toString(): String
 }
 
@@ -226,16 +225,17 @@ open external class Transform {
 	open var scale: ObservablePoint<Any?>
 	open var pivot: ObservablePoint<Any?>
 	open var skew: ObservablePoint<Any?>
-	open var _parentID: Number
-	open var _worldID: Number
-	protected open var _rotation: Number
-	protected open var _cx: Number
-	protected open var _cy: Number
-	protected open var _sy: Number
-	protected open var _localID: Number
-	protected open var _currentLocalID: Number
+	open var _parentID: Int
+	open var _worldID: Int
+	protected open var _rotation: Double
+	protected open var _cx: Double
+	protected open var _sx: Double
+	protected open var _cy: Double
+	protected open var _sy: Double
+	protected open var _localID: Int
+	protected open var _currentLocalID: Int
 	
-	open var rotation: Number
+	open var rotation: Double
 	
 	protected open fun onChange()
 	protected open fun updateSkew()

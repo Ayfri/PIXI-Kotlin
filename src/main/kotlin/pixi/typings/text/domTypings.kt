@@ -4,11 +4,10 @@ import org.khronos.webgl.WebGLContextAttributes
 import org.w3c.dom.*
 import org.w3c.dom.events.EventTarget
 import org.w3c.files.Blob
-import pixi.typings.Number
 import kotlin.js.Promise
 
 external interface ImageEncodeOptions {
-	var quality: Number?
+	var quality: Double?
 	var type: String?
 }
 
@@ -20,8 +19,8 @@ external interface OffscreenCanvasRenderingContext2D : CanvasCompositing, Canvas
 
 @Suppress("INTERFACE_WITH_SUPERCLASS")
 external interface OffscreenCanvas : EventTarget {
-	var height: Number
-	var width: Number
+	var height: Int
+	var width: Int
 	fun convertToBlob(options: ImageEncodeOptions): Promise<Blob>
 	fun getContext(contextId: String /* "2d" */, options: CanvasRenderingContext2DSettings = definedExternally): OffscreenCanvasRenderingContext2D?
 	fun getContext(contextId: String /* "2d" | "bitmaprenderer" | "webgl" | "webgl2" */): dynamic /* WebGL2RenderingContext | OffscreenCanvasRenderingContext2D? | ImageBitmapRenderingContext? | WebGLRenderingContext? | WebGL2RenderingContext? */

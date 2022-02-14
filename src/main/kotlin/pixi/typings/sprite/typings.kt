@@ -8,7 +8,6 @@ import org.w3c.dom.HTMLCanvasElement
 import org.w3c.dom.HTMLImageElement
 import org.w3c.dom.HTMLVideoElement
 import org.w3c.dom.ImageBitmap
-import pixi.typings.Number
 import pixi.typings.constants.BLEND_MODES
 import pixi.typings.core.BaseTexture
 import pixi.typings.core.IAutoDetectOptions
@@ -25,22 +24,22 @@ open external class Sprite(texture: Texture<Resource> = definedExternally) : Con
 	open var blendMode: BLEND_MODES
 	open var indices: Uint16Array
 	open var pluginName: String
-	override var _width: Number
-	override var _height: Number
+	override var _width: Double
+	override var _height: Double
 	open var _texture: Texture<Resource>
-	open var _textureID: Number
-	open var _cachedTint: Number
-	protected open var _textureTrimmedID: Number
+	open var _textureID: Int
+	open var _cachedTint: Int
+	protected open var _textureTrimmedID: Int
 	protected open var uvs: Float32Array
 	protected open var _anchor: ObservablePoint<Any?>
 	protected open var vertexData: Float32Array
-	open var _tintRGB: Number
+	open var _tintRGB: Int
 	
 	open var roundPixels: Boolean
-	override var width: Number
-	override var height: Number
+	override var width: Double
+	override var height: Double
 	open val anchor: ObservablePoint<Any?>
-	open var tint: Number
+	open var tint: Int
 	open var texture: Texture<Resource>
 	
 	protected open fun _onTextureUpdate()

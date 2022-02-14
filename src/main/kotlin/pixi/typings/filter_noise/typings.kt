@@ -3,10 +3,9 @@
 package pixi.typings.filter_noise
 
 import pixi.typings.core.Filter
-import pixi.typings.Number
 
-open external class NoiseFilter(noise: Number = definedExternally, seed: Number = definedExternally) : Filter {
-	open var noise: Number
-	open var seed: Number
+open external class NoiseFilter(noise: Double = definedExternally, seed: Double = definedExternally) : Filter {
+	open var noise: Double
+	open var seed: Double
 }
 

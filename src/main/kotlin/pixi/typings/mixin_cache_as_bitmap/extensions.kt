@@ -2,7 +2,6 @@
 
 package pixi.typings.mixin_cache_as_bitmap
 
-import pixi.typings.Number
 import pixi.typings.constants.MSAA_QUALITY
 import pixi.typings.core.AbstractRenderer
 import pixi.typings.core.Renderer
@@ -16,7 +15,7 @@ inline var DisplayObject.cacheAsBitmap
 		asDynamic().cacheAsBitmap = value
 	}
 inline var DisplayObject.cacheAsBitmapResolution
-	get() = asDynamic().cacheAsBitmapResolution as Number
+	get() = asDynamic().cacheAsBitmapResolution as Double
 	set(value) {
 		asDynamic().cacheAsBitmapResolution = value
 	}
@@ -26,7 +25,7 @@ inline var DisplayObject.cacheAsBitMapMultisample
 		asDynamic().cacheAsBitMapMultisample = value
 	}
 inline var DisplayObject._cacheAsBitmapResolution
-	get() = asDynamic()._cacheAsBitmapResolution as Number
+	get() = asDynamic()._cacheAsBitmapResolution as Double
 	set(value) {
 		asDynamic()._cacheAsBitmapResolution = value
 	}

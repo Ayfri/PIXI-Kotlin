@@ -7,7 +7,7 @@ typealias ILoaderMiddleware = (resource: LoaderResource, next: VarArgFun<Any?, U
 typealias ILoaderResource = LoaderResource
 
 typealias OnStartSignalResource = (resource: LoaderResource) -> Unit
-typealias OnProgressSignalResource = (resource: LoaderResource, percentage: Number) -> Unit
+typealias OnProgressSignalResource = (resource: LoaderResource, percentage: Short) -> Unit
 typealias OnCompleteSignalResource = (resource: LoaderResource) -> Unit
 typealias MiddlewareFn = (resource: LoaderResource, next: () -> Unit) -> Unit
 
