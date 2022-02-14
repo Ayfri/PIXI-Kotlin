@@ -1,5 +1,6 @@
 package pixi.utils
 
+import kotlinext.js.jso
 import kotlinx.browser.window
 import org.w3c.dom.events.KeyboardEvent
 import pixi.typings.utils.EventEmitter
@@ -11,7 +12,6 @@ sealed interface KeyboardEvents<T : Any> {
 
 class KeyboardManager(var enabled: Boolean = true, var ignoreCase: Boolean = false) : EventEmitter() {
 	var keyPressed = mutableSetOf<Int>()
-	val keyPressedAsString get() = keyPressed.map { it.toChar() }
 	
 	init {
 		if (enabled) enable()
@@ -31,24 +31,24 @@ class KeyboardManager(var enabled: Boolean = true, var ignoreCase: Boolean = fal
 		enabled = false
 	}
 	
-	fun isDown(key: KeyboardEvent) = key.keyCode in keyPressed
-	fun isUp(key: KeyboardEvent) = !isDown(key)
+	fun isDown(keyCode: Int) = keyCode in keyPressed
+	fun isUp(keyCode: Int) = keyCode !in keyPressed
+	
+	fun <T : Any> on(event: KeyboardEvents<T>, callback: (KeyboardEvent) -> Unit) = window.addEventListener(event::class.simpleName!!, {
+		if (enabled) callback(it as KeyboardEvent)
+	})
+	
+	fun <T : Any> once(event: KeyboardEvents<T>, callback: (KeyboardEvent) -> Unit) = window.addEventListener(event::class.simpleName!!, {
+		if (enabled) callback(it as KeyboardEvent)
+	}, jso { once = true })
 	
 	fun <T : Any> off(event: KeyboardEvents<T>, callback: (KeyboardEvent) -> Unit) {
-		window.addEventListener(event::class.simpleName!!, { callback(it as KeyboardEvent) })
+		window.removeEventListener(event::class.simpleName!!, { callback(it as KeyboardEvent) })
 	}
 	
-	fun <T : Any> on(event: KeyboardEvents<T>, callback: (KeyboardEvent) -> Unit) {
-		window.addEventListener(event::class.simpleName!!, { callback(it as KeyboardEvent) })
-	}
+	fun onPress(callback: (KeyboardEvent) -> Unit) = on(KeyboardEvents.keydown, callback)
 	
-	fun onPress(callback: (KeyboardEvent) -> Unit) {
-		window.addEventListener("keydown", { callback(it as KeyboardEvent) })
-	}
-	
-	fun onRelease(callback: (KeyboardEvent) -> Unit) {
-		window.addEventListener("keyup", { callback(it as KeyboardEvent) })
-	}
+	fun onRelease(callback: (KeyboardEvent) -> Unit) = on(KeyboardEvents.keyup, callback)
 	
 	fun onPress(key: Int, callback: (event: KeyboardEvent) -> Unit) = onPress {
 		if (ignoreCase && it.keyCode.toChar() == key.toChar()) callback(it)
