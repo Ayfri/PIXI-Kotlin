@@ -33,6 +33,7 @@ dependencies {
 	implementation("org.jetbrains.kotlinx:kotlinx-html:0.7.3")
 	implementation("org.jetbrains.kotlin-wrappers:kotlin-extensions:1.0.1-pre.294-kotlin-1.6.10")
 	implementation(npm("pixi.js", "6.2.2"))
+	implementation(npm("@pixi/events", "6.2.2"))
 	testImplementation(kotlin("test-js"))
 	testImplementation(kotlin("test-junit"))
 	testImplementation(kotlin("test-js-runner"))
