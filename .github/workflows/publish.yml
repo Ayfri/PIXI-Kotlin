@@ -19,8 +19,9 @@ jobs:
 
       - name: Publish
         env:
+          GRADLE_OPTS: '-Dorg.gradle.daemon=false'
           OSSRH_USER: ${{ secrets.OSSRH_USER }}
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
           SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
           SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
-        run: ./gradlew --no-daemon buildAndPublish
+        run: ./gradlew --no-daemon buildAndPublish -x compileTestKotlinJs

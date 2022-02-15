@@ -19,4 +19,4 @@ jobs:
         uses: gradle/wrapper-validation-action@e6e38bacfdf1a337459f332974bb2327a31aaf4b
 
       - name: Build
-        run: ./gradlew --no-daemon build -x test
+        run: ./gradlew --no-daemon assemble
