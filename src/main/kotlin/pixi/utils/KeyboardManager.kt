@@ -1,7 +1,7 @@
 package pixi.utils
 
-import kotlinext.js.jso
 import kotlinx.browser.window
+import kotlinx.js.jso
 import org.w3c.dom.events.KeyboardEvent
 import pixi.typings.utils.EventEmitter
 

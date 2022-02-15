@@ -28,8 +28,8 @@ class MouseManager(var enabled: Boolean = true) {
 		if (enabled) return
 		on(MouseEvents.mousedown, ::onMouseDown)
 		on(MouseEvents.mouseup, ::onMouseUp)
-		on(MouseEvents.mouseenter, ::onMouseEnter)
-		on(MouseEvents.mouseleave, ::onMouseLeave)
+		on(MouseEvents.mouseenter) { onMouseEnter() }
+		on(MouseEvents.mouseleave) { onMouseLeave() }
 		enabled = true
 	}
 	
@@ -89,11 +89,11 @@ class MouseManager(var enabled: Boolean = true) {
 		pressed -= event.button
 	}
 	
-	private fun onMouseEnter(event: MouseEvent) {
+	private fun onMouseEnter() {
 		overWindow = true
 	}
 	
-	private fun onMouseLeave(event: MouseEvent) {
+	private fun onMouseLeave() {
 		overWindow = false
 	}
 }
