@@ -1,4 +1,4 @@
-package pixi.externals
+package pixi.externals.extensions
 
 import org.w3c.dom.Window
 import pixi.typings.display.Container

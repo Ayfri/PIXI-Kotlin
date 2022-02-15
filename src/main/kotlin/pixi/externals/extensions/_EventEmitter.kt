@@ -1,4 +1,4 @@
-package pixi.externals
+package pixi.externals.extensions
 
 import pixi.typings.ListenerFn
 import pixi.typings.utils.EventEmitter

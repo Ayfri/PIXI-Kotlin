@@ -1,5 +1,6 @@
-package pixi.externals
+package pixi.externals.extensions
 
+import pixi.externals.Tuple
 import pixi.typings.ListenerFn
 import pixi.typings.display.Container
 import pixi.typings.display.DisplayObject

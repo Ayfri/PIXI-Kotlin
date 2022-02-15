@@ -1,6 +1,7 @@
-package pixi.externals
+package pixi.externals.extensions
 
 import kotlinx.browser.window
+import pixi.externals.Tuple
 import pixi.typings.ListenerFn
 import pixi.typings.app.Application
 import pixi.typings.display.Container

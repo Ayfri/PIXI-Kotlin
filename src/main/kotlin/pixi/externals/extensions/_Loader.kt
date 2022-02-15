@@ -1,4 +1,4 @@
-package pixi.externals
+package pixi.externals.extensions
 
 import pixi.typings.loaders.Loader
 import pixi.typings.loaders.OnCompleteSignal

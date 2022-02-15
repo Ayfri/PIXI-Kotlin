@@ -1,4 +1,4 @@
-package pixi.externals
+package pixi.externals.extensions
 
 import pixi.typings.ticker.Ticker
 import pixi.typings.ticker.TickerCallback

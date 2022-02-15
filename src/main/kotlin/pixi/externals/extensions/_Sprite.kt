@@ -1,5 +1,6 @@
-package pixi.externals
+package pixi.externals.extensions
 
+import pixi.externals.Color
 import pixi.typings.core.CanvasResource
 import pixi.typings.core.Resource
 import pixi.typings.core.Texture

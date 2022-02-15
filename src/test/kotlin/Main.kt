@@ -7,9 +7,9 @@ import kotlinx.html.div
 import kotlinx.html.dom.append
 import kotlinx.html.id
 import pixi.externals.Color
-import pixi.externals.add
-import pixi.externals.load
-import pixi.externals.once
+import pixi.externals.extensions.add
+import pixi.externals.extensions.load
+import pixi.externals.extensions.once
 import pixi.typings.app.Application
 import pixi.typings.loaders.Loader
 import pixi.typings.loaders.loader

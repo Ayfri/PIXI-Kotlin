@@ -1,6 +1,8 @@
 package pixi.externals
 
 import kotlinx.js.jso
+import pixi.externals.extensions.Sprite
+import pixi.externals.extensions.color
 import pixi.typings.app.Application
 import pixi.typings.core.IGenerateTextureOptions
 import pixi.typings.core.IRenderableObject
