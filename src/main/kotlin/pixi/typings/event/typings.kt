@@ -2,7 +2,8 @@
 
 package pixi.typings.event
 
-import kotlinext.js.ReadonlyArray
+import kotlinx.js.ReadonlyArray
+import kotlinx.js.Record
 import org.w3c.dom.HTMLCanvasElement
 import org.w3c.dom.HTMLElement
 import org.w3c.dom.events.EventTarget
@@ -258,7 +259,7 @@ external interface Renderer {
 	var _lastObjectRendered: DisplayObject
 	var view: HTMLCanvasElement
 	var resolution: Double
-	var plugins: Object<String, Any>
+	var plugins: Record<String, Any>
 }
 
 external interface Clicks {

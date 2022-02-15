@@ -2,7 +2,7 @@
 
 package pixi.typings.graphics
 
-import kotlinext.js.Record
+import kotlinx.js.Record
 import org.khronos.webgl.ArrayBufferView
 import org.khronos.webgl.Float32Array
 import pixi.externals.Color

@@ -1,6 +1,6 @@
 package pixi.typings.utils
 
-import kotlinext.js.Record
+import kotlinx.js.Record
 import org.khronos.webgl.ArrayBufferView
 import pixi.typings.EventEmitter as EventEmitter2
 

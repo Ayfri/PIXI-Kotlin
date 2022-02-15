@@ -1,6 +1,6 @@
 package pixi.utils
 
-import kotlinext.js.jso
+import kotlinx.js.jso
 import pixi.typings.app.Application
 import pixi.typings.app.IApplicationOptions
 
