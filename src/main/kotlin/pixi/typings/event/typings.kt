@@ -1,4 +1,4 @@
-@file:JsModule("@pixi/event")
+@file:JsModule("@pixi/events")
 
 package pixi.typings.event
 

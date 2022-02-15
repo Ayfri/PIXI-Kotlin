@@ -52,7 +52,7 @@ kotlin {
 	kotlinDaemonJvmArgs = listOf("-Xopt-in=kotlin.RequiresOptIn")
 	
 	js(IR) {
-		this.useCommonJs()
+		useCommonJs()
 		browser {
 			commonWebpackConfig {
 				outputFileName = "dist.js"
