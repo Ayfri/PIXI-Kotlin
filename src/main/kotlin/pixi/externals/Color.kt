@@ -20,16 +20,18 @@ fun Color(string: String): Color {
 	val g: String
 	val b: String
 	
-	if (hex.length == 3) {
-		r = hex[0].toString().repeat(2)
-		g = hex[1].toString().repeat(2)
-		b = hex[2].toString().repeat(2)
-	} else if (hex.length == 6) {
-		r = hex.substring(0, 2)
-		g = hex.substring(2, 4)
-		b = hex.substring(4, 6)
-	} else {
-		throw IllegalArgumentException("Invalid hex string: $string")
+	when (hex.length) {
+		3 -> {
+			r = hex[0].toString().repeat(2)
+			g = hex[1].toString().repeat(2)
+			b = hex[2].toString().repeat(2)
+		}
+		6 -> {
+			r = hex.substring(0, 2)
+			g = hex.substring(2, 4)
+			b = hex.substring(4, 6)
+		}
+		else -> throw IllegalArgumentException("Invalid hex string: $string")
 	}
 	
 	return Color(r.toInt(16), g.toInt(16), b.toInt(16))

@@ -35,18 +35,21 @@ fun main() {
 		backgroundColor = Color(120, 200, 230)
 		resizeTo = window
 	}
+	app.addToBody()
 	
-	val bunny = Sprite.from("bunny.png")
-	bunny.setPositionFromWindow(0.5, 0.5)
-	bunny.anchor.set(0.5)
-	bunny.addToApplication(app)
+	val bunny = Sprite.from("bunny.png").apply {
+		setPositionFromWindow(0.5, 0.5)
+		anchor.set(0.5)
+		interactive = true
+		addToApplication(app)
+	}
 	
-	bunny.on(DisplayObjectEvents.click) {
+	bunny.on(DisplayObjectEvents.mousedown) {
 		bunny.scale.set(1.1)
 	}
 	
 	bunny.on(DisplayObjectEvents.mouseup) {
-		bunny.scale.set(1)
+		bunny.scale.set(1.0)
 	}
 }
 ```
@@ -58,6 +61,7 @@ fun main() {
 	val app = Application {
 		resizeTo = window
 	}
+	app.addToBody()
 	
 	val english = "en" in window.navigator.languages.elementAtOrElse(0) { window.navigator.language }
 	
@@ -72,12 +76,14 @@ fun main() {
 	)
 	
 	val sprite = Sprite(generateBlankTexture(app) {
-		width = 300
-		height = 300
-		color = Color(0xFF0000)
+		width = 300.0
+		height = 300.0
+		color = Color(255, 0, 0)
 	})
+	sprite.addToApplication(app)
+	sprite.setPositionFromApplication(app, 0.5, 0.5)
 	
-	val area = Rectangle(0, 0, app.screen.width, app.screen.height)
+	val area = Rectangle(0.0, 0.0, app.screen.width, app.screen.height)
 	
 	keyMap.onPress("forward") {
 		sprite.y -= 10
