@@ -42,7 +42,7 @@ tasks {
 		group = "publishing"
 		description = "Builds and publishes the project"
 		dependsOn("clean")
-		dependsOn("build")
+		dependsOn("assemble")
 		dependsOn("publishToSonatype", "closeAndReleaseSonatypeStagingRepository")
 	}
 }
