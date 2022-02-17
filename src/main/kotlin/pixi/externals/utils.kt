@@ -15,11 +15,11 @@ interface Tuple<T1, T2, T3> {
 	operator fun component3(): T3
 }
 
-interface GenerateBlankTextureOptions {
-	var width: Double?
-	var height: Double?
-	var color: Color?
-	var resolution: Double?
+class GenerateBlankTextureOptions {
+	var width: Double? = null
+	var height: Double? = null
+	var color: Color? = null
+	var resolution: Double? = null
 }
 
 fun generateBlankTexture(application: Application, options: GenerateBlankTextureOptions.() -> Unit): RenderTexture {
