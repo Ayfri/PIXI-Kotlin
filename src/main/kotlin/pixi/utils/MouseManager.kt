@@ -24,13 +24,21 @@ class MouseManager(var enabled: Boolean = true) {
 	var pressed = mutableSetOf<Short>()
 	var overWindow = false
 	
+	init {
+		if (enabled) activateEvents()
+	}
+	
 	fun enable() {
 		if (enabled) return
+		activateEvents()
+		enabled = true
+	}
+	
+	private fun activateEvents() {
 		on(MouseEvents.mousedown, ::onMouseDown)
 		on(MouseEvents.mouseup, ::onMouseUp)
 		on(MouseEvents.mouseenter) { onMouseEnter() }
 		on(MouseEvents.mouseleave) { onMouseLeave() }
-		enabled = true
 	}
 	
 	fun disable() {
