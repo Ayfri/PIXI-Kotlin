@@ -1,8 +1,9 @@
 package pixi.externals.extensions
 
 import org.w3c.dom.Window
+import org.w3c.dom.events.MouseEvent
 import pixi.typings.display.Container
-import pixi.typings.math.IPoint
+import pixi.typings.math.IPointData
 import pixi.typings.math.ISize
 import pixi.typings.math.Rectangle
 import kotlin.math.abs
@@ -129,7 +130,9 @@ operator fun Rectangle.rangeTo(other: Rectangle): Rectangle {
 
 operator fun Rectangle.contains(other: Rectangle): Boolean = x <= other.x && other.x + other.width <= x + width && y <= other.y && other.y + other.height <= y + height
 
-operator fun Rectangle.contains(point: IPoint) = contains(point.x, point.y)
+operator fun Rectangle.contains(point: IPointData) = contains(point.x, point.y)
+
+operator fun Rectangle.contains(point: MouseEvent) = contains(point.x, point.y)
 
 
 fun Rectangle.abs() = +this
@@ -152,7 +155,7 @@ fun Rectangle.floor() {
 
 fun Rectangle.inflate(x: Double, y: Double) = Rectangle(this.x - x, this.y - y, this.width + x * 2, this.height + y * 2)
 
-fun Rectangle.intersectSegment(start: IPoint, end: IPoint): Boolean {
+fun Rectangle.intersectSegment(start: IPointData, end: IPointData): Boolean {
 	val x1 = start.x
 	val y1 = start.y
 	val x2 = end.x
@@ -200,7 +203,7 @@ fun Rectangle.setPosition(x: Double, y: Double) {
 	this.y = y
 }
 
-fun Rectangle.setPosition(position: IPoint) {
+fun Rectangle.setPosition(position: IPointData) {
 	x = position.x
 	y = position.y
 }
@@ -215,12 +218,12 @@ fun Rectangle.setSize(size: ISize) {
 	height = size.height
 }
 
-fun Rectangle.setSize(point: IPoint) {
+fun Rectangle.setSize(point: IPointData) {
 	width = point.x
 	height = point.y
 }
 
-fun Rectangle(first: IPoint, second: IPoint) = Rectangle(first.x, first.y, second.x - first.x, second.y - first.y)
+fun Rectangle(first: IPointData, second: IPointData) = Rectangle(first.x, first.y, second.x - first.x, second.y - first.y)
 
 fun Rectangle(container: Container) = Rectangle(container.x, container.y, container.width, container.height)
 
