@@ -35,6 +35,9 @@ fun Color(string: String): Color {
 	return Color(r.toInt(16), g.toInt(16), b.toInt(16))
 }
 
+fun Color(int: Int): Color = int
+fun Color(array: ColorArr): Color = Color(array[0], array[1], array[2])
+
 typealias ColorArr = Array<Double>
 
 var ColorArr.red
@@ -63,7 +66,7 @@ val ColorArr.hasAlpha get() = this.size > 3
 
 val ColorArr.asHexString get() = "#${red.toString(16).padStart(2, '0')}${green.toString(16).padStart(2, '0')}${blue.toString(16).padStart(2, '0')}"
 val ColorArr.asRGB get() = arrayOf(red, green, blue)
-fun ColorArr.toColor() = (red * 0x10000 + green * 0x100 + blue)
+fun ColorArr.toColor() = Color(this)
 
 fun ColorArr(color: Color) = arrayOf(
 	(color and 0xFF0000 shr 16).toDouble() / 255,
