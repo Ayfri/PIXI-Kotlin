@@ -14,13 +14,12 @@ class KeyboardManager(var enabled: Boolean = true, var ignoreCase: Boolean = fal
 	var keyPressed = mutableSetOf<Int>()
 	
 	init {
-		if (enabled) enable()
+		if (enabled) activateEvents()
 	}
 	
 	fun enable() {
 		if (enabled) return
-		on(KeyboardEvents.keydown, ::onKeyDown)
-		on(KeyboardEvents.keyup, ::onKeyUp)
+		activateEvents()
 		enabled = true
 	}
 	
@@ -32,8 +31,8 @@ class KeyboardManager(var enabled: Boolean = true, var ignoreCase: Boolean = fal
 	}
 	
 	fun isDown(keyCode: Int) = keyCode in keyPressed
-	fun isUp(keyCode: Int) = keyCode !in keyPressed
 	
+	fun isUp(keyCode: Int) = keyCode !in keyPressed
 	fun <T : Any> on(event: KeyboardEvents<T>, callback: (KeyboardEvent) -> Unit) = window.addEventListener(event::class.simpleName!!, {
 		if (enabled) callback(it as KeyboardEvent)
 	})
@@ -70,6 +69,11 @@ class KeyboardManager(var enabled: Boolean = true, var ignoreCase: Boolean = fal
 		else if (!ignoreCase && it.key == key) callback(it)
 	}
 	
+	private fun activateEvents() {
+		on(KeyboardEvents.keydown, ::onKeyDown)
+		on(KeyboardEvents.keyup, ::onKeyUp)
+	}
+	
 	private fun onKeyDown(event: KeyboardEvent) {
 		keyPressed += event.keyCode
 	}
@@ -79,19 +83,15 @@ class KeyboardManager(var enabled: Boolean = true, var ignoreCase: Boolean = fal
 	}
 }
 
-class KeyMap(keys: MutableMap<String, MutableList<String>> = mutableMapOf(), var enabled: Boolean = true, ignoreCase: Boolean = false) {
-	private var _keys = keys
+class KeyMap(keys: Map<String, List<String>> = mutableMapOf(), var enabled: Boolean = true, ignoreCase: Boolean = false) {
+	private var _keys = mutableMapOf(*keys.toList().map { (key, value) -> key to value.toMutableList() }.toTypedArray())
 	private val callbacks = mutableMapOf<String, MutableList<(KeyboardEvent) -> Unit>>()
-	val keyboardManager = KeyboardManager(true, ignoreCase)
-	var keys: MutableMap<String, MutableList<String>>
+	val keyboardManager = KeyboardManager(enabled, ignoreCase)
+	var keys
 		get() = _keys
 		set(value) {
 			_keys = value
 		}
-	
-	init {
-		if (enabled) enable()
-	}
 	
 	fun add(entryName: String, key: String, callback: (event: KeyboardEvent) -> Unit = {}) {
 		keys.getOrPut(entryName) { mutableListOf() } += key

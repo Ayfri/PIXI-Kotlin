@@ -34,13 +34,6 @@ class MouseManager(var enabled: Boolean = true) {
 		enabled = true
 	}
 	
-	private fun activateEvents() {
-		on(MouseEvents.mousedown, ::onMouseDown)
-		on(MouseEvents.mouseup, ::onMouseUp)
-		on(MouseEvents.mouseenter) { onMouseEnter() }
-		on(MouseEvents.mouseleave) { onMouseLeave() }
-	}
-	
 	fun disable() {
 		if (!enabled) return
 		off(MouseEvents.mousedown, ::onMouseDown)
@@ -95,6 +88,13 @@ class MouseManager(var enabled: Boolean = true) {
 	
 	private fun onMouseUp(event: MouseEvent) {
 		pressed -= event.button
+	}
+	
+	private fun activateEvents() {
+		on(MouseEvents.mousedown, ::onMouseDown)
+		on(MouseEvents.mouseup, ::onMouseUp)
+		on(MouseEvents.mouseenter) { onMouseEnter() }
+		on(MouseEvents.mouseleave) { onMouseLeave() }
 	}
 	
 	private fun onMouseEnter() {
