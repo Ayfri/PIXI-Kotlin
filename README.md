@@ -63,50 +63,52 @@ fun main() {
 	}
 	app.addToBody()
 	
-	val english = "en" in window.navigator.languages.elementAtOrElse(0) { window.navigator.language }
-	
-	val keyMap = KeyMap(
-		mapOf(
-			"forward" to listOf(if (english) "W" else "Z", "ArrowUp"),
-			"backward" to listOf("S", "ArrowDown"),
-			"left" to listOf(if (english) "A" else "Q", "ArrowLeft"),
-			"right" to listOf("D", "ArrowRight"),
-		),
-		ignoreCase = true
-	)
-	
+	val speed = 10.0
 	val sprite = Sprite(generateBlankTexture(app) {
 		width = 300.0
 		height = 300.0
 		color = Color(255, 0, 0)
-	})
-	sprite.addToApplication(app)
-	sprite.setPositionFromApplication(app, 0.5, 0.5)
+	}).apply {
+		addToApplication(app)
+		anchor.set(0.5)
+		setPositionFromApplication(app, 0.5, 0.5)
+		window["sprite"] = this
+	}
 	
 	val area = Rectangle(0.0, 0.0, app.screen.width, app.screen.height)
 	
-	keyMap.onPress("forward") {
-		sprite.y -= 10
-		if (sprite.hitBox !in area) sprite.y += 10
+	app.renderer.on(AbstractRendererEvents.resize) {
+		area.setSize(app.screen.width, app.screen.height)
 	}
 	
-	keyMap.onPress("backward") {
-		sprite.y += 10
-		if (sprite.hitBox !in area) sprite.y -= 10
-	}
 	
-	keyMap.onPress("left") {
-		sprite.x -= 10
-		if (sprite.hitBox !in area) sprite.x += 10
-	}
-	
-	keyMap.onPress("right") {
-		sprite.x += 10
-		if (sprite.hitBox !in area) sprite.x -= 10
-	}
-	
-	keyMap.keyboardManager.onPress("Space") {
-		sprite.visible = !sprite.visible
+	val english = "en" in window.navigator.languages.elementAtOrElse(0) { window.navigator.language }
+	KeyMap(
+		mapOf(
+			"forward" to setOf(if (english) "W" else "Z", "ArrowUp"),
+			"backward" to setOf("S", "ArrowDown"),
+			"left" to setOf(if (english) "A" else "Q", "ArrowLeft"),
+			"right" to setOf("D", "ArrowRight"),
+			"power" to setOf(" ")
+		),
+		ignoreCase = true
+	).apply {
+		onKeep("forward") {
+			if ((sprite.hitBox.top + speed * 2) > area.top) sprite.y -= speed
+		}
+		onKeep("backward") {
+			if ((sprite.hitBox.bottom - speed * 2) < area.bottom) sprite.y += speed
+		}
+		onKeep("left") {
+			if ((sprite.hitBox.left + speed * 2) > area.left) sprite.x -= speed
+		}
+		onKeep("right") {
+			if ((sprite.hitBox.right - speed * 2) < area.right) sprite.x += speed
+		}
+		
+		onPress("power") {
+			sprite.alpha = if (sprite.alpha == 0.1) 1.0 else 0.1
+		}
 	}
 }
 ```
