@@ -1,21 +1,9 @@
 package pixi.typings.core
 
 import org.khronos.webgl.WebGLObject
+import pixi.typings.compressed_textures.GLenum
 import seskar.js.JsString
 import seskar.js.JsUnion
-import pixi.typings.compressed_textures.GLenum
-
-@JsUnion
-external enum class WebGLPowerPreference {
-	@JsString("default")
-	DEFAULT,
-	
-	@JsString("high-performance")
-	HIGH_PERFORMANCE,
-	
-	@JsString("low-performance")
-	LOW_PERFORMANCE
-}
 
 external interface EXT_texture_filter_anisotropic {
 	var MAX_TEXTURE_MAX_ANISOTROPY_EXT: GLenum
@@ -94,7 +82,17 @@ external interface WEBGL_lose_context {
 
 open external class WebGL2RenderingContext
 
-open external class WebGLRenderbuffer
+@JsUnion
+external enum class WebGLPowerPreference {
+	@JsString("default")
+	DEFAULT,
+	
+	@JsString("high-performance")
+	HIGH_PERFORMANCE,
+	
+	@JsString("low-performance")
+	LOW_PERFORMANCE
+}
 
 open external class WebGLVertexArrayObject
 

@@ -4,6 +4,7 @@
 package pixi.typings.core
 
 import org.khronos.webgl.*
+import org.khronos.webgl.WebGLRenderbuffer
 import org.w3c.dom.ErrorEvent
 import org.w3c.dom.HTMLCanvasElement
 import org.w3c.dom.HTMLImageElement
