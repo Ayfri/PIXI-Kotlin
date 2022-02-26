@@ -9,5 +9,5 @@ inline var Application.loader
 		asDynamic()?.loader = value
 	}
 
-inline fun Loader.add(): Unit = asDynamic().add() as Unit
-inline fun Loader.use(resource: LoaderResource, noinline next: VarArgFun<dynamic, Unit>): Unit = asDynamic().use(resource, next) as Unit
+inline fun Loader.add() = asDynamic().add() as Unit
+inline fun Loader.use(resource: LoaderResource, noinline next: VarArgFun<dynamic, Unit>) = asDynamic().use(resource, next) as Unit
