@@ -35,6 +35,7 @@ dependencies {
 	implementation(npm("pixi.js", "6.2.2"))
 	implementation(npm("@pixi/events", "6.2.2"))
 	implementation(npm("@pixi/graphics-extras", "6.2.2"))
+	implementation(npm("@pixi/math-extras", "6.2.2"))
 	testImplementation(kotlin("test-js"))
 }
 
