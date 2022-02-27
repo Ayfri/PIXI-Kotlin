@@ -7,6 +7,7 @@ object Project {
 	const val url = "https://github.com/$githubUrl"
 	const val publishUrl = "https://s01.oss.sonatype.org/service/local/"
 	const val snapshotUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+	const val pixiVersion = "6.2.2"
 }
 
 
@@ -32,12 +33,12 @@ dependencies {
 	implementation("io.github.turansky.seskar:seskar-core:0.5.0")
 	implementation("org.jetbrains.kotlinx:kotlinx-html:0.7.3")
 	implementation("org.jetbrains.kotlin-wrappers:kotlin-extensions:1.0.1-pre.307-kotlin-1.6.10")
-	implementation(npm("pixi.js", "6.2.2"))
-	implementation(npm("@pixi/basis", "6.2.2"))
-	implementation(npm("@pixi/events", "6.2.2"))
-	implementation(npm("@pixi/graphics-extras", "6.2.2"))
-	implementation(npm("@pixi/math-extras", "6.2.2"))
-	implementation(npm("@pixi/unsafe-eval", "6.2.2"))
+	implementation(npm("pixi.js", Project.pixiVersion))
+	implementation(npm("@pixi/basis", Project.pixiVersion))
+	implementation(npm("@pixi/events", Project.pixiVersion))
+	implementation(npm("@pixi/graphics-extras", Project.pixiVersion))
+	implementation(npm("@pixi/math-extras", Project.pixiVersion))
+	implementation(npm("@pixi/unsafe-eval", Project.pixiVersion))
 	testImplementation(kotlin("test-js"))
 }
 
