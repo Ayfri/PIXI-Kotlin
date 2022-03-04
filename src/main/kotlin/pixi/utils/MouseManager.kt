@@ -4,7 +4,10 @@ import kotlinx.browser.window
 import kotlinx.js.jso
 import org.w3c.dom.events.MouseEvent
 import org.w3c.dom.events.WheelEvent
+import pixi.externals.extensions.Rectangle
+import pixi.externals.extensions.contains
 import pixi.typings.interaction.Button
+import pixi.typings.math.Point
 
 @Suppress("ClassName")
 sealed interface MouseEvents<T> {
@@ -22,7 +25,8 @@ sealed interface MouseEvents<T> {
 
 class MouseManager(var enabled: Boolean = true) {
 	var pressed = mutableSetOf<Short>()
-	var overWindow = false
+	var position = Point()
+	val onWindow get() = position in Rectangle(window)
 	
 	init {
 		if (enabled) activateEvents()
@@ -93,15 +97,10 @@ class MouseManager(var enabled: Boolean = true) {
 	private fun activateEvents() {
 		on(MouseEvents.mousedown, ::onMouseDown)
 		on(MouseEvents.mouseup, ::onMouseUp)
-		on(MouseEvents.mouseenter) { onMouseEnter() }
-		on(MouseEvents.mouseleave) { onMouseLeave() }
+		on(MouseEvents.mousemove, ::onMouseMove)
 	}
 	
-	private fun onMouseEnter() {
-		overWindow = true
-	}
-	
-	private fun onMouseLeave() {
-		overWindow = false
+	private fun onMouseMove(event: MouseEvent) {
+		position.set(event.clientX.toDouble(), event.clientY.toDouble())
 	}
 }
