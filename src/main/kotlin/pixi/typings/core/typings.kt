@@ -4,7 +4,6 @@
 package pixi.typings.core
 
 import org.khronos.webgl.*
-import org.khronos.webgl.WebGLRenderbuffer
 import org.w3c.dom.ErrorEvent
 import org.w3c.dom.HTMLCanvasElement
 import org.w3c.dom.HTMLImageElement
@@ -112,6 +111,7 @@ abstract external class AbstractRenderer(type: RENDERER_TYPE = definedExternally
 	protected open var _backgroundColor: Color
 	protected open var _backgroundColorString: String
 	open var _backgroundColorRgba: ColorArr
+	open var _lastObjectRendered: IRenderableObject
 	
 	open fun initPlugins(staticMap: IRendererPlugins)
 	open val width: Int
@@ -1087,9 +1087,9 @@ open external class Renderer(options: IRendererOptions = definedExternally) : Ab
 	open var geometry: GeometrySystem
 	open var framebuffer: FramebufferSystem
 	open var scissor: ScissorsSystem
-	open var stencim: StencilSystem
-	open var project: ProjectionSystem
-	open var textureGc: TextureGCSystem
+	open var stencil: StencilSystem
+	open var projection: ProjectionSystem
+	open var textureGC: TextureGCSystem
 	open var filter: FilterSystem
 	open var renderTexture: RenderTextureSystem
 	open var batch: BatchSystem
