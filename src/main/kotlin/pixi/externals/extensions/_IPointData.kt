@@ -1,6 +1,8 @@
 package pixi.externals.extensions
 
 import pixi.typings.math.IPointData
+import pixi.typings.math.ObservablePoint
+import pixi.typings.math.Point
 import kotlin.math.abs
 import kotlin.math.ceil
 import kotlin.math.floor
@@ -186,3 +188,7 @@ fun IPointData.round() {
 	x = x.roundToInt().toDouble()
 	y = y.roundToInt().toDouble()
 }
+
+fun <T : Any> IPointData.toObservable(context: T.() -> Unit = {}, scope: T? = null) = ObservablePoint(context, scope ?: null.asDynamic(), x, y)
+fun IPointData.toObservable() = ObservablePoint({}, null.asDynamic(), x, y)
+fun IPointData.toPoint() = Point(x, y)
