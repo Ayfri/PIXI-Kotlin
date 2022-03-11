@@ -5,7 +5,7 @@ import pixi.typings.core.Resource
 import pixi.typings.core.Texture
 
 inline var ILoaderResource.texture
-	get() = asDynamic().texture as Texture<Resource>?
+	get() = asDynamic().texture.unsafeCast<Texture<Resource>?>()
 	set(value) {
 		asDynamic().texture = value
 	}

@@ -53,7 +53,7 @@ class KeyboardManager(enabled: Boolean = true, var ignoreCase: Boolean = false) 
 		val name = event::class.simpleName!!
 		listeners.getOrPut(name) { mutableListOf() } += callback
 		document.addEventListener(name, {
-			if (enabled) callback(it as KeyboardEvent)
+			if (enabled) callback(it.unsafeCast<KeyboardEvent>())
 		})
 	}
 	
@@ -62,7 +62,7 @@ class KeyboardManager(enabled: Boolean = true, var ignoreCase: Boolean = false) 
 		listeners.getOrPut(name) { mutableListOf() } += callback
 		document.addEventListener(name, {
 			if (enabled) {
-				callback(it as KeyboardEvent)
+				callback(it.unsafeCast<KeyboardEvent>())
 				listeners[name]?.remove(callback)
 			}
 		}, jso { once = true })
@@ -71,11 +71,11 @@ class KeyboardManager(enabled: Boolean = true, var ignoreCase: Boolean = false) 
 	fun <T : Any> off(event: KeyboardEvents<T>, callback: ((KeyboardEvent) -> Unit)? = null) {
 		val name = event::class.simpleName!!
 		if (callback == null) {
-			listeners[name]?.forEach { document.removeEventListener(name, it as EventListener) }
+			listeners[name]?.forEach { document.removeEventListener(name, it.unsafeCast<EventListener>()) }
 			listeners.remove(name)
 		} else {
 			listeners[name]?.removeAll { it == callback }
-			document.removeEventListener(name, callback as EventListener)
+			document.removeEventListener(name, callback.unsafeCast<EventListener>())
 		}
 	}
 	

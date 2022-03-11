@@ -3,7 +3,7 @@ package pixi.typings.ticker
 import pixi.typings.app.Application
 
 inline var Application.ticker
-	get() = asDynamic().ticker as Ticker
+	get() = asDynamic().ticker.unsafeCast<Ticker>()
 	set(value) {
 		asDynamic().ticker = value
 	}

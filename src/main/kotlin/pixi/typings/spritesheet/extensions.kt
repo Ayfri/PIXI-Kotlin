@@ -6,13 +6,13 @@ import pixi.typings.core.Texture
 import pixi.typings.loaders.LoaderResource
 
 inline var LoaderResource.spritesheet
-	get() = asDynamic().spritesheet as Spritesheet?
+	get() = asDynamic().spritesheet.unsafeCast<Spritesheet?>()
 	set(value) {
 		asDynamic().spritesheet = value
 	}
 
 inline var LoaderResource.textures
-	get() = asDynamic().textures as Object<String, Texture<Resource>>?
-	set(value) {
-		asDynamic().textures = value
-	}
+	get() = asDynamic().textures.unsafeCast < Object<String>(), Texture<Resource>>?
+set(value ) {
+	asDynamic().textures = value
+}

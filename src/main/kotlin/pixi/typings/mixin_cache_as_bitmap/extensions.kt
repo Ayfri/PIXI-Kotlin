@@ -10,37 +10,37 @@ import pixi.typings.display.IDestroyOptions
 import pixi.typings.math.Rectangle
 
 inline var DisplayObject.cacheAsBitmap
-	get() = asDynamic().cacheAsBitmap as Boolean
+	get() = asDynamic().cacheAsBitmap.unsafeCast<Boolean>()
 	set(value) {
 		asDynamic().cacheAsBitmap = value
 	}
 inline var DisplayObject.cacheAsBitmapResolution
-	get() = asDynamic().cacheAsBitmapResolution as Double
+	get() = asDynamic().cacheAsBitmapResolution.unsafeCast<Double>()
 	set(value) {
 		asDynamic().cacheAsBitmapResolution = value
 	}
 inline var DisplayObject.cacheAsBitMapMultisample
-	get() = asDynamic().cacheAsBitMapMultisample as MSAA_QUALITY
+	get() = asDynamic().cacheAsBitMapMultisample.unsafeCast<MSAA_QUALITY>()
 	set(value) {
 		asDynamic().cacheAsBitMapMultisample = value
 	}
 inline var DisplayObject._cacheAsBitmapResolution
-	get() = asDynamic()._cacheAsBitmapResolution as Double
+	get() = asDynamic()._cacheAsBitmapResolution.unsafeCast<Double>()
 	set(value) {
 		asDynamic()._cacheAsBitmapResolution = value
 	}
 inline var DisplayObject._cacheAsBitmapMultisample
-	get() = asDynamic()._cacheAsBitmapMultisample as MSAA_QUALITY
+	get() = asDynamic()._cacheAsBitmapMultisample.unsafeCast<MSAA_QUALITY>()
 	set(value) {
 		asDynamic()._cacheAsBitmapMultisample = value
 	}
 inline var DisplayObject._cacheAsBitmap
-	get() = asDynamic()._cacheAsBitmap as Boolean
+	get() = asDynamic()._cacheAsBitmap.unsafeCast<Boolean>()
 	set(value) {
 		asDynamic()._cacheAsBitmap = value
 	}
 inline var DisplayObject._cacheData
-	get() = asDynamic()._cacheData as CacheData
+	get() = asDynamic()._cacheData.unsafeCast<CacheData>()
 	set(value) {
 		asDynamic()._cacheData = value
 	}

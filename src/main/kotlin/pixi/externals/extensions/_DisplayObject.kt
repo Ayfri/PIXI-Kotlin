@@ -87,10 +87,10 @@ fun DisplayObject.hide() {
 	this.visible = false
 }
 
-inline fun <reified T : DisplayObjectEvents<*>> DisplayObject.emit(vararg arguments: T) = emit(T::class.simpleName!!, arguments as Array<Any?>)
-fun <T : Any> DisplayObject.on(event: DisplayObjectEvents<T>, callback: (T) -> Unit) = on(event::class.simpleName!!, callback as ListenerFn, null)
-fun <T : Any> DisplayObject.once(event: DisplayObjectEvents<T>, callback: (T) -> Unit) = once(event::class.simpleName!!, callback as ListenerFn, null)
-fun <T : Any> DisplayObject.off(event: DisplayObjectEvents<T>, callback: (T) -> Unit) = off(event::class.simpleName!!, callback as ListenerFn, null)
+inline fun <reified T : DisplayObjectEvents<*>> DisplayObject.emit(vararg arguments: T) = emit(T::class.simpleName!!, arguments.unsafeCast<Array<Any?>>())
+fun <T : Any> DisplayObject.on(event: DisplayObjectEvents<T>, callback: (T) -> Unit) = on(event::class.simpleName!!, callback.unsafeCast<ListenerFn>(), null)
+fun <T : Any> DisplayObject.once(event: DisplayObjectEvents<T>, callback: (T) -> Unit) = once(event::class.simpleName!!, callback.unsafeCast<ListenerFn>(), null)
+fun <T : Any> DisplayObject.off(event: DisplayObjectEvents<T>, callback: (T) -> Unit) = off(event::class.simpleName!!, callback.unsafeCast<ListenerFn>(), null)
 
 fun DisplayObject.removeFromApplication(application: Application) {
 	application.stage.removeChild(this)

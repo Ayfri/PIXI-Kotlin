@@ -7,13 +7,13 @@ inline var Application.resizeTo: dynamic /* Window | HTMLElement */
 	}
 
 inline var Application.resize: () -> Unit
-	get() = asDynamic().resize as () -> Unit
+	get() = asDynamic().resize.unsafeCast<() -> Unit>()
 	set(noinline value) {
 		asDynamic().resize = value
 	}
 
 inline var Application.queueResize: () -> Unit
-	get() = asDynamic().queueResize as () -> Unit
+	get() = asDynamic().queueResize.unsafeCast<() -> Unit>()
 	set(noinline value) {
 		asDynamic().queueResize = value
 	}

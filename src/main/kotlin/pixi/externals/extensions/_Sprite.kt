@@ -16,4 +16,4 @@ var Sprite.color: Color
 val Sprite.hitBox: Rectangle
 	get() = getBounds()
 
-fun Sprite(texture: Texture<CanvasResource>) = Sprite(texture as Texture<Resource>)
+fun Sprite(texture: Texture<CanvasResource>) = Sprite(texture.unsafeCast<Texture<Resource>>())

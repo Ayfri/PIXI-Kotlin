@@ -6,7 +6,7 @@ import pixi.typings.display.Container
 import pixi.typings.display.DisplayObject
 
 inline var DisplayObject.name
-	get() = asDynamic().name as String
+	get() = asDynamic().name.unsafeCast<String>()
 	set(value) {
 		asDynamic().name = value
 	}

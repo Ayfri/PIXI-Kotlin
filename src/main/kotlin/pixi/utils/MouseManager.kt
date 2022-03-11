@@ -51,14 +51,14 @@ class MouseManager(var enabled: Boolean = true) {
 	fun isNotPressed(button: Button) = button.ordinal.toShort() !in pressed
 	
 	fun <T : Any> on(event: MouseEvents<T>, callback: (T) -> Unit) = window.addEventListener(event::class.simpleName!!, {
-		if (enabled) callback(it as T)
+		if (enabled) callback(it.unsafeCast<T>())
 	})
 	
 	fun <T : Any> once(event: MouseEvents<T>, callback: (T) -> Unit) = window.addEventListener(event::class.simpleName!!, {
-		if (enabled) callback(it as T)
+		if (enabled) callback(it.unsafeCast<T>())
 	}, jso { once = true })
 	
-	fun <T : Any> off(event: MouseEvents<T>, callback: (T) -> Unit) = window.removeEventListener(event::class.simpleName!!, { callback(it as T) })
+	fun <T : Any> off(event: MouseEvents<T>, callback: (T) -> Unit) = window.removeEventListener(event::class.simpleName!!, { callback(it.unsafeCast<T>()) })
 	
 	fun onDoubleClick(callback: (MouseEvent) -> Unit) = on(MouseEvents.dblclick, callback)
 	

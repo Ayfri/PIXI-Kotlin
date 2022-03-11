@@ -11,8 +11,8 @@ sealed interface RendererEvents<T> : AbstractRendererEvents<T> {
 	object resize : AbstractRendererEvents<Pair<Int, Int>>
 }
 
-inline fun <reified T : RendererEvents<*>> Renderer.emit(vararg arguments: T) = emit(T::class.simpleName!!, arguments as Array<Any?>)
-fun <T : Any> Renderer.on(event: RendererEvents<T>, callback: (T) -> Unit) = on(event::class.simpleName!!, callback as ListenerFn, null)
-fun <T : Any> Renderer.once(event: RendererEvents<T>, callback: (T) -> Unit) = once(event::class.simpleName!!, callback as ListenerFn, null)
-fun <T : Any> Renderer.off(event: RendererEvents<T>, callback: (T) -> Unit) = off(event::class.simpleName!!, callback as ListenerFn, null)
+inline fun <reified T : RendererEvents<*>> Renderer.emit(vararg arguments: T) = emit(T::class.simpleName!!, arguments.unsafeCast<Array<Any?>>())
+fun <T : Any> Renderer.on(event: RendererEvents<T>, callback: (T) -> Unit) = on(event::class.simpleName!!, callback.unsafeCast<ListenerFn>(), null)
+fun <T : Any> Renderer.once(event: RendererEvents<T>, callback: (T) -> Unit) = once(event::class.simpleName!!, callback.unsafeCast<ListenerFn>(), null)
+fun <T : Any> Renderer.off(event: RendererEvents<T>, callback: (T) -> Unit) = off(event::class.simpleName!!, callback.unsafeCast<ListenerFn>(), null)
 

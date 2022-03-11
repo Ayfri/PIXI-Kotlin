@@ -4,7 +4,7 @@ import pixi.typings.VarArgFun
 import pixi.typings.app.Application
 
 inline var Application.loader
-	get() = asDynamic()?.loader as Loader? ?: Loader.shared
+	get() = asDynamic()?.loader.unsafeCast<Loader?>() ?: Loader.shared
 	set(value) {
 		asDynamic()?.loader = value
 	}

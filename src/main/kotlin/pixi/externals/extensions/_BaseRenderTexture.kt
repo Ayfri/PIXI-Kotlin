@@ -11,8 +11,8 @@ sealed interface BaseRenderTextureEvents<T> : BaseTextureEvents<T> {
 	object loaded : BaseRenderTextureEvents<BaseTexture<Resource, Any?>>
 }
 
-inline fun <reified T : BaseRenderTextureEvents<*>> BaseRenderTexture.emit(vararg arguments: T) = emit(T::class.simpleName!!, arguments as Array<Any?>)
-fun <T : Any> BaseRenderTexture.on(event: BaseRenderTextureEvents<T>, callback: (T) -> Unit) = on(event::class.simpleName!!, callback as ListenerFn, null)
-fun <T : Any> BaseRenderTexture.once(event: BaseRenderTextureEvents<T>, callback: (T) -> Unit) = once(event::class.simpleName!!, callback as ListenerFn, null)
-fun <T : Any> BaseRenderTexture.off(event: BaseRenderTextureEvents<T>, callback: (T) -> Unit) = off(event::class.simpleName!!, callback as ListenerFn, null)
+inline fun <reified T : BaseRenderTextureEvents<*>> BaseRenderTexture.emit(vararg arguments: T) = emit(T::class.simpleName!!, arguments.unsafeCast<Array<Any?>>())
+fun <T : Any> BaseRenderTexture.on(event: BaseRenderTextureEvents<T>, callback: (T) -> Unit) = on(event::class.simpleName!!, callback.unsafeCast<ListenerFn>(), null)
+fun <T : Any> BaseRenderTexture.once(event: BaseRenderTextureEvents<T>, callback: (T) -> Unit) = once(event::class.simpleName!!, callback.unsafeCast<ListenerFn>(), null)
+fun <T : Any> BaseRenderTexture.off(event: BaseRenderTextureEvents<T>, callback: (T) -> Unit) = off(event::class.simpleName!!, callback.unsafeCast<ListenerFn>(), null)
 

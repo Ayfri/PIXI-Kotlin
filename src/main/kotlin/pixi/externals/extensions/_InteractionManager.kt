@@ -32,8 +32,8 @@ sealed interface InteractionManagerEvents<T> {
 	object touchstart : InteractionManagerEvents<InteractionEvent>
 }
 
-inline fun <reified T : InteractionManagerEvents<*>> InteractionManager.emit(vararg arguments: T) = emit(T::class.simpleName!!, arguments as Array<Any?>)
-fun <T : Any> InteractionManager.on(event: InteractionManagerEvents<T>, callback: (T) -> Unit) = on(event::class.simpleName!!, callback as ListenerFn, null)
-fun <T : Any> InteractionManager.once(event: InteractionManagerEvents<T>, callback: (T) -> Unit) = once(event::class.simpleName!!, callback as ListenerFn, null)
-fun <T : Any> InteractionManager.off(event: InteractionManagerEvents<T>, callback: (T) -> Unit) = off(event::class.simpleName!!, callback as ListenerFn, null)
+inline fun <reified T : InteractionManagerEvents<*>> InteractionManager.emit(vararg arguments: T) = emit(T::class.simpleName!!, arguments.unsafeCast<Array<Any?>>())
+fun <T : Any> InteractionManager.on(event: InteractionManagerEvents<T>, callback: (T) -> Unit) = on(event::class.simpleName!!, callback.unsafeCast<ListenerFn>(), null)
+fun <T : Any> InteractionManager.once(event: InteractionManagerEvents<T>, callback: (T) -> Unit) = once(event::class.simpleName!!, callback.unsafeCast<ListenerFn>(), null)
+fun <T : Any> InteractionManager.off(event: InteractionManagerEvents<T>, callback: (T) -> Unit) = off(event::class.simpleName!!, callback.unsafeCast<ListenerFn>(), null)
 
