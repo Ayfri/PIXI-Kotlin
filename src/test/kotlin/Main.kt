@@ -8,8 +8,11 @@ import kotlinx.html.dom.append
 import kotlinx.html.id
 import pixi.externals.Color
 import pixi.externals.extensions.add
+import pixi.externals.extensions.addToApplication
 import pixi.externals.extensions.load
 import pixi.externals.extensions.once
+import pixi.externals.extensions.setPositionFromWindow
+import pixi.externals.generateBlankTexture
 import pixi.typings.app.Application
 import pixi.typings.loaders.Loader
 import pixi.typings.loaders.loader
@@ -78,6 +81,20 @@ class Tests : EventEmitter() {
 		once("ready") {
 			assertNotNull(sprite)
 			assertContains(app.stage.children, sprite)
+		}
+	}
+	
+	@Test
+	fun testGeneratedTexture() {
+		once("ready") {
+			val sprite = Sprite(generateBlankTexture(app) {
+				color = Color(255, 0, 0)
+				width = 300
+				height = 300
+			})
+			sprite.anchor.set(0.5)
+			sprite.setPositionFromWindow(0.5, 0.5)
+			sprite.addToApplication(app)
 		}
 	}
 }

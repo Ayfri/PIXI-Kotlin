@@ -12,7 +12,7 @@ inline var LoaderResource.spritesheet
 	}
 
 inline var LoaderResource.textures
-	get() = asDynamic().textures.unsafeCast < Object<String>(), Texture<Resource>>?
-set(value ) {
-	asDynamic().textures = value
-}
+	get() = asDynamic().textures.unsafeCast < Object<String, Texture<Resource>?>()
+	set(value) {
+		asDynamic().textures = value
+	}
