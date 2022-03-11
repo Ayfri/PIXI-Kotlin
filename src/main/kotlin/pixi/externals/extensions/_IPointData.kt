@@ -37,9 +37,9 @@ operator fun <T : IPointData> T.plus(other: IPointData): T {
 	return this
 }
 
-operator fun <T : IPointData> T.plus(factor: Double): T {
-	x += factor
-	y += factor
+operator fun <T : IPointData> T.plus(factor: Number): T {
+	x += factor.toDouble()
+	y += factor.toDouble()
 	return this
 }
 
@@ -47,7 +47,7 @@ operator fun IPointData.plusAssign(other: IPointData) {
 	this + other
 }
 
-operator fun IPointData.plusAssign(factor: Double) {
+operator fun IPointData.plusAssign(factor: Number) {
 	this + factor
 }
 
@@ -57,9 +57,9 @@ operator fun <T : IPointData> T.minus(other: IPointData): T {
 	return this
 }
 
-operator fun <T : IPointData> T.minus(factor: Double): T {
-	x -= factor
-	y -= factor
+operator fun <T : IPointData> T.minus(factor: Number): T {
+	x -= factor.toDouble()
+	y -= factor.toDouble()
 	return this
 }
 
@@ -67,7 +67,7 @@ operator fun IPointData.minusAssign(other: IPointData) {
 	this - other
 }
 
-operator fun <T : IPointData> T.minusAssign(factor: Double) {
+operator fun <T : IPointData> T.minusAssign(factor: Number) {
 	this - factor
 }
 
@@ -77,9 +77,9 @@ operator fun <T : IPointData> T.times(other: IPointData): T {
 	return this
 }
 
-operator fun <T : IPointData> T.times(factor: Double): T {
-	x *= factor
-	y *= factor
+operator fun <T : IPointData> T.times(factor: Number): T {
+	x *= factor.toDouble()
+	y *= factor.toDouble()
 	return this
 }
 
@@ -87,7 +87,7 @@ operator fun IPointData.timesAssign(other: IPointData) {
 	this * other
 }
 
-operator fun <T : IPointData> T.timesAssign(factor: Double) {
+operator fun <T : IPointData> T.timesAssign(factor: Number) {
 	this * factor
 }
 
@@ -97,9 +97,9 @@ operator fun <T : IPointData> T.div(other: IPointData): T {
 	return this
 }
 
-operator fun <T : IPointData> T.div(factor: Double): T {
-	x /= factor
-	y /= factor
+operator fun <T : IPointData> T.div(factor: Number): T {
+	x /= factor.toDouble()
+	y /= factor.toDouble()
 	return this
 }
 
@@ -107,7 +107,7 @@ operator fun <T : IPointData> T.divAssign(other: IPointData) {
 	this / other
 }
 
-operator fun <T : IPointData> T.divAssign(factor: Double) {
+operator fun <T : IPointData> T.divAssign(factor: Number) {
 	this / factor
 }
 
@@ -117,9 +117,9 @@ operator fun <T : IPointData> T.rem(other: IPointData): T {
 	return this
 }
 
-operator fun <T : IPointData> T.rem(factor: Double): T {
-	x %= factor
-	y %= factor
+operator fun <T : IPointData> T.rem(factor: Number): T {
+	x %= factor.toDouble()
+	y %= factor.toDouble()
 	return this
 }
 
@@ -127,7 +127,7 @@ operator fun <T : IPointData> T.remAssign(other: IPointData) {
 	this % other
 }
 
-operator fun <T : IPointData> T.remAssign(factor: Double) {
+operator fun <T : IPointData> T.remAssign(factor: Number) {
 	this % factor
 }
 
@@ -135,7 +135,7 @@ operator fun <T : IPointData> T.compareTo(other: IPointData) = squaredLength.com
 
 operator fun <T : IPointData> T.rangeTo(other: IPointData) = Rectangle(this, other)
 
-operator fun <T : IPointData> T.get(index: Int): Double {
+operator fun <T : IPointData> T.get(index: Int): Number {
 	return when (index) {
 		0 -> x
 		1 -> y
@@ -143,10 +143,10 @@ operator fun <T : IPointData> T.get(index: Int): Double {
 	}
 }
 
-operator fun <T : IPointData> T.set(index: Int, value: Double) {
+operator fun <T : IPointData> T.set(index: Int, value: Number) {
 	when (index) {
-		0 -> x = value
-		1 -> y = value
+		0 -> x = value.toDouble()
+		1 -> y = value.toDouble()
 		else -> throw IndexOutOfBoundsException("Index must be 0 or 1")
 	}
 }

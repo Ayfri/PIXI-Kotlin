@@ -2,6 +2,7 @@ package pixi.externals.extensions
 
 import org.w3c.dom.Window
 import org.w3c.dom.events.MouseEvent
+import pixi.typings.display.Bounds
 import pixi.typings.display.Container
 import pixi.typings.math.IPointData
 import pixi.typings.math.ISize
@@ -61,18 +62,18 @@ operator fun Rectangle.times(other: Rectangle): Rectangle {
 	return this
 }
 
-operator fun Rectangle.times(factor: Double) {
-	x *= factor
-	y *= factor
-	width *= factor
-	height *= factor
+operator fun Rectangle.times(factor: Number) {
+	x *= factor.toDouble()
+	y *= factor.toDouble()
+	width *= factor.toDouble()
+	height *= factor.toDouble()
 }
 
 operator fun Rectangle.timesAssign(other: Rectangle) {
 	this * other
 }
 
-operator fun Rectangle.timesAssign(factor: Double) {
+operator fun Rectangle.timesAssign(factor: Number) {
 	this * factor
 }
 
@@ -83,18 +84,18 @@ operator fun Rectangle.div(other: Rectangle) {
 	height /= other.height
 }
 
-operator fun Rectangle.div(factor: Double) {
-	x /= factor
-	y /= factor
-	width /= factor
-	height /= factor
+operator fun Rectangle.div(factor: Number) {
+	x /= factor.toDouble()
+	y /= factor.toDouble()
+	width /= factor.toDouble()
+	height /= factor.toDouble()
 }
 
 operator fun Rectangle.divAssign(other: Rectangle) {
 	this / other
 }
 
-operator fun Rectangle.divAssign(factor: Double) {
+operator fun Rectangle.divAssign(factor: Number) {
 	this / factor
 }
 
@@ -105,18 +106,18 @@ operator fun Rectangle.rem(other: Rectangle) {
 	height %= other.height
 }
 
-operator fun Rectangle.rem(factor: Double) {
-	x %= factor
-	y %= factor
-	width %= factor
-	height %= factor
+operator fun Rectangle.rem(factor: Number) {
+	x %= factor.toDouble()
+	y %= factor.toDouble()
+	width %= factor.toDouble()
+	height %= factor.toDouble()
 }
 
 operator fun Rectangle.remAssign(other: Rectangle) {
 	this % other
 }
 
-operator fun Rectangle.remAssign(factor: Double) {
+operator fun Rectangle.remAssign(factor: Number) {
 	this % factor
 }
 
@@ -153,7 +154,12 @@ fun Rectangle.floor() {
 	height = floor(height)
 }
 
-fun Rectangle.inflate(x: Double, y: Double) = Rectangle(this.x - x, this.y - y, this.width + x * 2, this.height + y * 2)
+fun Rectangle.inflate(x: Number, y: Number) = Rectangle(
+	this.x - x.toDouble(),
+	this.y - y.toDouble(),
+	this.width + x.toDouble() * 2,
+	this.height + y.toDouble() * 2
+)
 
 fun Rectangle.intersectSegment(start: IPointData, end: IPointData): Boolean {
 	val x1 = start.x
@@ -198,9 +204,9 @@ fun Rectangle.round() {
 	height = height.roundToInt().toDouble()
 }
 
-fun Rectangle.setPosition(x: Double, y: Double) {
-	this.x = x
-	this.y = y
+fun Rectangle.setPosition(x: Number, y: Number) {
+	this.x = x.toDouble()
+	this.y = y.toDouble()
 }
 
 fun Rectangle.setPosition(position: IPointData) {
@@ -208,9 +214,9 @@ fun Rectangle.setPosition(position: IPointData) {
 	y = position.y
 }
 
-fun Rectangle.setSize(width: Double, height: Double) {
-	this.width = width
-	this.height = height
+fun Rectangle.setSize(width: Number, height: Number) {
+	this.width = width.toDouble()
+	this.height = height.toDouble()
 }
 
 fun Rectangle.setSize(size: ISize) {
@@ -224,7 +230,7 @@ fun Rectangle.setSize(point: IPointData) {
 }
 
 fun Rectangle(first: IPointData, second: IPointData) = Rectangle(first.x, first.y, second.x - first.x, second.y - first.y)
-
+fun Rectangle(x: Number, y: Number, width: Number, height: Number) = Rectangle(x.toDouble(), y.toDouble(), width.toDouble(), height.toDouble())
+fun Rectangle(bounds: Bounds) = bounds.getRectangle()
 fun Rectangle(container: Container) = Rectangle(container.x, container.y, container.width, container.height)
-
 fun Rectangle(window: Window) = Rectangle(0.0, 0.0, window.innerWidth.toDouble(), window.innerHeight.toDouble())
