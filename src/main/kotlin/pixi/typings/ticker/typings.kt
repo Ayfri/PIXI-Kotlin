@@ -7,9 +7,9 @@ import pixi.typings.app.IApplicationOptions
 open external class Ticker {
 	open var autoStart: Boolean
 	open var deltaTime: Double
-	open var deltaMS: Int
-	open var elapsedMS: Int
-	open var lastTime: Int
+	open var deltaMS: Double
+	open var elapsedMS: Double
+	open var lastTime: Double
 	open var speed: Double
 	open val started: Boolean
 	
