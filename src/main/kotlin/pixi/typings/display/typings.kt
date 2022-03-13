@@ -165,9 +165,9 @@ abstract external class DisplayObject : EventEmitter {
 }
 
 external interface IDestroyOptions {
-	val children: Boolean?
-	val texture: Boolean?
-	val baseTexture: Boolean?
+	var children: Boolean?
+	var texture: Boolean?
+	var baseTexture: Boolean?
 }
 
 @Suppress("RETURN_TYPE_MISMATCH_ON_OVERRIDE")
