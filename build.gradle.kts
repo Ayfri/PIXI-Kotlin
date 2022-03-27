@@ -7,7 +7,7 @@ object Project {
 	const val url = "https://github.com/$githubUrl"
 	const val publishUrl = "https://s01.oss.sonatype.org/service/local/"
 	const val snapshotUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
-	const val pixiVersion = "6.2.2"
+	const val pixiVersion = "6.3.0"
 }
 
 
@@ -32,7 +32,7 @@ repositories {
 dependencies {
 	implementation("io.github.turansky.seskar:seskar-core:0.5.0")
 	implementation("org.jetbrains.kotlinx:kotlinx-html:0.7.3")
-	implementation("org.jetbrains.kotlin-wrappers:kotlin-extensions:1.0.1-pre.311-kotlin-1.6.10")
+	implementation("org.jetbrains.kotlin-wrappers:kotlin-extensions:1.0.1-pre.321-kotlin-1.6.10")
 	implementation(npm("pixi.js", Project.pixiVersion))
 	implementation(npm("@pixi/basis", Project.pixiVersion))
 	implementation(npm("@pixi/events", Project.pixiVersion))
