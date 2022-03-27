@@ -1,7 +1,9 @@
 package pixi.externals.extensions
 
+import kotlinx.browser.window
 import org.w3c.dom.Window
 import org.w3c.dom.events.MouseEvent
+import pixi.typings.app.Application
 import pixi.typings.display.Bounds
 import pixi.typings.display.Container
 import pixi.typings.math.IPointData
@@ -146,6 +148,7 @@ fun Rectangle.ceil() {
 }
 
 infix fun Rectangle.collidesWith(other: Rectangle) = x + width >= other.x && x <= other.x + other.width && y + height >= other.y && y <= other.y + other.height
+infix fun Rectangle.collidesWith(other: Container) = x + width >= other.x && x <= other.x + other.width && y + height >= other.y && y <= other.y + other.height
 
 fun Rectangle.floor() {
 	x = floor(x)
@@ -153,13 +156,6 @@ fun Rectangle.floor() {
 	width = floor(width)
 	height = floor(height)
 }
-
-fun Rectangle.inflate(x: Number, y: Number) = Rectangle(
-	this.x - x.toDouble(),
-	this.y - y.toDouble(),
-	this.width + x.toDouble() * 2,
-	this.height + y.toDouble() * 2
-)
 
 fun Rectangle.intersectSegment(start: IPointData, end: IPointData): Boolean {
 	val x1 = start.x
@@ -183,6 +179,11 @@ fun Rectangle.intersectSegment(start: IPointData, end: IPointData): Boolean {
 infix fun Rectangle.maxTo(other: Rectangle) = enlarge(other)
 
 infix fun Rectangle.minTo(other: Rectangle) = fit(other)
+
+fun Rectangle.move(x: Number, y: Number) = apply {
+	this.x += x.toDouble()
+	this.y += y.toDouble()
+}
 
 fun Rectangle.negate() = -this
 
@@ -234,3 +235,10 @@ fun Rectangle(x: Number, y: Number, width: Number, height: Number) = Rectangle(x
 fun Rectangle(bounds: Bounds) = bounds.getRectangle()
 fun Rectangle(container: Container) = Rectangle(container.x, container.y, container.width, container.height)
 fun Rectangle(window: Window) = Rectangle(0.0, 0.0, window.innerWidth.toDouble(), window.innerHeight.toDouble())
+
+fun Rectangle.Companion.fromApplication(app: Application) = app.screen
+fun Rectangle.Companion.fromBounds(bounds: Bounds) = bounds.getRectangle()
+fun Rectangle.Companion.fromContainer(container: Container) = Rectangle(container.x, container.y, container.width, container.height)
+fun Rectangle.Companion.fromPoints(first: IPointData, second: IPointData) = Rectangle(first, second)
+fun Rectangle.Companion.fromWindow(window: Window) = Rectangle(0.0, 0.0, window.innerWidth.toDouble(), window.innerHeight.toDouble())
+val Rectangle.Companion.WINDOW get() = Rectangle(0.0, 0.0, window.innerWidth.toDouble(), window.innerHeight.toDouble())
