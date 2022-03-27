@@ -12,6 +12,7 @@ import org.w3c.dom.events.UIEvent
 import org.w3c.dom.events.WheelEvent
 import org.w3c.dom.pointerevents.PointerEvent
 import pixi.typings.Object
+import pixi.typings.core.IRenderableObject
 import pixi.typings.core.Renderer
 import pixi.typings.display.DisplayObject
 import pixi.typings.interaction.Cursor
@@ -161,7 +162,7 @@ external interface FederatedEventTarget : EventTarget, EventEmitter {
 	val children: ReadonlyArray<FederatedEventTarget>?
 	var interactive: Boolean
 	var interactiveChildren: Boolean
-	var hitArea: IHitArea
+	var hitArea: IHitArea?
 }
 
 @Suppress("MANY_CLASSES_IN_SUPERTYPE_LIST")
@@ -256,7 +257,7 @@ open external class FederatedWheelEvent : FederatedMouseEvent, WheelEvent {
 }
 
 external interface Renderer {
-	var _lastObjectRendered: DisplayObject
+	var _lastObjectRendered: IRenderableObject
 	var view: HTMLCanvasElement
 	var resolution: Double
 	var plugins: Record<String, Any>

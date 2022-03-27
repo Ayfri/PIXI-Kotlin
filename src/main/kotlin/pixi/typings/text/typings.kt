@@ -87,6 +87,7 @@ open external class Text(
 	
 	companion object {
 		var nextLineHeightBehavior: Boolean
+		var experimentalLetterSpacing: Boolean
 	}
 }
 

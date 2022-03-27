@@ -79,6 +79,7 @@ open external class Container : DisplayObject {
 	override fun calculateBounds()
 	open fun getLocalBounds(rect: Rectangle = definedExternally, skipChildrenUpdate: Boolean = definedExternally): Rectangle
 	protected open fun _calculateBounds()
+	protected open fun _renderWithCulling(renderer: Renderer)
 	override fun render(renderer: Renderer)
 	protected open fun renderAdvanced(renderer: Renderer)
 	protected open fun _render(_renderer: Renderer)
@@ -94,6 +95,8 @@ abstract external class DisplayObject : EventEmitter {
 	open var alpha: Double
 	open var visible: Boolean
 	open var renderable: Boolean
+	open var cullable: Boolean
+	open var cullArea: Rectangle?
 	open var filterArea: Rectangle
 	open var filters: Array<Filter>?
 	open var isSprite: Boolean

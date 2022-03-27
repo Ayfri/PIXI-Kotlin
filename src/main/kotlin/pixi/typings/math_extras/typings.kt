@@ -25,9 +25,6 @@ external interface Vector2Math {
 	fun multiply(other: IPointData): Point
 	fun <T : IPointData> multiply(other: IPointData, outPoint: T): T
 	
-	fun divide(other: IPointData): Point
-	fun <T : IPointData> divide(other: IPointData, outPoint: T): T
-	
 	fun multiplyScalar(scalar: Double): Point
 	fun <T : IPointData> multiplyScalar(scalar: Double, outPoint: T): T
 	

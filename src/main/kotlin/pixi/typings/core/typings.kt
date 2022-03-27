@@ -125,6 +125,7 @@ abstract external class AbstractRenderer(type: RENDERER_TYPE = definedExternally
 		region: Rectangle = definedExternally
 	): RenderTexture
 	
+	abstract fun addSystem(ClassRef: ISystemConstructor<Renderer>, name: String): AbstractRenderer /* this */
 	abstract fun render(displayObject: IRenderableObject, options: IRendererRenderOptions = definedExternally)
 	open fun destroy(removeView: Boolean = definedExternally)
 	open var backgroundColor: Color
@@ -374,9 +375,10 @@ open external class Buffer(data: IArrayBuffer = definedExternally, _static: Bool
 open external class BufferResource(source: Float32Array, options: ISize) : Resource {
 	constructor(source: Uint8Array, options: ISize)
 	constructor(source: Uint16Array, options: ISize)
+	constructor(source: Int32Array, options: ISize)
 	constructor(source: Uint32Array, options: ISize)
 	
-	open var data: ArrayBufferView /* Float32Array | Uint8Array | Uint16Array | Uint32Array */
+	open var data: ArrayBufferView /* Float32Array | Uint8Array | Uint16Array | Int32Array | Uint32Array */
 	override fun upload(renderer: Renderer, baseTexture: BaseTexture<Resource, IAutoDetectOptions>, glTexture: GLTexture): Boolean
 	
 	override fun dispose()
@@ -1097,7 +1099,7 @@ open external class Renderer(options: IRendererOptions = definedExternally) : Ab
 	open val extract: Any
 	
 	protected open fun contextChange()
-	open fun addSystem(ClassRef: ISystemConstructor<Renderer>, name: String): Renderer /* this */
+	override fun addSystem(ClassRef: ISystemConstructor<Renderer>, name: String): Renderer /* this */
 	override fun render(displayObject: IRenderableObject, options: IRendererRenderOptions)
 	open fun render(
 		displayObject: IRenderableObject,

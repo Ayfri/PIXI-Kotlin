@@ -148,6 +148,7 @@ open external class Graphics(geometry: GraphicsGeometry = definedExternally) : C
 	override fun destroy(options: Boolean)
 	
 	companion object {
+		var nextRoundedRectBehavior: Boolean
 		var _TEMP_POINT: Point
 	}
 }
@@ -219,7 +220,7 @@ open external class GraphicsGeometry : BatchGeometry {
 	protected open fun transformPoints(points: Array<Double>, matrix: Matrix)
 	protected open fun addColors(colors: Array<Int>, color: Color, alpha: Double, size: Int, offset: Int = definedExternally)
 	protected open fun addTextureIds(textureIds: Array<Int>, id: Int, size: Int, offset: Int = definedExternally)
-	protected open fun addUvs(vers: Array<Double>, uvs: Array<Double>, texture: Texture<Resource>, start: Int, size: Int, matrix: Matrix = definedExternally)
+	protected open fun addUvs(vers: Array<Double>, uvs: Array<Double>, texture: Texture<Resource>, start: Int, size: Int, matrix: Matrix? = definedExternally)
 	protected open fun adjustUvs(uvs: Array<Double>, texture: Texture<Resource>, start: Int, size: Int)
 	
 	companion object {

@@ -188,6 +188,7 @@ open external class Rectangle(x: Double = definedExternally, y: Double = defined
 	open fun clone(): Rectangle
 	open fun copyFrom(rectangle: Rectangle): Rectangle
 	open fun contains(x: Double, y: Double): Boolean
+	open fun intersects(rectangle: Rectangle, transform: Matrix = definedExternally): Boolean
 	open fun pad(paddingX: Double = definedExternally, paddingY: Double = definedExternally): Rectangle /* this */
 	open fun fit(rectangle: Rectangle): Rectangle /* this */
 	open fun ceil(resolution: Double = definedExternally, eps: Double = definedExternally): Rectangle /* this */
