@@ -1,6 +1,7 @@
 package pixi.externals
 
 import kotlin.math.roundToInt
+import kotlin.random.Random
 
 typealias Color = Int
 
@@ -39,6 +40,16 @@ fun Color(string: String): Color {
 
 fun Color(int: Int): Color = int
 fun Color(array: ColorArr): Color = Color(array[0], array[1], array[2])
+
+val Int.Companion.RED: Color get() = Color(255, 0, 0)
+val Int.Companion.GREEN: Color get() = Color(0, 255, 0)
+val Int.Companion.BLUE: Color get() = Color(0, 0, 255)
+val Int.Companion.WHITE: Color get() = Color(255, 255, 255)
+val Int.Companion.BLACK: Color get() = Color(0, 0, 0)
+fun Int.Companion.random(): Color = Color(Random.nextDouble(), Random.nextDouble(), Random.nextDouble())
+fun Int.Companion.rgb(red: Int, green: Int, blue: Int): Color = Color(red, green, blue)
+fun Int.Companion.rgb(red: Double, green: Double, blue: Double): Color = Color(red, green, blue)
+fun Int.Companion.fromHex(hex: String): Color = Color(hex)
 
 typealias ColorArr = Array<Double>
 
