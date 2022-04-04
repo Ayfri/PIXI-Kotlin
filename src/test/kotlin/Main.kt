@@ -19,7 +19,7 @@ import pixi.typings.loaders.loader
 import pixi.typings.sprite.Sprite
 import pixi.typings.ticker.Ticker
 import pixi.typings.utils.EventEmitter
-import pixi.utils.Application
+import pixi.utils.application
 import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertContains
@@ -38,7 +38,7 @@ class Tests : EventEmitter() {
 			}
 		}
 		
-		app = Application {
+		app = application {
 			backgroundColor = Color("#eee")
 			resizeTo = window
 		}
