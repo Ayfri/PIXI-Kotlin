@@ -15,6 +15,8 @@ import kotlin.math.roundToInt
 
 val Rectangle.halfWidth get() = width / 2
 val Rectangle.halfHeight get() = height / 2
+val Rectangle.x2 get() = x + width
+val Rectangle.y2 get() = y + height
 
 operator fun Rectangle.not() {
 	x = -x
