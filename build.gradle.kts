@@ -1,6 +1,6 @@
 object Project {
 	const val group = "io.github.ayfri"
-	const val version = "0.4.0"
+	const val version = "0.5.0"
 	const val name = "PIXI-Kotlin"
 	const val description = "Kotlin bindings for PIXI.js"
 	const val githubUrl = "Ayfri/PIXI-kotlin"
@@ -28,7 +28,6 @@ repositories {
 	uri("https://maven.pkg.jetbrains.space/kotlin/p/kotlin/kotlin-js-wrappers")
 }
 
-
 dependencies {
 	api("io.github.turansky.seskar:seskar-core:0.5.0")
 	api("org.jetbrains.kotlinx:kotlinx-html:0.7.5")
@@ -51,7 +50,6 @@ tasks {
 		dependsOn("publishToSonatype", "closeAndReleaseSonatypeStagingRepository")
 	}
 }
-
 
 kotlin {
 	kotlinDaemonJvmArgs = listOf("-Xopt-in=kotlin.RequiresOptIn")
