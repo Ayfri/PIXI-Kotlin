@@ -12,7 +12,7 @@ object Project {
 
 
 plugins {
-	kotlin("js") version "1.6.10"
+	kotlin("js") version "1.6.20"
 	id("io.github.turansky.seskar") version "0.5.0"
 	id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
 	`maven-publish`
