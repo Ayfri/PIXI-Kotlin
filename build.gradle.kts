@@ -30,16 +30,16 @@ repositories {
 
 
 dependencies {
-	implementation("io.github.turansky.seskar:seskar-core:0.5.0")
-	implementation("org.jetbrains.kotlinx:kotlinx-html:0.7.3")
-	implementation("org.jetbrains.kotlin-wrappers:kotlin-extensions:1.0.1-pre.321-kotlin-1.6.10")
+	api("io.github.turansky.seskar:seskar-core:0.5.0")
+	api("org.jetbrains.kotlinx:kotlinx-html:0.7.5")
+	api("org.jetbrains.kotlin-wrappers:kotlin-extensions:1.0.1-pre.325-kotlin-1.6.10")
 	implementation(npm("pixi.js", Project.pixiVersion))
 	implementation(npm("@pixi/basis", Project.pixiVersion))
 	implementation(npm("@pixi/events", Project.pixiVersion))
 	implementation(npm("@pixi/graphics-extras", Project.pixiVersion))
 	implementation(npm("@pixi/math-extras", Project.pixiVersion))
 	implementation(npm("@pixi/unsafe-eval", Project.pixiVersion))
-	testImplementation(kotlin("test-js"))
+	testApi(kotlin("test-js"))
 }
 
 tasks {
