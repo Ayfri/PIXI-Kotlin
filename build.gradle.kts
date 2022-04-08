@@ -1,3 +1,6 @@
+import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin
+import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension
+
 plugins {
 	id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
 	kotlin("js") apply false
@@ -16,4 +19,11 @@ nexusPublishing {
 
 tasks.wrapper {
 	gradleVersion = "7.4.2"
+}
+
+plugins.withType<YarnPlugin> {
+	the<YarnRootExtension>().apply {
+		lockFileDirectory = projectDir
+		version = "1.22.18"
+	}
 }
