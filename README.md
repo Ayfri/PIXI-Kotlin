@@ -25,6 +25,17 @@ dependencies {
 }
 ```
 
+If you want to add optional PIXI modules, you have to implement them in your project.
+
+```kotlin
+const val PIXI_KOTLIN_VERSION = "0.5.0"
+
+dependencies {
+	implementation("io.github.ayfri:PIXI-Kotlin:PIXI_KOTLIN_VERSION")
+	implementation("io.github.ayfri:PIXI-Kotlin-unsafe-eval:PIXI_KOTLIN_VERSION")
+}
+```
+
 ## Example
 
 Simple application with a sprite, size change when clicking.

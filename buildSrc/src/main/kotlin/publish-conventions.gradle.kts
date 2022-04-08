@@ -10,13 +10,13 @@ configure<PublishingExtension> {
 				from(components["kotlin"])
 				
 				groupId = Project.group
-				artifactId = project.name
-				version = Versions.getPublishVersion(project.name)
+				artifactId = project.publishName
+				version = project.publishVersion
 				
 				artifact(tasks.getByName<Zip>("jsSourcesJar"))
 				
 				pom {
-					name.set(Project.name)
+					name.set(project.name)
 					description.set(Project.description)
 					url.set(Project.url)
 					

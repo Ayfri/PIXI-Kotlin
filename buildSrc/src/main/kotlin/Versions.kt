@@ -4,13 +4,6 @@ object Versions {
 	const val kotlinWrappers = "1.0.1-pre.328-kotlin-1.6.20"
 	const val pixi = "6.3.0"
 	const val seskar = "0.5.0"
-	
-	/**
-	 * The version of the pixi package to publish.
-	 */
-	fun getPublishVersion(pixiModule: String) = when (pixiModule.removePrefix("@pixi/")) {
-		else -> pixi
-	}
 }
 
 object Project {

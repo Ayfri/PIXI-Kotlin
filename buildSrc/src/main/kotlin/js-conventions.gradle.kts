@@ -12,6 +12,9 @@ plugins.withType<KotlinJsPluginWrapper> {
 					outputFileName = "dist.js"
 				}
 			}
+			
+			logger.lifecycle("Configured Kotlin.js project")
+			logger.lifecycle(project.publishName, project.publishVersion)
 			binaries.library()
 		}
 	}
