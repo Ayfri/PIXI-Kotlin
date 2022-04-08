@@ -1,4 +1,4 @@
-package events
+package pixi.externals.events
 
 import org.w3c.dom.ErrorEvent
 import pixi.typings.ListenerFn

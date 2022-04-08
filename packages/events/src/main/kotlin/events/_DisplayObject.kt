@@ -2,16 +2,12 @@ package events
 
 import pixi.FederatedPointerEvent
 import pixi.FederatedWheelEvent
-import pixi.externals.Tuple
 import pixi.typings.ListenerFn
-import pixi.typings.display.Container
 import pixi.typings.display.DisplayObject
 
 sealed interface DisplayObjectEvents<T : Any> {
-	object added : DisplayObjectEvents<Container>
 	object click : DisplayObjectEvents<FederatedPointerEvent>
 	object clickcapture : DisplayObjectEvents<FederatedPointerEvent>
-	object destroyed : DisplayObjectEvents<Nothing>
 	object mousedown : DisplayObjectEvents<FederatedPointerEvent>
 	object mousedowncapture : DisplayObjectEvents<FederatedPointerEvent>
 	object mouseenter : DisplayObjectEvents<FederatedPointerEvent>
@@ -48,8 +44,6 @@ sealed interface DisplayObjectEvents<T : Any> {
 	object pointerupcapture : DisplayObjectEvents<FederatedPointerEvent>
 	object pointerupoutside : DisplayObjectEvents<FederatedPointerEvent>
 	object pointerupoutsidecapture : DisplayObjectEvents<FederatedPointerEvent>
-	object removed : DisplayObjectEvents<Container>
-	object removedFrom : DisplayObjectEvents<Tuple<DisplayObject, Container, Int>>
 	object rightclick : DisplayObjectEvents<FederatedPointerEvent>
 	object rightclickcapture : DisplayObjectEvents<FederatedPointerEvent>
 	object rightdown : DisplayObjectEvents<FederatedPointerEvent>
@@ -74,16 +68,10 @@ sealed interface DisplayObjectEvents<T : Any> {
 	object wheelcapture : DisplayObjectEvents<FederatedWheelEvent>
 }
 
-
 fun <T : DisplayObjectEvents<out E>, E> DisplayObject.emit(event: T, vararg arguments: E) = emit(event::class.simpleName!!, arguments.unsafeCast<Array<Any?>>())
 fun <T : Any> DisplayObject.on(event: DisplayObjectEvents<T>, callback: (T) -> Unit) = on(event::class.simpleName!!, callback.unsafeCast<ListenerFn>(), null)
 fun <T : Any> DisplayObject.once(event: DisplayObjectEvents<T>, callback: (T) -> Unit) = once(event::class.simpleName!!, callback.unsafeCast<ListenerFn>(), null)
 fun <T : Any> DisplayObject.off(event: DisplayObjectEvents<T>, callback: (T) -> Unit) = off(event::class.simpleName!!, callback.unsafeCast<ListenerFn>(), null)
-
-fun DisplayObject.emitAdded(container: Container) = emit(DisplayObjectEvents.added, container)
-fun DisplayObject.onAdded(callback: (Container) -> Unit) = on(DisplayObjectEvents.added, callback)
-fun DisplayObject.onceAdded(callback: (Container) -> Unit) = once(DisplayObjectEvents.added, callback)
-fun DisplayObject.offAdded(callback: (Container) -> Unit) = off(DisplayObjectEvents.added, callback)
 
 fun DisplayObject.emitClick(event: FederatedPointerEvent) = emit(DisplayObjectEvents.click, event)
 fun DisplayObject.onClick(callback: (FederatedPointerEvent) -> Unit) = on(DisplayObjectEvents.click, callback)
@@ -94,11 +82,6 @@ fun DisplayObject.emitClickCapture(event: FederatedPointerEvent) = emit(DisplayO
 fun DisplayObject.onClickCapture(callback: (FederatedPointerEvent) -> Unit) = on(DisplayObjectEvents.clickcapture, callback)
 fun DisplayObject.onceClickCapture(callback: (FederatedPointerEvent) -> Unit) = once(DisplayObjectEvents.clickcapture, callback)
 fun DisplayObject.offClickCapture(callback: (FederatedPointerEvent) -> Unit) = off(DisplayObjectEvents.clickcapture, callback)
-
-fun DisplayObject.emitDestroyed() = emit(DisplayObjectEvents.destroyed)
-fun DisplayObject.onDestroyed(callback: (Nothing) -> Unit) = on(DisplayObjectEvents.destroyed, callback)
-fun DisplayObject.onceDestroyed(callback: (Nothing) -> Unit) = once(DisplayObjectEvents.destroyed, callback)
-fun DisplayObject.offDestroyed(callback: (Nothing) -> Unit) = off(DisplayObjectEvents.destroyed, callback)
 
 fun DisplayObject.emitMouseDown(event: FederatedPointerEvent) = emit(DisplayObjectEvents.mousedown, event)
 fun DisplayObject.onMouseDown(callback: (FederatedPointerEvent) -> Unit) = on(DisplayObjectEvents.mousedown, callback)
@@ -279,16 +262,6 @@ fun DisplayObject.emitPointerUpOutsideCapture(event: FederatedPointerEvent) = em
 fun DisplayObject.onPointerUpOutsideCapture(callback: (FederatedPointerEvent) -> Unit) = on(DisplayObjectEvents.pointerupoutsidecapture, callback)
 fun DisplayObject.oncePointerUpOutsideCapture(callback: (FederatedPointerEvent) -> Unit) = once(DisplayObjectEvents.pointerupoutsidecapture, callback)
 fun DisplayObject.offPointerUpOutsideCapture(callback: (FederatedPointerEvent) -> Unit) = off(DisplayObjectEvents.pointerupoutsidecapture, callback)
-
-fun DisplayObject.emitRemoved(container: Container) = emit(DisplayObjectEvents.removed, container)
-fun DisplayObject.onRemoved(callback: (Container) -> Unit) = on(DisplayObjectEvents.removed, callback)
-fun DisplayObject.onceRemoved(callback: (Container) -> Unit) = once(DisplayObjectEvents.removed, callback)
-fun DisplayObject.offRemoved(callback: (Container) -> Unit) = off(DisplayObjectEvents.removed, callback)
-
-fun DisplayObject.emitRemovedFrom(child: DisplayObject, container: Container, index: Int) = emit(DisplayObjectEvents.removedFrom, child, container, index)
-fun DisplayObject.onRemovedFrom(callback: (Tuple<DisplayObject, Container, Int>) -> Unit) = on(DisplayObjectEvents.removedFrom, callback)
-fun DisplayObject.onceRemovedFrom(callback: (Tuple<DisplayObject, Container, Int>) -> Unit) = once(DisplayObjectEvents.removedFrom, callback)
-fun DisplayObject.offRemovedFrom(callback: (Tuple<DisplayObject, Container, Int>) -> Unit) = off(DisplayObjectEvents.removedFrom, callback)
 
 fun DisplayObject.emitRightClick(event: FederatedPointerEvent) = emit(DisplayObjectEvents.rightclick, event)
 fun DisplayObject.onRightClick(callback: (FederatedPointerEvent) -> Unit) = on(DisplayObjectEvents.rightclick, callback)

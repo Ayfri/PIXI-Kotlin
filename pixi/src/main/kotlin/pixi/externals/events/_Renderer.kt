@@ -1,4 +1,4 @@
-package events
+package pixi.externals.events
 
 import org.khronos.webgl.WebGLRenderingContext
 import pixi.typings.ListenerFn

@@ -1,4 +1,4 @@
-package events
+package pixi.externals.events
 
 import pixi.typings.ListenerFn
 import pixi.typings.core.AbstractRenderer
