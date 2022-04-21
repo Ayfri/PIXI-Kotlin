@@ -1,7 +1,7 @@
 object Versions {
 	const val kotlin = "1.6.20"
 	const val kotlinxHTML = "0.7.3"
-	const val kotlinWrappers = "1.0.1-pre.328-kotlin-1.6.20"
+	const val kotlinWrappers = "1.0.1-pre.331-kotlin-1.6.20"
 	const val pixi = "6.3.0"
 	const val seskar = "0.5.0"
 }

@@ -13,9 +13,7 @@ plugins.withType<KotlinJsPluginWrapper> {
 				}
 			}
 			
-			logger.lifecycle("Configured Kotlin.js project")
-			logger.lifecycle(project.publishName, project.publishVersion)
-			binaries.library()
+			binaries.executable()
 		}
 	}
 }

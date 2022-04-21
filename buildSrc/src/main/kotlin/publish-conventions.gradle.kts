@@ -3,6 +3,10 @@ plugins {
 	signing
 }
 
+repositories {
+	mavenCentral()
+}
+
 configure<PublishingExtension> {
 	publications {
 		if (isKotlinJsProject) {
