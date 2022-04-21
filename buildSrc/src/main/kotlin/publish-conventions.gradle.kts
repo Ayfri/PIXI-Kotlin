@@ -67,8 +67,8 @@ tasks.register("buildAndPublish") {
 	group = "publishing"
 	description = "Builds and publishes the project"
 	
-	dependsOn("${project.displayName}:clean")
-	dependsOn("${project.displayName}:assemble")
-	dependsOn("${project.displayName}:publishToSonatype:closeAndReleaseSonatypeStagingRepository")
+	val subModule = project.displayName
+	dependsOn("$subModule:clean")
+	dependsOn("$subModule:assemble")
 }
 

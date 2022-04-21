@@ -7,6 +7,7 @@ plugins {
 }
 
 nexusPublishing {
+	
 	repositories {
 		sonatype {
 			nexusUrl.set(uri(Project.publishUrl))
@@ -37,6 +38,8 @@ tasks.register("publishAll") {
 	}.map {
 		"${it.path}:buildAndPublish"
 	})
+	
+	dependsOn("closeAndReleaseSonatypeStagingRepository")
 }
 
 plugins.withType<YarnPlugin> {
