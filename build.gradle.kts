@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension
 
 plugins {
-	id("io.github.gradle-nexus.publish-plugin")
+	id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
 	kotlin("js") apply false
 }
 
