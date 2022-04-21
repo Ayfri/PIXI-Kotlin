@@ -32,7 +32,11 @@ tasks.register("publishAll") {
 	group = "publishing"
 	description = "Publish all submodules at once."
 	
-	dependsOn(subprojects.map { "${it.path}:buildAndPublish" })
+	dependsOn(subprojects.filter {
+		it.childProjects.isEmpty()
+	}.map {
+		"${it.path}:buildAndPublish"
+	})
 }
 
 plugins.withType<YarnPlugin> {
