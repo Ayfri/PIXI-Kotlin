@@ -63,12 +63,12 @@ signing {
 	sign(extension.publications)
 }
 
-tasks {
-	create("buildAndPublish") {
-		group = "publishing"
-		description = "Builds and publishes the project"
-		dependsOn("clean")
-		dependsOn("assemble")
-		dependsOn("publishToSonatype:closeAndReleaseSonatypeStagingRepository")
-	}
+tasks.register("buildAndPublish") {
+	group = "publishing"
+	description = "Builds and publishes the project"
+	
+	dependsOn("${project.displayName}:clean")
+	dependsOn("${project.displayName}:assemble")
+	dependsOn("${project.displayName}:publishToSonatype:closeAndReleaseSonatypeStagingRepository")
 }
+
