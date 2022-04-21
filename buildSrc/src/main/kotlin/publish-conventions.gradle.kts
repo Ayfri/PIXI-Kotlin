@@ -70,5 +70,6 @@ tasks.register("buildAndPublish") {
 	logger.lifecycle("Building and publishing the project ${project.name} at ${project.path}, ${project.displayName}")
 	dependsOn(":clean")
 	dependsOn(":assemble")
+	dependsOn(":publishToSonatype")
 }
 
