@@ -67,6 +67,7 @@ tasks.register("buildAndPublish") {
 	group = "publishing"
 	description = "Builds and publishes the project"
 	
+	logger.lifecycle("Building and publishing the project ${project.name} at ${project.path}, ${project.displayName}")
 	dependsOn(":clean")
 	dependsOn(":assemble")
 }
