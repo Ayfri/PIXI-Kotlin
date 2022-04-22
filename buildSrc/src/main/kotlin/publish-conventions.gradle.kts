@@ -69,5 +69,6 @@ tasks.register("buildAndPublish") {
 	
 	dependsOn(":clean")
 	dependsOn(":assemble")
+	dependsOn(":publishToSonatype")
 }
 

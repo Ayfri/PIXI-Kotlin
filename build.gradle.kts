@@ -36,7 +36,7 @@ tasks.register("publishAll") {
 		it.childProjects.isEmpty()
 	}.map {
 		"${it.path}:buildAndPublish"
-	}).finalizedBy(":publishToSonatype", ":closeAndReleaseSonatypeStagingRepository")
+	}).finalizedBy("closeAndReleaseSonatypeStagingRepository")
 }
 
 plugins.withType<YarnPlugin> {
