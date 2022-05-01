@@ -28,15 +28,13 @@ tasks.wrapper {
 	gradleVersion = "7.4.2"
 }
 
-tasks.register("publishAll") {
+tasks.register("buildAndPublish") {
 	group = "publishing"
-	description = "Publish all submodules at once."
+	description = "Builds and publishes the project"
 	
-	dependsOn(subprojects.filter {
-		it.childProjects.isEmpty()
-	}.map {
-		"${it.path}:buildAndPublish"
-	}).finalizedBy("closeAndReleaseSonatypeStagingRepository")
+	dependsOn(":clean")
+	dependsOn(":assemble")
+	dependsOn(":publishToSonatype")
 }
 
 plugins.withType<YarnPlugin> {

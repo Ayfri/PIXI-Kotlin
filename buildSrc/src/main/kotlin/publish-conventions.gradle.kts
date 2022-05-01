@@ -62,13 +62,3 @@ signing {
 	useInMemoryPgpKeys(key, password)
 	sign(extension.publications)
 }
-
-tasks.register("buildAndPublish") {
-	group = "publishing"
-	description = "Builds and publishes the project"
-	
-	dependsOn(":clean")
-	dependsOn(":assemble")
-	dependsOn(":publishToSonatype")
-}
-
