@@ -6,5 +6,5 @@ internal val GradleProject.publishName get() = "${Project.name}-$name"
 
 internal val GradleProject.publishVersion
 	get() = when (name) {
-		else -> Versions.pixi
+		else -> Project.version
 	}
