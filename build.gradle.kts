@@ -13,6 +13,9 @@ nexusPublishing {
 			snapshotRepositoryUrl.set(uri(Project.snapshotUrl))
 			username.set(System.getenv("OSSRH_USER") ?: return@sonatype)
 			password.set(System.getenv("OSSRH_PASSWORD") ?: return@sonatype)
+			stagingProfileId.set(
+				properties["oss.stagingProfileId"]?.toString() ?: System.getenv("OSS_STAGING_PROFILE_ID") ?: return@sonatype
+			)
 		}
 	}
 }
