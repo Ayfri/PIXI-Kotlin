@@ -1413,10 +1413,31 @@ open external class Texture<R : Resource /* = Resource */>(
 			strict: Boolean = definedExternally
 		): Texture<Resource>
 		
+		fun <R : Resource, R0> from(source: Array<String>, options: IBaseTextureOptions<R0> = definedExternally, strict: Boolean = definedExternally): Texture<R>
+		fun <R : Resource, R0> from(source: Array<ImageSource>, options: IBaseTextureOptions<R0> = definedExternally, strict: Boolean = definedExternally): Texture<R>
+		fun <R : Resource, R0> from(
+			source: Array<BaseTexture<R, IAutoDetectOptions>> = definedExternally,
+			options: IBaseTextureOptions<R0>,
+			strict: Boolean = definedExternally
+		): Texture<R>
+		
+		fun from(source: Array<String>, options: IBaseTextureOptions<Any> = definedExternally, strict: Boolean = definedExternally): Texture<Resource>
+		fun from(source: Array<ImageSource>, options: IBaseTextureOptions<Any> = definedExternally, strict: Boolean = definedExternally): Texture<Resource>
+		fun from(
+			source: Array<BaseTexture<Resource, IAutoDetectOptions>>,
+			options: IBaseTextureOptions<Any> = definedExternally,
+			strict: Boolean = definedExternally
+		): Texture<Resource>
+		
 		fun <R : Resource, R0> fromUrl(url: String, options: IBaseTextureOptions<R0> = definedExternally): Promise<Texture<R>>
+		fun <R : Resource, R0> fromUrl(url: Array<String>, options: IBaseTextureOptions<R0> = definedExternally): Promise<Texture<R>>
 		fun fromUrl(url: String, options: IBaseTextureOptions<Any> = definedExternally): Promise<Texture<Resource>>
+		fun fromUrl(url: Array<String>, options: IBaseTextureOptions<Any> = definedExternally): Promise<Texture<Resource>>
+		
+		
 		fun fromBuffer(buffer: Float32Array, width: Double, height: Double, options: IBaseTextureOptions<ISize> = definedExternally): Texture<BufferResource>
 		fun fromBuffer(buffer: Uint8Array, width: Double, height: Double, options: IBaseTextureOptions<ISize> = definedExternally): Texture<BufferResource>
+		
 		fun <R : Resource> fromLoader(
 			source: HTMLImageElement,
 			imageUrl: String,
