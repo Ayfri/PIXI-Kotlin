@@ -31,15 +31,6 @@ tasks.wrapper {
 	gradleVersion = "7.4.2"
 }
 
-tasks.register("buildAndPublish") {
-	group = "publishing"
-	description = "Builds and publishes the project"
-	
-	dependsOn(":clean")
-	dependsOn(":assemble")
-	dependsOn("publishToSonatype")
-}
-
 plugins.withType<YarnPlugin> {
 	the<YarnRootExtension>().apply {
 		lockFileDirectory = projectDir

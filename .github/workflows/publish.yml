@@ -17,6 +17,9 @@ jobs:
       - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@e6e38bacfdf1a337459f332974bb2327a31aaf4b
 
+      - name: Assemble
+        run: ./gradlew assemble
+
       - name: Publish to Nexus
         env:
           OSSRH_USER: ${{ secrets.OSSRH_USER }}
@@ -24,4 +27,4 @@ jobs:
           SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
           SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
           OSS_STAGING_PROFILE_ID: ${{ secrets.OSS_STAGING_PROFILE_ID }}
-        run: ./gradlew buildAndPublish
+        run: ./gradlew publishToSonatype
