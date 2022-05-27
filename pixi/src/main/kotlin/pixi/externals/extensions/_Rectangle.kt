@@ -25,7 +25,12 @@ operator fun Rectangle.not() {
 	height = -height
 }
 
-operator fun Rectangle.unaryMinus(): Rectangle = -this
+operator fun Rectangle.unaryMinus() {
+	x = -x
+	y = -y
+	width = -width
+	height = -height
+}
 
 operator fun Rectangle.unaryPlus() {
 	x = abs(x)
@@ -42,20 +47,12 @@ operator fun Rectangle.plus(other: Rectangle): Rectangle {
 	return this
 }
 
-operator fun Rectangle.plusAssign(other: Rectangle) {
-	this + other
-}
-
 operator fun Rectangle.minus(other: Rectangle): Rectangle {
 	x += other.x
 	y += other.y
 	width -= other.width
 	height -= other.height
 	return this
-}
-
-operator fun Rectangle.minusAssign(other: Rectangle) {
-	this - other
 }
 
 operator fun Rectangle.times(other: Rectangle): Rectangle {
@@ -73,14 +70,6 @@ operator fun Rectangle.times(factor: Number) {
 	height *= factor.toDouble()
 }
 
-operator fun Rectangle.timesAssign(other: Rectangle) {
-	this * other
-}
-
-operator fun Rectangle.timesAssign(factor: Number) {
-	this * factor
-}
-
 operator fun Rectangle.div(other: Rectangle) {
 	x /= other.x
 	y /= other.y
@@ -93,14 +82,6 @@ operator fun Rectangle.div(factor: Number) {
 	y /= factor.toDouble()
 	width /= factor.toDouble()
 	height /= factor.toDouble()
-}
-
-operator fun Rectangle.divAssign(other: Rectangle) {
-	this / other
-}
-
-operator fun Rectangle.divAssign(factor: Number) {
-	this / factor
 }
 
 operator fun Rectangle.rem(other: Rectangle) {
@@ -117,14 +98,6 @@ operator fun Rectangle.rem(factor: Number) {
 	height %= factor.toDouble()
 }
 
-operator fun Rectangle.remAssign(other: Rectangle) {
-	this % other
-}
-
-operator fun Rectangle.remAssign(factor: Number) {
-	this % factor
-}
-
 operator fun Rectangle.rangeTo(other: Rectangle): Rectangle {
 	x = x.coerceIn(other.x, other.x + other.width)
 	y = y.coerceIn(other.y, other.y + other.height)
@@ -133,7 +106,7 @@ operator fun Rectangle.rangeTo(other: Rectangle): Rectangle {
 	return this
 }
 
-operator fun Rectangle.contains(other: Rectangle): Boolean = x <= other.x && other.x + other.width <= x + width && y <= other.y && other.y + other.height <= y + height
+operator fun Rectangle.contains(other: Rectangle) = x <= other.x && other.x + other.width <= x + width && y <= other.y && other.y + other.height <= y + height
 
 operator fun Rectangle.contains(point: IPointData) = contains(point.x, point.y)
 

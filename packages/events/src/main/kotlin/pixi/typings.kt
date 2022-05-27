@@ -216,7 +216,6 @@ open external class FederatedMouseEvent : FederatedEvent<UIEvent /* MouseEvent |
 		_buttonArg: Short,
 		_relatedTargetArg: EventTarget
 	)
-	
 }
 
 @Suppress("MANY_CLASSES_IN_SUPERTYPE_LIST")

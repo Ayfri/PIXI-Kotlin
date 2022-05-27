@@ -11,7 +11,7 @@ fun DisplayObject.addToApplication(application: Application) {
 fun DisplayObject.collidesWith(other: DisplayObject) = getBounds().collidesWith(other.getBounds())
 
 fun DisplayObject.hide() {
-	this.visible = false
+	visible = false
 }
 
 fun DisplayObject.removeFromApplication(application: Application) {
@@ -30,5 +30,5 @@ fun DisplayObject.setPositionFromWindow(factorX: Double, factorY: Double) {
 }
 
 fun DisplayObject.show() {
-	this.visible = true
+	visible = true
 }

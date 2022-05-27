@@ -11,7 +11,7 @@ import kotlin.math.sqrt
 
 val IPointData.length get() = sqrt(x * x + y * y)
 val IPointData.squaredLength get() = x * x + y * y
-val IPointData.xy get() = Pair(x, y)
+val IPointData.xy get() = x to y
 
 operator fun <T : IPointData> T.not(): T {
 	x = -x
@@ -43,14 +43,6 @@ operator fun <T : IPointData> T.plus(factor: Number): T {
 	return this
 }
 
-operator fun IPointData.plusAssign(other: IPointData) {
-	this + other
-}
-
-operator fun IPointData.plusAssign(factor: Number) {
-	this + factor
-}
-
 operator fun <T : IPointData> T.minus(other: IPointData): T {
 	x -= other.x
 	y -= other.y
@@ -61,14 +53,6 @@ operator fun <T : IPointData> T.minus(factor: Number): T {
 	x -= factor.toDouble()
 	y -= factor.toDouble()
 	return this
-}
-
-operator fun IPointData.minusAssign(other: IPointData) {
-	this - other
-}
-
-operator fun <T : IPointData> T.minusAssign(factor: Number) {
-	this - factor
 }
 
 operator fun <T : IPointData> T.times(other: IPointData): T {
@@ -83,14 +67,6 @@ operator fun <T : IPointData> T.times(factor: Number): T {
 	return this
 }
 
-operator fun IPointData.timesAssign(other: IPointData) {
-	this * other
-}
-
-operator fun <T : IPointData> T.timesAssign(factor: Number) {
-	this * factor
-}
-
 operator fun <T : IPointData> T.div(other: IPointData): T {
 	x /= other.x
 	y /= other.y
@@ -103,14 +79,6 @@ operator fun <T : IPointData> T.div(factor: Number): T {
 	return this
 }
 
-operator fun <T : IPointData> T.divAssign(other: IPointData) {
-	this / other
-}
-
-operator fun <T : IPointData> T.divAssign(factor: Number) {
-	this / factor
-}
-
 operator fun <T : IPointData> T.rem(other: IPointData): T {
 	x %= other.x
 	y %= other.y
@@ -121,14 +89,6 @@ operator fun <T : IPointData> T.rem(factor: Number): T {
 	x %= factor.toDouble()
 	y %= factor.toDouble()
 	return this
-}
-
-operator fun <T : IPointData> T.remAssign(other: IPointData) {
-	this % other
-}
-
-operator fun <T : IPointData> T.remAssign(factor: Number) {
-	this % factor
 }
 
 operator fun <T : IPointData> T.compareTo(other: IPointData) = squaredLength.compareTo(other.squaredLength)
