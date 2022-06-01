@@ -78,7 +78,7 @@ open external class SimpleMesh(
 	override fun _render(renderer: Renderer)
 }
 
-open external class SimplePlane(texture: Texture<Resource>, verticesX: Int, verticesY: Int) : Mesh<MeshMaterial> {
+open external class SimplePlane(texture: Texture<Resource>, verticesX: Int = definedExternally, verticesY: Int = definedExternally) : Mesh<MeshMaterial> {
 	open var autoUpdate: Boolean
 	protected open var _textureID: Int
 	

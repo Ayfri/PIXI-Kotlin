@@ -17,3 +17,9 @@ inline var Application.queueResize: () -> Unit
 	set(noinline value) {
 		asDynamic().queueResize = value
 	}
+
+inline var Application.cancelResize: () -> Unit
+	get() = asDynamic().cancelResize.unsafeCast<() -> Unit>()
+	set(noinline value) {
+		asDynamic().cancelResize = value
+	}

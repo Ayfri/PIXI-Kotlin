@@ -267,6 +267,12 @@ open external class BaseTexture<R : Resource /*= Resource*/, R0 /*= IAutoDetectO
 			strict: Boolean = definedExternally
 		): BaseTexture<R, IAutoDetectOptions>
 		
+		fun <R : Resource, R0 : IAutoDetectOptions> from(
+			source: Array<String>,
+			options: IBaseTextureOptions<R0> = definedExternally,
+			strict: Boolean = definedExternally
+		): BaseTexture<R, IAutoDetectOptions>
+		
 		fun from(
 			source: ImageSource,
 			options: IBaseTextureOptions<IAutoDetectOptions> = definedExternally,
@@ -275,6 +281,12 @@ open external class BaseTexture<R : Resource /*= Resource*/, R0 /*= IAutoDetectO
 		
 		fun from(
 			source: String,
+			options: IBaseTextureOptions<IAutoDetectOptions> = definedExternally,
+			strict: Boolean = definedExternally
+		): BaseTexture<Resource, IAutoDetectOptions>
+		
+		fun from(
+			source: Array<String>,
 			options: IBaseTextureOptions<IAutoDetectOptions> = definedExternally,
 			strict: Boolean = definedExternally
 		): BaseTexture<Resource, IAutoDetectOptions>

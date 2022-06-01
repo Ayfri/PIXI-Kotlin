@@ -72,14 +72,12 @@ inline fun Point.reflect(other: IPointData) = asDynamic().reflect(other) as Poin
 inline fun <T : IPointData> Point.reflect(other: IPointData, outPoint: T) = asDynamic().reflect(other, outPoint) as T
 
 
-inline fun Rectangle.intersects(other: Rectangle) = asDynamic().intersects(other) as Boolean
-
 inline fun Rectangle.containsRect(other: Rectangle) = asDynamic().containsRect(other) as Boolean
 
 inline fun Rectangle.equals(other: Rectangle) = asDynamic().equals(other)
 
 inline fun Rectangle.intersection(other: Rectangle) = asDynamic().intersection(other) as Rectangle
-inline fun <T : Rectangle> Rectangle.intersection(other: Rectangle, outRectangle: T) = asDynamic().intersection(other, outRectangle) as T
+inline fun <T : Rectangle> Rectangle.intersection(other: Rectangle, outRect: T) = asDynamic().intersection(other, outRect) as T
 
 inline fun Rectangle.union(other: Rectangle) = asDynamic().union(other) as Rectangle
-inline fun <T : Rectangle> Rectangle.union(other: Rectangle, outRectangle: T) = asDynamic().union(other, outRectangle) as T
+inline fun <T : Rectangle> Rectangle.union(other: Rectangle, outRect: T) = asDynamic().union(other, outRect) as T

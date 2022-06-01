@@ -120,9 +120,17 @@ abstract external class DisplayObject : EventEmitter {
 	open val worldTransform: Transform
 	open val localTransform: Matrix
 	open var position: ObservablePoint<Any?>
+		@Suppress("WRONG_SETTER_PARAMETER_TYPE")
+		set(value: IPointData) = definedExternally
 	open var scale: ObservablePoint<Any?>
+		@Suppress("WRONG_SETTER_PARAMETER_TYPE")
+		set(value: IPointData) = definedExternally
 	open var pivot: ObservablePoint<Any?>
+		@Suppress("WRONG_SETTER_PARAMETER_TYPE")
+		set(value: IPointData) = definedExternally
 	open var skew: ObservablePoint<Any?>
+		@Suppress("WRONG_SETTER_PARAMETER_TYPE")
+		set(value: IPointData) = definedExternally
 	open var rotation: Double
 	open var angle: Double
 	open var zIndex: Int

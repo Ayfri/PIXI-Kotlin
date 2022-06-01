@@ -105,7 +105,7 @@ open external class Graphics(geometry: GraphicsGeometry = definedExternally) : C
 	): Graphics /* this */
 	
 	open fun lineStyle(options: ILineStyleOptions = definedExternally): Graphics /* this */
-	open fun lineTextureStyle(options: ILineStyleOptions): Graphics /* this */
+	open fun lineTextureStyle(options: ILineStyleOptions = definedExternally): Graphics /* this */
 	protected open fun startPoly()
 	open fun finishPoly()
 	open fun moveTo(x: Double, y: Double): Graphics /* this */

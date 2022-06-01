@@ -117,6 +117,7 @@ external val INTERNAL_FORMAT_TO_BYTES_PER_PIXEL: Object<INTERNAL_FORMATS, Double
 
 external class KTXLoader {
 	companion object {
+		var loadKeyValueData: Boolean
 		fun use(resource: LoaderResource, next: VarArgFun<Any?, Unit>)
 	}
 }

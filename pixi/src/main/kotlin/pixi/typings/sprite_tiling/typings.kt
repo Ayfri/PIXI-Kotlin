@@ -2,15 +2,7 @@
 
 package pixi.typings.sprite_tiling
 
-import pixi.typings.core.IBaseTextureOptions
-import pixi.typings.core.ObjectRenderer
-import pixi.typings.core.QuadUv
-import pixi.typings.core.Renderer
-import pixi.typings.core.Resource
-import pixi.typings.core.Shader
-import pixi.typings.core.State
-import pixi.typings.core.Texture
-import pixi.typings.core.TextureMatrix
+import pixi.typings.core.*
 import pixi.typings.display.IDestroyOptions
 import pixi.typings.math.IPointData
 import pixi.typings.math.ISize
@@ -32,6 +24,8 @@ open external class TilingSprite(texture: Texture<Resource>, width: Int = define
 	
 	open var clampMargin: Double
 	open var tileScale: ObservablePoint<Any?>
+		@Suppress("WRONG_SETTER_PARAMETER_TYPE")
+		set(value: IPointData) = definedExternally
 	open var tilePosition: ObservablePoint<Any?>
 	override var width: Double
 	override var height: Double
@@ -45,7 +39,10 @@ open external class TilingSprite(texture: Texture<Resource>, width: Int = define
 	override fun destroy(options: IDestroyOptions)
 	
 	companion object {
+		fun from(source: BaseTexture<*, *>, options: TilingSpriteFromOptions): TilingSprite
+		fun from(source: ImageSource, options: TilingSpriteFromOptions): TilingSprite
 		fun from(source: String, options: TilingSpriteFromOptions): TilingSprite
+		fun from(source: Texture<*>, options: TilingSpriteFromOptions): TilingSprite
 	}
 }
 

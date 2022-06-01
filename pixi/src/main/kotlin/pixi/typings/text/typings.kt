@@ -55,11 +55,13 @@ external interface ModernContext2D : CanvasRenderingContext2D {
 }
 
 open external class Text(
-	text: String,
+	text: String = definedExternally,
 	style: PartialTextStyle = definedExternally,
 	canvas: HTMLCanvasElement = definedExternally
 ) : Sprite {
-	constructor(text: String, style: TextStyle = definedExternally, canvas: HTMLCanvasElement = definedExternally)
+	constructor(text: Number = definedExternally, style: PartialTextStyle = definedExternally, canvas: HTMLCanvasElement = definedExternally)
+	constructor(text: String = definedExternally, style: TextStyle = definedExternally, canvas: HTMLCanvasElement = definedExternally)
+	constructor(text: Number = definedExternally, style: TextStyle = definedExternally, canvas: HTMLCanvasElement = definedExternally)
 	
 	open var canvas: HTMLCanvasElement
 	open var context: ModernContext2D
@@ -75,12 +77,14 @@ open external class Text(
 	override var width: Double
 	override var height: Double
 	open var style: PartialTextStyle
-	open var text: String
+	open var text: String /* String | Number for setter */
 	open var resolution: Double
 	
 	open fun updateText(respectDirty: Boolean)
 	override fun _render(renderer: Renderer)
 	override fun getLocalBounds(rect: Rectangle): Rectangle
+	override fun updateTransform()
+	override fun getBounds(skipUpdate: Boolean, rect: Rectangle): Rectangle
 	override fun _calculateBounds()
 	override fun destroy(options: Boolean)
 	override fun destroy(options: IDestroyOptions)

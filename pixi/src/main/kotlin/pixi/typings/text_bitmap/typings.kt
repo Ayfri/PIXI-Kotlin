@@ -77,6 +77,8 @@ external class BitmapFontLoader {
 
 open external class BitmapText(text: String, style: PartialIBitmapTextStyle = definedExternally) : Container {
 	open var dirty: Boolean
+	open var _resolution: Number
+	open var _autoResolution: Boolean
 	protected open var _textWidth: Double
 	protected open var _textHeight: Double
 	protected open var _text: String
@@ -103,6 +105,7 @@ open external class BitmapText(text: String, style: PartialIBitmapTextStyle = de
 	open var letterSpacing: Double
 	open var roundPixels: Boolean
 	open val textHeight: Double
+	open var resolution: Number
 	
 	open fun updateText()
 	override fun updateTransform()
