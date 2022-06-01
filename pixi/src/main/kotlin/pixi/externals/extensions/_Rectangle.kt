@@ -8,6 +8,7 @@ import pixi.typings.display.Bounds
 import pixi.typings.display.Container
 import pixi.typings.math.IPointData
 import pixi.typings.math.ISize
+import pixi.typings.math.Point
 import pixi.typings.math.Rectangle
 import kotlin.math.abs
 import kotlin.math.floor
@@ -17,6 +18,9 @@ val Rectangle.halfWidth get() = width / 2
 val Rectangle.halfHeight get() = height / 2
 val Rectangle.x2 get() = x + width
 val Rectangle.y2 get() = y + height
+val Rectangle.centerX get() = x + halfWidth
+val Rectangle.centerY get() = y + halfHeight
+val Rectangle.points get() = Point(x, y) to Point(x2, y2)
 
 operator fun Rectangle.not() {
 	x = -x
