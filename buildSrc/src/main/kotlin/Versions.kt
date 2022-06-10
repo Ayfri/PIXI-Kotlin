@@ -3,7 +3,7 @@ object Versions {
 	const val kotlinxHTML = "0.7.3"
 	const val kotlinWrappers = "1.0.1-pre.343"
 	const val pixi = "6.4.2"
-	const val seskar = "0.7.0"
+	const val seskar = "0.6.0"
 }
 
 object Project {

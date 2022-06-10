@@ -48,7 +48,7 @@ class Tests : EventEmitter() {
 	}
 	
 	fun start(loader: Loader) {
-		val texture = loader.resources["test"]!!.texture!!
+		val texture = (loader.resources["test"] ?: return).texture ?: return
 		
 		val size = 250.0
 		sprite = Sprite(texture).apply {

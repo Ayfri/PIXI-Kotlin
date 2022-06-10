@@ -3,8 +3,9 @@ rootProject.name = "PIXI-Kotlin"
 pluginManagement {
 	resolutionStrategy {
 		plugins {
-			kotlin("js") version "1.6.21"
-			kotlin("jvm") version "1.6.21"
+			val kotlinVersion = "1.7.0"
+			kotlin("js") version kotlinVersion
+			kotlin("jvm") version kotlinVersion
 		}
 	}
 	
