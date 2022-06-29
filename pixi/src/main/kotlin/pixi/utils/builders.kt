@@ -1,5 +1,6 @@
 package pixi.utils
 
+import kotlinx.js.Void
 import kotlinx.js.jso
 import pixi.externals.BLACK
 import pixi.externals.Color
@@ -12,6 +13,7 @@ import pixi.typings.core.Texture
 import pixi.typings.display.Container
 import pixi.typings.graphics.Graphics
 import pixi.typings.math.Matrix
+import pixi.typings.math.ObservablePoint
 import pixi.typings.math.Point
 import pixi.typings.sprite.Sprite
 import pixi.typings.text.PartialTextStyle
@@ -29,6 +31,9 @@ fun graphics(block: Graphics.() -> Unit) = Graphics().apply(block)
 fun matrix(block: Matrix.() -> Unit) = Matrix().apply(block)
 
 fun point(block: Point.() -> Unit) = Point().apply(block)
+
+fun <T> observablePoint(x: Number, y: Number, scope: T = jso(), onChange: ((T) -> Any?) = {}) = ObservablePoint(onChange, scope, x.toDouble(), y.toDouble())
+fun observablePoint(x: Number, y: Number, onChange: (() -> Any?) = {}) = ObservablePoint(onChange.unsafeCast<(Void) -> Any?>(), null, x.toDouble(), y.toDouble())
 
 fun sprite(texture: Texture<Resource>, block: Sprite.() -> Unit) = Sprite(texture).apply(block)
 fun sprite(texture: BaseTexture<Resource, IAutoDetectOptions>, block: Sprite.() -> Unit) = Sprite.from(texture).apply(block)

@@ -125,7 +125,7 @@ open external class Matrix(
 }
 
 @Suppress("RETURN_TYPE_MISMATCH_ON_OVERRIDE")
-open external class ObservablePoint<T /* = Any */>(context: (self: T) -> Any?, scope: T, x: Double = definedExternally, y: Double = definedExternally) : IPoint {
+open external class ObservablePoint<T /* = Any */>(cb: (self: T) -> Any?, scope: T, x: Double = definedExternally, y: Double = definedExternally) : IPoint {
 	open var cb: (self: T) -> Any?
 	open var scope: Any?
 	open var _x: Double
