@@ -50,16 +50,18 @@ class KeyboardManager(enabled: Boolean = true, var ignoreCase: Boolean = false) 
 	fun isUp(keyName: String) = !isDown(keyName)
 	
 	fun <T : Any> on(event: KeyboardEvents<T>, callback: (KeyboardEvent) -> Unit) {
-		val name = event::class.simpleName!!
-		listeners.getOrPut(name) { mutableListOf() } += callback
+		val name = event::class.simpleName ?: return
+		
+		listeners.getOrPut(name, ::mutableListOf) += callback
 		document.addEventListener(name, {
 			if (enabled) callback(it.unsafeCast<KeyboardEvent>())
 		})
 	}
 	
 	fun <T : Any> once(event: KeyboardEvents<T>, callback: (KeyboardEvent) -> Unit) {
-		val name = event::class.simpleName!!
-		listeners.getOrPut(name) { mutableListOf() } += callback
+		val name = event::class.simpleName ?: return
+		
+		listeners.getOrPut(name, ::mutableListOf) += callback
 		document.addEventListener(name, {
 			if (enabled) {
 				callback(it.unsafeCast<KeyboardEvent>())
@@ -69,7 +71,8 @@ class KeyboardManager(enabled: Boolean = true, var ignoreCase: Boolean = false) 
 	}
 	
 	fun <T : Any> off(event: KeyboardEvents<T>, callback: ((KeyboardEvent) -> Unit)? = null) {
-		val name = event::class.simpleName!!
+		val name = event::class.simpleName ?: return
+		
 		if (callback == null) {
 			listeners[name]?.forEach { document.removeEventListener(name, it.unsafeCast<EventListener>()) }
 			listeners.remove(name)
@@ -94,6 +97,7 @@ class KeyboardManager(enabled: Boolean = true, var ignoreCase: Boolean = false) 
 	
 	fun onKeep(key: String, callback: (KeyboardEvent) -> Unit) {
 		val kept = KeptCallback(callback)
+		
 		onPress {
 			if (ignoreCase && it.key.lowercase() == key.lowercase()) kept.event = it
 			else if (!ignoreCase && it.key == key) kept.event = it
@@ -185,14 +189,14 @@ class KeyMap(keyMap: Map<String, Set<String>> = HashMap(), enabled: Boolean = tr
 	val debug get() = listeners
 	
 	fun addPress(entryName: String, key: String, callback: (KeyboardEvent) -> Unit = {}) {
-		_keys.getOrPut(entryName) { mutableSetOf() } += key
-		listeners.getOrPut(entryName) { mutableListOf() } += KeyListener(KeyboardEvents.keydown, key, callback)
+		_keys.getOrPut(entryName, ::mutableSetOf) += key
+		listeners.getOrPut(entryName, ::mutableListOf) += KeyListener(KeyboardEvents.keydown, key, callback)
 		keyboardManager.onPress(key, callback)
 	}
 	
 	fun addRelease(entryName: String, key: String, callback: (KeyboardEvent) -> Unit = {}) {
-		_keys.getOrPut(entryName) { mutableSetOf() } += key
-		listeners.getOrPut(entryName) { mutableListOf() } += KeyListener(KeyboardEvents.keyup, key, callback)
+		_keys.getOrPut(entryName, ::mutableSetOf) += key
+		listeners.getOrPut(entryName, ::mutableListOf) += KeyListener(KeyboardEvents.keyup, key, callback)
 		keyboardManager.onRelease(key, callback)
 	}
 	
@@ -208,7 +212,7 @@ class KeyMap(keyMap: Map<String, Set<String>> = HashMap(), enabled: Boolean = tr
 		enabled = false
 	}
 	
-	fun isPressed(entry: String) = _keys[entry]?.any { keyboardManager.isPressed(it) } ?: false
+	fun isPressed(entry: String) = _keys[entry]?.any(keyboardManager::isPressed) ?: false
 	fun isDown(entry: String) = isPressed(entry)
 	fun isUp(entry: String) = !isPressed(entry)
 	
@@ -242,9 +246,10 @@ class KeyMap(keyMap: Map<String, Set<String>> = HashMap(), enabled: Boolean = tr
 	
 	fun removePress(entryName: String, key: String? = null) {
 		if (key == null || _keys[entryName]?.isEmpty() == true) {
-			listeners.remove(entryName)?.let {
-				it.forEach { keyboardManager.off(it.type, it.callback) }
+			listeners.remove(entryName)?.let { keyListeners ->
+				keyListeners.forEach { keyboardManager.off(it.type, it.callback) }
 			}
+			
 			_keys.remove(entryName)
 		} else {
 			_keys[entryName]?.remove(key)

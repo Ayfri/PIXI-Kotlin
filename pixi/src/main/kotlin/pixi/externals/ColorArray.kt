@@ -42,7 +42,7 @@ fun ColorArr(red: Double, green: Double, blue: Double, alpha: Double = 1.0) = ar
 fun ColorArr(color: String): ColorArr {
 	val hex = color.removePrefix("#")
 	return ColorArr(
-		hex.substring(0, 2).toInt(16).toDouble() / 255,
+		hex.take(2).toInt(16).toDouble() / 255,
 		hex.substring(2, 4).toInt(16).toDouble() / 255,
 		hex.substring(4, 6).toInt(16).toDouble() / 255
 	)

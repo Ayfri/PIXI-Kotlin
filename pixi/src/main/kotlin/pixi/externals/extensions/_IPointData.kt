@@ -95,12 +95,10 @@ operator fun <T : IPointData> T.compareTo(other: IPointData) = squaredLength.com
 
 operator fun <T : IPointData> T.rangeTo(other: IPointData) = Rectangle(this, other)
 
-operator fun <T : IPointData> T.get(index: Int): Number {
-	return when (index) {
-		0 -> x
-		1 -> y
-		else -> throw IndexOutOfBoundsException("Index must be 0 or 1")
-	}
+operator fun <T : IPointData> T.get(index: Int): Number = when (index) {
+	0 -> x
+	1 -> y
+	else -> throw IndexOutOfBoundsException("Index must be 0 or 1")
 }
 
 operator fun <T : IPointData> T.set(index: Int, value: Number) {

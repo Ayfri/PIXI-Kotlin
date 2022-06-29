@@ -62,7 +62,7 @@ fun Color(string: String): Color {
 			b = hex[2].toString().repeat(2)
 		}
 		6 -> {
-			r = hex.substring(0, 2)
+			r = hex.take(2)
 			g = hex.substring(2, 4)
 			b = hex.substring(4, 6)
 		}
@@ -156,22 +156,22 @@ fun Color.toHsv(): Triple<Int, Int, Int> {
 	
 	return Triple(h.toInt(), s.toInt(), max.toInt())
 }
-	
+
 internal fun Int.Companion.checkRGB(red: Number, green: Number, blue: Number) {
 	val r = red.toInt()
-	if (r < 0 || r > 255) throw IllegalArgumentException("Red must be between 0 and 255, got $r")
+	require(r in 0..255) { "Red must be between 0 and 255, got $r" }
 	
 	val g = green.toInt()
-	if (g < 0 || g > 255) throw IllegalArgumentException("Green must be between 0 and 255, got $g")
+	require(g in 0..255) { "Green must be between 0 and 255, got $g" }
 	
 	val b = blue.toInt()
-	if (b < 0 || b > 255) throw IllegalArgumentException("Blue must be between 0 and 255, $b")
+	require(b in 0..255) { "Blue must be between 0 and 255, $b" }
 }
 
 internal fun Int.Companion.checkRGB(red: Double, green: Double, blue: Double) {
-	if (red < 0 || red > 1) throw IllegalArgumentException("Red must be between 0 and 1, got $red")
-	if (green < 0 || green > 1) throw IllegalArgumentException("Green must be between 0 and 1, got $green")
-	if (blue < 0 || blue > 1) throw IllegalArgumentException("Blue must be between 0 and 1, got $blue")
+	require(red in 0.0..1.0) { "Red must be between 0 and 1, got $red" }
+	require(green in 0.0..1.0) { "Green must be between 0 and 1, got $green" }
+	require(blue in 0.0..1.0) { "Blue must be between 0 and 1, got $blue" }
 }
 
 fun String.toColor(): Color = Color(this)
