@@ -1,11 +1,11 @@
 package tests
 
-import kotlinext.js.require
 import kotlinx.browser.document
 import kotlinx.browser.window
 import kotlinx.html.div
 import kotlinx.html.dom.append
 import kotlinx.html.id
+import kotlinx.js.import
 import pixi.externals.Color
 import pixi.externals.extensions.add
 import pixi.externals.extensions.addToApplication
@@ -13,6 +13,7 @@ import pixi.externals.extensions.load
 import pixi.externals.extensions.once
 import pixi.externals.extensions.setPositionFromWindow
 import pixi.externals.generateBlankTexture
+import pixi.typings.VERSION
 import pixi.typings.app.Application
 import pixi.typings.loaders.Loader
 import pixi.typings.loaders.loader
@@ -25,12 +26,12 @@ import kotlin.test.Test
 import kotlin.test.assertContains
 import kotlin.test.assertNotNull
 
-class Tests : EventEmitter() {
+object Tests : EventEmitter() {
 	lateinit var sprite: Sprite
 	var app: Application
 	
 	init {
-		require("pixi.js")
+		import<Any>("pixi.js")
 		
 		document.body!!.append {
 			div {
@@ -42,8 +43,10 @@ class Tests : EventEmitter() {
 			backgroundColor = Color("#eee")
 			resizeTo = window
 		}
+		
 		document.querySelector("#root")!!.appendChild(app.view)
 		
+		console.log("Pixi.js version: $VERSION")
 		app.loader.add("test", "test.png").load(::start)
 	}
 	
