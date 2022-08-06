@@ -1,5 +1,13 @@
 import org.jetbrains.kotlin.gradle.dsl.KotlinCompile
 import org.jetbrains.kotlin.gradle.plugin.KotlinJsCompilerType.IR
+import java.util.*
+
+val props = Properties().apply {
+	file("../gradle.properties").inputStream().use { load(it) }
+}
+
+fun version(target: String) = props.getProperty("${target}.version")
+
 
 plugins {
 	kotlin("js")
@@ -14,10 +22,10 @@ repositories {
 
 dependencies {
 	api("io.github.turansky.seskar:seskar-core:${Versions.seskar}")
-	api("org.jetbrains.kotlinx:kotlinx-html:${Versions.kotlinxHTML}")
+	api("org.jetbrains.kotlinx:kotlinx-html-js:${Versions.kotlinxHTML}")
 	api("org.jetbrains.kotlin-wrappers:kotlin-js:${Versions.kotlinWrappers}")
 	implementation(npm("pixi.js", Versions.pixi))
-	testImplementation(kotlin("test-js"))
+	testImplementation(kotlin("test-js", version("kotlin")))
 }
 
 tasks.withType<KotlinCompile<*>>().configureEach {
@@ -33,7 +41,7 @@ kotlin.js(IR) {
 		testTask {
 			useKarma {
 				useSourceMapSupport()
-				useFirefox()
+				useChrome()
 				
 				webpackConfig.sourceMaps = true
 			}
