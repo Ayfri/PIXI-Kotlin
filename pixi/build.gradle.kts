@@ -1,4 +1,4 @@
-import org.jetbrains.kotlin.gradle.dsl.KotlinCompile
+
 import org.jetbrains.kotlin.gradle.plugin.KotlinJsCompilerType.IR
 import java.util.*
 
@@ -26,10 +26,6 @@ dependencies {
 	api("org.jetbrains.kotlin-wrappers:kotlin-js:${Versions.kotlinWrappers}")
 	implementation(npm("pixi.js", Versions.pixi))
 	testImplementation(kotlin("test-js", version("kotlin")))
-}
-
-tasks.withType<KotlinCompile<*>>().configureEach {
-	kotlinOptions.freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
 }
 
 kotlin.js(IR) {
