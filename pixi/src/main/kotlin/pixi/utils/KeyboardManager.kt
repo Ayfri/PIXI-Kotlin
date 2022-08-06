@@ -235,12 +235,12 @@ class KeyMap(keyMap: Map<String, Set<String>> = HashMap(), enabled: Boolean = tr
 	fun onRelease(entry: String, callback: (KeyboardEvent) -> Unit) = _keys[entry]?.forEach { addRelease(entry, it, callback) }
 	
 	fun offPress(entry: String, callback: ((KeyboardEvent) -> Unit)? = null) {
-		_keys[entry]?.forEach { keyboardManager.off(KeyboardEvents.keydown, callback) }
+		repeat(_keys[entry]?.size ?: 0) { keyboardManager.off(KeyboardEvents.keydown, callback) }
 		_keys.remove(entry)
 	}
 	
 	fun offRelease(entry: String, callback: ((KeyboardEvent) -> Unit)? = null) {
-		_keys[entry]?.forEach { keyboardManager.off(KeyboardEvents.keyup, callback) }
+		repeat(_keys[entry]?.size ?: 0) { keyboardManager.off(KeyboardEvents.keyup, callback) }
 		_keys.remove(entry)
 	}
 	
