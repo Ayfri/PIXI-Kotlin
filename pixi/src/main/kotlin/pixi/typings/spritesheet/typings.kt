@@ -10,9 +10,11 @@ import pixi.typings.core.Texture
 import pixi.typings.loaders.LoaderResource
 import pixi.typings.math.IPointData
 import pixi.typings.utils.Dict
+import kotlin.js.Promise
 
 external interface ISpritesheetDataMeta {
 	var scale: String
+	var related_multi_packs: Array<String>?
 }
 
 external interface ISpritesheetData {
@@ -47,6 +49,7 @@ external interface ISpritesheetFrameData {
 open external class Spritesheet(texture: Texture<Resource>, data: ISpritesheetData, resolutionFilename: String = definedExternally) {
 	constructor(texture: BaseTexture<Resource, IAutoDetectOptions>, data: ISpritesheetData, resolutionFilename: String = definedExternally)
 	
+	open var linkedSheets: Array<Spritesheet>
 	open var baseTexture: BaseTexture<Resource, IAutoDetectOptions>
 	open var textures: Dict<Texture<Resource>>
 	open var animations: Dict<Array<Texture<Resource>>>
@@ -56,6 +59,7 @@ open external class Spritesheet(texture: Texture<Resource>, data: ISpritesheetDa
 	open fun destroy(destroyBase: Boolean = definedExternally)
 	open fun parse(callback: (textures: Dict<Texture<Resource>>) -> Unit)
 	open fun parse(callback: () -> Unit)
+	open fun parse(): Promise<Dict<Texture<Resource>>>
 	
 	companion object {
 		val BATCH_SIZE: Int /* = 1000 */

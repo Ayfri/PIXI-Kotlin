@@ -6,6 +6,7 @@ import org.w3c.dom.HTMLElement
 import pixi.typings.core.AbstractRenderer
 import pixi.typings.core.Renderer
 import pixi.typings.display.DisplayObject
+import pixi.typings.extensions.ExtensionMetadata
 import pixi.typings.math.Rectangle
 
 open external class AccessibilityManager(renderer: AbstractRenderer) {
@@ -18,6 +19,10 @@ open external class AccessibilityManager(renderer: AbstractRenderer) {
 	open fun updateDebugHTML(div: IAccessibleHTMLElement)
 	open fun capHitArea(hitArea: Rectangle)
 	open fun destroy()
+	
+	companion object {
+		var extension: ExtensionMetadata
+	}
 }
 
 external val accessibleTarget: IAccessibleTarget

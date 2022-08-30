@@ -17,7 +17,11 @@ import pixi.typings.core.IAutoDetectOptions
 import pixi.typings.core.Renderer
 import pixi.typings.core.Resource
 import pixi.typings.core.ViewableBuffer
+import pixi.typings.extensions.ExtensionMetadata
 import pixi.typings.loaders.LoaderResource
+import webgl.WEBGL_compressed_texture_astc
+import webgl.WEBGL_compressed_texture_s3tc
+import webgl.WEBGL_compressed_texture_s3tc_srgb
 import kotlin.js.Promise
 
 abstract external class BlobResource(source: String, options: IBlobOptions = definedExternally) : BufferResource {
@@ -63,6 +67,8 @@ external interface CompressedTextureExtensionsPartial {
 
 open external class CompressedTextureLoader {
 	companion object {
+		var extension: ExtensionMetadata
+		
 		var textureExtensions: CompressedTextureExtensionsPartial
 		var textureFormats: Object<INTERNAL_FORMATS, Number>
 		fun use(resource: LoaderResource, next: VarArgFun<Any?, Unit>)
@@ -93,6 +99,8 @@ open external class CompressedTextureResource(source: String, options: ICompress
 
 external class DDSLoader {
 	companion object {
+		var extension: ExtensionMetadata
+		
 		fun use(resource: LoaderResource, next: VarArgFun<Any?, Unit>)
 	}
 }
@@ -117,6 +125,8 @@ external val INTERNAL_FORMAT_TO_BYTES_PER_PIXEL: Object<INTERNAL_FORMATS, Double
 
 external class KTXLoader {
 	companion object {
+		var extension: ExtensionMetadata
+		
 		var loadKeyValueData: Boolean
 		fun use(resource: LoaderResource, next: VarArgFun<Any?, Unit>)
 	}

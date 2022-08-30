@@ -127,7 +127,7 @@ fun Rectangle.ceil() {
 }
 
 infix fun Rectangle.collidesWith(other: Rectangle) = x + width >= other.x && x <= other.x + other.width && y + height >= other.y && y <= other.y + other.height
-infix fun Rectangle.collidesWith(other: Container) = x + width >= other.x && x <= other.x + other.width && y + height >= other.y && y <= other.y + other.height
+infix fun Rectangle.collidesWith(other: Container<*>) = x + width >= other.x && x <= other.x + other.width && y + height >= other.y && y <= other.y + other.height
 
 fun Rectangle.floor() {
 	x = floor(x)
@@ -212,12 +212,12 @@ fun Rectangle.setSize(point: IPointData) {
 fun Rectangle(first: IPointData, second: IPointData) = Rectangle(first.x, first.y, second.x - first.x, second.y - first.y)
 fun Rectangle(x: Number, y: Number, width: Number, height: Number) = Rectangle(x.toDouble(), y.toDouble(), width.toDouble(), height.toDouble())
 fun Rectangle(bounds: Bounds) = bounds.getRectangle()
-fun Rectangle(container: Container) = Rectangle(container.x, container.y, container.width, container.height)
+fun Rectangle(container: Container<*>) = Rectangle(container.x, container.y, container.width, container.height)
 fun Rectangle(window: Window) = Rectangle(0.0, 0.0, window.innerWidth.toDouble(), window.innerHeight.toDouble())
 
 fun Rectangle.Companion.fromApplication(app: Application) = app.screen
 fun Rectangle.Companion.fromBounds(bounds: Bounds) = bounds.getRectangle()
-fun Rectangle.Companion.fromContainer(container: Container) = Rectangle(container.x, container.y, container.width, container.height)
+fun Rectangle.Companion.fromContainer(container: Container<*>) = Rectangle(container.x, container.y, container.width, container.height)
 fun Rectangle.Companion.fromPoints(first: IPointData, second: IPointData) = Rectangle(first, second)
 fun Rectangle.Companion.fromWindow(window: Window) = Rectangle(0.0, 0.0, window.innerWidth.toDouble(), window.innerHeight.toDouble())
 val Rectangle.Companion.WINDOW get() = Rectangle(0.0, 0.0, window.innerWidth.toDouble(), window.innerHeight.toDouble())

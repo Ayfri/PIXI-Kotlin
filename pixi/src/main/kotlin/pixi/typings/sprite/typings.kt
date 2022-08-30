@@ -17,11 +17,12 @@ import pixi.typings.core.Renderer
 import pixi.typings.core.Resource
 import pixi.typings.core.Texture
 import pixi.typings.display.Container
+import pixi.typings.display.DisplayObject
 import pixi.typings.math.IPointData
 import pixi.typings.math.ObservablePoint
 import pixi.typings.math.Rectangle
 
-open external class Sprite(texture: Texture<Resource> = definedExternally) : Container {
+open external class Sprite(texture: Texture<Resource> = definedExternally) : Container<DisplayObject> {
 	open var blendMode: BLEND_MODES
 	open var indices: Uint16Array
 	open var pluginName: String

@@ -1,19 +1,16 @@
 @file:JsModule("ismobilejs")
 
-package pixi.typings
+package pixi.typings.settings
 
-external interface AppleResult {
+external interface BaseResult {
 	var phone: Boolean
-	var ipod: Boolean
 	var tablet: Boolean
-	var universal: Boolean
 	var device: Boolean
 }
 
-external interface BasicResult {
-	var phone: Boolean
-	var tablet: Boolean
-	var device: Boolean
+external interface AppleResult : BaseResult {
+	var ipod: Boolean
+	var universal: Boolean
 }
 
 external interface OtherResult {
@@ -27,9 +24,9 @@ external interface OtherResult {
 
 external interface isMobileResult {
 	var apple: AppleResult
-	var amazon: BasicResult
-	var android: BasicResult
-	var windows: BasicResult
+	var amazon: BaseResult
+	var android: BaseResult
+	var windows: BaseResult
 	var other: OtherResult
 	var phone: Boolean
 	var tablet: Boolean

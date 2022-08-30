@@ -11,7 +11,9 @@ import pixi.typings.core.Renderer
 import pixi.typings.core.Resource
 import pixi.typings.core.Texture
 import pixi.typings.display.Container
+import pixi.typings.display.DisplayObject
 import pixi.typings.display.IDestroyOptions
+import pixi.typings.extensions.ExtensionMetadata
 import pixi.typings.loaders.Loader
 import pixi.typings.loaders.LoaderResource
 import pixi.typings.math.ObservablePoint
@@ -70,12 +72,14 @@ open external class BitMapFontData {
 
 external class BitmapFontLoader {
 	companion object {
+		var extension: ExtensionMetadata
+		
 		fun add()
 		fun use(`this`: Loader, resource: LoaderResource, next: VarArgFun<Any?, Unit>)
 	}
 }
 
-open external class BitmapText(text: String, style: PartialIBitmapTextStyle = definedExternally) : Container {
+open external class BitmapText(text: String, style: PartialIBitmapTextStyle = definedExternally) : Container<DisplayObject> {
 	open var dirty: Boolean
 	open var _resolution: Number
 	open var _autoResolution: Boolean

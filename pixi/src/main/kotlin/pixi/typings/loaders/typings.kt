@@ -10,6 +10,7 @@ import pixi.typings.app.IApplicationOptions
 import pixi.typings.core.IBaseTextureOptions
 import pixi.typings.core.Resource
 import pixi.typings.core.Texture
+import pixi.typings.extensions.ExtensionMetadata
 import pixi.typings.utils.Dict
 import seskar.js.JsInt
 import seskar.js.JsString
@@ -17,6 +18,8 @@ import seskar.js.JsUnion
 
 external class AppLoaderPlugin {
 	companion object {
+		var extension: ExtensionMetadata
+		
 		var loader: Loader
 		fun init(options: IApplicationOptions = definedExternally)
 		fun destroy()
@@ -141,7 +144,10 @@ open external class Loader(baseUrl: String = definedExternally, concurrency: Int
 	open fun destroy()
 	
 	companion object {
+		var __plugins: Array<ILoaderPlugin>
 		val shared: Loader
+		
+		@Deprecated("Use extensions.add(plugin) instead", ReplaceWith("extensions.add"))
 		fun registerPlugin(plugin: ILoaderPlugin): Loader
 	}
 }
@@ -302,6 +308,8 @@ open external class SignalBending<CbType>(fn: CbType, once: Boolean, thisArg: An
 
 external class TextureLoader {
 	companion object {
+		var extension: ExtensionMetadata
+		
 		fun add()
 		fun use(resource: LoaderResource, next: VarArgFun<Any?, Unit>)
 	}

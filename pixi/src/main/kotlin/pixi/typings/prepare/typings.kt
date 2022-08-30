@@ -10,6 +10,8 @@ import pixi.typings.core.Resource
 import pixi.typings.core.Texture
 import pixi.typings.display.Container
 import pixi.typings.display.DisplayObject
+import pixi.typings.extensions.ExtensionMetadata
+import kotlin.js.Promise
 
 open external class BasePrepare(renderer: AbstractRenderer) {
 	protected open var renderer: AbstractRenderer
@@ -20,18 +22,18 @@ open external class BasePrepare(renderer: AbstractRenderer) {
 	open var compeltes: Array<Any?>
 	open var ticking: Boolean
 	
-	open fun upload(item: IDisplayObjectExtended, done: () -> Unit = definedExternally)
-	open fun upload(item: Container, done: () -> Unit = definedExternally)
-	open fun upload(item: BaseTexture<Resource, IAutoDetectOptions>, done: () -> Unit = definedExternally)
-	open fun upload(item: Texture<Resource>, done: () -> Unit = definedExternally)
-	open fun upload(item: () -> Unit, done: () -> Unit = definedExternally)
+	open fun upload(item: IDisplayObjectExtended = definedExternally, done: () -> Unit = definedExternally): Promise<Unit>
+	open fun upload(item: Container<DisplayObject> = definedExternally, done: () -> Unit = definedExternally): Promise<Unit>
+	open fun upload(item: BaseTexture<Resource, IAutoDetectOptions> = definedExternally, done: () -> Unit = definedExternally): Promise<Unit>
+	open fun upload(item: Texture<Resource> = definedExternally, done: () -> Unit = definedExternally): Promise<Unit>
+	open fun upload(done: () -> Unit = definedExternally): Promise<Unit>
 	open fun tick()
 	open fun prepareItems()
 	open fun registerFindHook(addHook: IFindHook): BasePrepare /* this */
 	open fun registerUploadHook(uploadHook: IUploadHook): BasePrepare /* this */
 	open fun registerUploadHook(uploadHook: IUploadHook2): BasePrepare /* this */
 	open fun add(item: IDisplayObjectExtended): BasePrepare /* this */
-	open fun add(item: Container): BasePrepare /* this */
+	open fun add(item: Container<DisplayObject>): BasePrepare /* this */
 	open fun add(item: BaseTexture<Resource, IAutoDetectOptions>): BasePrepare /* this */
 	open fun add(item: Texture<Resource>): BasePrepare /* this */
 	open fun destroy()
@@ -52,7 +54,11 @@ external interface IDisplayObjectExtended : DisplayObject {
 	var style: dynamic /* TextStyle | PartialTextStyle */
 }
 
-open external class Prepare(renderer: Renderer) : BasePrepare
+open external class Prepare(renderer: Renderer) : BasePrepare {
+	companion object {
+		var extension: ExtensionMetadata
+	}
+}
 
 open external class TimeLimiter(maxMilliseconds: Int) {
 	open var maxMilliseconds: Int

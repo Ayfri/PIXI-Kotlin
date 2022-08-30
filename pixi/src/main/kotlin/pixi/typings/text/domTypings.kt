@@ -4,6 +4,7 @@ import org.khronos.webgl.WebGLContextAttributes
 import org.w3c.dom.*
 import org.w3c.dom.events.EventTarget
 import org.w3c.files.Blob
+import webgl.WebGLRenderingContextBase
 import kotlin.js.Promise
 
 external interface ImageEncodeOptions {
@@ -28,7 +29,7 @@ external interface OffscreenCanvas : EventTarget {
 	fun getContext(
 		contextId: String /* "webgl" | "webgl2" */,
 		options: WebGLContextAttributes = definedExternally
-	): dynamic /* WebGLRenderingContext | WebGL2RenderingContext */
+	): WebGLRenderingContextBase /* WebGLRenderingContext | WebGL2RenderingContext */
 	
 	fun getContext(
 		contextId: String /* "2d" | "bitmaprenderer" | "webgl" | "webgl2" */,

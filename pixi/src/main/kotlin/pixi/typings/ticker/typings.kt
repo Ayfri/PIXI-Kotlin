@@ -3,6 +3,7 @@
 package pixi.typings.ticker
 
 import pixi.typings.app.IApplicationOptions
+import pixi.typings.extensions.ExtensionMetadata
 
 open external class Ticker {
 	open var autoStart: Boolean
@@ -45,6 +46,8 @@ open external class Ticker {
 
 open external class TickerPlugin {
 	companion object {
+		var extension: ExtensionMetadata
+		
 		var start: () -> Unit
 		var stop: () -> Unit
 		var _ticker: Ticker

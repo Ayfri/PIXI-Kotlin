@@ -20,7 +20,9 @@ import pixi.typings.core.State
 import pixi.typings.display.Container
 import pixi.typings.display.DisplayObject
 import pixi.typings.display.IDestroyOptions
+import pixi.typings.extensions.ExtensionMetadata
 import pixi.typings.math.Matrix
+import pixi.typings.sprite.Sprite
 
 external interface IParticleProperties {
 	var vertices: Boolean?
@@ -52,8 +54,8 @@ open external class ParticleBuffer(properties: Array<IParticleRendererProperty>,
 	open var _updateID: Int
 	open var indexBuffer: Buffer
 	
-	open fun uploadDynamic(children: Array<DisplayObject>, startIndex: Int, amount: Int)
-	open fun uploadStatic(children: Array<DisplayObject>, startIndex: Int, amount: Int)
+	open fun uploadDynamic(children: Array<Sprite>, startIndex: Int, amount: Int)
+	open fun uploadStatic(children: Array<Sprite>, startIndex: Int, amount: Int)
 	open fun destroy()
 }
 
@@ -62,7 +64,7 @@ open external class ParticleContainer(
 	properties: IParticleProperties = definedExternally,
 	batchSize: Int = definedExternally,
 	autoResize: Boolean = definedExternally
-) : Container {
+) : Container<Sprite> {
 	open var blendMode: BLEND_MODES
 	open var autoResize: Boolean
 	open var roundPixels: Boolean
@@ -84,6 +86,10 @@ open external class ParticleContainer(
 	open fun dispose()
 	override fun destroy(options: Boolean)
 	override fun destroy(options: IDestroyOptions)
+	
+	companion object {
+		var extension: ExtensionMetadata
+	}
 }
 
 open external class ParticleRenderer(renderer: Renderer) : ObjectRenderer {
@@ -93,9 +99,9 @@ open external class ParticleRenderer(renderer: Renderer) : ObjectRenderer {
 	open var properties: Array<IParticleRendererProperty>
 	
 	open fun render(container: ParticleContainer)
-	open fun uploadVertices(children: Array<DisplayObject>, startIndex: Int, amount: Int, array: Array<Double>, stride: Int, offset: Int)
-	open fun uploadPosition(children: Array<DisplayObject>, startIndex: Int, amount: Int, array: Array<Double>, stride: Int, offset: Int)
-	open fun uploadRotation(children: Array<DisplayObject>, startIndex: Int, amount: Int, array: Array<Double>, stride: Int, offset: Int)
+	open fun uploadVertices(children: Array<Sprite>, startIndex: Int, amount: Int, array: Array<Double>, stride: Int, offset: Int)
+	open fun uploadPosition(children: Array<Sprite>, startIndex: Int, amount: Int, array: Array<Double>, stride: Int, offset: Int)
+	open fun uploadRotation(children: Array<Sprite>, startIndex: Int, amount: Int, array: Array<Double>, stride: Int, offset: Int)
 	open fun uploadUvs(children: Array<DisplayObject>, startIndex: Int, amount: Int, array: Array<Double>, stride: Int, offset: Int)
 	open fun uploadTint(children: Array<DisplayObject>, startIndex: Int, amount: Int, array: Array<Int>, stride: Int, offset: Int)
 	override fun destroy()

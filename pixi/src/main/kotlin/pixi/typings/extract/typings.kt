@@ -10,7 +10,10 @@ import pixi.typings.core.IRendererPlugin
 import pixi.typings.core.RenderTexture
 import pixi.typings.core.Renderer
 import pixi.typings.display.DisplayObject
+import pixi.typings.extensions.ExtensionMetadata
+import pixi.typings.math.Rectangle
 
+@Deprecated("Use Rectangle instead, since pixi v6.5.0.", ReplaceWith("Rectangle"))
 external interface PixelExtractOptions {
 	var x: Number
 	var t: Number
@@ -26,15 +29,19 @@ open external class Extract(renderer: Renderer) : IRendererPlugin {
 	open fun base64(target: DisplayObject, format: String = definedExternally, quality: Double = definedExternally): String
 	open fun base64(target: RenderTexture, format: String = definedExternally, quality: Double = definedExternally): String
 	
-	open fun canvas(target: DisplayObject): HTMLCanvasElement
-	open fun canvas(target: RenderTexture): HTMLCanvasElement
+	open fun canvas(target: DisplayObject, frame: Rectangle = definedExternally): HTMLCanvasElement
+	open fun canvas(target: RenderTexture, frame: Rectangle = definedExternally): HTMLCanvasElement
 	
-	open fun pixels(target: DisplayObject = definedExternally, options: PixelExtractOptions = definedExternally): Uint8Array
-	open fun pixels(target: RenderTexture = definedExternally, options: PixelExtractOptions = definedExternally): Uint8Array
+	open fun pixels(target: DisplayObject = definedExternally, frame: Rectangle = definedExternally): Uint8Array
+	open fun pixels(target: RenderTexture = definedExternally, frame: Rectangle = definedExternally): Uint8Array
+	open fun pixels(target: DisplayObject = definedExternally, frame: PixelExtractOptions = definedExternally): Uint8Array
+	open fun pixels(target: RenderTexture = definedExternally, frame: PixelExtractOptions = definedExternally): Uint8Array
 	
 	override fun destroy()
 	
 	companion object {
+		var extension: ExtensionMetadata
+		
 		fun arrayPostDivide(pixels: Array<Int>, out: Array<Int>)
 		fun arrayPostDivide(pixels: Array<Int>, out: Uint8Array)
 		fun arrayPostDivide(pixels: Array<Int>, out: Uint8ClampedArray)

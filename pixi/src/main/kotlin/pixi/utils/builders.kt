@@ -11,6 +11,7 @@ import pixi.typings.core.IAutoDetectOptions
 import pixi.typings.core.Resource
 import pixi.typings.core.Texture
 import pixi.typings.display.Container
+import pixi.typings.display.DisplayObject
 import pixi.typings.graphics.Graphics
 import pixi.typings.math.Matrix
 import pixi.typings.math.ObservablePoint
@@ -24,7 +25,7 @@ fun application(block: IApplicationOptions.() -> Unit) = Application(jso(block))
 
 fun color(block: Color.() -> Unit) = Color.BLACK.apply(block)
 
-fun container(block: Container.() -> Unit) = Container().apply(block)
+fun <T : DisplayObject> container(block: Container<T>.() -> Unit) = Container<T>().apply(block)
 
 fun graphics(block: Graphics.() -> Unit) = Graphics().apply(block)
 

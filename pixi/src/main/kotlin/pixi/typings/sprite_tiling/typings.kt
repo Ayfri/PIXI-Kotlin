@@ -4,6 +4,7 @@ package pixi.typings.sprite_tiling
 
 import pixi.typings.core.*
 import pixi.typings.display.IDestroyOptions
+import pixi.typings.extensions.ExtensionMetadata
 import pixi.typings.math.IPointData
 import pixi.typings.math.ISize
 import pixi.typings.math.ObservablePoint
@@ -54,4 +55,8 @@ open external class TilingSpriteRenderer(renderer: Renderer) : ObjectRenderer {
 	
 	open fun contextChange()
 	open fun render(ts: TilingSprite)
+	
+	companion object {
+		var extension: ExtensionMetadata
+	}
 }

@@ -48,11 +48,11 @@ open external class Bounds {
 	open fun addFramePad(x0: Double, y0: Double, x1: Double, y1: Double, padX: Double, padY: Double)
 }
 
-open external class Container : DisplayObject {
-	open val children: Array<DisplayObject>
+open external class Container<T : DisplayObject /* = DisplayObject */> : DisplayObject {
+	open val children: Array<T>
 	open var sortableChildren: Boolean
 	override var sortDirty: Boolean
-	override var parent: Container
+	override var parent: Container<DisplayObject>
 	open var containerUpdateTransform: () -> Unit
 	protected open var _width: Double
 	protected open var _height: Double
@@ -60,20 +60,20 @@ open external class Container : DisplayObject {
 	open var height: Double
 	
 	protected open fun onChildrenChange(_length: Int = definedExternally)
-	open fun <T : DisplayObject> addChild(vararg child: T): T
-	open fun <T : DisplayObject> addChildAt(child: T, index: Int): T
-	open fun swapChildren(child: DisplayObject, child2: DisplayObject)
-	open fun getChildIndex(child: DisplayObject): Int
-	open fun setChildIndex(child: DisplayObject, index: Int)
-	open fun getChildAt(index: Int): DisplayObject
+	open fun <U : T> addChild(vararg child: U): U
+	open fun <U : T> addChildAt(child: U, index: Int): U
+	open fun swapChildren(child: T, child2: T)
+	open fun getChildIndex(child: T): Int
+	open fun setChildIndex(child: T, index: Int)
+	open fun getChildAt(index: Int): T
 	
 	@Suppress("CANNOT_WEAKEN_ACCESS_PRIVILEGE")
 	internal override fun removeChild(child: DisplayObject)
 	
 	@Suppress("RETURN_TYPE_MISMATCH_ON_OVERRIDE")
-	open fun <T : DisplayObject> removeChild(vararg child: T): T
-	open fun removeChildAt(index: Int): DisplayObject
-	open fun removeChildren(beginIndex: Int = definedExternally, endIndex: Int = definedExternally): Array<DisplayObject>
+	open fun <U : T> removeChild(vararg child: U): U
+	open fun removeChildAt(index: Int): T
+	open fun removeChildren(beginIndex: Int = definedExternally, endIndex: Int = definedExternally): Array<T>
 	open fun sortChildren()
 	override fun updateTransform()
 	override fun calculateBounds()
@@ -89,7 +89,7 @@ open external class Container : DisplayObject {
 
 abstract external class DisplayObject : EventEmitter {
 	abstract var sortDirty: Boolean
-	open var parent: Container
+	open var parent: Container<DisplayObject>
 	open var worldAlpha: Double
 	open var transform: Transform
 	open var alpha: Double
@@ -152,7 +152,7 @@ abstract external class DisplayObject : EventEmitter {
 		skipUpdate: Boolean = definedExternally
 	): P
 	
-	open fun setParent(container: Container): Container
+	open fun setParent(container: Container<DisplayObject>): Container<DisplayObject>
 	open fun setTransform(
 		x: Double = definedExternally,
 		y: Double = definedExternally,
@@ -167,8 +167,8 @@ abstract external class DisplayObject : EventEmitter {
 	
 	open fun destroy(_options: IDestroyOptions = definedExternally)
 	open fun destroy(_options: Boolean = definedExternally)
-	open fun enableTempParent(): Container
-	open fun disableTempParent(cacheParent: Container)
+	open fun enableTempParent(): Container<DisplayObject>
+	open fun disableTempParent(cacheParent: Container<DisplayObject>)
 	
 	companion object {
 		fun mixin(source: Dict<Any>)

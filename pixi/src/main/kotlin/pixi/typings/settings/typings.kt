@@ -11,7 +11,6 @@ import pixi.typings.constants.MSAA_QUALITY
 import pixi.typings.constants.PRECISION
 import pixi.typings.constants.SCALE_MODES
 import pixi.typings.constants.WRAP_MODES
-import pixi.typings.isMobileResult
 import kotlin.js.RegExp
 
 external interface IRenderOptions {

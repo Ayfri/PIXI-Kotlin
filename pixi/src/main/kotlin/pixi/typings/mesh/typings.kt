@@ -9,6 +9,7 @@ import pixi.typings.constants.BLEND_MODES
 import pixi.typings.constants.DRAW_MODES
 import pixi.typings.core.*
 import pixi.typings.display.Container
+import pixi.typings.display.DisplayObject
 import pixi.typings.display.IDestroyOptions
 import pixi.typings.math.IPointData
 import pixi.typings.math.Matrix
@@ -27,7 +28,7 @@ open external class Mesh<T : Shader /* = MeshMaterial */>(
 	shader: T,
 	state: State = definedExternally,
 	drawMode: DRAW_MODES = definedExternally
-) : Container {
+) : Container<DisplayObject> {
 	open var shader: T
 	open var state: State
 	open var drawMode: DRAW_MODES

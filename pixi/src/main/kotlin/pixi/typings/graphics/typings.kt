@@ -16,6 +16,7 @@ import pixi.typings.core.Shader
 import pixi.typings.core.Texture
 import pixi.typings.display.Bounds
 import pixi.typings.display.Container
+import pixi.typings.display.DisplayObject
 import pixi.typings.display.IDestroyOptions
 import pixi.typings.math.IPointData
 import pixi.typings.math.IShape
@@ -74,7 +75,7 @@ open external class FillStyle {
 	open fun destroy()
 }
 
-open external class Graphics(geometry: GraphicsGeometry = definedExternally) : Container {
+open external class Graphics(geometry: GraphicsGeometry = definedExternally) : Container<DisplayObject> {
 	open var shader: Shader
 	open var pluginName: String
 	open var currentPath: Polygon
@@ -204,7 +205,7 @@ open external class GraphicsGeometry : BatchGeometry {
 	open fun drawHole(shape: IShape_2, matrix: Matrix = definedExternally): GraphicsGeometry
 	override fun destroy()
 	open fun containsPoint(point: IPointData): Boolean
-	open fun updateBatches(allow32Indices: Boolean = definedExternally)
+	open fun updateBatches()
 	protected open fun _compareStyles(styleA: FillStyle, styleB: FillStyle): Boolean
 	protected open fun _compareStyles(styleA: FillStyle, styleB: LineStyle): Boolean
 	protected open fun _compareStyles(styleA: LineStyle, styleB: FillStyle): Boolean

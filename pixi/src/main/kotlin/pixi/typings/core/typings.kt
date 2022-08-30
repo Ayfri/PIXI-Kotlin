@@ -1,9 +1,17 @@
-@file:Suppress("PropertyName")
+@file:Suppress("PropertyName", "unused")
 @file:JsModule("@pixi/core")
 
 package pixi.typings.core
 
 import org.khronos.webgl.*
+import org.khronos.webgl.WebGLBuffer
+import org.khronos.webgl.WebGLContextAttributes
+import org.khronos.webgl.WebGLContextEvent
+import org.khronos.webgl.WebGLFramebuffer
+import org.khronos.webgl.WebGLProgram
+import org.khronos.webgl.WebGLRenderbuffer
+import org.khronos.webgl.WebGLTexture
+import org.khronos.webgl.WebGLUniformLocation
 import org.w3c.dom.ErrorEvent
 import org.w3c.dom.HTMLCanvasElement
 import org.w3c.dom.HTMLImageElement
@@ -13,9 +21,6 @@ import pixi.externals.Color
 import pixi.externals.ColorArr
 import pixi.externals.WEBGLVersion
 import pixi.typings.Object
-import pixi.typings.compressed_textures.WEBGL_compressed_texture_astc
-import pixi.typings.compressed_textures.WEBGL_compressed_texture_s3tc
-import pixi.typings.compressed_textures.WEBGL_compressed_texture_s3tc_srgb
 import pixi.typings.constants.*
 import pixi.typings.math.IPointData
 import pixi.typings.math.ISize
@@ -25,6 +30,7 @@ import pixi.typings.math.Rectangle
 import pixi.typings.runner.Runner
 import pixi.typings.utils.Dict
 import pixi.typings.utils.EventEmitter
+import webgl.*
 import kotlin.js.Promise
 import kotlin.js.RegExp
 
@@ -871,7 +877,7 @@ external interface IMaskTarget : IFilterTarget {
 	var isSprite: Boolean?
 	var worldTransform: Matrix
 	var isFastRect: (() -> Boolean)?
-	override fun getBounds(skipUpdate: Boolean): Rectangle
+	fun getBounds(skipUpdate: Boolean, rect: Rectangle = definedExternally): Rectangle
 	fun render(renderer: Renderer)
 }
 
@@ -1011,11 +1017,13 @@ open external class MaskData(maskObject: IMaskTarget = definedExternally) {
 	open var resolution: Double?
 	open var multisample: MSAA_QUALITY
 	open var enabled: Boolean
+	open var colorMask: COLOR_MASK_BITS
 	open var _filters: Array<ISpriteMaskFilter>
 	open var _stencilCounter: Int
 	open var _scissorCounter: Int
 	open var _scissorRect: Rectangle?
 	open var _scissorRectLocal: Rectangle
+	open var _colorMask: Number
 	open var _target: IMaskTarget
 	
 	open var filter: ISpriteMaskFilter
@@ -1028,13 +1036,15 @@ open external class MaskSystem(renderer: Renderer) : ISystem {
 	open var enableScissor: Boolean
 	protected open val alphaMaskPool: Array<Array<SpriteMaskFilter>>
 	protected open var alphaMaskIndex: Double
-	fun setMaskStack(maskStack: Array<MaskData>)
-	fun push(target: IMaskTarget, maskDataOrTarget: MaskData)
-	fun push(target: IMaskTarget, maskDataOrTarget: IMaskTarget)
-	fun pop(target: IMaskTarget)
-	fun detect(maskData: MaskData)
-	fun pushSpriteMask(maskData: MaskData)
-	fun popSpriteMask(maskData: MaskData)
+	open fun setMaskStack(maskStack: Array<MaskData>)
+	open fun push(target: IMaskTarget, maskDataOrTarget: MaskData)
+	open fun push(target: IMaskTarget, maskDataOrTarget: IMaskTarget)
+	open fun pop(target: IMaskTarget)
+	open fun detect(maskData: MaskData)
+	open fun pushColorMask(maskData: MaskData)
+	open fun popColorMask(maskData: MaskData)
+	open fun pushSpriteMask(maskData: MaskData)
+	open fun popSpriteMask(maskData: MaskData)
 	override fun destroy()
 }
 
@@ -1143,6 +1153,8 @@ open external class Renderer(options: IRendererOptions = definedExternally) : Ab
 		var __plugins: IRendererPlugins
 		
 		fun create(options: IRendererOptions = definedExternally): AbstractRenderer
+		
+		@Deprecated("Use extensions.add(plugin) instead", ReplaceWith("extensions.add"))
 		fun registerPlugin(pluginName: String, ctor: IRendererPluginConstructor)
 	}
 }
@@ -1200,6 +1212,7 @@ open external class RenderTextureSystem(renderer: Renderer) : ISystem {
 }
 
 abstract external class Resource(width: Int = definedExternally, height: Int = definedExternally) {
+	open var src: String
 	open var destroyed: Boolean
 	open var internal: Boolean
 	protected open var _width: Int
@@ -1244,7 +1257,7 @@ open external class ScissorsSystem(renderer: Renderer) : AbstractMaskSystem {
 	open fun calcScissorRect(maskData: MaskData)
 	open fun testScissor(maskData: MaskData)
 	open fun push(maskData: MaskData)
-	open fun pop()
+	open fun pop(maskData: MaskData = definedExternally)
 	override fun _useCurrent()
 }
 
@@ -1604,6 +1617,8 @@ open external class UniformGroup<LAYOUT /* = Dict<Any> */>(uniforms: LAYOUT, isS
 
 external val uniformParers: Array<IUniformParser>
 
+external val VERSION: String
+
 open external class VideoResource(source: HTMLVideoElement, options: IVideoResourceOptions = definedExternally) : BaseImageResource {
 	constructor(source: Array<String>, options: IVideoResourceOptions = definedExternally)
 	constructor(source: Array<IVideoResourceOptionsElement>, options: IVideoResourceOptions = definedExternally)
@@ -1646,36 +1661,6 @@ open external class ViewableBuffer(length: Int) {
 	companion object {
 		fun sizeOf(type: String): Int
 	}
-}
-
-external interface WEBGL_compressed_texture_atc {
-	var COMPRESSED_RGB_ATC_WEBGL: Int
-	var COMPRESSED_RGBA_ATC_EXPLICIT_ALPHA_WEBGL: Int
-	var COMPRESSED_RGBA_ATC_INTERPOLATED_ALPHA_WEBGL: Int
-}
-
-external interface WEBGL_compressed_texture_etc {
-	var COMPRESSED_R11_EAC: Int
-	var COMPRESSED_SIGNED_R11_EAC: Int
-	var COMPRESSED_RG11_EAC: Int
-	var COMPRESSED_SIGNED_RG11_EAC: Int
-	var COMPRESSED_RGB8_ETC2: Int
-	var COMPRESSED_RGBA8_ETC2_EAC: Int
-	var COMPRESSED_SRGB8_ETC2: Int
-	var COMPRESSED_SRGB8_ALPHA8_ETC2_EAC: Int
-	var COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2: Int
-	var COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2: Int
-}
-
-external interface WEBGL_compressed_texture_etc1 {
-	var COMPRESSED_RGB_ETC1_WEBGL: Int
-}
-
-external interface WEBGL_compressed_texture_pvrtc {
-	var COMPRESSED_RGB_PVRTC_4BPPV1_IMG: Int
-	var COMPRESSED_RGBA_PVRTC_4BPPV1_IMG: Int
-	var COMPRESSED_RGB_PVRTC_2BPPV1_IMG: Int
-	var COMPRESSED_RGBA_PVRTC_2BPPV1_IMG: Int
 }
 
 external interface WebGLExtensions {

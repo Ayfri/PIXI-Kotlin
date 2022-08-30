@@ -169,6 +169,20 @@ external enum class CLEAR_MODES {
 	BLIT
 }
 
+external enum class COLOR_MASK_BITS {
+	@JsInt(0x1)
+	RED,
+	
+	@JsInt(0x2)
+	GREEN,
+	
+	@JsInt(0x4)
+	BLUE,
+	
+	@JsInt(0x8)
+	ALPHA
+}
+
 external enum class DRAW_MODES {
 	@JsInt(0)
 	POINTS,
@@ -263,7 +277,10 @@ external enum class MASK_TYPES {
 	STENCIL,
 	
 	@JsInt(3)
-	SPRITE
+	SPRITE,
+	
+	@JsInt(4)
+	COLOR
 }
 
 external enum class MIPMAP_MODES {

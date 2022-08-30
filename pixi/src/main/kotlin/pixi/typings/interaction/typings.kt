@@ -10,6 +10,7 @@ import org.w3c.dom.pointerevents.PointerEvent
 import pixi.typings.Object
 import pixi.typings.core.AbstractRenderer
 import pixi.typings.display.DisplayObject
+import pixi.typings.extensions.ExtensionMetadata
 import pixi.typings.math.IPointData
 import pixi.typings.math.Point
 import pixi.typings.utils.Dict
@@ -116,6 +117,10 @@ open external class InteractionManager(renderer: AbstractRenderer, options: Inte
 	)
 	
 	open fun destroy()
+	
+	companion object {
+		var extension: ExtensionMetadata
+	}
 }
 
 external interface InteractionManagerOptions {
