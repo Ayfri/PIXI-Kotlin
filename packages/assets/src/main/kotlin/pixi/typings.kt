@@ -1,3 +1,4 @@
+@file:Suppress("unused")
 @file:JsModule("@pixi/assets")
 
 package pixi

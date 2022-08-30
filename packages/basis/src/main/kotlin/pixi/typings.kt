@@ -10,12 +10,12 @@ import org.w3c.dom.Worker
 import pixi.typings.Object
 import pixi.typings.VarArgFun
 import pixi.typings.compressed_textures.INTERNAL_FORMATS
-import pixi.typings.compressed_textures.WEBGL_compressed_texture_astc
-import pixi.typings.compressed_textures.WEBGL_compressed_texture_s3tc
-import pixi.typings.compressed_textures.WEBGL_compressed_texture_s3tc_srgb
 import pixi.typings.constants.TYPES
+import pixi.typings.extensions.ExtensionMetadata
 import pixi.typings.loaders.LoaderResource
-import pixi.typings.runner.Runner
+import webgl.WEBGL_compressed_texture_astc
+import webgl.WEBGL_compressed_texture_s3tc
+import webgl.WEBGL_compressed_texture_s3tc_srgb
 import kotlin.js.Promise
 
 external interface BASIS_Transcoder {
@@ -52,6 +52,8 @@ open external class BasisFile(buffer: Uint8Array) {
 
 open external class BasisLoader {
 	companion object {
+		var extension: ExtensionMetadata
+		
 		fun use(resource: LoaderResource, next: VarArgFun<Any, Unit>)
 		fun autoDetectFormats(extensions: BasisTextureExtensionsPartial = definedExternally)
 		fun bindTranscoder(basisLibrary: BasisBinding)
@@ -127,7 +129,7 @@ open external class TranscoderWorker {
 		var bindingURL: String
 		var jsSource: String
 		var wasmSource: ArrayBuffer
-		var onTranscoderInitialized: Runner
+		var onTranscoderInitialized: Promise<Unit>
 		
 		val workerURL: String
 		
