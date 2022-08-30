@@ -17,6 +17,8 @@ pluginManagement {
 
 include("pixi")
 
+include("packages:assets")
+
 include("packages:basis")
 
 include("packages:events")
