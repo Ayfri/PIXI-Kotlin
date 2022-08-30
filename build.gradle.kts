@@ -34,6 +34,6 @@ tasks.wrapper {
 plugins.withType<YarnPlugin> {
 	the<YarnRootExtension>().apply {
 		lockFileDirectory = projectDir
-		version = "1.22.18"
+		version = "1.22.19"
 	}
 }
