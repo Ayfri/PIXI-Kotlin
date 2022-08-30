@@ -23,7 +23,8 @@ repositories {
 dependencies {
 	api("io.github.turansky.seskar:seskar-core:${Versions.seskar}")
 	api("org.jetbrains.kotlinx:kotlinx-html-js:${Versions.kotlinxHTML}")
-	api("org.jetbrains.kotlin-wrappers:kotlin-js:${Versions.kotlinWrappers}")
+	api("org.jetbrains.kotlin-wrappers:kotlin-browser:${Versions.kotlinWrappersBrowser}")
+	api("org.jetbrains.kotlin-wrappers:kotlin-js:${Versions.kotlinWrappersJs}")
 	implementation(npm("pixi.js", Versions.pixi))
 	testImplementation(kotlin("test-js", version("kotlin")))
 }
