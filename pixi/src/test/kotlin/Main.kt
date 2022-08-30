@@ -5,6 +5,7 @@ import kotlinx.browser.window
 import kotlinx.html.div
 import kotlinx.html.dom.append
 import kotlinx.html.id
+import kotlinx.js.get
 import kotlinx.js.import
 import pixi.externals.Color
 import pixi.externals.extensions.add
@@ -13,8 +14,8 @@ import pixi.externals.extensions.load
 import pixi.externals.extensions.once
 import pixi.externals.extensions.setPositionFromWindow
 import pixi.externals.generateBlankTexture
-import pixi.typings.VERSION
 import pixi.typings.app.Application
+import pixi.typings.core.VERSION
 import pixi.typings.loaders.Loader
 import pixi.typings.loaders.loader
 import pixi.typings.sprite.Sprite

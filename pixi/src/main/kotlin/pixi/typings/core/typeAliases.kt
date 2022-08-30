@@ -3,6 +3,7 @@ package pixi.typings.core
 import org.khronos.webgl.ArrayBuffer
 import pixi.typings.Object
 import pixi.typings.VarArgFun
+import webgl.WebGL2RenderingContext
 
 typealias ImageSource = Any
 typealias IArrayBuffer = ArrayBuffer
