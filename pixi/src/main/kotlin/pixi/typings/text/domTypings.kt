@@ -27,13 +27,13 @@ external interface OffscreenCanvas : EventTarget {
 	fun getContext(contextId: String /* "2d" | "bitmaprenderer" | "webgl" | "webgl2" */): dynamic /* WebGL2RenderingContext | OffscreenCanvasRenderingContext2D? | ImageBitmapRenderingContext? | WebGLRenderingContext? | WebGL2RenderingContext? */
 	fun getContext(contextId: String /* "bitmaprenderer" */, options: ImageBitmapRenderingContextSettings = definedExternally): ImageBitmapRenderingContext?
 	fun getContext(
-		contextId: String /* "webgl" | "webgl2" */,
-		options: WebGLContextAttributes = definedExternally
+		contextId: String, /* "webgl" | "webgl2" */
+		options: WebGLContextAttributes = definedExternally,
 	): WebGLRenderingContextBase /* WebGLRenderingContext | WebGL2RenderingContext */
 	
 	fun getContext(
-		contextId: String /* "2d" | "bitmaprenderer" | "webgl" | "webgl2" */,
-		options: Any? = definedExternally
+		contextId: String, /* "2d" | "bitmaprenderer" | "webgl" | "webgl2" */
+		options: Any? = definedExternally,
 	): dynamic /* OffscreenCanvasRenderingContext2D? | ImageBitmapRenderingContext? | WebGLRenderingContext? | WebGL2RenderingContext? */
 	
 	fun transferToImageBitmap(): ImageBitmap

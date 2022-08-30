@@ -22,13 +22,13 @@ open external class Ticker {
 	open fun <T /* = Any */> add(
 		fn: TickerCallback<T>,
 		context: T = definedExternally,
-		priority: UPDATE_PRIORITY = definedExternally
+		priority: UPDATE_PRIORITY = definedExternally,
 	): Ticker /* this */
 	
 	open fun <T /* = Any */> addOnce(
 		fn: TickerCallback<T>,
 		context: T = definedExternally,
-		priority: UPDATE_PRIORITY = definedExternally
+		priority: UPDATE_PRIORITY = definedExternally,
 	): Ticker /* this */
 	
 	open fun <T /* = Any */> remove(fn: TickerCallback<T>, context: T = definedExternally): Ticker /* this */

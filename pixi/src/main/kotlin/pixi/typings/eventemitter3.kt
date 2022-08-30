@@ -13,7 +13,7 @@ open external class EventEmitter<EventTypes : String> {
 		event: EventTypes,
 		fn: ListenerFn = definedExternally,
 		context: Any? = definedExternally,
-		once: Boolean = definedExternally
+		once: Boolean = definedExternally,
 	): EventEmitter<EventTypes> /* this */
 	
 	open fun off(event: EventTypes, fn: ListenerFn, context: Any? = definedExternally, once: Boolean = definedExternally): EventEmitter<EventTypes> /* this */

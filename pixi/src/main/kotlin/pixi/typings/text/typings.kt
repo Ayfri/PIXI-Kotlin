@@ -57,7 +57,7 @@ external interface ModernContext2D : CanvasRenderingContext2D {
 open external class Text(
 	text: String = definedExternally,
 	style: PartialTextStyle = definedExternally,
-	canvas: HTMLCanvasElement = definedExternally
+	canvas: HTMLCanvasElement = definedExternally,
 ) : Sprite {
 	constructor(text: Number = definedExternally, style: PartialTextStyle = definedExternally, canvas: HTMLCanvasElement = definedExternally)
 	constructor(text: String = definedExternally, style: TextStyle = definedExternally, canvas: HTMLCanvasElement = definedExternally)
@@ -104,7 +104,7 @@ open external class TextMetrics(
 	lineWidths: Array<Double>,
 	lineHeight: Double,
 	maxLineWidth: Double,
-	fontProperties: IFontMetrics
+	fontProperties: IFontMetrics,
 ) {
 	open var text: String
 	open var style: TextStyle
@@ -131,14 +131,14 @@ open external class TextMetrics(
 			text: String,
 			style: TextStyle,
 			wordWrap: Boolean = definedExternally,
-			canvas: HTMLCanvasElement = definedExternally
+			canvas: HTMLCanvasElement = definedExternally,
 		): TextMetrics
 		
 		fun measureText(
 			text: String,
 			style: TextStyle,
 			wordWrap: Boolean = definedExternally,
-			canvas: OffscreenCanvas = definedExternally
+			canvas: OffscreenCanvas = definedExternally,
 		): TextMetrics
 		
 		fun isBreakingSpace(char: String, _nextChar: String = definedExternally): Boolean
@@ -148,7 +148,7 @@ open external class TextMetrics(
 			_nextChar: String,
 			_token: String,
 			_index: Int,
-			_breakWords: Boolean
+			_breakWords: Boolean,
 		): Boolean
 		
 		fun wordWrapSplit(token: String): Array<String>

@@ -37,7 +37,7 @@ open external class Bounds {
 		beginOffset: Int,
 		endOffset: Int,
 		padX: Double = definedExternally,
-		padY: Double = definedExternally
+		padY: Double = definedExternally,
 	)
 	
 	open fun addBounds(bounds: Bounds)
@@ -149,7 +149,7 @@ abstract external class DisplayObject : EventEmitter {
 		position: IPointData,
 		from: DisplayObject = definedExternally,
 		point: P = definedExternally,
-		skipUpdate: Boolean = definedExternally
+		skipUpdate: Boolean = definedExternally,
 	): P
 	
 	open fun setParent(container: Container<DisplayObject>): Container<DisplayObject>
@@ -162,7 +162,7 @@ abstract external class DisplayObject : EventEmitter {
 		skewX: Double = definedExternally,
 		skewY: Double = definedExternally,
 		pivotX: Double = definedExternally,
-		pivotY: Double = definedExternally
+		pivotY: Double = definedExternally,
 	): DisplayObject /* this */
 	
 	open fun destroy(_options: IDestroyOptions = definedExternally)

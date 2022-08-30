@@ -55,28 +55,28 @@ open external class AsyncQueue<TaskData>(worker: (x: TaskData, next: () -> Unit)
 			array: Array<Any?>,
 			iterator: (x: Any?, next: (err: Any?) -> Unit) -> Unit,
 			callback: (err: Any?) -> Unit = definedExternally,
-			deferNext: Boolean = definedExternally
+			deferNext: Boolean = definedExternally,
 		)
 		
 		fun eachSeries(
 			array: Array<Any?>,
 			iterator: (x: Any?, next: (err: Any?) -> Unit) -> Unit,
 			callback: () -> Unit = definedExternally,
-			deferNext: Boolean = definedExternally
+			deferNext: Boolean = definedExternally,
 		)
 		
 		fun eachSeries(
 			array: Array<Any?>,
 			iterator: (x: Any?, next: () -> Unit) -> Unit,
 			callback: (err: Any?) -> Unit,
-			deferNext: Boolean = definedExternally
+			deferNext: Boolean = definedExternally,
 		)
 		
 		fun eachSeries(
 			array: Array<Any?>,
 			iterator: (x: Any?, next: () -> Unit) -> Unit,
 			callback: () -> Unit = definedExternally,
-			deferNext: Boolean = definedExternally
+			deferNext: Boolean = definedExternally,
 		)
 		
 		fun queue(worker: (x: Any?, next: VarArgFun<Any?, Unit>) -> Unit, concurrency: Int = definedExternally): AsyncQueue<Any?>

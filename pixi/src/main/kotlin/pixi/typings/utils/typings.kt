@@ -42,12 +42,12 @@ external fun clearTextureCache()
 external fun correctBlendMode(blendMode: Short, premultiplied: Boolean): BLEND_MODES
 external fun createIndicesForQuads(
 	size: Int,
-	outBuffer: Uint16Array = definedExternally
+	outBuffer: Uint16Array = definedExternally,
 ): ArrayBufferView /* Uint16Array | Uint32Array */
 
 external fun createIndicesForQuads(
 	size: Int,
-	outBuffer: Uint32Array = definedExternally
+	outBuffer: Uint32Array = definedExternally,
 ): ArrayBufferView /* Uint16Array | Uint32Array */
 
 external val DATA_URI: RegExp
@@ -94,6 +94,36 @@ external interface ParseFunction {
 	operator fun invoke(urlString: String, parseQueryString: Boolean?, slashesDenoteHost: Boolean = definedExternally): UrlWithStringQuery
 	operator fun invoke(urlString: String, parseQueryString: Boolean, slashesDenoteHost: Boolean = definedExternally): Url
 }
+
+external interface PathParseResult {
+	var root: String?
+	var dir: String?
+	var base: String?
+	var ext: String?
+	var name: String?
+}
+
+external interface Path {
+	var sep: String
+	var delimiter: String
+	
+	fun toPosix(path: String): String
+	fun toAbsolute(path: String, baseUrl: String = definedExternally, rootUrl: String = definedExternally): String
+	fun isUrl(path: String): Boolean
+	fun isDataUrl(path: String): Boolean
+	fun hasProtocol(path: String): Boolean
+	fun getProtocol(path: String): String
+	fun normalize(path: String): String
+	fun join(vararg paths: String): String
+	fun isAbsolute(path: String): Boolean
+	fun dirname(path: String): String
+	fun rootname(path: String): String
+	fun basename(path: String, ext: String = definedExternally): String
+	fun extname(path: String): String
+	fun parse(path: String): PathParseResult
+}
+
+external val path: Path
 
 external val premultiplyBlendMode: Array<Array<BLEND_MODES>>
 

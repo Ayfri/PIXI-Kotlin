@@ -19,7 +19,7 @@ open external class NineSlicePlane(
 	leftWidth: Double = definedExternally,
 	topHeight: Double = definedExternally,
 	rightWidth: Double = definedExternally,
-	bottomHeight: Double = definedExternally
+	bottomHeight: Double = definedExternally,
 ) : SimplePlane {
 	open var _leftWidth: Double
 	open var _rightWidth: Double
@@ -43,7 +43,7 @@ open external class PlaneGeometry(
 	width: Double,
 	height: Double = definedExternally,
 	segWidth: Double = definedExternally,
-	segHeight: Double = definedExternally
+	segHeight: Double = definedExternally,
 ) : MeshGeometry {
 	open var segWidth: Double
 	open var segHeight: Double
@@ -69,7 +69,7 @@ open external class SimpleMesh(
 	vertices: IArrayBuffer = definedExternally,
 	uvs: IArrayBuffer = definedExternally,
 	indices: IArrayBuffer = definedExternally,
-	drawMode: DRAW_MODES = definedExternally
+	drawMode: DRAW_MODES = definedExternally,
 ) : Mesh<MeshMaterial> {
 	open var autoUpdate: Boolean
 	

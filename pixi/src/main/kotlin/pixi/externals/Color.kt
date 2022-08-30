@@ -61,11 +61,13 @@ fun Color(string: String): Color {
 			g = hex[1].toString().repeat(2)
 			b = hex[2].toString().repeat(2)
 		}
+		
 		6 -> {
 			r = hex.take(2)
 			g = hex.substring(2, 4)
 			b = hex.substring(4, 6)
 		}
+		
 		else -> throw IllegalArgumentException("Invalid hex string: $string")
 	}
 	

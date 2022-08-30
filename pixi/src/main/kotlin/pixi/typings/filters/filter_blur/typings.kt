@@ -12,7 +12,7 @@ open external class BlurFilter(
 	strength: Double = definedExternally,
 	quality: Double = definedExternally,
 	resolution: Double = definedExternally,
-	kernelSize: Int = definedExternally
+	kernelSize: Int = definedExternally,
 ) : Filter {
 	open var blurXFilter: BlurFilterPass
 	open var blurYFilter: BlurFilterPass
@@ -33,7 +33,7 @@ open external class BlurFilterPass(
 	strength: Double = definedExternally,
 	quality: Double = definedExternally,
 	resolution: Double = definedExternally,
-	kernelSize: Int = definedExternally
+	kernelSize: Int = definedExternally,
 ) : Filter {
 	open var horizontal: Boolean
 	open var strength: Double

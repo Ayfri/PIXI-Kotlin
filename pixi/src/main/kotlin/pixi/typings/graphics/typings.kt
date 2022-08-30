@@ -37,7 +37,7 @@ external class ArcUtils {
 			startAngle: Double,
 			endAngle: Double,
 			_anticlockwise: Boolean,
-			points: Array<Double>
+			points: Array<Double>,
 		)
 	}
 }
@@ -102,7 +102,7 @@ open external class Graphics(geometry: GraphicsGeometry = definedExternally) : C
 		color: Color = definedExternally,
 		alpha: Double = definedExternally,
 		alignment: Double = definedExternally,
-		native: Boolean = definedExternally
+		native: Boolean = definedExternally,
 	): Graphics /* this */
 	
 	open fun lineStyle(options: ILineStyleOptions = definedExternally): Graphics /* this */
@@ -124,9 +124,9 @@ open external class Graphics(geometry: GraphicsGeometry = definedExternally) : C
 	open fun drawCircle(x: Double, y: Double, radius: Double): Graphics /* this */
 	open fun drawEllipse(x: Double, y: Double, width: Double, height: Double): Graphics /* this */
 	open fun drawPolygon(vararg path: Array<Double>): Graphics /* this */
-	open fun drawPolygon(vararg path: Array<Point>): Graphics /* this */
+	open fun drawPolygon(vararg path: Array<IPointData>): Graphics /* this */
 	open fun drawPolygon(path: Array<Double>): Graphics /* this */
-	open fun drawPolygon(path: Array<Point>): Graphics /* this */
+	open fun drawPolygon(path: Array<IPointData>): Graphics /* this */
 	open fun drawPolygon(path: Polygon): Graphics /* this */
 	open fun drawShape(shape: IShape): Graphics /* this */
 	open fun clear()
@@ -199,7 +199,7 @@ open external class GraphicsGeometry : BatchGeometry {
 		shape: IShape_2,
 		fillStyle: FillStyle = definedExternally,
 		lineStyle: LineStyle = definedExternally,
-		matrix: Matrix = definedExternally
+		matrix: Matrix = definedExternally,
 	): GraphicsGeometry
 	
 	open fun drawHole(shape: IShape_2, matrix: Matrix = definedExternally): GraphicsGeometry

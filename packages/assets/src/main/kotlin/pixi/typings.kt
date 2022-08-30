@@ -6,8 +6,7 @@ package pixi
 import kotlinx.js.Record
 import org.w3c.dom.ImageBitmap
 import pixi.typings.Object
-import pixi.typings.core.BaseTexture
-import pixi.typings.core.IAutoDetectOptions
+import pixi.typings.core.IBaseTextureOptions
 import pixi.typings.core.Resource
 import pixi.typings.core.Texture
 import pixi.typings.extensions.ExtensionMetadata
@@ -40,62 +39,60 @@ external interface AssetInitOptions {
 
 external val Assets: AssetsClass
 
-external class AssetsClass {
-	var resolver: Resolver
-	var loader: Loader
-	var cache: Cache
+open external class AssetsClass {
+	open var resolver: Resolver
+	open var loader: Loader
+	open var cache: Cache
 	
-	val detections: Array<FormatDetectionParser>
+	open val detections: Array<FormatDetectionParser>
 	
-	fun init(options: AssetInitOptions? = definedExternally): Promise<Unit>
-	fun add(keysIn: String, assetsIn: String, data: Any? = definedExternally)
-	fun add(keysIn: Array<String>, assetsIn: String, data: Any? = definedExternally)
-	fun add(keysIn: String, assetsIn: Array<ResolveAsset>, data: Any? = definedExternally)
-	fun add(keysIn: Array<String>, assetsIn: Array<ResolveAsset>, data: Any? = definedExternally)
-	fun add(keysIn: String, assetsIn: Array<String>, data: Any? = definedExternally)
-	fun add(keysIn: Array<String>, assetsIn: Array<String>, data: Any? = definedExternally)
+	open fun init(options: AssetInitOptions? = definedExternally): Promise<Unit>
+	open fun add(keysIn: String, assetsIn: String, data: Any? = definedExternally)
+	open fun add(keysIn: Array<String>, assetsIn: String, data: Any? = definedExternally)
+	open fun add(keysIn: String, assetsIn: Array<ResolveAsset>, data: Any? = definedExternally)
+	open fun add(keysIn: Array<String>, assetsIn: Array<ResolveAsset>, data: Any? = definedExternally)
+	open fun add(keysIn: String, assetsIn: Array<String>, data: Any? = definedExternally)
+	open fun add(keysIn: Array<String>, assetsIn: Array<String>, data: Any? = definedExternally)
 	
-	fun <T : Any /* = Any */> load(url: String, onProgress: ProgressCallback): Promise<dynamic /* T | Record<String, T>> */>
-	fun <T : Any /* = Any */> load(url: Array<String>, onProgress: ProgressCallback): Promise<dynamic /* T | Record<String, T>> */>
-	fun <T : Any /* = Any */> load(url: LoadAsset<Any>, onProgress: ProgressCallback): Promise<dynamic /* T | Record<String, T>> */>
-	fun <T : Any /* = Any */> load(url: Array<LoadAsset<Any>>, onProgress: ProgressCallback): Promise<dynamic /* T | Record<String, T>> */>
-	fun load(url: String, onProgress: ProgressCallback): Promise<dynamic /* Any | Record<String, Any>> */>
-	fun load(url: Array<String>, onProgress: ProgressCallback): Promise<dynamic /* Any | Record<String, Any>> */>
-	fun load(url: LoadAsset<Any>, onProgress: ProgressCallback): Promise<dynamic /* Any | Record<String, Any>> */>
-	fun load(url: Array<LoadAsset<Any>>, onProgress: ProgressCallback): Promise<dynamic /* Any | Record<String, Any>> */>
+	open fun <T : Any /* = Any */> load(url: String, onProgress: ProgressCallback): Promise<dynamic /* T | Record<String, T>> */>
+	open fun <T : Any /* = Any */> load(url: Array<String>, onProgress: ProgressCallback): Promise<dynamic /* T | Record<String, T>> */>
+	open fun <T : Any /* = Any */> load(url: LoadAsset<Any>, onProgress: ProgressCallback): Promise<dynamic /* T | Record<String, T>> */>
+	open fun <T : Any /* = Any */> load(url: Array<LoadAsset<Any>>, onProgress: ProgressCallback): Promise<dynamic /* T | Record<String, T>> */>
+	open fun load(url: String, onProgress: ProgressCallback): Promise<dynamic /* Any | Record<String, Any>> */>
+	open fun load(url: Array<String>, onProgress: ProgressCallback): Promise<dynamic /* Any | Record<String, Any>> */>
+	open fun load(url: LoadAsset<Any>, onProgress: ProgressCallback): Promise<dynamic /* Any | Record<String, Any>> */>
+	open fun load(url: Array<LoadAsset<Any>>, onProgress: ProgressCallback): Promise<dynamic /* Any | Record<String, Any>> */>
 	
-	fun addBundle(bundleId: String, assets: ResolverBundleBase)
-	fun loadBundle(bundleIds: String, onProgress: ProgressCallback = definedExternally): Promise<Any>
-	fun loadBundle(bundleIds: Array<String>, onProgress: ProgressCallback = definedExternally): Promise<Any>
-	fun backgroundLoad(urls: String): Promise<Unit>
-	fun backgroundLoad(urls: Array<String>): Promise<Unit>
-	fun backgroundLoadBundle(bundleIds: String): Promise<Unit>
-	fun backgroundLoadBundle(bundleIds: Array<String>): Promise<Unit>
-	fun reset()
-	fun <T : Any /* = Any */> get(keys: String): dynamic /* T | Record<String, T> */
-	fun <T : Any /* = Any */> get(keys: Array<String>): dynamic /* T | Record<String, T> */
-	fun get(keys: String): dynamic /* Any | Record<String, Any> */
-	fun get(keys: Array<String>): dynamic /* Any | Record<String, Any> */
-	fun unload(url: String): Promise<Unit>
-	fun unload(url: Array<String>): Promise<Unit>
-	fun unload(url: LoadAsset<Any>): Promise<Unit>
-	fun unload(url: Array<LoadAsset<Any>>): Promise<Unit>
-	fun unloadBundle(bundleIds: String): Promise<Unit>
-	fun unloadBundle(bundleIds: Array<String>): Promise<Unit>
+	open fun addBundle(bundleId: String, assets: ResolverBundleBase)
+	open fun loadBundle(bundleIds: String, onProgress: ProgressCallback = definedExternally): Promise<Any>
+	open fun loadBundle(bundleIds: Array<String>, onProgress: ProgressCallback = definedExternally): Promise<Any>
+	open fun backgroundLoad(urls: String): Promise<Unit>
+	open fun backgroundLoad(urls: Array<String>): Promise<Unit>
+	open fun backgroundLoadBundle(bundleIds: String): Promise<Unit>
+	open fun backgroundLoadBundle(bundleIds: Array<String>): Promise<Unit>
+	open fun reset()
+	open fun <T : Any /* = Any */> get(keys: String): dynamic /* T | Record<String, T> */
+	open fun <T : Any /* = Any */> get(keys: Array<String>): dynamic /* T | Record<String, T> */
+	open fun get(keys: String): dynamic /* Any | Record<String, Any> */
+	open fun get(keys: Array<String>): dynamic /* Any | Record<String, Any> */
+	open fun unload(url: String): Promise<Unit>
+	open fun unload(url: Array<String>): Promise<Unit>
+	open fun unload(url: LoadAsset<Any>): Promise<Unit>
+	open fun unload(url: Array<LoadAsset<Any>>): Promise<Unit>
+	open fun unloadBundle(bundleIds: String): Promise<Unit>
+	open fun unloadBundle(bundleIds: Array<String>): Promise<Unit>
 }
 
-external fun basename(path: String, ext: String): String
-
-external class CacheClass {
-	val parsers: Array<CacheParser<Any>>
+open external class CacheClass {
+	open val parsers: Array<CacheParser<Any>>
 	
-	fun reset()
-	fun has(key: String): Boolean
-	fun <T : Any /* = Any */> get(key: String): T
-	fun get(key: String): Any
-	fun <T : Any /* = Any */> set(key: String, value: T): T
-	fun set(key: String, value: Any): Any
-	fun remove(key: String): Any
+	open fun reset()
+	open fun has(key: String): Boolean
+	open fun <T : Any /* = Any */> get(key: String): T
+	open fun get(key: String): Any
+	open fun <T : Any /* = Any */> set(key: String, value: T): T
+	open fun set(key: String, value: Any): Any
+	open fun remove(key: String): Any
 }
 
 external interface CacheParser<T : Any /* = Any */> {
@@ -107,10 +104,6 @@ external interface CacheParser<T : Any /* = Any */> {
 
 external val cacheSpriteSheet: CacheParser<Spritesheet>
 external val cacheTextureArray: CacheParser<Array<Texture<Resource>>>
-
-external interface ConvertToList<T> {
-	fun invoke(value: T): Array<T>
-}
 
 external fun <T> convertToList(input: String, transform: (input: String) -> T = definedExternally): Array<T>
 external fun <T> convertToList(input: T, transform: (input: String) -> T = definedExternally): Array<T>
@@ -125,7 +118,6 @@ external val detectCompressedTextures: FormatDetectionParser
 external val detectWebp: FormatDetectionParser
 
 external fun dirname(path: String): String
-external fun extname(path: String): String
 
 external interface FormatDetectionParser {
 	var extension: ExtensionMetadata?
@@ -134,35 +126,32 @@ external interface FormatDetectionParser {
 	var remove: (formats: Array<String>) -> Promise<Array<String>>
 }
 
-external fun getBaseUrl(url: String): String
 external fun getFontFamilyName(url: String): String
-external fun isAbsouteUrl(url: String): Boolean
 external val isSingleItem: (item: Any?) -> Boolean
-external fun join(vararg parts: String): String
 
 external interface LoadAsset<T : Any /* = Any */> {
 	var src: String
 	var data: T?
 }
 
-external val loadBasis: LoaderParser<dynamic /* Texture<Resource> | Array<Texture<Resource>> */, LoadTextureData>
+external val loadBasis: LoaderParser<dynamic /* Texture<Resource> | Array<Texture<Resource>> */, IBaseTextureOptions<Any>>
 external val loadBitmapFont: LoaderParser<dynamic /* String | BitmapFont */, Any>
 external val loadDDS: LoaderParser<Any, Any>
 
-external class Loader {
-	var promiseCache: Record<String, PromiseAndParser>
+open external class Loader {
+	open var promiseCache: Record<String, PromiseAndParser>
 	
-	val parsers: Array<LoaderParser<Any, Any>>
+	open val parsers: Array<LoaderParser<Any, Any>>
 	
-	fun reset()
-	fun load(assetsToLoadIn: String, onProgress: (progress: Number) -> Unit = definedExternally): Promise<dynamic /* Any | Record<String, Any> */>
-	fun load(assetsToLoadIn: Array<String>, onProgress: (progress: Number) -> Unit = definedExternally): Promise<dynamic /* Any | Record<String, Any> */>
-	fun load(assetsToLoadIn: LoadAsset<Any>, onProgress: (progress: Number) -> Unit = definedExternally): Promise<dynamic /* Any | Record<String, Any> */>
-	fun load(assetsToLoadIn: Array<LoadAsset<Any>>, onProgress: (progress: Number) -> Unit = definedExternally): Promise<dynamic /* Any | Record<String, Any> */>
-	fun unload(assetsToUnloadIn: String): Promise<Unit>
-	fun unload(assetsToUnloadIn: Array<String>): Promise<Unit>
-	fun unload(assetsToUnloadIn: LoadAsset<Any>): Promise<Unit>
-	fun unload(assetsToUnloadIn: Array<LoadAsset<Any>>): Promise<Unit>
+	open fun reset()
+	open fun load(assetsToLoadIn: String, onProgress: (progress: Number) -> Unit = definedExternally): Promise<dynamic /* Any | Record<String, Any> */>
+	open fun load(assetsToLoadIn: Array<String>, onProgress: (progress: Number) -> Unit = definedExternally): Promise<dynamic /* Any | Record<String, Any> */>
+	open fun load(assetsToLoadIn: LoadAsset<Any>, onProgress: (progress: Number) -> Unit = definedExternally): Promise<dynamic /* Any | Record<String, Any> */>
+	open fun load(assetsToLoadIn: Array<LoadAsset<Any>>, onProgress: (progress: Number) -> Unit = definedExternally): Promise<dynamic /* Any | Record<String, Any> */>
+	open fun unload(assetsToUnloadIn: String): Promise<Unit>
+	open fun unload(assetsToUnloadIn: Array<String>): Promise<Unit>
+	open fun unload(assetsToUnloadIn: LoadAsset<Any>): Promise<Unit>
+	open fun unload(assetsToUnloadIn: Array<LoadAsset<Any>>): Promise<Unit>
 }
 
 external interface LoaderParserLoad<META_DATA : Any /* = Any */> {
@@ -197,18 +186,12 @@ external interface LoadFontData {
 external fun loadImageBitmap(url: String): Promise<ImageBitmap>
 
 external val loadJSON: LoaderParser<Any, Any>
-external val loadKTX: LoaderParser<Any /*Texture<Resource> | Array<Texture<Resource>> */, LoadTextureData>
+external val loadKTX: LoaderParser<dynamic /*Texture<Resource> | Array<Texture<Resource>> */, IBaseTextureOptions<Any>>
 external val loadSpriteSheet: LoaderParser<Any, Any>
-
-external interface LoadTextureData {
-	var baseTexture: BaseTexture<Resource, IAutoDetectOptions>
-}
-
-external val loadTexture: LoaderParser<Texture<Resource>, LoadTextureData>
+external val loadSVG: LoaderParser<dynamic /* String | Texture<Resource> */ , IBaseTextureOptions<Any>>
+external val loadTextures: LoaderParser<Texture<Resource>, IBaseTextureOptions<Any>>
 external val loadTxt: LoaderParser<Any, Any>
-external val loadWebFont: LoaderParser<Any /* FontFace | Array<FontFace> */, Any>
-
-external fun makeAbsoluteURL(url: String, customBaseUrl: String): String
+external val loadWebFont: LoaderParser<dynamic /* FontFace | Array<FontFace> */, Any>
 
 external interface PreferOrder {
 	var priority: Array<String>?
@@ -229,30 +212,31 @@ external interface ResolveAsset : Record<String, Any> {
 
 external val resolveCompressedTextureUrl: ResolveURLParser
 
-external class Resolver {
-	var basePath: String
-	val parsers: Array<ResolveURLParser>
+open external class Resolver {
+	open var basePath: String
+	open var rootPath: String
+	open val parsers: Array<ResolveURLParser>
 	
-	fun prefer(vararg preferOrder: PreferOrder)
-	fun reset()
-	fun addManifest(manifest: ResolverManifest)
-	fun addBundle(bundleId: String, assets: ResolverBundleBase)
+	open fun prefer(vararg preferOrder: PreferOrder)
+	open fun reset()
+	open fun addManifest(manifest: ResolverManifest)
+	open fun addBundle(bundleId: String, assets: ResolverBundleBase)
 	
-	fun add(keysIn: String, assetsIn: String, data: Any? = definedExternally)
-	fun add(keysIn: String, assetsIn: ResolveAsset, data: Any? = definedExternally)
-	fun add(keysIn: String, assetsIn: Array<String>, data: Any? = definedExternally)
-	fun add(keysIn: String, assetsIn: Array<ResolveAsset>, data: Any? = definedExternally)
-	fun add(keysIn: Array<String>, assetsIn: String, data: Any? = definedExternally)
-	fun add(keysIn: Array<String>, assetsIn: ResolveAsset, data: Any? = definedExternally)
-	fun add(keysIn: Array<String>, assetsIn: Array<String>, data: Any? = definedExternally)
-	fun add(keysIn: Array<String>, assetsIn: Array<ResolveAsset>, data: Any? = definedExternally)
+	open fun add(keysIn: String, assetsIn: String, data: Any? = definedExternally)
+	open fun add(keysIn: String, assetsIn: ResolveAsset, data: Any? = definedExternally)
+	open fun add(keysIn: String, assetsIn: Array<String>, data: Any? = definedExternally)
+	open fun add(keysIn: String, assetsIn: Array<ResolveAsset>, data: Any? = definedExternally)
+	open fun add(keysIn: Array<String>, assetsIn: String, data: Any? = definedExternally)
+	open fun add(keysIn: Array<String>, assetsIn: ResolveAsset, data: Any? = definedExternally)
+	open fun add(keysIn: Array<String>, assetsIn: Array<String>, data: Any? = definedExternally)
+	open fun add(keysIn: Array<String>, assetsIn: Array<ResolveAsset>, data: Any? = definedExternally)
 	
-	fun resoleBundle(bundleIds: String): Record<String, ResolveAsset>
-	fun resoleBundle(bundleIds: Array<String>): Record<String, Record<String, ResolveAsset>>
-	fun resolveUrl(url: String): String
-	fun resolveUrl(url: Array<String>): Array<String>
-	fun resolve(keys: String): ResolveAsset
-	fun resolve(keys: Array<String>): Record<String, ResolveAsset>
+	open fun resoleBundle(bundleIds: String): Record<String, ResolveAsset>
+	open fun resoleBundle(bundleIds: Array<String>): Record<String, Record<String, ResolveAsset>>
+	open fun resolveUrl(url: String): String
+	open fun resolveUrl(url: Array<String>): Array<String>
+	open fun resolve(keys: String): ResolveAsset
+	open fun resolve(keys: Array<String>): Record<String, ResolveAsset>
 }
 
 external interface ResolverBundleBase
@@ -282,5 +266,3 @@ external interface ResolveURLParser {
 	var test: (url: String) -> Boolean
 	var parse: (value: String) -> ResolveAsset
 }
-
-external fun urlJoin(vararg url: String): String

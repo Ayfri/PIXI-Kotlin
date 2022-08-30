@@ -16,7 +16,7 @@ open external class Runner(name: String) {
 		a4: Any? /* unknown */ = definedExternally,
 		a5: Any? /* unknown */ = definedExternally,
 		a6: Any? /* unknown */ = definedExternally,
-		a7: Any? /* unknown */ = definedExternally
+		a7: Any? /* unknown */ = definedExternally,
 	): Runner /* this */
 	
 	open fun add(item: Any? /* unknown */): Runner /* this */

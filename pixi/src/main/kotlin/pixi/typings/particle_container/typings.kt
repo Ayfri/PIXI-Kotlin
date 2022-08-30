@@ -63,7 +63,7 @@ open external class ParticleContainer(
 	maxSize: Int = definedExternally,
 	properties: IParticleProperties = definedExternally,
 	batchSize: Int = definedExternally,
-	autoResize: Boolean = definedExternally
+	autoResize: Boolean = definedExternally,
 ) : Container<Sprite> {
 	open var blendMode: BLEND_MODES
 	open var autoResize: Boolean

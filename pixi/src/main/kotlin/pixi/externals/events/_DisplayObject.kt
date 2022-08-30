@@ -48,10 +48,10 @@ fun <T : Any> DisplayObject.on(event: DisplayObjectInteractionEvents<T>, callbac
 fun <T : Any> DisplayObject.once(event: DisplayObjectInteractionEvents<T>, callback: (T) -> Unit) = once(event::class.simpleName!!, callback.unsafeCast<ListenerFn>(), null)
 fun <T : Any> DisplayObject.off(event: DisplayObjectInteractionEvents<T>, callback: (T) -> Unit) = off(event::class.simpleName!!, callback.unsafeCast<ListenerFn>(), null)
 
-fun DisplayObject.emitAdded(container:  Container<DisplayObject>) = emit(DisplayObjectInteractionEvents.added, container)
-fun DisplayObject.onAdded(callback: ( Container<DisplayObject>) -> Unit) = on(DisplayObjectInteractionEvents.added, callback)
-fun DisplayObject.onceAdded(callback: ( Container<DisplayObject>) -> Unit) = once(DisplayObjectInteractionEvents.added, callback)
-fun DisplayObject.offAdded(callback: ( Container<DisplayObject>) -> Unit) = off(DisplayObjectInteractionEvents.added, callback)
+fun DisplayObject.emitAdded(container: Container<DisplayObject>) = emit(DisplayObjectInteractionEvents.added, container)
+fun DisplayObject.onAdded(callback: (Container<DisplayObject>) -> Unit) = on(DisplayObjectInteractionEvents.added, callback)
+fun DisplayObject.onceAdded(callback: (Container<DisplayObject>) -> Unit) = once(DisplayObjectInteractionEvents.added, callback)
+fun DisplayObject.offAdded(callback: (Container<DisplayObject>) -> Unit) = off(DisplayObjectInteractionEvents.added, callback)
 
 fun DisplayObject.emitClick(event: InteractionEvent) = emit(DisplayObjectInteractionEvents.click, event)
 fun DisplayObject.onClick(callback: (InteractionEvent) -> Unit) = on(DisplayObjectInteractionEvents.click, callback)
@@ -153,15 +153,15 @@ fun DisplayObject.onPointerUpOutside(callback: (InteractionEvent) -> Unit) = on(
 fun DisplayObject.oncePointerUpOutside(callback: (InteractionEvent) -> Unit) = once(DisplayObjectInteractionEvents.pointerupoutside, callback)
 fun DisplayObject.offPointerUpOutside(callback: (InteractionEvent) -> Unit) = off(DisplayObjectInteractionEvents.pointerupoutside, callback)
 
-fun DisplayObject.emitRemoved(container:  Container<DisplayObject>) = emit(DisplayObjectInteractionEvents.removed, container)
-fun DisplayObject.onRemoved(callback: ( Container<DisplayObject>) -> Unit) = on(DisplayObjectInteractionEvents.removed, callback)
-fun DisplayObject.onceRemoved(callback: ( Container<DisplayObject>) -> Unit) = once(DisplayObjectInteractionEvents.removed, callback)
-fun DisplayObject.offRemoved(callback: ( Container<DisplayObject>) -> Unit) = off(DisplayObjectInteractionEvents.removed, callback)
+fun DisplayObject.emitRemoved(container: Container<DisplayObject>) = emit(DisplayObjectInteractionEvents.removed, container)
+fun DisplayObject.onRemoved(callback: (Container<DisplayObject>) -> Unit) = on(DisplayObjectInteractionEvents.removed, callback)
+fun DisplayObject.onceRemoved(callback: (Container<DisplayObject>) -> Unit) = once(DisplayObjectInteractionEvents.removed, callback)
+fun DisplayObject.offRemoved(callback: (Container<DisplayObject>) -> Unit) = off(DisplayObjectInteractionEvents.removed, callback)
 
-fun DisplayObject.emitRemovedFrom(child: DisplayObject, container:  Container<DisplayObject>, index: Int) = emit(DisplayObjectInteractionEvents.removedFrom, child, container, index)
-fun DisplayObject.onRemovedFrom(callback: (Tuple<DisplayObject,  Container<DisplayObject>, Int>) -> Unit) = on(DisplayObjectInteractionEvents.removedFrom, callback)
-fun DisplayObject.onceRemovedFrom(callback: (Tuple<DisplayObject,  Container<DisplayObject>, Int>) -> Unit) = once(DisplayObjectInteractionEvents.removedFrom, callback)
-fun DisplayObject.offRemovedFrom(callback: (Tuple<DisplayObject,  Container<DisplayObject>, Int>) -> Unit) = off(DisplayObjectInteractionEvents.removedFrom, callback)
+fun DisplayObject.emitRemovedFrom(child: DisplayObject, container: Container<DisplayObject>, index: Int) = emit(DisplayObjectInteractionEvents.removedFrom, child, container, index)
+fun DisplayObject.onRemovedFrom(callback: (Tuple<DisplayObject, Container<DisplayObject>, Int>) -> Unit) = on(DisplayObjectInteractionEvents.removedFrom, callback)
+fun DisplayObject.onceRemovedFrom(callback: (Tuple<DisplayObject, Container<DisplayObject>, Int>) -> Unit) = once(DisplayObjectInteractionEvents.removedFrom, callback)
+fun DisplayObject.offRemovedFrom(callback: (Tuple<DisplayObject, Container<DisplayObject>, Int>) -> Unit) = off(DisplayObjectInteractionEvents.removedFrom, callback)
 
 fun DisplayObject.emitRightClick(event: InteractionEvent) = emit(DisplayObjectInteractionEvents.rightclick, event)
 fun DisplayObject.onRightClick(callback: (InteractionEvent) -> Unit) = on(DisplayObjectInteractionEvents.rightclick, callback)

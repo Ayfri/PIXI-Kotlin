@@ -78,7 +78,7 @@ open external class Matrix(
 	c: Double = definedExternally,
 	d: Double = definedExternally,
 	tx: Double = definedExternally,
-	ty: Double = definedExternally
+	ty: Double = definedExternally,
 ) {
 	open var a: Double
 	open var b: Double
@@ -106,7 +106,7 @@ open external class Matrix(
 		scaleY: Double,
 		rotation: Double,
 		skewX: Double,
-		skewY: Double
+		skewY: Double,
 	): Matrix /* this */
 	
 	open fun prepend(matrix: Matrix): Matrix /* this */
@@ -205,7 +205,7 @@ open external class RoundedRectangle(
 	y: Double = definedExternally,
 	width: Double = definedExternally,
 	height: Double = definedExternally,
-	radius: Double = definedExternally
+	radius: Double = definedExternally,
 ) {
 	open var x: Double
 	open var y: Double

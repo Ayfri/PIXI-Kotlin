@@ -27,7 +27,7 @@ open external class Mesh<T : Shader /* = MeshMaterial */>(
 	geometry: Geometry,
 	shader: T,
 	state: State = definedExternally,
-	drawMode: DRAW_MODES = definedExternally
+	drawMode: DRAW_MODES = definedExternally,
 ) : Container<DisplayObject> {
 	open var shader: T
 	open var state: State

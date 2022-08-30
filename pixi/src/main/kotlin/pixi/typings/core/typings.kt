@@ -128,7 +128,7 @@ abstract external class AbstractRenderer(type: RENDERER_TYPE = definedExternally
 		displayObject: IRenderableObject,
 		scaleMode: SCALE_MODES = definedExternally,
 		resolution: Double = definedExternally,
-		region: Rectangle = definedExternally
+		region: Rectangle = definedExternally,
 	): RenderTexture
 	
 	abstract fun addSystem(ClassRef: ISystemConstructor<Renderer>, name: String): AbstractRenderer /* this */
@@ -153,7 +153,7 @@ open external class Attribute(
 	type: TYPES = definedExternally,
 	stride: Int = definedExternally,
 	start: Int = definedExternally,
-	instance: Boolean = definedExternally
+	instance: Boolean = definedExternally,
 ) {
 	open var buffer: Int
 	open var size: Int
@@ -170,7 +170,7 @@ open external class Attribute(
 			size: Int = definedExternally,
 			normalized: Boolean = definedExternally,
 			type: TYPES = definedExternally,
-			stride: Int = definedExternally
+			stride: Int = definedExternally,
 		): Attribute
 	}
 }
@@ -186,7 +186,7 @@ open external class BaseImageResource(source: ImageSource) : Resource {
 		renderer: Renderer,
 		baseTexture: BaseTexture<Resource, IAutoDetectOptions>,
 		glTexture: GLTexture,
-		source: ImageSource = definedExternally
+		source: ImageSource = definedExternally,
 	): Boolean
 	
 	override fun upload(renderer: Renderer, baseTexture: BaseTexture<Resource, IAutoDetectOptions>, glTexture: GLTexture): Boolean
@@ -213,7 +213,7 @@ open external class BaseRenderTexture(options: IBaseTextureOptions<Any?> = defin
 
 open external class BaseTexture<R : Resource /*= Resource*/, R0 /*= IAutoDetectOptions*/>(
 	resource: R = definedExternally,
-	options: IBaseTextureOptions<R0> = definedExternally
+	options: IBaseTextureOptions<R0> = definedExternally,
 ) : EventEmitter {
 	constructor(resource: ImageSource = definedExternally, options: IBaseTextureOptions<R0> = definedExternally)
 	constructor(resource: String = definedExternally, options: IBaseTextureOptions<R0> = definedExternally)
@@ -264,51 +264,51 @@ open external class BaseTexture<R : Resource /*= Resource*/, R0 /*= IAutoDetectO
 		fun <R : Resource, R0 : IAutoDetectOptions> from(
 			source: ImageSource,
 			options: IBaseTextureOptions<R0> = definedExternally,
-			strict: Boolean = definedExternally
+			strict: Boolean = definedExternally,
 		): BaseTexture<R, IAutoDetectOptions>
 		
 		fun <R : Resource, R0 : IAutoDetectOptions> from(
 			source: String,
 			options: IBaseTextureOptions<R0> = definedExternally,
-			strict: Boolean = definedExternally
+			strict: Boolean = definedExternally,
 		): BaseTexture<R, IAutoDetectOptions>
 		
 		fun <R : Resource, R0 : IAutoDetectOptions> from(
 			source: Array<String>,
 			options: IBaseTextureOptions<R0> = definedExternally,
-			strict: Boolean = definedExternally
+			strict: Boolean = definedExternally,
 		): BaseTexture<R, IAutoDetectOptions>
 		
 		fun from(
 			source: ImageSource,
 			options: IBaseTextureOptions<IAutoDetectOptions> = definedExternally,
-			strict: Boolean = definedExternally
+			strict: Boolean = definedExternally,
 		): BaseTexture<Resource, IAutoDetectOptions>
 		
 		fun from(
 			source: String,
 			options: IBaseTextureOptions<IAutoDetectOptions> = definedExternally,
-			strict: Boolean = definedExternally
+			strict: Boolean = definedExternally,
 		): BaseTexture<Resource, IAutoDetectOptions>
 		
 		fun from(
 			source: Array<String>,
 			options: IBaseTextureOptions<IAutoDetectOptions> = definedExternally,
-			strict: Boolean = definedExternally
+			strict: Boolean = definedExternally,
 		): BaseTexture<Resource, IAutoDetectOptions>
 		
 		fun fromBuffer(
 			buffer: Float32Array,
 			width: Double,
 			height: Double,
-			options: IBaseTextureOptions<IAutoDetectOptions> = definedExternally
+			options: IBaseTextureOptions<IAutoDetectOptions> = definedExternally,
 		): BaseTexture<BufferResource, IAutoDetectOptions>
 		
 		fun fromBuffer(
 			buffer: Uint8Array,
 			width: Double,
 			height: Double,
-			options: IBaseTextureOptions<IAutoDetectOptions> = definedExternally
+			options: IBaseTextureOptions<IAutoDetectOptions> = definedExternally,
 		): BaseTexture<BufferResource, IAutoDetectOptions>
 		
 		fun addToCache(baseTexture: BaseTexture<Resource, IAutoDetectOptions>, id: String)
@@ -488,7 +488,7 @@ open external class Filter(vertexSrc: String = definedExternally, fragmentSrc: S
 		input: RenderTexture,
 		output: RenderTexture,
 		clearMode: CLEAR_MODES = definedExternally,
-		_currentState: FilterState = definedExternally
+		_currentState: FilterState = definedExternally,
 	)
 	
 	open var blendMode: BLEND_MODES
@@ -537,13 +537,13 @@ open external class FilterSystem(renderer: Renderer) : ISystem {
 		minWidth: Double,
 		minHeight: Double,
 		resolution: Double = definedExternally,
-		multisample: MSAA_QUALITY = definedExternally
+		multisample: MSAA_QUALITY = definedExternally,
 	): RenderTexture
 	
 	open fun getFilterTexture(
 		input: RenderTexture = definedExternally,
 		resolution: Double = definedExternally,
-		multisample: MSAA_QUALITY = definedExternally
+		multisample: MSAA_QUALITY = definedExternally,
 	): RenderTexture
 	
 	open fun returnFilterTexture(renderTexture: RenderTexture)
@@ -640,7 +640,7 @@ open external class Geometry(buffers: Array<Buffer> = definedExternally, attribu
 		type: TYPES = definedExternally,
 		stride: Int = definedExternally,
 		start: Int = definedExternally,
-		instance: Boolean = definedExternally
+		instance: Boolean = definedExternally,
 	): Geometry
 	
 	open fun addAttribute(
@@ -651,7 +651,7 @@ open external class Geometry(buffers: Array<Buffer> = definedExternally, attribu
 		type: TYPES = definedExternally,
 		stride: Int = definedExternally,
 		start: Int = definedExternally,
-		instance: Boolean = definedExternally
+		instance: Boolean = definedExternally,
 	): Geometry
 	
 	open fun addAttribute(
@@ -662,7 +662,7 @@ open external class Geometry(buffers: Array<Buffer> = definedExternally, attribu
 		type: TYPES = definedExternally,
 		stride: Int = definedExternally,
 		start: Int = definedExternally,
-		instance: Boolean = definedExternally
+		instance: Boolean = definedExternally,
 	): Geometry
 	
 	open fun addAttribute(
@@ -673,7 +673,7 @@ open external class Geometry(buffers: Array<Buffer> = definedExternally, attribu
 		type: TYPES = definedExternally,
 		stride: Int = definedExternally,
 		start: Int = definedExternally,
-		instance: Boolean = definedExternally
+		instance: Boolean = definedExternally,
 	): Geometry
 	
 	open fun getAttribute(id: String): Attribute
@@ -718,7 +718,7 @@ open external class GeometrySystem(renderer: Renderer) : ISystem {
 		type: DRAW_MODES,
 		size: Int = definedExternally,
 		start: Int = definedExternally,
-		instanceCount: Int = definedExternally
+		instanceCount: Int = definedExternally,
 	): GeometrySystem /* this */
 	
 	protected open fun unbind()
@@ -1128,21 +1128,21 @@ open external class Renderer(options: IRendererOptions = definedExternally) : Ab
 		renderTexture: RenderTexture = definedExternally,
 		clear: Boolean = definedExternally,
 		transform: Matrix = definedExternally,
-		skipUpdateTransform: Boolean = definedExternally
+		skipUpdateTransform: Boolean = definedExternally,
 	)
 	
 	open fun generateTexture(
 		displayObject: IRenderableObject,
 		options: IGenerateTextureOptions = definedExternally,
 		resolution: Double = definedExternally,
-		region: Rectangle = definedExternally
+		region: Rectangle = definedExternally,
 	): RenderTexture
 	
 	override fun generateTexture(
 		displayObject: IRenderableObject,
 		scaleMode: SCALE_MODES,
 		resolution: Double,
-		region: Rectangle
+		region: Rectangle,
 	): RenderTexture
 	
 	open fun reset(): Renderer /* this */
@@ -1183,7 +1183,7 @@ open external class RenderTexturePool(textureOptions: IBaseTextureOptions<Any> =
 		minWidth: Int,
 		minHeight: Int,
 		resolution: Double = definedExternally,
-		multisample: MSAA_QUALITY = definedExternally
+		multisample: MSAA_QUALITY = definedExternally,
 	): RenderTexture
 	
 	open fun getFilterTexture(input: RenderTexture, resolution: Double = definedExternally, multisample: MSAA_QUALITY = definedExternally): RenderTexture
@@ -1232,13 +1232,13 @@ abstract external class Resource(width: Int = definedExternally, height: Int = d
 	abstract fun upload(
 		renderer: Renderer,
 		baseTexture: BaseTexture<Resource, IAutoDetectOptions>,
-		glTexture: GLTexture
+		glTexture: GLTexture,
 	): Boolean
 	
 	open fun style(
 		_renderer: Renderer,
 		_baseTexture: BaseTexture<Resource, IAutoDetectOptions>,
-		_glTexture: GLTexture
+		_glTexture: GLTexture,
 	): Boolean
 	
 	open fun dispose()
@@ -1390,7 +1390,7 @@ open external class Texture<R : Resource /* = Resource */>(
 	orig: Rectangle = definedExternally,
 	trim: Rectangle = definedExternally,
 	rotate: Int = definedExternally,
-	anchor: IPointData = definedExternally
+	anchor: IPointData = definedExternally,
 ) : EventEmitter {
 	open var baseTexture: BaseTexture<R, IAutoDetectOptions>
 	open var orig: Rectangle
@@ -1427,7 +1427,7 @@ open external class Texture<R : Resource /* = Resource */>(
 		fun <R : Resource, R0> from(
 			source: BaseTexture<R, IAutoDetectOptions> = definedExternally,
 			options: IBaseTextureOptions<R0>,
-			strict: Boolean = definedExternally
+			strict: Boolean = definedExternally,
 		): Texture<R>
 		
 		fun from(source: String, options: IBaseTextureOptions<Any> = definedExternally, strict: Boolean = definedExternally): Texture<Resource>
@@ -1435,7 +1435,7 @@ open external class Texture<R : Resource /* = Resource */>(
 		fun from(
 			source: BaseTexture<Resource, IAutoDetectOptions>,
 			options: IBaseTextureOptions<Any> = definedExternally,
-			strict: Boolean = definedExternally
+			strict: Boolean = definedExternally,
 		): Texture<Resource>
 		
 		fun <R : Resource, R0> from(source: Array<String>, options: IBaseTextureOptions<R0> = definedExternally, strict: Boolean = definedExternally): Texture<R>
@@ -1443,7 +1443,7 @@ open external class Texture<R : Resource /* = Resource */>(
 		fun <R : Resource, R0> from(
 			source: Array<BaseTexture<R, IAutoDetectOptions>> = definedExternally,
 			options: IBaseTextureOptions<R0>,
-			strict: Boolean = definedExternally
+			strict: Boolean = definedExternally,
 		): Texture<R>
 		
 		fun from(source: Array<String>, options: IBaseTextureOptions<Any> = definedExternally, strict: Boolean = definedExternally): Texture<Resource>
@@ -1451,7 +1451,7 @@ open external class Texture<R : Resource /* = Resource */>(
 		fun from(
 			source: Array<BaseTexture<Resource, IAutoDetectOptions>>,
 			options: IBaseTextureOptions<Any> = definedExternally,
-			strict: Boolean = definedExternally
+			strict: Boolean = definedExternally,
 		): Texture<Resource>
 		
 		fun <R : Resource, R0> fromUrl(url: String, options: IBaseTextureOptions<R0> = definedExternally): Promise<Texture<R>>
@@ -1467,42 +1467,42 @@ open external class Texture<R : Resource /* = Resource */>(
 			source: HTMLImageElement,
 			imageUrl: String,
 			name: String = definedExternally,
-			options: IBaseTextureOptions<Any> = definedExternally
+			options: IBaseTextureOptions<Any> = definedExternally,
 		): Promise<Texture<R>>
 		
 		fun <R : Resource> fromLoader(
 			source: HTMLCanvasElement,
 			imageUrl: String,
 			name: String = definedExternally,
-			options: IBaseTextureOptions<Any> = definedExternally
+			options: IBaseTextureOptions<Any> = definedExternally,
 		): Promise<Texture<R>>
 		
 		fun <R : Resource> fromLoader(
 			source: String,
 			imageUrl: String,
 			name: String = definedExternally,
-			options: IBaseTextureOptions<Any> = definedExternally
+			options: IBaseTextureOptions<Any> = definedExternally,
 		): Promise<Texture<R>>
 		
 		fun fromLoader(
 			source: HTMLImageElement,
 			imageUrl: String,
 			name: String = definedExternally,
-			options: IBaseTextureOptions<Any> = definedExternally
+			options: IBaseTextureOptions<Any> = definedExternally,
 		): Promise<Texture<Resource>>
 		
 		fun fromLoader(
 			source: HTMLCanvasElement,
 			imageUrl: String,
 			name: String = definedExternally,
-			options: IBaseTextureOptions<Any> = definedExternally
+			options: IBaseTextureOptions<Any> = definedExternally,
 		): Promise<Texture<Resource>>
 		
 		fun fromLoader(
 			source: String,
 			imageUrl: String,
 			name: String = definedExternally,
-			options: IBaseTextureOptions<Any> = definedExternally
+			options: IBaseTextureOptions<Any> = definedExternally,
 		): Promise<Texture<Resource>>
 		
 		fun addToCache(texture: Texture<Resource>, id: String)

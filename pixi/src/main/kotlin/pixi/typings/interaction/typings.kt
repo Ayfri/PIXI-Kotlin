@@ -49,7 +49,7 @@ open external class InteractionData {
 	open fun <P : IPointData /* = Point */> getLocalPosition(
 		displayObject: DisplayObject,
 		point: P = definedExternally,
-		globalPos: IPointData = definedExternally
+		globalPos: IPointData = definedExternally,
 	): P
 	
 	open fun getLocalPosition(displayObject: DisplayObject, point: Point = definedExternally, globalPos: IPointData = definedExternally): Point
@@ -106,14 +106,14 @@ open external class InteractionManager(renderer: AbstractRenderer, options: Inte
 		interactionEvent: InteractionEvent,
 		displayObject: DisplayObject,
 		func: InteractionCallback = definedExternally,
-		hitTest: Boolean = definedExternally
+		hitTest: Boolean = definedExternally,
 	)
 	
 	open fun processInteractive(
 		interactionEvent: InteractionEvent,
 		displayObject: DisplayObject,
 		func: InteractionCallbackDefaultValue = definedExternally,
-		hitTest: Boolean = definedExternally
+		hitTest: Boolean = definedExternally,
 	)
 	
 	open fun destroy()
@@ -182,7 +182,7 @@ open external class TreeSearch {
 		displayObject: DisplayObject,
 		func: InteractionCallback = definedExternally,
 		hitTest: Boolean = definedExternally,
-		interactive: Boolean = definedExternally
+		interactive: Boolean = definedExternally,
 	): Boolean
 	
 	open fun recursiveFindHit(
@@ -190,20 +190,20 @@ open external class TreeSearch {
 		displayObject: DisplayObject,
 		func: InteractionCallbackDefaultValue = definedExternally,
 		hitTest: Boolean = definedExternally,
-		interactive: Boolean = definedExternally
+		interactive: Boolean = definedExternally,
 	): Boolean
 	
 	open fun findHit(
 		interactionEvent: InteractionEvent,
 		displayObject: DisplayObject,
 		func: InteractionCallback = definedExternally,
-		hitTest: Boolean = definedExternally
+		hitTest: Boolean = definedExternally,
 	)
 	
 	open fun findHit(
 		interactionEvent: InteractionEvent,
 		displayObject: DisplayObject,
 		func: InteractionCallbackDefaultValue = definedExternally,
-		hitTest: Boolean = definedExternally
+		hitTest: Boolean = definedExternally,
 	)
 }
