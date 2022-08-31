@@ -4,9 +4,6 @@ import pixi.typings.math.IPointData
 import pixi.typings.math.ObservablePoint
 import pixi.typings.math.Point
 import kotlin.math.abs
-import kotlin.math.ceil
-import kotlin.math.floor
-import kotlin.math.roundToInt
 import kotlin.math.sqrt
 
 val IPointData.length get() = sqrt(x * x + y * y)
@@ -31,66 +28,6 @@ operator fun <T : IPointData> T.unaryPlus(): T {
 	return this
 }
 
-operator fun <T : IPointData> T.plus(other: IPointData): T {
-	x += other.x
-	y += other.y
-	return this
-}
-
-operator fun <T : IPointData> T.plus(factor: Number): T {
-	x += factor.toDouble()
-	y += factor.toDouble()
-	return this
-}
-
-operator fun <T : IPointData> T.minus(other: IPointData): T {
-	x -= other.x
-	y -= other.y
-	return this
-}
-
-operator fun <T : IPointData> T.minus(factor: Number): T {
-	x -= factor.toDouble()
-	y -= factor.toDouble()
-	return this
-}
-
-operator fun <T : IPointData> T.times(other: IPointData): T {
-	x *= other.x
-	y *= other.y
-	return this
-}
-
-operator fun <T : IPointData> T.times(factor: Number): T {
-	x *= factor.toDouble()
-	y *= factor.toDouble()
-	return this
-}
-
-operator fun <T : IPointData> T.div(other: IPointData): T {
-	x /= other.x
-	y /= other.y
-	return this
-}
-
-operator fun <T : IPointData> T.div(factor: Number): T {
-	x /= factor.toDouble()
-	y /= factor.toDouble()
-	return this
-}
-
-operator fun <T : IPointData> T.rem(other: IPointData): T {
-	x %= other.x
-	y %= other.y
-	return this
-}
-
-operator fun <T : IPointData> T.rem(factor: Number): T {
-	x %= factor.toDouble()
-	y %= factor.toDouble()
-	return this
-}
-
 operator fun <T : IPointData> T.compareTo(other: IPointData) = squaredLength.compareTo(other.squaredLength)
 
 operator fun <T : IPointData> T.rangeTo(other: IPointData) = Rectangle(this, other)
@@ -109,22 +46,11 @@ operator fun <T : IPointData> T.set(index: Int, value: Number) {
 	}
 }
 
-
 fun <T : IPointData> T.abs() = +this
-
-fun IPointData.ceil() {
-	x = ceil(x)
-	y = ceil(y)
-}
 
 infix fun IPointData.distanceTo(other: IPointData) = sqrt((x - other.x) * (x - other.x) + (y - other.y) * (y - other.y))
 
 infix fun IPointData.dot(other: IPointData) = x * other.x + y * other.y
-
-fun IPointData.floor() {
-	x = floor(x)
-	y = floor(y)
-}
 
 fun <T : IPointData> T.negate() = -this
 
@@ -142,11 +68,6 @@ fun IPointData.reset() {
 	y = 0.0
 }
 
-fun IPointData.round() {
-	x = x.roundToInt().toDouble()
-	y = y.roundToInt().toDouble()
-}
-
-fun <T : Any> IPointData.toObservable(context: T.() -> Unit = {}, scope: T? = null) = ObservablePoint(context, scope ?: null.asDynamic(), x, y)
+fun <T : Any> IPointData.toObservable(context: T.() -> Unit = {}, scope: T? = null) = ObservablePoint(context, scope ?: null.unsafeCast<T>(), x, y)
 fun IPointData.toObservable() = ObservablePoint({}, null.asDynamic(), x, y)
 fun IPointData.toPoint() = Point(x, y)
