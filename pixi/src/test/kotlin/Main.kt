@@ -12,12 +12,14 @@ import pixi.externals.extensions.add
 import pixi.externals.extensions.addToApplication
 import pixi.externals.extensions.load
 import pixi.externals.extensions.once
+import pixi.externals.extensions.plus
 import pixi.externals.extensions.setPositionFromWindow
 import pixi.externals.generateBlankTexture
 import pixi.typings.app.Application
 import pixi.typings.core.VERSION
 import pixi.typings.loaders.Loader
 import pixi.typings.loaders.loader
+import pixi.typings.math.Point
 import pixi.typings.sprite.Sprite
 import pixi.typings.ticker.Ticker
 import pixi.typings.utils.EventEmitter
@@ -25,6 +27,7 @@ import pixi.utils.application
 import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertContains
+import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 
 object Tests : EventEmitter() {
@@ -73,7 +76,7 @@ object Tests : EventEmitter() {
 	}
 	
 	@Test
-	fun testAppAdded() {
+	fun appIsAdded() {
 		once("ready") {
 			assertNotNull(app)
 			assertNotNull(document.querySelector("canvas"))
@@ -81,7 +84,7 @@ object Tests : EventEmitter() {
 	}
 	
 	@Test
-	fun testSprite() {
+	fun spriteIsAdded() {
 		once("ready") {
 			assertNotNull(sprite)
 			assertContains(app.stage.children, sprite)
@@ -89,7 +92,7 @@ object Tests : EventEmitter() {
 	}
 	
 	@Test
-	fun testGeneratedTexture() {
+	fun generatedTexture() {
 		once("ready") {
 			val sprite = Sprite(generateBlankTexture(app) {
 				color = Color(255, 0, 0)
@@ -100,5 +103,18 @@ object Tests : EventEmitter() {
 			sprite.setPositionFromWindow(0.5, 0.5)
 			sprite.addToApplication(app)
 		}
+	}
+	
+	@Test
+	fun immutablePoint() {
+		var a = Point(1.0, 2.0)
+		val b = Point(4.0, -2.5)
+		a + b
+		assertEquals(a.x, 1.0)
+		a += b
+		assertEquals(a.x, 5.0)
+		val c = a.clone() + b
+		assertEquals(c.x, 9.0)
+		assertEquals(a.x, 5.0)
 	}
 }
