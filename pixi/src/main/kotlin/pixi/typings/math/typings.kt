@@ -134,7 +134,7 @@ open external class ObservablePoint<T /* = Any */>(cb: (self: T) -> Any?, scope:
 	override var x: Double
 	override var y: Double
 	
-	open fun clone(cb: (`this`: T) -> Any? = definedExternally, scope: Any? = definedExternally): ObservablePoint<Any?>
+	open fun clone(cb: (`this`: T) -> Any? = definedExternally, scope: Any? = definedExternally): ObservablePoint<T>
 	override fun set(x: Double, y: Double): ObservablePoint<T> /* this */
 	override fun copyFrom(p: IPointData): ObservablePoint<T> /* this */
 	override fun <T : IPoint> copyTo(p: T): T
