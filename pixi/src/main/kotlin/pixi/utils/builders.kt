@@ -16,6 +16,7 @@ import pixi.typings.graphics.Graphics
 import pixi.typings.math.Matrix
 import pixi.typings.math.ObservablePoint
 import pixi.typings.math.Point
+import pixi.typings.math.Rectangle
 import pixi.typings.sprite.Sprite
 import pixi.typings.text.PartialTextStyle
 import pixi.typings.text.Text
@@ -35,6 +36,8 @@ fun point(block: Point.() -> Unit) = Point().apply(block)
 
 fun <T> observablePoint(x: Number, y: Number, scope: T = jso(), onChange: ((T) -> Any?) = {}) = ObservablePoint(onChange, scope, x.toDouble(), y.toDouble())
 fun observablePoint(x: Number, y: Number, onChange: (() -> Any?) = {}) = ObservablePoint(onChange.unsafeCast<(Void) -> Any?>(), null, x.toDouble(), y.toDouble())
+
+fun rectangle(block: Rectangle.() -> Unit) = Rectangle().apply(block)
 
 fun sprite(texture: Texture<Resource>, block: Sprite.() -> Unit) = Sprite(texture).apply(block)
 fun sprite(texture: BaseTexture<Resource, IAutoDetectOptions>, block: Sprite.() -> Unit) = Sprite.from(texture).apply(block)
