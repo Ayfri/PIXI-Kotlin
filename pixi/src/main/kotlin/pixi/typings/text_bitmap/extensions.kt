@@ -4,11 +4,11 @@ import pixi.typings.loaders.IResourceMetadata
 import pixi.typings.loaders.LoaderResource
 
 external interface IBitmapFontResource {
-	var bitmapFont: BitMapFont
+	var bitmapFont: BitmapFont
 }
 
 inline var LoaderResource.bitmapFont
-	get() = asDynamic().bitmapFont as? BitMapFont
+	get() = asDynamic().bitmapFont as? BitmapFont
 	set(value) {
 		asDynamic().bitmapFont = value
 	}

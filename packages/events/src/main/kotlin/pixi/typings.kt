@@ -137,8 +137,18 @@ open external class FederatedEvent<N : UIEvent /* = UIEvent */>(manager: EventBo
 	@Suppress("RETURN_TYPE_MISMATCH_ON_OVERRIDE", "OVERRIDING_FINAL_MEMBER")
 	override fun composedPath(): Array<FederatedEventTarget>
 	
+	@Deprecated("Unimplemented method included for implementing the DOM interface UIEvent. Since Pixi 6.5.4", level = DeprecationLevel.ERROR)
 	@Suppress("OVERRIDING_FINAL_MEMBER")
 	override fun initEvent(_type: String, _bubbles: Boolean, _cancelable: Boolean)
+	
+	@Deprecated("Unimplemented method included for implementing the DOM interface UIEvent. Since Pixi 6.5.4", level = DeprecationLevel.ERROR)
+	fun initUiEvent(
+		_typeArg: String,
+		_bubblesArg: Boolean = definedExternally,
+		_cancelableArg: Boolean = definedExternally,
+		_viewArg: WindowProxy? = definedExternally,
+		_detailArg: Int = definedExternally,
+	)
 	
 	@Suppress("OVERRIDING_FINAL_MEMBER")
 	override fun preventDefault()

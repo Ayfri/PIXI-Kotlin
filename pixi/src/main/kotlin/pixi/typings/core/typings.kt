@@ -1265,6 +1265,7 @@ open external class Shader(program: Program, uniforms: Dict<Any> = definedExtern
 	open var program: Program
 	open var uniformGroup: UniformGroup<Dict<Any>>
 	open var uniformBindCount: Int
+	open var disposeRunner: Runner
 	open val uniforms: Dict<Any>
 	
 	open fun checkUniformExists(name: String, group: UniformGroup<Dict<Any>>): Boolean
@@ -1285,6 +1286,7 @@ open external class ShaderSystem(renderer: Renderer) : ISystem {
 	open fun systemCheck()
 	protected open fun contextChange(gl: IRenderingContext)
 	open fun bind(shader: Shader, dontSync: Boolean = definedExternally): GLProgram
+	open fun disposeShader(shader: Shader)
 	open fun setUniforms(uniforms: Dict<Any>)
 	open fun syncUniformGroup(group: UniformGroup<Dict<Any>>, syncData: Any = definedExternally)
 	open fun syncUniforms(group: UniformGroup<Dict<Any>>, glProgram: GLProgram, syncData: Any)

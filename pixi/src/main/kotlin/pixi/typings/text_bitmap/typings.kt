@@ -1,4 +1,5 @@
 @file:JsModule("@pixi/text-bitmap")
+@file:Suppress("unused")
 
 package pixi.typings.text_bitmap
 
@@ -25,7 +26,7 @@ import pixi.typings.text.TextStyle
 import pixi.typings.text.TextStyleAlign
 import pixi.typings.utils.Dict
 
-open external class BitMapFont(data: BitMapFontData, textures: Array<Texture<Resource>>, ownsTextures: Boolean = definedExternally) {
+open external class BitmapFont(data: BitMapFontData, textures: Array<Texture<Resource>>, ownsTextures: Boolean = definedExternally) {
 	constructor(data: BitMapFontData, textures: Dict<Texture<Resource>>, ownsTextures: Boolean = definedExternally)
 	
 	open val font: String
@@ -44,20 +45,20 @@ open external class BitMapFont(data: BitMapFontData, textures: Array<Texture<Res
 		val ALPHANUMERIC: dynamic /* Array<String> | Array<Array<String>> */
 		val ASCII: Array<Array<String>>
 		val defaultOptions: IBitmapFontOptions
-		val available: Dict<BitMapFont>
+		val available: Dict<BitmapFont>
 		
-		fun install(data: String, textures: Texture<Resource>, ownsTextures: Boolean = definedExternally): BitMapFont
-		fun install(data: XMLDocument, textures: Texture<Resource>, ownsTextures: Boolean = definedExternally): BitMapFont
-		fun install(data: BitMapFontData, textures: Texture<Resource>, ownsTextures: Boolean = definedExternally): BitMapFont
-		fun install(data: String, textures: Array<Texture<Resource>>, ownsTextures: Boolean = definedExternally): BitMapFont
-		fun install(data: XMLDocument, textures: Array<Texture<Resource>>, ownsTextures: Boolean = definedExternally): BitMapFont
-		fun install(data: BitMapFontData, textures: Array<Texture<Resource>>, ownsTextures: Boolean = definedExternally): BitMapFont
-		fun install(data: String, textures: Dict<Texture<Resource>>, ownsTextures: Boolean = definedExternally): BitMapFont
-		fun install(data: XMLDocument, textures: Dict<Texture<Resource>>, ownsTextures: Boolean = definedExternally): BitMapFont
-		fun install(data: BitMapFontData, textures: Dict<Texture<Resource>>, ownsTextures: Boolean = definedExternally): BitMapFont
+		fun install(data: String, textures: Texture<Resource>, ownsTextures: Boolean = definedExternally): BitmapFont
+		fun install(data: XMLDocument, textures: Texture<Resource>, ownsTextures: Boolean = definedExternally): BitmapFont
+		fun install(data: BitMapFontData, textures: Texture<Resource>, ownsTextures: Boolean = definedExternally): BitmapFont
+		fun install(data: String, textures: Array<Texture<Resource>>, ownsTextures: Boolean = definedExternally): BitmapFont
+		fun install(data: XMLDocument, textures: Array<Texture<Resource>>, ownsTextures: Boolean = definedExternally): BitmapFont
+		fun install(data: BitMapFontData, textures: Array<Texture<Resource>>, ownsTextures: Boolean = definedExternally): BitmapFont
+		fun install(data: String, textures: Dict<Texture<Resource>>, ownsTextures: Boolean = definedExternally): BitmapFont
+		fun install(data: XMLDocument, textures: Dict<Texture<Resource>>, ownsTextures: Boolean = definedExternally): BitmapFont
+		fun install(data: BitMapFontData, textures: Dict<Texture<Resource>>, ownsTextures: Boolean = definedExternally): BitmapFont
 		fun uninstall(name: String)
-		fun from(name: String, textStyle: TextStyle = definedExternally, options: IBitmapFontOptions = definedExternally): BitMapFont
-		fun from(name: String, textStyle: PartialTextStyle = definedExternally, options: IBitmapFontOptions = definedExternally): BitMapFont
+		fun from(name: String, textStyle: TextStyle = definedExternally, options: IBitmapFontOptions = definedExternally): BitmapFont
+		fun from(name: String, textStyle: PartialTextStyle = definedExternally, options: IBitmapFontOptions = definedExternally): BitmapFont
 	}
 }
 
@@ -90,8 +91,9 @@ open external class BitmapText(text: String, style: PartialIBitmapTextStyle = de
 	protected open var _maxLineHeight: Double
 	protected open var _letterSpacing: Double
 	protected open var _anchor: ObservablePoint<Any?>
+	protected open var _font: BitmapFont?
 	protected open var _fontName: String
-	protected open var _fontSize: Double
+	protected open var _fontSize: Double?
 	protected open var _align: TextStyleAlign
 	protected open var _activePageMeshData: Array<PageMeshData>
 	protected open var _tint: Color

@@ -11,7 +11,25 @@ import pixi.typings.constants.MSAA_QUALITY
 import pixi.typings.constants.PRECISION
 import pixi.typings.constants.SCALE_MODES
 import pixi.typings.constants.WRAP_MODES
+import web.http.RequestInit
+import web.http.Response
+import webgl.WebGLRenderingContext
+import kotlin.js.Promise
 import kotlin.js.RegExp
+
+external val BrowserAdapter: IAdapter
+
+external interface GetNavigator {
+	var userAgent: String
+}
+
+external interface IAdapter {
+	fun createCanvas(width: Number = definedExternally, height: Number = definedExternally): HTMLCanvasElement
+	var getWebGLRenderingContext: () -> WebGLRenderingContext
+	var getNavigator: () -> GetNavigator
+	var getBaseUrl: () -> String
+	fun fetch(url: RequestInfo, options: RequestInit = definedExternally): Promise<Response>
+}
 
 external interface IRenderOptions {
 	var view: HTMLCanvasElement
@@ -21,6 +39,7 @@ external interface IRenderOptions {
 	var backgroundAlpha: Double
 	var useContextAlpha: dynamic /* boolean | 'notMultiplied' */
 	var clearBeforeRender: Boolean
+	var preserveDrawingBuffer: Boolean
 	var width: Int
 	var height: Int
 	var legacy: Boolean

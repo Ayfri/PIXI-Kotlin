@@ -132,6 +132,8 @@ external val isSingleItem: (item: Any?) -> Boolean
 external interface LoadAsset<T : Any /* = Any */> {
 	var src: String
 	var data: T?
+	var alias: Array<String>?
+	var format: String?
 }
 
 external val loadBasis: LoaderParser<dynamic /* Texture<Resource> | Array<Texture<Resource>> */, IBaseTextureOptions<Any>>
